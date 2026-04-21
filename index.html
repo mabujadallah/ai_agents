@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>وكلاء الذكاء الاصطناعي · جولة في ثلاثين دقيقة</title>
+  <meta name="description" content="محاضرة ثلاثين دقيقة عن وكلاء الذكاء الاصطناعي." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: "#0A0A0B",
+            surface: "#151518",
+            primary: "#8B5CF6",
+            "primary-soft": "#a78bfa",
+            secondary: "#84CC16",
+            ink: "#FAFAF9",
+            muted: "#71717A",
+            edge: "#27272A",
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', '"Readex Pro"', "system-ui", "sans-serif"],
+            mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+            arabic: ['"Readex Pro"', '"Space Grotesk"', "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ---------- Base ---------- */
+    html, body { height: 100%; margin: 0; overflow: hidden; background: #0a0a0b; color: #fafaf9; font-family: "Readex Pro", "Space Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    * { box-sizing: border-box; }
+    :focus { outline: none; }
+    :focus-visible { outline: 2px solid #8b5cf6; outline-offset: 4px; border-radius: 4px; }
+    button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.45); }
+    ::-webkit-scrollbar { display: none; }
+    body { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Code-style elements force LTR so brackets/symbols render as written */
+    .ltr, .font-mono { direction: ltr; unicode-bidi: isolate; }
+    pre.code-block { direction: ltr; text-align: left; }
+
+    /* ---------- Stage + slides ---------- */
+    .stage { position: fixed; inset: 0; overflow: hidden; }
+    .stage::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; z-index: 0; }
+    .slide { position: absolute; inset: 0; padding: 6rem clamp(2.5rem, 5vw, 5rem) 7.5rem; display: flex; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; z-index: 1; }
+    .slide[aria-current="true"] { pointer-events: auto; }
+    .slide-inner { width: 100%; max-width: 1600px; margin: 0 auto; position: relative; }
+
+    /* ---------- Chrome ---------- */
+    .chrome-top { position: fixed; top: 0; left: 0; right: 0; height: 3.5rem; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; color: #71717a; text-transform: uppercase; z-index: 30; direction: ltr; }
+    .chrome-top > div:nth-child(1) { text-align: left; }
+    .chrome-top > div:nth-child(2) { text-align: center; }
+    .chrome-top > div:nth-child(3) { text-align: right; }
+    .chrome-top .accent { color: #fafaf9; }
+    .chrome-top::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(to right, transparent 0%, #27272a 12%, #27272a 88%, transparent 100%); }
+    .state-dot { display: inline-block; width: 6px; height: 6px; background: #8b5cf6; border-radius: 50%; margin-right: 8px; vertical-align: 1px; animation: state-pulse 1s ease-in-out infinite alternate; }
+    @keyframes state-pulse { from { opacity: 0.45; transform: scale(0.85); } to { opacity: 1; transform: scale(1.15); } }
+
+    .chrome-bottom { position: fixed; bottom: 1.6rem; left: 2rem; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; color: #71717a; z-index: 30; direction: ltr; }
+    .chrome-bottom .val { color: #84cc16; }
+    .chrome-bottom .hint { margin-top: 0.5rem; font-size: 0.6rem; opacity: 0.65; letter-spacing: 0.14em; }
+    .chrome-bottom .hint .hint-key { display: inline-block; padding: 0 0.35rem; border: 1px solid #3f3f46; border-radius: 2px; color: #a1a1aa; margin: 0 0.1rem; }
+
+    .json-badge { position: fixed; top: 4.2rem; left: 2rem; padding: 0.4rem 0.7rem; font-family: "JetBrains Mono", monospace; font-size: 0.65rem; background: #151518; border: 1px solid #27272a; color: #84cc16; border-radius: 3px; opacity: 0; pointer-events: none; z-index: 40; letter-spacing: 0.04em; white-space: nowrap; direction: ltr; }
+
+    /* ---------- Ambient + big loop ---------- */
+    .loop-mini { position: fixed; bottom: 1.25rem; right: 1.75rem; width: 80px; height: 80px; z-index: 30; }
+    .loop-mini svg { display: block; }
+    .loop-mini .ring { fill: none; stroke: #27272a; stroke-width: 1; stroke-dasharray: 2 5; }
+    .loop-mini .tick { stroke: #3f3f46; stroke-width: 1; }
+    .loop-mini .node { fill: #18181b; stroke: #3f3f46; stroke-width: 1.5; transition: fill 300ms ease, stroke 300ms ease; }
+    .loop-mini[data-state="0"] .node-0,
+    .loop-mini[data-state="1"] .node-1,
+    .loop-mini[data-state="2"] .node-2,
+    .loop-mini[data-state="3"] .node-3 { fill: #8b5cf6; stroke: #c4b5fd; }
+
+    .loop-big .ring { fill: none; stroke: #27272a; stroke-width: 1.5; stroke-dasharray: 4 8; }
+    .loop-big .node-circle { fill: #151518; stroke: #3f3f46; stroke-width: 2; transition: fill 450ms ease, stroke 450ms ease; }
+    .loop-big .node-label { fill: #e4e4e7; font-family: "Readex Pro", "Space Grotesk", sans-serif; font-weight: 600; font-size: 22px; text-anchor: middle; letter-spacing: 0; transition: fill 450ms ease; }
+    .loop-big .node-sub { fill: #71717a; font-family: "JetBrains Mono", monospace; font-size: 10px; text-anchor: middle; letter-spacing: 0.2em; transition: fill 450ms ease; }
+    .loop-big[data-state="0"] .node-0 .node-circle,
+    .loop-big[data-state="1"] .node-1 .node-circle,
+    .loop-big[data-state="2"] .node-2 .node-circle,
+    .loop-big[data-state="3"] .node-3 .node-circle { fill: rgba(139, 92, 246, 0.18); stroke: #8b5cf6; }
+    .loop-big[data-state="0"] .node-0 .node-label,
+    .loop-big[data-state="1"] .node-1 .node-label,
+    .loop-big[data-state="2"] .node-2 .node-label,
+    .loop-big[data-state="3"] .node-3 .node-label { fill: #fafaf9; }
+    .loop-big[data-state="0"] .node-0 .node-sub,
+    .loop-big[data-state="1"] .node-1 .node-sub,
+    .loop-big[data-state="2"] .node-2 .node-sub,
+    .loop-big[data-state="3"] .node-3 .node-sub { fill: #c4b5fd; }
+    .loop-big .arrow { fill: #3f3f46; transition: fill 300ms ease; }
+    .loop-big[data-state="0"] .arrow-0,
+    .loop-big[data-state="1"] .arrow-1,
+    .loop-big[data-state="2"] .arrow-2,
+    .loop-big[data-state="3"] .arrow-3 { fill: #8b5cf6; }
+
+    /* ---------- Scanlines / pre-roll / overlays ---------- */
+    .scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 25; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 3px); opacity: 0; transition: opacity 300ms ease; }
+    .scanlines.on { opacity: 1; }
+
+    .preroll { position: fixed; inset: 0; z-index: 100; background: #0a0a0b; display: flex; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; font-size: clamp(1rem, 2.2vw, 1.5rem); color: #84cc16; letter-spacing: 0.04em; direction: ltr; }
+    .preroll .cursor { display: inline-block; width: 0.55em; height: 1.05em; background: #84cc16; margin-left: 0.15em; vertical-align: -3px; animation: blink 0.6s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .overlay { position: fixed; inset: 0; z-index: 90; background: rgba(10,10,11,0.92); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 3rem; }
+    .overlay.show { display: flex; }
+    .overlay-card { max-width: 38rem; width: 100%; padding: 2.5rem; background: #151518; border: 1px solid #27272a; border-radius: 10px; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8); }
+    .overlay-title { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: #8b5cf6; text-transform: uppercase; margin-bottom: 1.25rem; direction: ltr; }
+    .kbd { display: inline-block; padding: 0.2rem 0.55rem; background: #0a0a0b; border: 1px solid #3f3f46; border-radius: 4px; font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: #fafaf9; min-width: 1.8rem; text-align: center; direction: ltr; }
+
+    /* ---------- Slide-level visuals ---------- */
+    .char { display: inline-block; will-change: transform, opacity; }
+    .divider-number { font-family: "Space Grotesk", "Readex Pro", sans-serif; font-weight: 600; letter-spacing: -0.05em; line-height: 0.82; font-size: clamp(10rem, 28vw, 28rem); color: #fafaf9; direction: ltr; }
+
+    .concept-card { padding: 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; display: flex; flex-direction: column; min-height: 400px; position: relative; }
+    .concept-card.highlight { background: rgba(139, 92, 246, 0.07); border-color: #8b5cf6; box-shadow: 0 0 0 1px rgba(139,92,246,0.2), 0 20px 40px -20px rgba(139,92,246,0.35); }
+
+    .feature-num { font-family: "Space Grotesk", sans-serif; font-size: clamp(5rem, 12vw, 11rem); font-weight: 600; line-height: 0.85; color: rgba(139, 92, 246, 0.22); letter-spacing: -0.05em; direction: ltr; }
+    .feature-headline { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-weight: 500; letter-spacing: -0.01em; line-height: 1.05; }
+    .example-card { padding: 1.5rem 1.75rem; background: #151518; border: 1px solid #27272a; border-right: 3px solid #84cc16; border-radius: 4px; }
+
+    .stage-pill { padding: 0.75rem 1.75rem; border: 1px solid #27272a; border-radius: 999px; font-family: "JetBrains Mono", monospace; font-size: 0.85rem; letter-spacing: 0.12em; color: #71717a; background: #151518; transition: all 300ms ease; }
+    .stage-pill.active { border-color: #8b5cf6; color: #fafaf9; background: rgba(139,92,246,0.15); transform: scale(1.05); }
+    .stage-pill.done { border-color: #84cc16; color: #84cc16; background: rgba(132,204,22,0.08); transform: scale(1); }
+    .run-btn { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1rem; letter-spacing: 0.05em; padding: 1rem 3rem; background: #8b5cf6; color: #0a0a0b; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease; }
+    .run-btn:hover { transform: translateY(-2px); background: #a78bfa; box-shadow: 0 10px 30px -10px rgba(139,92,246,0.55); }
+    .run-btn:active { transform: translateY(0); }
+    .run-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .quadrant { padding: 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .quadrant::before { content: ""; position: absolute; top: 0; right: 0; width: 40px; height: 1px; background: #8b5cf6; }
+    .quadrant .q-num { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: #71717a; direction: ltr; }
+    .quadrant .q-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-weight: 500; font-size: 2rem; margin-top: 0.4rem; letter-spacing: -0.01em; }
+    .quadrant .q-tag { font-family: "JetBrains Mono", monospace; color: #8b5cf6; font-size: 0.75rem; letter-spacing: 0.18em; margin-top: 0.35rem; direction: ltr; }
+    .quadrant .q-desc { color: #a1a1aa; margin-top: auto; padding-top: 2rem; font-size: 1.05rem; line-height: 1.7; }
+    .quadrant .q-icon { position: absolute; top: 1.5rem; left: 1.5rem; color: #3f3f46; width: 34px; height: 34px; }
+
+    .domain-tile { padding: 1.5rem; background: #151518; border: 1px solid #27272a; border-radius: 6px; min-height: 240px; display: flex; flex-direction: column; }
+    .domain-tile .dt-num { font-family: "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.22em; color: #52525b; direction: ltr; }
+    .domain-tile .dt-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-weight: 600; font-size: 1.5rem; margin-top: 0.5rem; letter-spacing: -0.01em; }
+    .domain-tile .dt-list { margin-top: 1rem; font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: #a1a1aa; line-height: 1.9; list-style: none; padding: 0; direction: ltr; text-align: left; }
+    .domain-tile .dt-list li::before { content: "› "; color: #8b5cf6; margin-right: 0.25rem; }
+
+    .stat-card { padding: 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; }
+    .stat-card .stat-num { font-family: "JetBrains Mono", monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: #52525b; direction: ltr; }
+    .stat-card .stat-value { font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: clamp(3rem, 6.5vw, 6.5rem); line-height: 1; margin-top: 1rem; letter-spacing: -0.045em; direction: ltr; }
+    .stat-card .stat-caption { margin-top: 1rem; font-size: 1.05rem; color: #e4e4e7; line-height: 1.5; }
+    .stat-card .stat-context { margin-top: 0.5rem; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: #71717a; text-transform: uppercase; direction: ltr; }
+
+    .question-row { display: flex; align-items: baseline; gap: 2rem; padding: 1.25rem 0; border-top: 1px solid #27272a; }
+    .question-row:last-child { border-bottom: 1px solid #27272a; }
+    .q-num { font-family: "JetBrains Mono", monospace; font-size: 0.85rem; color: #8b5cf6; letter-spacing: 0.22em; min-width: 3rem; direction: ltr; }
+    .q-text { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: -0.01em; }
+
+    .mcp-badge { display: inline-block; padding: 0.4rem 0.8rem; border: 1px solid #8b5cf6; color: #8b5cf6; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.22em; border-radius: 3px; direction: ltr; }
+    .qr-frame { padding: 1.25rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; display: inline-block; }
+    .complete-stamp { display: inline-block; padding: 1.5rem 3rem; border: 3px solid #84cc16; border-radius: 10px; background: rgba(132,204,22,0.08); transform-origin: center; direction: ltr; }
+
+    .link-row { display: flex; align-items: baseline; gap: 1.25rem; padding: 1rem 0; border-top: 1px solid #27272a; }
+    .link-row:last-child { border-bottom: 1px solid #27272a; }
+    .link-row .ln-num { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: #8b5cf6; min-width: 2rem; direction: ltr; }
+
+    /* Brand logos (real SVGs served via Simple Icons CDN) */
+    .brand { display: inline-block; line-height: 0; vertical-align: middle; }
+    .brand img { display: block; }
+    .brand-inline { width: 28px; height: 28px; margin-inline-end: 10px; vertical-align: -6px; }
+    .brand-list   { width: 16px; height: 16px; margin-inline-end: 10px; vertical-align: -3px; opacity: 0.95; }
+    .brand-stat   { position: absolute; top: 1.25rem; right: 1.25rem; width: 26px; height: 26px; opacity: 0.75; }
+    html[dir="rtl"] .brand-stat { right: auto; left: 1.25rem; }
+    .brand-link   { width: 30px; height: 30px; margin-inline-end: 16px; opacity: 0.9; }
+    .brand-mcp    { width: 64px; height: 64px; }
+    .brand-hook-g { width: 72px; height: 72px; }
+    .brand-hook-plus { color: #71717a; font-family: "JetBrains Mono", monospace; font-size: 1.4rem; margin: 0 0.7rem; }
+
+    /* Hook "screenshot" — stylized Stitch voice-canvas mockup */
+    .stitch-shot { position: relative; aspect-ratio: 16 / 9; width: 100%; border-radius: 10px; border: 1px solid #27272a; background: #0f0f11; overflow: hidden; box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6); direction: ltr; }
+    .stitch-chrome { display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #151518; border-bottom: 1px solid #27272a; }
+    .stitch-chrome .dot { width: 10px; height: 10px; border-radius: 50%; background: #3f3f46; }
+    .stitch-chrome .url { flex: 1; margin-left: 10px; background: #0a0a0b; border: 1px solid #27272a; border-radius: 4px; padding: 3px 8px; font-family: "JetBrains Mono", monospace; font-size: 0.65rem; color: #71717a; letter-spacing: 0.02em; }
+    .stitch-body { position: absolute; top: 34px; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1rem; }
+    .stitch-brandline { display: flex; align-items: center; justify-content: center; gap: 14px; }
+    .stitch-wordmark { font-family: "Space Grotesk", sans-serif; font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; color: #fafaf9; }
+    .stitch-prompt { margin-top: 1.25rem; padding: 0.45rem 0.85rem; background: #151518; border: 1px solid #27272a; border-radius: 999px; font-family: "JetBrains Mono", monospace; font-size: 0.65rem; color: #a1a1aa; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .stitch-prompt .mic { width: 10px; height: 10px; border-radius: 50%; background: #84cc16; box-shadow: 0 0 0 3px rgba(132,204,22,0.2); }
+    .stitch-wave { position: absolute; bottom: 0.75rem; left: 0.75rem; right: 0.75rem; height: 1.25rem; display: flex; align-items: flex-end; gap: 2px; opacity: 0.55; }
+    .stitch-wave .bar { flex: 1; background: linear-gradient(to top, #8b5cf6, #a78bfa); border-radius: 1px; animation: wave-bob 1.2s ease-in-out infinite alternate; }
+    @keyframes wave-bob { from { height: 20%; } to { height: 100%; } }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .state-dot, .preroll .cursor, .video-frame .vf-play .pulse, .video-frame .wave .bar { animation: none; }
+      .scanlines { display: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-bg text-ink">
+
+  <!-- Pre-roll ---------------------------------------------------- -->
+  <div class="preroll" id="preroll" aria-hidden="true">
+    <span id="preroll-text"></span><span class="cursor" id="preroll-cursor"></span>
+  </div>
+
+  <!-- Top chrome -------------------------------------------------- -->
+  <div class="chrome-top" aria-hidden="true">
+    <div><span class="accent" id="slide-number">01 / 24</span></div>
+    <div><span id="section-name">INTRO</span></div>
+    <div><span class="state-dot"></span>STATE · <span class="accent" id="loop-state-label">THINK</span></div>
+  </div>
+
+  <!-- Bottom counter + hint -------------------------------------- -->
+  <div class="chrome-bottom" aria-hidden="true">
+    <div>tools_called: <span class="val" id="tool-counter">0</span></div>
+    <div class="hint">
+      <span class="hint-key">?</span> keys ·
+      <span class="hint-key">S</span> notes ·
+      <span class="hint-key">T</span> texture ·
+      <span class="hint-key">F</span> full
+    </div>
+  </div>
+
+  <!-- JSON tool badge -------------------------------------------- -->
+  <div class="json-badge" id="json-badge" aria-hidden="true">{"tool":"render_slide","id":1}</div>
+
+  <!-- Mini ambient loop ------------------------------------------ -->
+  <div class="loop-mini" id="loop-mini" data-state="0" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <circle class="ring" cx="50" cy="50" r="38" />
+      <line class="tick" x1="50" y1="10" x2="50" y2="14" />
+      <line class="tick" x1="90" y1="50" x2="86" y2="50" />
+      <line class="tick" x1="50" y1="90" x2="50" y2="86" />
+      <line class="tick" x1="10" y1="50" x2="14" y2="50" />
+      <circle class="node node-0" cx="50" cy="12" r="7" />
+      <circle class="node node-1" cx="88" cy="50" r="7" />
+      <circle class="node node-2" cx="50" cy="88" r="7" />
+      <circle class="node node-3" cx="12" cy="50" r="7" />
+    </svg>
+  </div>
+
+  <!-- Scanlines -------------------------------------------------- -->
+  <div class="scanlines" id="scanlines" aria-hidden="true"></div>
+
+  <!-- Main stage ------------------------------------------------- -->
+  <main class="stage" id="stage" role="main" aria-label="عرض وكلاء الذكاء الاصطناعي">
+
+    <!-- 01 · COVER -->
+    <section class="slide"
+             data-slide="1"
+             data-section="INTRO"
+             data-title="COVER"
+             data-notes="مرحبًا. هذه محاضرة ثلاثين دقيقة عن وكلاء الذكاء الاصطناعي. سنُغطِّي: ما هو الوكيل، الخصائص الخمس التي تُعرِّفه، أين يعمل على أرض الواقع، وكيف تختار الأداة المناسبة. بنية المحاضرة نفسها تُحاكي حلقة الوكيل: إطار، خُطَّة، أمثلة، قاعدة عمليَّة.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// lecture.begin()</div>
+        <h1 class="reveal-item font-display font-semibold tracking-tight leading-[0.95] text-[clamp(4rem,11vw,11rem)] mt-6">
+          وكلاء الذكاء<br />الاصطناعي
+        </h1>
+        <p class="reveal-item text-muted text-2xl md:text-3xl mt-10 max-w-3xl leading-snug">
+          جولة في ثلاثين دقيقة مع شُركاء البُناة الجُدد.
+        </p>
+        <div class="reveal-item mt-16 flex flex-wrap gap-12 text-sm">
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted ltr">Instructor</div>
+            <div class="text-ink mt-1 text-base">محمود صلاح الدين أبو جادالله</div>
+          </div>
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted ltr">Date</div>
+            <div class="text-ink mt-1 text-base">21 أبريل 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · HOOK -->
+    <section class="slide"
+             data-slide="2"
+             data-section="INTRO"
+             data-title="HOOK"
+             data-notes="انتقال من الإكمال التلقائي إلى التصرُّف الوكيلي. الكلُّ رأى نموذجًا لُغويًّا يُجيب. الوكيل هو حين يبدأ النموذج بالفعل. افتحها بلوحة ستيتش الصوتية — تصف ما تريد، والوكيل يبني أمامك. قبل عام، كان مُستحيلًا.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-12 items-center">
+          <div class="col-span-12 md:col-span-7">
+            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the hook</div>
+            <blockquote class="reveal-item font-display font-medium leading-[1.1] tracking-tight text-[clamp(2.5rem,6vw,6rem)]">
+              ماذا لو استطاعت <span class="text-primary">أدواتُك</span> أن <em class="not-italic" style="font-style: italic">تُفكِّر</em>؟
+            </blockquote>
+          </div>
+          <div class="col-span-12 md:col-span-5 reveal-item">
+            <div class="stitch-shot">
+              <div class="stitch-chrome">
+                <span class="dot" style="background:#f87171"></span>
+                <span class="dot" style="background:#facc15"></span>
+                <span class="dot" style="background:#84cc16"></span>
+                <span class="url">stitch.withgoogle.com</span>
+              </div>
+              <div class="stitch-body">
+                <div class="stitch-brandline">
+                  <span class="brand">
+                    <img class="brand-hook-g" src="https://cdn.simpleicons.org/google" alt="Google" />
+                  </span>
+                  <span class="brand-hook-plus">×</span>
+                  <span class="stitch-wordmark">Stitch</span>
+                </div>
+                <div class="stitch-prompt">
+                  <span class="mic"></span>
+                  <span>“build me a voice canvas for a design agent…”</span>
+                </div>
+              </div>
+              <div class="stitch-wave" id="hook-wave" aria-hidden="true"></div>
+            </div>
+            <div class="mt-4 font-mono text-xs text-muted tracking-wider">
+              ↳ لوحة الإملاء الصوتي في <span class="ltr">Google Stitch</span> · مارس 2026.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · SECTION DIVIDER "01 / WHAT" -->
+    <section class="slide divider"
+             data-slide="3"
+             data-section="WHAT"
+             data-title="SECTION · WHAT"
+             data-notes="القسم الأول: ما هو الوكيل؟ كثير من المنتجات ترتدي هذه التسمية. دعنا نُعرِّفها بدقَّة، ثم ننظر في آليَّتها.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">01</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ ما هو؟</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          عَرِّف الشيء. افصله عمَّا يُشبهه. واكتشف الجزء الأهمَّ.
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 · LLM · CHATBOT · AGENT -->
+    <section class="slide"
+             data-slide="4"
+             data-section="WHAT"
+             data-title="LLM vs CHATBOT vs AGENT"
+             data-notes="ثلاث مُصطلحات مُتجاورة، ثلاثة أشياء مُختلفة. النموذج اللُّغوي دالَّة — مُطالبة تدخل، إجابة تخرج، ولا ذاكرة بين الاستدعاءات. الدردشة تُغلِّف النموذج بحالة محادثة. الوكيل يُضيف الأدوات والحلقة — يُغيِّر العالم الخارجي. الصندوق الذي نتذكَّره هو الوكيل.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// definitions</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
+          نموذج لُغوي <span class="text-muted">·</span> دردشة <span class="text-muted">·</span> وكيل
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="reveal-item concept-card">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">01 / BASE MODEL</div>
+            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">نموذج لُغوي</div>
+            <p class="mt-4 text-muted text-[0.95rem] leading-relaxed">
+              دالَّة. مُدخَلٌ نصِّيٌّ يدخل، نصٌّ ناتجٌ يخرج. لا ذاكرة بين الاستدعاءات، ولا أيدٍ.
+            </p>
+            <div class="mt-auto pt-8 font-mono text-xs ltr">
+              <span class="text-secondary">verb →</span> <span class="text-ink">answers</span>
+            </div>
+          </div>
+
+          <div class="reveal-item concept-card">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">02 / WRAPPER</div>
+            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">دردشة</div>
+            <p class="mt-4 text-muted text-[0.95rem] leading-relaxed">
+              نموذج لُغوي + حالة محادثة. يتذكَّر الجلسة، لكن بلا يدٍ تمتدُّ إلى العالم.
+            </p>
+            <div class="mt-auto pt-8 font-mono text-xs ltr">
+              <span class="text-secondary">verb →</span> <span class="text-ink">converses</span>
+            </div>
+          </div>
+
+          <div class="reveal-item concept-card highlight">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">03 / AGENT</div>
+            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">وكيل</div>
+            <p class="mt-4 text-ink/90 text-[0.95rem] leading-relaxed">
+              نموذج لُغوي مع أدوات وحلقة. يُفكِّر، يعمل في العالم، يُراقب، ويستمرُّ حتى تكتمل المُهمَّة.
+            </p>
+            <div class="mt-auto pt-8 font-mono text-xs ltr">
+              <span class="text-secondary">verb →</span> <span class="text-ink">thinks, acts, loops</span>
+            </div>
+            <div class="absolute top-3 left-4 font-mono text-[10px] text-primary/70 ltr">// focus here</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · THE LOOP -->
+    <section class="slide"
+             data-slide="5"
+             data-section="WHAT"
+             data-title="THE LOOP"
+             data-notes="الآليَّة الجوهريَّة: الحَلقة. الوكيل يُخطِّط للعمل، يستدعي أداة، يُراقب ما عاد، ويُقرِّر إن كان سيُكرِّر. سواء كانت بالمِلِّي ثانية أو بالدقائق — المهمُّ ألَّا يكون هناك إنسانٌ بين الخطوات. كلُّ وكيلٍ هو نُسخة من هذه الصورة.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-10 items-center">
+          <div class="col-span-12 md:col-span-5">
+            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the mechanic</div>
+            <h2 class="reveal-item font-display text-5xl md:text-7xl font-medium tracking-tight leading-[1.0]">
+              الحَلقة.
+            </h2>
+            <p class="reveal-item text-muted mt-6 text-lg leading-relaxed max-w-md">
+              كلُّ وكيلٍ ببساطة: يُفكِّر، يُنفِّذ بأداة، يُراقب النتيجة، ويُقرِّر إن كان سيُكرِّر.
+            </p>
+            <pre class="reveal-item code-block mt-8 font-mono text-xs text-muted leading-relaxed bg-surface border border-edge rounded-md p-4 max-w-md"><span class="text-primary">while</span> (<span class="text-secondary">!done</span>) {
+  thought  <span class="text-muted">= </span>llm.plan(ctx);
+  result   <span class="text-muted">= </span>tool.run(thought);
+  ctx.push(result);
+  done     <span class="text-muted">= </span>llm.check(ctx);
+}</pre>
+          </div>
+          <div class="col-span-12 md:col-span-7 flex justify-center reveal-item">
+            <div id="loop-big" class="loop-big" data-state="0">
+              <svg viewBox="0 0 560 560" width="100%" style="max-width: 560px; height: auto;">
+                <circle class="ring" cx="280" cy="280" r="200"/>
+                <polygon class="arrow arrow-0" points="480,270 492,280 480,290"/>
+                <polygon class="arrow arrow-1" points="270,480 280,492 290,480"/>
+                <polygon class="arrow arrow-2" points="80,290 68,280 80,270"/>
+                <polygon class="arrow arrow-3" points="290,80 280,68 270,80"/>
+                <g class="node-0">
+                  <circle class="node-circle" cx="280" cy="80" r="66"/>
+                  <text class="node-label" x="280" y="78">تفكير</text>
+                  <text class="node-sub" x="280" y="102">01 · PLAN</text>
+                </g>
+                <g class="node-1">
+                  <circle class="node-circle" cx="480" cy="280" r="66"/>
+                  <text class="node-label" x="480" y="278">تنفيذ</text>
+                  <text class="node-sub" x="480" y="302">02 · TOOL</text>
+                </g>
+                <g class="node-2">
+                  <circle class="node-circle" cx="280" cy="480" r="66"/>
+                  <text class="node-label" x="280" y="478">مراقبة</text>
+                  <text class="node-sub" x="280" y="502">03 · READ</text>
+                </g>
+                <g class="node-3">
+                  <circle class="node-circle" cx="80" cy="280" r="66"/>
+                  <text class="node-label" x="80" y="278">تكرار</text>
+                  <text class="node-sub" x="80" y="302">04 · OR STOP</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · EQUATION -->
+    <section class="slide"
+             data-slide="6"
+             data-section="WHAT"
+             data-title="EQUATION"
+             data-notes="اضغط التعريف إلى مُعادلة. هذه الأجزاء الأربعة هي ما سنُفصِّله لاحقًا: النموذج اللُّغوي للتفكير، الأدوات للتنفيذ، الذاكرة للسياق، والحلقة التي تربط الجميع. أزِل أيًّا منها يصبح شيئًا آخر.">
+      <div class="slide-inner text-center">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// definition</div>
+        <div class="eq-row flex items-baseline flex-wrap justify-center gap-x-10 gap-y-4 font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.25rem,5.5vw,5.5rem)]">
+          <span class="eq-piece">وكيل</span>
+          <span class="eq-piece">
+            <span class="text-muted ml-4">=</span>نموذج لُغوي
+          </span>
+          <span class="eq-piece">
+            <span class="text-muted ml-4">+</span><span class="text-secondary">أدوات</span>
+          </span>
+          <span class="eq-piece">
+            <span class="text-muted ml-4">+</span><span class="text-secondary">ذاكرة</span>
+          </span>
+          <span class="eq-piece">
+            <span class="text-muted ml-4">+</span><span class="text-primary">حلقة</span>
+          </span>
+        </div>
+        <div class="reveal-item mt-16 text-muted text-lg max-w-2xl mx-auto leading-relaxed">
+          أربعة أجزاء. أزِل أيًّا منها تجد شيئًا آخر.
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · ANATOMY -->
+    <section class="slide"
+             data-slide="7"
+             data-section="WHAT"
+             data-title="ANATOMY"
+             data-notes="فرِّد المعادلة إلى أجزاءٍ يستطيع المهندس بناءها. النموذج اللُّغوي هو صاحب القرار. الأدوات هي مجموعة الدوالِّ التي يستدعيها. الذاكرة هي ما يُنقَل بين الخطوات — محادثة، ملفَّات مُسترجعة، نتائج وسيطة. المُنسِّق هو الكود الذي يُدير الحلقة ويفرض السلامة.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// anatomy</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          ممَّ يتكوَّن الوكيل.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="reveal-item quadrant">
+            <div class="q-num">01</div>
+            <div class="q-title">العقل</div>
+            <div class="q-tag">// LLM</div>
+            <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M6 12h3m6 0h3M12 6v3m0 6v3"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+            <p class="q-desc">يُفكِّر في الخطوة التالية. يُخطِّط، يُفصِّل، ويحكم.</p>
+          </div>
+          <div class="reveal-item quadrant">
+            <div class="q-num">02</div>
+            <div class="q-title">الأيدي</div>
+            <div class="q-tag">// TOOLS</div>
+            <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M4 12h12M16 6l6 6-6 6"/>
+            </svg>
+            <p class="q-desc">تمتدُّ إلى العالم. ملفَّات، واجهات، أوامر نظام، متصفِّحات، قواعد بيانات.</p>
+          </div>
+          <div class="reveal-item quadrant">
+            <div class="q-num">03</div>
+            <div class="q-title">الذاكرة</div>
+            <div class="q-tag">// CONTEXT</div>
+            <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="3" y="5"  width="18" height="3" rx="1"/>
+              <rect x="3" y="10" width="18" height="3" rx="1"/>
+              <rect x="3" y="15" width="18" height="3" rx="1"/>
+            </svg>
+            <p class="q-desc">تُمسِك بالخيط. محادثة، وثائق مُسترجعة، ونتائج وسيطة.</p>
+          </div>
+          <div class="reveal-item quadrant">
+            <div class="q-num">04</div>
+            <div class="q-title">المُنسِّق</div>
+            <div class="q-tag">// LOOP</div>
+            <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M21 12a9 9 0 1 1-3-6.7"/>
+              <path d="M21 4v5h-5"/>
+            </svg>
+            <p class="q-desc">يربطها. يُدير الدورة حتى تنتهي المُهمَّة — أو تنتهي الميزانية.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · SECTION DIVIDER "02 / FIVE FEATURES" -->
+    <section class="slide divider"
+             data-slide="8"
+             data-section="FEATURES"
+             data-title="SECTION · FIVE FEATURES"
+             data-notes="خمس خصائص تُعرِّف الوكيل الحديث. ليست أربعًا، ولا ستًّا — خمس. كلٌّ منها قُدرةٌ يمكن تمييزها، ولكلٍّ منها مُنتجٌ حقيقي نُشير إليه.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">02</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ خمس خصائص</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          القُدرات الخمس التي تفصل الوكيل عن نافذة الدردشة.
+        </p>
+      </div>
+    </section>
+
+    <!-- 09 · FEATURE 01 — TOOL USE -->
+    <section class="slide"
+             data-slide="9"
+             data-section="FEATURES"
+             data-title="01 · TOOL USE"
+             data-notes="الخاصَّة الأولى: استخدام الأدوات. الوكيل يستدعي دوالَّ. تعديل ملفَّات، طلبات HTTP، أوامر صَدَفَة، وبحث. هذه هي المسافة بين الإجابة والفعل. Claude Code هو المثال الكلاسيكي — لا يصف الإصلاح، بل يُطبِّقه، ويُشغِّل الاختبارات، ويفتح طلب الدمج.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-12 items-start">
+          <div class="col-span-12 md:col-span-4">
+            <div class="reveal-item feature-num">01</div>
+            <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 01 / 05</div>
+          </div>
+          <div class="col-span-12 md:col-span-8">
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">استخدام الأدوات.</h2>
+            <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
+              لا يكتفي بالإجابة — يستدعي دوالَّ. يُعدِّل ملفَّات. يُشغِّل أوامر. يستدعي واجهات. يبحث في الويب.
+            </p>
+            <div class="reveal-item example-card mt-10 max-w-3xl">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
+              <div class="mt-3 font-display text-2xl text-ink leading-snug">
+                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" /></span><span class="text-primary ltr">Claude Code</span> يُعدِّل الملفَّات، ويُشغِّل الاختبارات، ويفتح طلبات الدمج.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · FEATURE 02 — REASONING & PLANNING -->
+    <section class="slide"
+             data-slide="10"
+             data-section="FEATURES"
+             data-title="02 · REASONING & PLANNING"
+             data-notes="الخاصَّة الثانية: التفكير والتخطيط. الوكلاء الحديثون لا يكتفون بالردِّ على آخر رسالة — يُفكِّرون عبر المشروع كلِّه. وكيل التصميم في ستيتش يقرأ تاريخ التصميم كاملًا قبل اقتراح التعديل. التخطيط هو ما يُمكِّن الوكيل من عملٍ مُتعدِّد الخطوات دون أن يضيع.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-12 items-start">
+          <div class="col-span-12 md:col-span-4">
+            <div class="reveal-item feature-num">02</div>
+            <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 02 / 05</div>
+          </div>
+          <div class="col-span-12 md:col-span-8">
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">التفكير والتخطيط.</h2>
+            <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
+              فكِّك الهدف إلى خطوات، واحتفظ بالخُطَّة في ذهنك عبر جولاتٍ كثيرة دون أن تفقد الخيط.
+            </p>
+            <div class="reveal-item example-card mt-10 max-w-3xl">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
+              <div class="mt-3 font-display text-2xl text-ink leading-snug">
+                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/google" alt="Google" /></span>وكيل التصميم في <span class="text-primary ltr">Google Stitch</span> يُفكِّر عبر تاريخ المشروع كاملًا، لا آخر مُطالبة فحسب.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · FEATURE 03 — THE LOOP -->
+    <section class="slide"
+             data-slide="11"
+             data-section="FEATURES"
+             data-title="03 · THE LOOP"
+             data-notes="الخاصَّة الثالثة: الحَلقة نفسها، مرفوعة إلى مرتبة خاصَّة. الاستقلاليَّة هي ما يُشعرك بأنَّ الوكيل مُختلف. مانوس يتصفَّح، يُسجِّل دخولًا، يضغط، يملأ نماذج، ويستمرُّ لساعات — كلُّ استدعاء أداة مبنيٌّ على نتيجة سابقه.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-12 items-start">
+          <div class="col-span-12 md:col-span-4">
+            <div class="reveal-item feature-num">03</div>
+            <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 03 / 05</div>
+          </div>
+          <div class="col-span-12 md:col-span-8">
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">الحَلقة.</h2>
+            <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
+              استقلاليَّة. كلُّ خطوةٍ مبنيَّة على نتيجة سابقتها، وتستمرُّ دون إنسانٍ بين الجولات.
+            </p>
+            <div class="reveal-item example-card mt-10 max-w-3xl">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
+              <div class="mt-3 font-display text-2xl text-ink leading-snug">
+                <span class="brand" aria-hidden="true" style="display:inline-flex;width:28px;height:28px;border-radius:6px;background:#fafaf9;color:#0a0a0b;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;margin-inline-end:10px;vertical-align:-6px;letter-spacing:-0.02em">M</span><span class="text-primary ltr">Manus</span> يُشغِّل سير عمل المتصفِّح تلقائيًّا لساعات دون إنسانٍ في الحَلقة.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · FEATURE 04 — MEMORY & CONTEXT -->
+    <section class="slide"
+             data-slide="12"
+             data-section="FEATURES"
+             data-title="04 · MEMORY & CONTEXT"
+             data-notes="الخاصَّة الرابعة: الذاكرة والسياق. كلَّما عرف الوكيل عالمك أكثر، صار ناتجه أفضل. وكلاء فيجما لا يقرؤون الإطار الواحد — يسحبون نظام التصميم كاملًا: الرُّموز، المُتغيِّرات، والمُكوِّنات. والنتيجة تأتي داخل معايير الفريق.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-12 items-start">
+          <div class="col-span-12 md:col-span-4">
+            <div class="reveal-item feature-num">04</div>
+            <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 04 / 05</div>
+          </div>
+          <div class="col-span-12 md:col-span-8">
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">الذاكرة والسياق.</h2>
+            <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
+              اقرأ المحيط. الوكيل يسحب حالة المشروع لتأتي مُخرجاته مُتَّفقة مع طريقة عمل الفريق.
+            </p>
+            <div class="reveal-item example-card mt-10 max-w-3xl">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
+              <div class="mt-3 font-display text-2xl text-ink leading-snug">
+                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/figma" alt="Figma" /></span>وكلاء <span class="text-primary ltr">Figma AI</span> يسحبون مكتبة المُكوِّنات والمُتغيِّرات والرُّموز كاملةً، لتأتي النتيجة مُتوافقة مع نظام تصميم الفريق.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 · FEATURE 05 — SELF-CORRECTION -->
+    <section class="slide"
+             data-slide="13"
+             data-section="FEATURES"
+             data-title="05 · SELF-CORRECTION"
+             data-notes="الخاصَّة الخامسة، التي تُحوِّل العرض إلى مُنتج. الوكيل يُلاحظ أنَّه أخطأ فيُصلِح. كيرسر يُعيد التشغيل بعد اختبارٍ فاشل. Claude Code يقرأ آثار الأخطاء ويُكرِّر. بلا هذه الخاصَّة، كلُّ خطأٍ صغيرٍ يعود إليك.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-12 items-start">
+          <div class="col-span-12 md:col-span-4">
+            <div class="reveal-item feature-num">05</div>
+            <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 05 / 05</div>
+          </div>
+          <div class="col-span-12 md:col-span-8">
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">التصحيح الذاتيّ.</h2>
+            <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
+              يُلاحظ الفشل. يقرأ الخطأ. يُحاول مرَّةً أُخرى. هذا ما يُحوِّل العرض التجريبيَّ إلى مُنتَج.
+            </p>
+            <div class="reveal-item example-card mt-10 max-w-3xl">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
+              <div class="mt-3 font-display text-2xl text-ink leading-snug">
+                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="Cursor" /></span><span class="text-primary ltr">Cursor</span> يُعيد المحاولة بعد فشل الاختبارات. <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" /></span><span class="text-primary ltr">Claude Code</span> يُصلِح أخطاء الإنتاج بقراءة السجلَّات والتكرار.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · INTERACTIVE — RUN AGENT -->
+    <section class="slide"
+             data-slide="14"
+             data-section="FEATURES"
+             data-title="INTERACTIVE"
+             data-notes="عرض حيٍّ. اضغط الزرَّ وشاهد الحَلقة تتحلَّل. كلُّ مرحلةٍ تستغرق 600 مللي ثانية. إن بدا الحُضور مُتفاعلًا، أعِد تشغيلها — في المرَّة الثانية، اروِ ما يُفكِّر فيه الوكيل في كلِّ خطوة.">
+      <div class="slide-inner">
+        <div class="text-center">
+          <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// interactive · try it</div>
+          <h2 class="reveal-item font-display text-5xl md:text-6xl font-medium tracking-tight mt-6 mb-3 leading-tight">
+            شاهِد حَلقةً واحدة تعمل.
+          </h2>
+          <p class="reveal-item text-muted text-lg mb-14 max-w-xl mx-auto leading-relaxed">
+            اضغط الزرَّ. كلُّ مرحلةٍ تستغرق نحو 600 مللي ثانية. قابلٌ للتشغيل مُجدَّدًا.
+          </p>
+
+          <div class="reveal-item flex flex-wrap gap-3 justify-center mb-12" id="interactive-stages">
+            <div class="stage-pill" data-stage="0">01 · تفكير</div>
+            <div class="stage-pill" data-stage="1">02 · تنفيذ</div>
+            <div class="stage-pill" data-stage="2">03 · مراقبة</div>
+            <div class="stage-pill" data-stage="3">04 · انتهى</div>
+          </div>
+
+          <button id="run-agent-btn" class="reveal-item run-btn" type="button">شَغِّل الوكيل</button>
+
+          <div id="run-log" class="reveal-item mt-10 font-mono text-sm text-muted min-h-[1.5rem]">
+            &nbsp;
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · SECTION DIVIDER "03 / IN THE WILD" -->
+    <section class="slide divider"
+             data-slide="15"
+             data-section="IN THE WILD"
+             data-title="SECTION · IN THE WILD"
+             data-notes="القسم الثالث: هذه المُنتجات تُشحَن الآن. لا عروض بحثيَّة — برامج مدفوعة بأعدادٍ حقيقيَّة. مُرَّ عليها بسرعة، ودع الأسماء تقوم بالعمل.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">03</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ على أرض الواقع</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          أين يعمل الوكلاء اليوم، وكم كَبُر السوق.
+        </p>
+      </div>
+    </section>
+
+    <!-- 16 · DOMAIN GRID -->
+    <section class="slide"
+             data-slide="16"
+             data-section="IN THE WILD"
+             data-title="DOMAINS"
+             data-notes="خمس مجالات، خمس أكداس من المُنتجات. البرمجة هي الأنضج. التصميم والبحث هما الأعلى صوتًا الآن. وكلاء المتصفِّح هم الغرب المُتوحِّش. المُستهلك ما زال مُبكِّرًا لكنَّه شخصيٌّ — تكامل DoorDash هو نظرة مُسبقة على وكلاء يُعاملون باسمك.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// market map</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          أين يعمل الوكلاء الآن.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div class="reveal-item domain-tile">
+            <div class="dt-num">01 / CODING</div>
+            <div class="dt-title">البرمجة</div>
+            <ul class="dt-list">
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="" />Claude Code</li>
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="" />Cursor</li>
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/github/FAFAF9" alt="" />GitHub Copilot</li>
+            </ul>
+          </div>
+          <div class="reveal-item domain-tile">
+            <div class="dt-num">02 / DESIGN</div>
+            <div class="dt-title">التصميم</div>
+            <ul class="dt-list">
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/google" alt="" />Google Stitch</li>
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/figma" alt="" />Figma AI</li>
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/vercel/FAFAF9" alt="" />v0</li>
+            </ul>
+          </div>
+          <div class="reveal-item domain-tile">
+            <div class="dt-num">03 / RESEARCH</div>
+            <div class="dt-title">البحث</div>
+            <ul class="dt-list">
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/perplexity" alt="" />Perplexity</li>
+              <li><img class="brand-list" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" style="filter:brightness(0) invert(1)" alt="" />ChatGPT Deep Research</li>
+            </ul>
+          </div>
+          <div class="reveal-item domain-tile">
+            <div class="dt-num">04 / BROWSER</div>
+            <div class="dt-title">المُتصفِّح</div>
+            <ul class="dt-list">
+              <li><span class="brand-list" style="display:inline-flex;width:16px;height:16px;border-radius:3px;background:#fafaf9;color:#0a0a0b;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:-0.02em">M</span>Manus</li>
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/perplexity" alt="" />Perplexity Computer</li>
+            </ul>
+          </div>
+          <div class="reveal-item domain-tile">
+            <div class="dt-num">05 / CONSUMER</div>
+            <div class="dt-title">المُستهلك</div>
+            <ul class="dt-list">
+              <li><img class="brand-list" src="https://cdn.simpleicons.org/googlegemini" alt="" />Gemini + DoorDash</li>
+              <li><span class="brand-list" style="display:inline-flex;width:16px;height:16px;border-radius:3px;background:#fafaf9;color:#0a0a0b;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:-0.02em">L</span>Lindy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · NUMBERS -->
+    <section class="slide"
+             data-slide="17"
+             data-section="IN THE WILD"
+             data-title="NUMBERS"
+             data-notes="ثلاثة أرقام تُثبِّت أنَّ هذا سوقٌ حقيقيٌّ. 4.7 مليون مُشترك مدفوع في GitHub Copilot منذ يناير. Cursor بلغ 2 مليار دولار إيرادًا سنويًّا في الربع الأوَّل. Claude Code يُحرِز نحو 80% على SWE-bench Verified — مجموعة كاملة من مشكلات GitHub حقيقيَّة. هذه الأرقام هي السبب وراء أنَّ كلَّ شركة SaaS كُبرى تُركِّب وكيلًا على مُنتجها.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// the market, measured</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
+          ثلاثة أرقام تُؤكِّد ذلك.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="reveal-item stat-card">
+            <img class="brand-stat" src="https://cdn.simpleicons.org/github/FAFAF9" alt="GitHub" />
+            <div class="stat-num">01 / REACH</div>
+            <div class="stat-value"><span class="stat-count" data-end="4.7" data-decimals="1">4.7</span><span class="text-primary">M</span></div>
+            <div class="stat-caption">مُشترِك في <span class="ltr">GitHub Copilot</span></div>
+            <div class="stat-context">Jan 2026</div>
+          </div>
+          <div class="reveal-item stat-card">
+            <img class="brand-stat" src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="Cursor" />
+            <div class="stat-num">02 / REVENUE</div>
+            <div class="stat-value">$<span class="stat-count" data-end="2" data-decimals="0">2</span><span class="text-secondary">B</span></div>
+            <div class="stat-caption">الإيراد السنويُّ لـ <span class="ltr">Cursor</span></div>
+            <div class="stat-context">Q1 2026</div>
+          </div>
+          <div class="reveal-item stat-card">
+            <img class="brand-stat" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" />
+            <div class="stat-num">03 / CAPABILITY</div>
+            <div class="stat-value">~<span class="stat-count" data-end="80" data-decimals="0">80</span><span class="text-primary">%</span></div>
+            <div class="stat-caption">درجة <span class="ltr">Claude Code</span> في <span class="ltr">SWE-bench Verified</span></div>
+            <div class="stat-context">benchmark score</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · SECTION DIVIDER "04 / HOW TO PICK" -->
+    <section class="slide divider"
+             data-slide="18"
+             data-section="HOW TO PICK"
+             data-title="SECTION · HOW TO PICK"
+             data-notes="القسم الرابع: متى نستخدم وكيلًا. ليس كلُّ مُهمَّةٍ تحتاجه. سكريبت bash من ثلاثة أسطر يظلُّ أفضل من وكيل متصفِّح ذاتيٍّ في مُعظم الأيَّام. الشرائح القادمة هي إطار القرار.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">04</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ كيف تختار</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          ليس كلُّ مُهمَّةٍ تحتاج وكيلًا. هذا هو إطار القرار.
+        </p>
+      </div>
+    </section>
+
+    <!-- 19 · THREE QUESTIONS -->
+    <section class="slide"
+             data-slide="19"
+             data-section="HOW TO PICK"
+             data-title="QUESTIONS"
+             data-notes="ثلاثة أسئلة قبل أن تستدعي وكيلًا. التكرار: هل هذا شيءٌ تفعله أنت أو فريقك أكثر من مرَّة؟ استخدام الأدوات: هل تحتاج لمسَ ملفَّات، واجهات، متصفِّح؟ الاستقلاليَّة: ما مدى سوء خطأ لن تكتشفه إلَّا مُتأخِّرًا؟ إن كان الجواب الثالث سيِّئًا جدًّا، فأنت تحتاج مسار عملٍ بإنسانٍ في الحلقة، لا وكيلًا.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// decision framework</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-14 leading-tight max-w-3xl">
+          قبل أن تمُدَّ يدك إلى وكيل، اسأل ثلاثة أسئلة.
+        </h2>
+        <div>
+          <div class="reveal-item question-row">
+            <span class="q-num">01</span>
+            <span class="q-text">هل المُهمَّة مُتكرِّرة؟</span>
+          </div>
+          <div class="reveal-item question-row">
+            <span class="q-num">02</span>
+            <span class="q-text">هل تحتاج استخدامَ أدوات؟</span>
+          </div>
+          <div class="reveal-item question-row">
+            <span class="q-num">03</span>
+            <span class="q-text">كم من الاستقلاليَّة مقبول؟</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 · RULE OF THUMB -->
+    <section class="slide"
+             data-slide="20"
+             data-section="HOW TO PICK"
+             data-title="RULE OF THUMB"
+             data-notes="القاعدة العمليَّة في سطرٍ واحد. مُهمَّة واضحة + أدوات مُتاحة + مخاطر منخفضة = استخدم وكيلًا. عدا ذلك، مسار عملٍ مكتوبٌ يدويًّا أو تنفيذها بنفسك أسرع. الفخُّ هو استخدام وكيلٍ في عملٍ فشله مُكلِف.">
+      <div class="slide-inner text-center">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// rule of thumb</div>
+        <div class="reveal-item font-display font-medium tracking-tight leading-[1.3] max-w-5xl mx-auto text-[clamp(1.75rem,3.8vw,3.8rem)]">
+          <span class="text-secondary">مُهمَّة واضحة</span>
+          <span class="text-muted mx-3">+</span>
+          <span class="text-secondary">أدوات مُتاحة</span>
+          <span class="text-muted mx-3">+</span>
+          <span class="text-secondary">مخاطر منخفضة</span>
+          <br/>
+          <span class="text-muted">=</span>
+          <span class="text-primary">استخدم وكيلًا.</span>
+        </div>
+        <div class="reveal-item mt-16 text-muted text-lg max-w-3xl mx-auto leading-relaxed">
+          عدا ذلك، الزم مسار عملٍ مكتوبًا، أو نفِّذها بنفسك.
+        </div>
+      </div>
+    </section>
+
+    <!-- 21 · MCP CALLOUT -->
+    <section class="slide"
+             data-slide="21"
+             data-section="HOW TO PICK"
+             data-title="MCP"
+             data-notes="احفظ هذا الاختصار: MCP. بروتوكول سياق النموذج. ابتكرته أنثروبيك، ثم في ديسمبر 2025 سلَّمته إلى مُؤسَّسة لينكس. هذه هي الخطوة التي تقول لك إنَّ الوكلاء صاروا منصَّة — الطريقة التي تتَّصل بها الأداة صارت معيارًا مفتوحًا. توقَّع أن تبدو العامان القادمان كعصر HTTP المُبكِّر.">
+      <div class="slide-inner max-w-5xl">
+        <div class="reveal-item font-mono text-xs text-primary tracking-[0.25em] mb-5 ltr">// remember this term</div>
+        <div class="reveal-item mcp-badge mb-8">MCP · MODEL CONTEXT PROTOCOL</div>
+        <div class="reveal-item flex items-center gap-8 mb-8 ltr" aria-hidden="true">
+          <img class="brand-mcp" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" />
+          <svg class="mcp-arrow" width="56" height="16" viewBox="0 0 56 16" fill="none" stroke="#a78bfa" stroke-width="1.5">
+            <path class="mcp-arrow-line" d="M2 8 H46" stroke-linecap="round"/>
+            <path class="mcp-arrow-head" d="M40 2 L50 8 L40 14" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <img class="brand-mcp" src="https://cdn.simpleicons.org/linuxfoundation/FAFAF9" alt="Linux Foundation" />
+        </div>
+        <h2 class="reveal-item font-display text-4xl md:text-[3.5rem] font-medium tracking-tight leading-[1.2]">
+          ديسمبر 2025:<br/>
+          تبرَّعت <span class="ltr">Anthropic</span> ببروتوكول <span class="text-primary">سياق النموذج</span> لمُؤسَّسة <span class="ltr">Linux</span>.
+        </h2>
+        <p class="reveal-item mt-10 text-muted text-xl leading-relaxed max-w-3xl">
+          الوكلاء يتحوَّلون إلى منصَّة. المقبس الذي تتَّصل به الأداة صار معيارًا مفتوحًا — كما صار <span class="ltr">HTTP</span> للويب.
+        </p>
+      </div>
+    </section>
+
+    <!-- 22 · RESOURCES -->
+    <section class="slide"
+             data-slide="22"
+             data-section="HOW TO PICK"
+             data-title="RESOURCES"
+             data-notes="إلى أين بعد ذلك. ثلاث نقاط انطلاق لثلاث فئاتٍ أراها في القاعة: البُناة يقرؤون وثائق Agent SDK من أنثروبيك. المُصمِّمون يُجرِّبون Stitch. ومن هو فضوليٌّ حول وكلاء البرمجة، وثائق Cursor مكتوبة جيِّدًا وسريعة القراءة.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-12 items-center">
+          <div class="col-span-12 md:col-span-7">
+            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-5 ltr">// keep going</div>
+            <h2 class="reveal-item font-display text-5xl md:text-6xl font-medium tracking-tight mb-10 leading-tight">
+              إلى أين بعد ذلك.
+            </h2>
+            <div class="max-w-xl">
+              <div class="reveal-item link-row">
+                <span class="ln-num">01</span>
+                <img class="brand-link" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="" />
+                <div>
+                  <div class="font-display text-xl text-ink ltr">Anthropic Agent SDK</div>
+                  <div class="text-xs text-muted mt-1 font-mono ltr">docs.anthropic.com/agent-sdk</div>
+                </div>
+              </div>
+              <div class="reveal-item link-row">
+                <span class="ln-num">02</span>
+                <img class="brand-link" src="https://cdn.simpleicons.org/google" alt="" />
+                <div>
+                  <div class="font-display text-xl text-ink ltr">Google Stitch</div>
+                  <div class="text-xs text-muted mt-1 font-mono ltr">stitch.withgoogle.com</div>
+                </div>
+              </div>
+              <div class="reveal-item link-row">
+                <span class="ln-num">03</span>
+                <img class="brand-link" src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="" />
+                <div>
+                  <div class="font-display text-xl text-ink">وثائق <span class="ltr">Cursor</span></div>
+                  <div class="text-xs text-muted mt-1 font-mono ltr">docs.cursor.com</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-5 reveal-item text-center">
+            <div class="qr-frame">
+              <div id="qr-code" aria-hidden="true"></div>
+            </div>
+            <div class="mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">// scan for slides + notes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 · TAKEAWAY -->
+    <section class="slide"
+             data-slide="23"
+             data-section="CLOSE"
+             data-title="TAKEAWAY"
+             data-notes="جُملةٌ واحدة تخرج بها. إن نسيت الخصائص الخمس، وأرقام السوق، ونداء MCP — تذكَّر هذه: الوكيل نموذج لُغويٌّ يستطيع أن يفعل أشياء.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// one sentence</div>
+        <h2 class="reveal-item font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.5rem,7.5vw,8rem)]">
+          الوكيل <span class="text-primary">نموذجٌ لُغويّ</span><br/>
+          يستطيع أن <span style="font-style: italic;">يفعل أشياء</span>.
+        </h2>
+        <div class="reveal-item mt-16 font-mono text-muted tracking-[0.22em] text-sm ltr">
+          // if you remember nothing else.
+        </div>
+      </div>
+    </section>
+
+    <!-- 24 · CLOSE -->
+    <section class="slide"
+             data-slide="24"
+             data-section="CLOSE"
+             data-title="CLOSE"
+             data-notes="اختم بسلاسة. ادعُ إلى الأسئلة. إن بقي وقت، اسأل القاعة: «ما المُهمَّة الواحدة التي ستُسلِّمها لوكيلٍ غدًا؟» — الإجابات عادةً هي أفضل جزءٍ من النقاش.">
+      <div class="slide-inner text-center">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// session</div>
+        <div id="complete-stamp" class="complete-stamp" style="opacity: 0">
+          <div class="font-display font-semibold tracking-tight text-[clamp(2.5rem,7vw,7rem)]">
+            TASK_COMPLETE <span class="text-secondary">✓</span>
+          </div>
+        </div>
+        <div class="reveal-item mt-16 font-display text-5xl md:text-6xl font-medium tracking-tight">
+          أسئلة؟
+        </div>
+        <div class="reveal-item mt-6 font-mono text-muted tracking-widest">
+          شكرًا لكم.
+        </div>
+        <div class="reveal-item mt-16 font-mono text-xs text-muted tracking-[0.22em] ltr">
+          // session closed · loop frozen on OBSERVE · tools_called = <span id="final-tool-count" class="text-secondary">—</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Overlay: shortcuts ----------------------------------------- -->
+  <div class="overlay" id="shortcuts-overlay" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+    <div class="overlay-card">
+      <div class="overlay-title" id="shortcuts-title">// keyboard shortcuts</div>
+      <dl class="space-y-3 text-sm">
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الشريحة التالية</dt>
+          <dd class="flex gap-2"><span class="kbd">→</span><span class="kbd">Space</span><span class="kbd">PgDn</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الشريحة السابقة</dt>
+          <dd class="flex gap-2"><span class="kbd">←</span><span class="kbd">PgUp</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الأولى / الأخيرة</dt>
+          <dd class="flex gap-2"><span class="kbd">Home</span><span class="kbd">End</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">ملء الشاشة</dt>
+          <dd><span class="kbd">F</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">ملاحظات المُحاضر</dt>
+          <dd><span class="kbd">S</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">نقش خطوط المَسح</dt>
+          <dd><span class="kbd">T</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الاختصارات</dt>
+          <dd class="flex gap-2"><span class="kbd">?</span><span class="kbd">H</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">إغلاق النافذة</dt>
+          <dd><span class="kbd">Esc</span></dd>
+        </div>
+      </dl>
+      <div class="mt-6 text-xs text-muted font-mono ltr">press <span class="kbd">Esc</span> to dismiss</div>
+    </div>
+  </div>
+
+  <!-- Overlay: speaker notes ------------------------------------- -->
+  <div class="overlay" id="notes-overlay" role="dialog" aria-modal="true" aria-labelledby="notes-title">
+    <div class="overlay-card">
+      <div class="overlay-title">// speaker notes</div>
+      <div class="notes-title font-display text-xl mb-4" id="notes-title">—</div>
+      <div class="notes-body text-muted leading-relaxed text-[0.95rem]" id="notes-body">—</div>
+      <div class="mt-6 text-xs text-muted font-mono ltr"><span class="kbd">S</span> or <span class="kbd">Esc</span> to dismiss</div>
+    </div>
+  </div>
+
+  <!-- Main script ------------------------------------------------ -->
+  <script>
+    (function () {
+      "use strict";
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const LOOP_STATES = ["THINK", "ACT", "OBSERVE", "REPEAT"];
+
+      const slides = Array.from(document.querySelectorAll("[data-slide]"));
+      const total = slides.length;
+      let currentIdx = 0;
+      let isTransitioning = false;
+      let toolCount = 0;
+      let loopStateIdx = 0;
+      let loopFrozen = false;
+      let ambientTimer = null;
+
+      const $slideNumber = document.getElementById("slide-number");
+      const $sectionName = document.getElementById("section-name");
+      const $loopStateLabel = document.getElementById("loop-state-label");
+      const $toolCounter = document.getElementById("tool-counter");
+      const $jsonBadge = document.getElementById("json-badge");
+      const $loopMini = document.getElementById("loop-mini");
+      const $scanlines = document.getElementById("scanlines");
+
+      const pad2 = (n) => String(n).padStart(2, "0");
+
+      /* Split divider numbers into char spans */
+      document.querySelectorAll(".divider-number[data-char-split]").forEach((el) => {
+        const text = el.textContent;
+        el.textContent = "";
+        text.split("").forEach((ch) => {
+          const span = document.createElement("span");
+          span.className = "char";
+          span.textContent = ch === " " ? " " : ch;
+          el.appendChild(span);
+        });
+      });
+
+      /* Waveform bars (hook slide) */
+      (function renderWave() {
+        const host = document.getElementById("hook-wave");
+        if (!host) return;
+        const delays = [0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0];
+        host.innerHTML = delays
+          .map((d) => `<div class="bar" style="animation-delay:${d * 0.1}s"></div>`)
+          .join("");
+      })();
+
+      /* QR code placeholder (stylized, not a real QR) */
+      (function renderQR() {
+        const host = document.getElementById("qr-code");
+        if (!host) return;
+        const size = 25, cell = 8, totalPx = size * cell;
+        const parts = [`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${totalPx} ${totalPx}" width="220" height="220" shape-rendering="crispEdges">`];
+        parts.push(`<rect x="0" y="0" width="${totalPx}" height="${totalPx}" fill="#0A0A0B"/>`);
+        const marker = (x, y) => {
+          parts.push(`<rect x="${x * cell}" y="${y * cell}" width="${7 * cell}" height="${7 * cell}" fill="#FAFAF9"/>`);
+          parts.push(`<rect x="${(x + 1) * cell}" y="${(y + 1) * cell}" width="${5 * cell}" height="${5 * cell}" fill="#0A0A0B"/>`);
+          parts.push(`<rect x="${(x + 2) * cell}" y="${(y + 2) * cell}" width="${3 * cell}" height="${3 * cell}" fill="#FAFAF9"/>`);
+        };
+        marker(0, 0);
+        marker(size - 7, 0);
+        marker(0, size - 7);
+        let seed = 1337;
+        const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+        for (let y = 0; y < size; y++) {
+          for (let x = 0; x < size; x++) {
+            const inMarker = (x < 8 && y < 8) || (x >= size - 8 && y < 8) || (x < 8 && y >= size - 8);
+            if (inMarker) continue;
+            if (rnd() > 0.53) {
+              parts.push(`<rect x="${x * cell}" y="${y * cell}" width="${cell}" height="${cell}" fill="#FAFAF9"/>`);
+            }
+          }
+        }
+        parts.push(`<rect x="${(size - 10) * cell}" y="${(size - 10) * cell}" width="${4 * cell}" height="${4 * cell}" fill="#8B5CF6"/>`);
+        parts.push(`</svg>`);
+        host.innerHTML = parts.join("");
+      })();
+
+      /* Loop state */
+      function setLoopState(n) {
+        loopStateIdx = n;
+        $loopMini.setAttribute("data-state", String(n));
+        const big = document.getElementById("loop-big");
+        if (big) big.setAttribute("data-state", String(n));
+        $loopStateLabel.textContent = LOOP_STATES[n];
+        popLoopNode(n);
+      }
+
+      /* Subtle scale-pulse on the node that just became active */
+      function popLoopNode(n) {
+        if (reducedMotion) return;
+        const miniNode = $loopMini.querySelector(`.node-${n}`);
+        if (miniNode) {
+          gsap.fromTo(miniNode, { attr: { r: 10 } }, { attr: { r: 7 }, duration: 0.45, ease: "expo.out", overwrite: true });
+        }
+        const big = document.getElementById("loop-big");
+        if (big) {
+          const bigCircle = big.querySelector(`.node-${n} .node-circle`);
+          if (bigCircle) {
+            gsap.fromTo(bigCircle, { attr: { r: 76 } }, { attr: { r: 66 }, duration: 0.55, ease: "expo.out", overwrite: true });
+          }
+        }
+      }
+      function tickLoop() {
+        if (loopFrozen) return;
+        setLoopState((loopStateIdx + 1) % 4);
+      }
+      function startAmbientLoop() {
+        if (reducedMotion) return;
+        if (ambientTimer) return;
+        ambientTimer = setInterval(tickLoop, 1000);
+      }
+      function stopAmbientLoop() {
+        if (ambientTimer) clearInterval(ambientTimer);
+        ambientTimer = null;
+      }
+
+      /* Chrome updates */
+      function updateTopBar(slide, idx) {
+        $slideNumber.textContent = `${pad2(idx + 1)} / ${pad2(total)}`;
+        $sectionName.textContent = slide.dataset.section || "";
+      }
+      function showJsonBadge(id) {
+        $jsonBadge.textContent = `{"tool":"render_slide","id":${id}}`;
+        gsap.killTweensOf($jsonBadge);
+        gsap.fromTo(
+          $jsonBadge,
+          { opacity: 0, y: -6 },
+          {
+            opacity: 1, y: 0,
+            duration: reducedMotion ? 0.1 : 0.2, ease: "expo.out",
+            onComplete: () => {
+              gsap.to($jsonBadge, { opacity: 0, delay: 0.9, duration: reducedMotion ? 0.1 : 0.35, ease: "power2.in" });
+            },
+          }
+        );
+      }
+      function incrementToolCount() {
+        toolCount += 1;
+        $toolCounter.textContent = toolCount;
+      }
+
+      /* Slide transition */
+      function goToSlide(idx) {
+        if (isTransitioning || idx < 0 || idx >= total || idx === currentIdx) return;
+        isTransitioning = true;
+        const fromSlide = slides[currentIdx];
+        const toSlide = slides[idx];
+        const direction = idx > currentIdx ? 1 : -1;
+
+        fromSlide.setAttribute("aria-current", "false");
+        toSlide.setAttribute("aria-current", "true");
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            fromSlide.style.visibility = "hidden";
+            isTransitioning = false;
+          },
+        });
+
+        tl.to(fromSlide, { opacity: 0, y: -20 * direction, duration: reducedMotion ? 0.12 : 0.3, ease: "expo.in" });
+
+        tl.call(() => {
+          toSlide.style.visibility = "visible";
+          updateTopBar(toSlide, idx);
+          showJsonBadge(idx + 1);
+          incrementToolCount();
+          runSlideInit(toSlide, idx);
+        });
+
+        tl.fromTo(
+          toSlide,
+          { opacity: 0, y: 30 * direction },
+          { opacity: 1, y: 0, duration: reducedMotion ? 0.15 : 0.45, ease: "expo.out" }
+        );
+
+        const items = toSlide.querySelectorAll(".reveal-item");
+        if (items.length && !reducedMotion) {
+          tl.fromTo(
+            items,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.45, stagger: 0.07, ease: "expo.out" },
+            "-=0.25"
+          );
+        } else if (items.length) {
+          tl.set(items, { opacity: 1, y: 0 });
+        }
+
+        currentIdx = idx;
+      }
+
+      /* Per-slide initializers */
+      function runSlideInit(slide, idx) {
+        const n = idx + 1;
+        if ([3, 8, 15, 18].includes(n)) animateDividerChars(slide);
+        if (n === 6) animateEquation(slide);
+        if (n === 14) setupInteractive(slide);
+        if (n === 17) animateStats(slide);
+        if (n === 21) animateMCPArrow(slide);
+        if (n === 24) runFinale(slide);
+        if (n !== 24 && loopFrozen) {
+          loopFrozen = false;
+          startAmbientLoop();
+        }
+      }
+
+      /* Count-up for the stat values */
+      function animateStats(slide) {
+        const counters = slide.querySelectorAll(".stat-count");
+        counters.forEach((el) => {
+          const end = parseFloat(el.dataset.end);
+          const dec = parseInt(el.dataset.decimals || "0", 10);
+          if (reducedMotion) {
+            el.textContent = end.toFixed(dec);
+            return;
+          }
+          const obj = { v: 0 };
+          gsap.to(obj, {
+            v: end,
+            duration: 1.4,
+            delay: 0.25,
+            ease: "expo.out",
+            onUpdate: () => { el.textContent = obj.v.toFixed(dec); },
+          });
+        });
+      }
+
+      /* MCP handoff arrow — line draws in, head snaps */
+      function animateMCPArrow(slide) {
+        const line = slide.querySelector(".mcp-arrow-line");
+        const head = slide.querySelector(".mcp-arrow-head");
+        if (!line) return;
+        if (reducedMotion) {
+          gsap.set(line, { strokeDashoffset: 0 });
+          gsap.set(head, { opacity: 1, x: 0 });
+          return;
+        }
+        gsap.set(line, { strokeDasharray: 46, strokeDashoffset: 46 });
+        gsap.set(head, { opacity: 0, x: -10 });
+        gsap.to(line, { strokeDashoffset: 0, duration: 0.95, delay: 0.5, ease: "power2.out" });
+        gsap.to(head, { opacity: 1, x: 0, duration: 0.4, delay: 1.25, ease: "back.out(2)" });
+      }
+
+      function animateDividerChars(slide) {
+        const chars = slide.querySelectorAll(".divider-number .char");
+        if (!chars.length) return;
+        if (reducedMotion) {
+          gsap.set(chars, { opacity: 1, y: 0, scale: 1 });
+          return;
+        }
+        gsap.fromTo(
+          chars,
+          { opacity: 0, y: 60, scale: 0.65 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.85, stagger: 0.15, ease: "expo.out" }
+        );
+      }
+
+      function animateEquation(slide) {
+        const pieces = slide.querySelectorAll(".eq-piece");
+        if (!pieces.length) return;
+        if (reducedMotion) {
+          gsap.set(pieces, { opacity: 1, y: 0 });
+          return;
+        }
+        gsap.fromTo(
+          pieces,
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.4, ease: "expo.out" }
+        );
+      }
+
+      function setupInteractive(slide) {
+        const btn = slide.querySelector("#run-agent-btn");
+        const pills = slide.querySelectorAll(".stage-pill");
+        const log = slide.querySelector("#run-log");
+        if (!btn || btn.dataset.wired === "1") return;
+        btn.dataset.wired = "1";
+
+        btn.addEventListener("click", () => {
+          pills.forEach((p) => p.classList.remove("active", "done"));
+          log.textContent = "";
+          btn.disabled = true;
+
+          const messages = [
+            "&lt; يُفكِّر: تفكيك الهدف إلى خطوات",
+            "&lt; يُنفِّذ: استدعاء أداة (بحث)",
+            "&lt; يُراقب: قراءة 12 نتيجة",
+            "&lt; انتهى: تجميع التقرير",
+          ];
+
+          const tl = gsap.timeline({ onComplete: () => { btn.disabled = false; } });
+          pills.forEach((pill, i) => {
+            tl.call(() => {
+              pill.classList.add("active");
+              log.innerHTML = messages[i];
+            });
+            tl.to({}, { duration: 0.6 });
+            tl.call(() => {
+              pill.classList.remove("active");
+              pill.classList.add("done");
+            });
+          });
+          tl.call(() => {
+            log.innerHTML = '<span style="color:#84CC16">&lt; TASK_COMPLETE ✓</span>';
+          });
+        });
+      }
+
+      function runFinale(slide) {
+        loopFrozen = true;
+        stopAmbientLoop();
+        setLoopState(2);
+        const final = slide.querySelector("#final-tool-count");
+        if (final) final.textContent = String(toolCount);
+        const stamp = slide.querySelector("#complete-stamp");
+        if (!stamp) return;
+        if (reducedMotion) {
+          gsap.set(stamp, { opacity: 1, scale: 1, rotate: 0 });
+          return;
+        }
+        const tl = gsap.timeline();
+        tl.fromTo(
+          stamp,
+          { opacity: 0, scale: 0.45, rotate: -3 },
+          { opacity: 1, scale: 1, rotate: 0, duration: 0.95, ease: "back.out(2)" }
+        );
+        /* small settle-wiggle after the stamp lands */
+        tl.to(stamp, { rotate: 1.8, duration: 0.18, ease: "power2.out" });
+        tl.to(stamp, { rotate: -1, duration: 0.18, ease: "power2.inOut" });
+        tl.to(stamp, { rotate: 0, duration: 0.2, ease: "power2.out" });
+      }
+
+      /* Navigation */
+      const next = () => { if (currentIdx < total - 1) goToSlide(currentIdx + 1); };
+      const prev = () => { if (currentIdx > 0) goToSlide(currentIdx - 1); };
+
+      document.addEventListener("keydown", (e) => {
+        if (e.target && e.target.matches && e.target.matches("input, textarea")) return;
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+        const shortcutsOpen = document.getElementById("shortcuts-overlay").classList.contains("show");
+        const notesOpen = document.getElementById("notes-overlay").classList.contains("show");
+
+        if (e.key === "Escape") { e.preventDefault(); closeOverlays(); return; }
+        if (e.key === "?" || e.key === "h" || e.key === "H") { e.preventDefault(); toggleShortcuts(); return; }
+        if (e.key === "s" || e.key === "S") { e.preventDefault(); toggleNotes(); return; }
+        if (e.key === "t" || e.key === "T") { e.preventDefault(); $scanlines.classList.toggle("on"); return; }
+        if (e.key === "f" || e.key === "F") { e.preventDefault(); toggleFullscreen(); return; }
+        if (shortcutsOpen || notesOpen) return;
+
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); next(); }
+        else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); prev(); }
+        else if (e.key === "Home") { e.preventDefault(); goToSlide(0); }
+        else if (e.key === "End") { e.preventDefault(); goToSlide(total - 1); }
+      });
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+        else document.exitFullscreen?.();
+      }
+      function toggleShortcuts() {
+        document.getElementById("notes-overlay").classList.remove("show");
+        document.getElementById("shortcuts-overlay").classList.toggle("show");
+      }
+      function toggleNotes() {
+        document.getElementById("shortcuts-overlay").classList.remove("show");
+        const overlay = document.getElementById("notes-overlay");
+        const slide = slides[currentIdx];
+        document.getElementById("notes-title").textContent =
+          `${pad2(currentIdx + 1)} / ${pad2(total)} · ${slide.dataset.title || ""}`;
+        document.getElementById("notes-body").textContent = slide.dataset.notes || "(no notes)";
+        overlay.classList.toggle("show");
+      }
+      function closeOverlays() {
+        document.getElementById("shortcuts-overlay").classList.remove("show");
+        document.getElementById("notes-overlay").classList.remove("show");
+      }
+      document.querySelectorAll(".overlay").forEach((ov) => {
+        ov.addEventListener("click", (e) => { if (e.target === ov) ov.classList.remove("show"); });
+      });
+
+      /* Pre-roll */
+      function runPreroll() {
+        const preroll = document.getElementById("preroll");
+        const text = document.getElementById("preroll-text");
+        const full = `start_lecture() → loading slides[${total}]...`;
+
+        if (reducedMotion) {
+          text.textContent = full;
+          setTimeout(() => {
+            gsap.to(preroll, {
+              opacity: 0, duration: 0.25,
+              onComplete: () => { preroll.style.display = "none"; enterFirstSlide(); },
+            });
+          }, 350);
+          return;
+        }
+
+        let i = 0;
+        const typeInterval = setInterval(() => {
+          text.textContent = full.slice(0, i);
+          i += 1;
+          if (i > full.length) {
+            clearInterval(typeInterval);
+            setTimeout(() => {
+              gsap.to(preroll, {
+                opacity: 0, duration: 0.45, ease: "expo.out",
+                onComplete: () => { preroll.style.display = "none"; enterFirstSlide(); },
+              });
+            }, 550);
+          }
+        }, 45);
+      }
+
+      function enterFirstSlide() {
+        const first = slides[0];
+        first.style.visibility = "visible";
+        first.setAttribute("aria-current", "true");
+        updateTopBar(first, 0);
+        showJsonBadge(1);
+        incrementToolCount();
+        startAmbientLoop();
+
+        const items = first.querySelectorAll(".reveal-item");
+        const tl = gsap.timeline();
+        tl.fromTo(first, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: reducedMotion ? 0.2 : 0.55, ease: "expo.out" });
+        if (items.length && !reducedMotion) {
+          tl.fromTo(items, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "expo.out" }, "-=0.25");
+        } else if (items.length) {
+          tl.set(items, { opacity: 1, y: 0 });
+        }
+        runSlideInit(first, 0);
+      }
+
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", runPreroll);
+      else runPreroll();
+    })();
+  </script>
+</body>
+</html>
