@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agents · ثلاث مستويات</title>
+  <meta name="description" content="محاضرة ثلاثين دقيقة عن AI Agents، مبنيَّة على ثلاث درجات." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: "#0A0A0B",
+            surface: "#151518",
+            primary: "#8B5CF6",
+            "primary-soft": "#a78bfa",
+            secondary: "#84CC16",
+            ink: "#FAFAF9",
+            muted: "#71717A",
+            edge: "#27272A",
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', '"Readex Pro"', "system-ui", "sans-serif"],
+            mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+            arabic: ['"Readex Pro"', '"Space Grotesk"', "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ---------- Base ---------- */
+    html, body { height: 100%; margin: 0; overflow: hidden; background: #0a0a0b; color: #fafaf9; font-family: "Readex Pro", "Space Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    * { box-sizing: border-box; }
+    :focus { outline: none; }
+    :focus-visible { outline: 2px solid #8b5cf6; outline-offset: 4px; border-radius: 4px; }
+    button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.45); }
+    ::-webkit-scrollbar { display: none; }
+    body { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .ltr, .font-mono { direction: ltr; unicode-bidi: isolate; }
+    pre.code-block { direction: ltr; text-align: left; }
+
+    /* ---------- Stage + slides ---------- */
+    .stage { position: fixed; inset: 0; overflow: hidden; }
+    .stage::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; z-index: 0; }
+    .slide { position: absolute; inset: 0; padding: 6rem clamp(2.5rem, 5vw, 5rem) 7.5rem; display: flex; align-items: center; opacity: 0; visibility: hidden; pointer-events: none; z-index: 1; }
+    .slide[aria-current="true"] { pointer-events: auto; }
+    .slide-inner { width: 100%; max-width: 1600px; margin: 0 auto; position: relative; }
+
+    /* ---------- Chrome ---------- */
+    .chrome-top { position: fixed; top: 0; left: 0; right: 0; height: 3.5rem; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; color: #71717a; text-transform: uppercase; z-index: 30; direction: ltr; }
+    .chrome-top > div:nth-child(1) { text-align: left; }
+    .chrome-top > div:nth-child(2) { text-align: center; }
+    .chrome-top > div:nth-child(3) { text-align: right; }
+    .chrome-top .accent { color: #fafaf9; }
+    .chrome-top::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: linear-gradient(to right, transparent 0%, #27272a 12%, #27272a 88%, transparent 100%); }
+    .state-dot { display: inline-block; width: 6px; height: 6px; background: #8b5cf6; border-radius: 50%; margin-right: 8px; vertical-align: 1px; animation: state-pulse 1s ease-in-out infinite alternate; }
+    @keyframes state-pulse { from { opacity: 0.45; transform: scale(0.85); } to { opacity: 1; transform: scale(1.15); } }
+
+    .chrome-bottom { position: fixed; bottom: 1.6rem; left: 2rem; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.12em; color: #71717a; z-index: 30; direction: ltr; }
+    .chrome-bottom .val { color: #84cc16; }
+    .chrome-bottom .hint { margin-top: 0.5rem; font-size: 0.6rem; opacity: 0.65; letter-spacing: 0.14em; }
+    .chrome-bottom .hint .hint-key { display: inline-block; padding: 0 0.35rem; border: 1px solid #3f3f46; border-radius: 2px; color: #a1a1aa; margin: 0 0.1rem; }
+
+    .json-badge { position: fixed; top: 4.2rem; left: 2rem; padding: 0.4rem 0.7rem; font-family: "JetBrains Mono", monospace; font-size: 0.65rem; background: #151518; border: 1px solid #27272a; color: #84cc16; border-radius: 3px; opacity: 0; pointer-events: none; z-index: 40; letter-spacing: 0.04em; white-space: nowrap; direction: ltr; }
+
+    /* ---------- Ambient + big loop ---------- */
+    .loop-mini { position: fixed; bottom: 1.25rem; right: 1.75rem; width: 80px; height: 80px; z-index: 30; }
+    .loop-mini svg { display: block; }
+    .loop-mini .ring { fill: none; stroke: #27272a; stroke-width: 1; stroke-dasharray: 2 5; }
+    .loop-mini .tick { stroke: #3f3f46; stroke-width: 1; }
+    .loop-mini .node { fill: #18181b; stroke: #3f3f46; stroke-width: 1.5; transition: fill 300ms ease, stroke 300ms ease; }
+    .loop-mini[data-state="0"] .node-0,
+    .loop-mini[data-state="1"] .node-1,
+    .loop-mini[data-state="2"] .node-2,
+    .loop-mini[data-state="3"] .node-3 { fill: #8b5cf6; stroke: #c4b5fd; }
+
+    .loop-big .ring { fill: none; stroke: #27272a; stroke-width: 1.5; stroke-dasharray: 4 8; }
+    .loop-big .node-circle { fill: #151518; stroke: #3f3f46; stroke-width: 2; transition: fill 450ms ease, stroke 450ms ease; }
+    .loop-big .node-label { fill: #e4e4e7; font-family: "Space Grotesk", "Readex Pro", sans-serif; font-weight: 600; font-size: 22px; text-anchor: middle; letter-spacing: -0.01em; transition: fill 450ms ease; }
+    .loop-big .node-sub { fill: #71717a; font-family: "JetBrains Mono", monospace; font-size: 10px; text-anchor: middle; letter-spacing: 0.2em; transition: fill 450ms ease; }
+    .loop-big[data-state="0"] .node-0 .node-circle,
+    .loop-big[data-state="1"] .node-1 .node-circle,
+    .loop-big[data-state="2"] .node-2 .node-circle,
+    .loop-big[data-state="3"] .node-3 .node-circle { fill: rgba(139, 92, 246, 0.18); stroke: #8b5cf6; }
+    .loop-big[data-state="0"] .node-0 .node-label,
+    .loop-big[data-state="1"] .node-1 .node-label,
+    .loop-big[data-state="2"] .node-2 .node-label,
+    .loop-big[data-state="3"] .node-3 .node-label { fill: #fafaf9; }
+    .loop-big[data-state="0"] .node-0 .node-sub,
+    .loop-big[data-state="1"] .node-1 .node-sub,
+    .loop-big[data-state="2"] .node-2 .node-sub,
+    .loop-big[data-state="3"] .node-3 .node-sub { fill: #c4b5fd; }
+    .loop-big .arrow { fill: #3f3f46; transition: fill 300ms ease; }
+    .loop-big[data-state="0"] .arrow-0,
+    .loop-big[data-state="1"] .arrow-1,
+    .loop-big[data-state="2"] .arrow-2,
+    .loop-big[data-state="3"] .arrow-3 { fill: #8b5cf6; }
+
+    /* ---------- Scanlines / pre-roll / overlays ---------- */
+    .scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 25; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 3px); opacity: 0; transition: opacity 300ms ease; }
+    .scanlines.on { opacity: 1; }
+
+    .preroll { position: fixed; inset: 0; z-index: 100; background: #0a0a0b; display: flex; align-items: center; justify-content: center; font-family: "JetBrains Mono", monospace; font-size: clamp(1rem, 2.2vw, 1.5rem); color: #84cc16; letter-spacing: 0.04em; direction: ltr; }
+    .preroll .cursor { display: inline-block; width: 0.55em; height: 1.05em; background: #84cc16; margin-left: 0.15em; vertical-align: -3px; animation: blink 0.6s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .overlay { position: fixed; inset: 0; z-index: 90; background: rgba(10,10,11,0.92); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 3rem; }
+    .overlay.show { display: flex; }
+    .overlay-card { max-width: 38rem; width: 100%; padding: 2.5rem; background: #151518; border: 1px solid #27272a; border-radius: 10px; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8); }
+    .overlay-title { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.2em; color: #8b5cf6; text-transform: uppercase; margin-bottom: 1.25rem; direction: ltr; }
+    .kbd { display: inline-block; padding: 0.2rem 0.55rem; background: #0a0a0b; border: 1px solid #3f3f46; border-radius: 4px; font-family: "JetBrains Mono", monospace; font-size: 0.75rem; color: #fafaf9; min-width: 1.8rem; text-align: center; direction: ltr; }
+
+    /* ---------- Slide-level visuals ---------- */
+    .char { display: inline-block; will-change: transform, opacity; }
+    .divider-number { font-family: "Space Grotesk", "Readex Pro", sans-serif; font-weight: 600; letter-spacing: -0.05em; line-height: 0.82; font-size: clamp(10rem, 28vw, 28rem); color: #fafaf9; direction: ltr; }
+
+    .concept-card { padding: 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; display: flex; flex-direction: column; min-height: 380px; position: relative; }
+    .concept-card.highlight { background: rgba(139, 92, 246, 0.07); border-color: #8b5cf6; box-shadow: 0 0 0 1px rgba(139,92,246,0.2), 0 20px 40px -20px rgba(139,92,246,0.35); }
+
+    .feature-num { font-family: "Space Grotesk", sans-serif; font-size: clamp(5rem, 12vw, 11rem); font-weight: 600; line-height: 0.85; color: rgba(139, 92, 246, 0.22); letter-spacing: -0.05em; direction: ltr; }
+    .feature-headline { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-weight: 500; letter-spacing: -0.01em; line-height: 1.05; }
+    .example-card { padding: 1.5rem 1.75rem; background: #151518; border: 1px solid #27272a; border-right: 3px solid #84cc16; border-radius: 4px; }
+
+    .stage-pill { padding: 0.75rem 1.75rem; border: 1px solid #27272a; border-radius: 999px; font-family: "JetBrains Mono", monospace; font-size: 0.85rem; letter-spacing: 0.12em; color: #71717a; background: #151518; transition: all 300ms ease; }
+    .stage-pill.active { border-color: #8b5cf6; color: #fafaf9; background: rgba(139,92,246,0.15); transform: scale(1.05); }
+    .stage-pill.done { border-color: #84cc16; color: #84cc16; background: rgba(132,204,22,0.08); transform: scale(1); }
+    .run-btn { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1rem; letter-spacing: 0.05em; padding: 1rem 3rem; background: #8b5cf6; color: #0a0a0b; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease; }
+    .run-btn:hover { transform: translateY(-2px); background: #a78bfa; box-shadow: 0 10px 30px -10px rgba(139,92,246,0.55); }
+    .run-btn:active { transform: translateY(0); }
+    .run-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .stat-card { padding: 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; }
+    .stat-card .stat-num { font-family: "JetBrains Mono", monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: #52525b; direction: ltr; }
+    .stat-card .stat-value { font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: clamp(3rem, 6.5vw, 6.5rem); line-height: 1; margin-top: 1rem; letter-spacing: -0.045em; direction: ltr; }
+    .stat-card .stat-caption { margin-top: 1rem; font-size: 1.05rem; color: #e4e4e7; line-height: 1.5; }
+    .stat-card .stat-context { margin-top: 0.5rem; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: #71717a; text-transform: uppercase; direction: ltr; }
+
+    .mcp-badge { display: inline-block; padding: 0.4rem 0.8rem; border: 1px solid #8b5cf6; color: #8b5cf6; font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.22em; border-radius: 3px; direction: ltr; }
+    .complete-stamp { display: inline-block; padding: 1.5rem 3rem; border: 3px solid #84cc16; border-radius: 10px; background: rgba(132,204,22,0.08); transform-origin: center; direction: ltr; }
+
+    /* Brand logos */
+    .brand { display: inline-block; line-height: 0; vertical-align: middle; }
+    .brand img { display: block; }
+    .brand-inline { width: 28px; height: 28px; margin-inline-end: 10px; vertical-align: -6px; }
+    .brand-stat   { position: absolute; top: 1.25rem; right: 1.25rem; width: 26px; height: 26px; opacity: 0.75; }
+    html[dir="rtl"] .brand-stat { right: auto; left: 1.25rem; }
+    .brand-mcp    { width: 64px; height: 64px; }
+    .brand-row   { width: 48px; height: 48px; opacity: 0.95; }
+
+    /* ---------- v2-specific ---------- */
+    /* Buzzword wall (slide 2) */
+    .buzz-wall { position: relative; min-height: 320px; }
+    .buzz-word { display: inline-block; font-family: "Space Grotesk", sans-serif; font-weight: 600; letter-spacing: -0.02em; margin: 0.5rem 0.75rem; color: #a1a1aa; position: relative; transition: color 300ms ease, opacity 300ms ease; }
+    .buzz-word.struck { color: #52525b; opacity: 0.6; }
+    .buzz-word.struck::after { content: ""; position: absolute; left: -2px; right: -2px; top: 52%; height: 3px; background: #8b5cf6; transform: scaleX(var(--sx, 1)); transform-origin: left; border-radius: 2px; }
+    .buzz-word.kept { color: #fafaf9; }
+
+    /* Level ladder preview (slide 3) */
+    .level-step { padding: 1.5rem 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; }
+    .level-step .ls-num { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.22em; color: #71717a; direction: ltr; }
+    .level-step .ls-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 2rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 0.3rem; }
+    .level-step .ls-tag { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: #8b5cf6; margin-top: 0.3rem; direction: ltr; }
+    .level-step .ls-hint { color: #a1a1aa; margin-top: 0.75rem; font-size: 1rem; line-height: 1.6; }
+    .level-step.lvl-01 { margin-inline-start: 0; }
+    .level-step.lvl-02 { margin-inline-start: 4rem; }
+    .level-step.lvl-03 { margin-inline-start: 8rem; background: rgba(139, 92, 246, 0.08); border-color: #8b5cf6; }
+
+    /* Flow chain (slides 5, 9, 10, 11, 17) */
+    .flow-chain { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; direction: ltr; }
+    .flow-step { padding: 0.65rem 1.1rem; background: #151518; border: 1px solid #27272a; border-radius: 6px; font-family: "JetBrains Mono", monospace; font-size: 0.85rem; color: #e4e4e7; letter-spacing: 0.04em; white-space: nowrap; }
+    .flow-step.llm { border-color: #8b5cf6; color: #c4b5fd; background: rgba(139,92,246,0.08); }
+    .flow-step.tool { border-color: #84cc16; color: #bef264; background: rgba(132,204,22,0.06); }
+    .flow-step.fail { border-color: #f87171; color: #fca5a5; background: rgba(248,113,113,0.06); text-decoration: line-through; text-decoration-color: #f87171; }
+    .flow-arrow { color: #52525b; font-family: "JetBrains Mono", monospace; font-size: 1.1rem; }
+
+    /* Pivot slide (slide 13) */
+    .pivot-box { padding: 1.5rem 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; }
+    .pivot-box.before { opacity: 0.6; }
+    .pivot-box.after { border-color: #8b5cf6; background: rgba(139,92,246,0.08); }
+    .pivot-strike { position: relative; display: inline-block; }
+    .pivot-strike::after { content: ""; position: absolute; left: -4px; right: -4px; top: 50%; height: 2px; background: #f87171; transform: rotate(-6deg); }
+    .pivot-arrow { font-family: "JetBrains Mono", monospace; font-size: 2rem; color: #8b5cf6; letter-spacing: -0.1em; }
+
+    /* 3-level comparison grid (slide 17) */
+    .compare-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .compare-col { padding: 1.5rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; display: flex; flex-direction: column; min-height: 380px; }
+    .compare-col.highlight { border-color: #8b5cf6; background: rgba(139,92,246,0.06); }
+    .compare-col .cc-num { font-family: "JetBrains Mono", monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: #71717a; direction: ltr; }
+    .compare-col .cc-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 0.35rem; }
+    .compare-col .cc-flow { margin-top: 1rem; }
+    .compare-col .cc-row { margin-top: 1.25rem; font-size: 0.9rem; color: #a1a1aa; line-height: 1.6; }
+    .compare-col .cc-row strong { color: #fafaf9; font-weight: 500; }
+    .compare-col .cc-decider { margin-top: auto; padding-top: 1.25rem; border-top: 1px solid #27272a; }
+    .compare-col .cc-decider-label { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: #52525b; direction: ltr; }
+    .compare-col .cc-decider-val { font-family: "Space Grotesk", sans-serif; font-size: 1.35rem; font-weight: 600; margin-top: 0.35rem; color: #fafaf9; }
+    .compare-col.highlight .cc-decider-val { color: #a78bfa; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .state-dot, .preroll .cursor { animation: none; }
+      .scanlines { display: none; }
+    }
+  </style>
+</head>
+
+<body class="bg-bg text-ink">
+
+  <!-- Pre-roll -->
+  <div class="preroll" id="preroll" aria-hidden="true">
+    <span id="preroll-text"></span><span class="cursor" id="preroll-cursor"></span>
+  </div>
+
+  <!-- Top chrome -->
+  <div class="chrome-top" aria-hidden="true">
+    <div><span class="accent" id="slide-number">01 / 22</span></div>
+    <div><span id="section-name">INTRO</span></div>
+    <div><span class="state-dot"></span>STATE · <span class="accent" id="loop-state-label">THINK</span></div>
+  </div>
+
+  <!-- Bottom counter + hint -->
+  <div class="chrome-bottom" aria-hidden="true">
+    <div>tools_called: <span class="val" id="tool-counter">0</span></div>
+    <div class="hint">
+      <span class="hint-key">?</span> keys ·
+      <span class="hint-key">S</span> notes ·
+      <span class="hint-key">T</span> texture ·
+      <span class="hint-key">F</span> full
+    </div>
+  </div>
+
+  <!-- JSON tool badge -->
+  <div class="json-badge" id="json-badge" aria-hidden="true">{"tool":"render_slide","id":1}</div>
+
+  <!-- Mini ambient loop -->
+  <div class="loop-mini" id="loop-mini" data-state="0" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <circle class="ring" cx="50" cy="50" r="38" />
+      <line class="tick" x1="50" y1="10" x2="50" y2="14" />
+      <line class="tick" x1="90" y1="50" x2="86" y2="50" />
+      <line class="tick" x1="50" y1="90" x2="50" y2="86" />
+      <line class="tick" x1="10" y1="50" x2="14" y2="50" />
+      <circle class="node node-0" cx="50" cy="12" r="7" />
+      <circle class="node node-1" cx="88" cy="50" r="7" />
+      <circle class="node node-2" cx="50" cy="88" r="7" />
+      <circle class="node node-3" cx="12" cy="50" r="7" />
+    </svg>
+  </div>
+
+  <!-- Scanlines -->
+  <div class="scanlines" id="scanlines" aria-hidden="true"></div>
+
+  <!-- Main stage -->
+  <main class="stage" id="stage" role="main" aria-label="عرض AI Agents — ثلاث مستويات">
+
+    <!-- 01 · COVER -->
+    <section class="slide"
+             data-slide="1"
+             data-section="INTRO"
+             data-title="COVER"
+             data-notes="مرحبًا. هذه ثلاثون دقيقة عن AI Agents — لكن بدل التعريف القاموسي، سنبني الفكرة على ثلاث درجات: LLM، ثمَّ AI Workflow، ثمَّ AI Agent. الفرق بينها ليس تقنيًّا — هو من يتَّخذ القرار. هذه هي الجُملة الوحيدة التي نحتاجها للانطلاق.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// lecture.begin()</div>
+        <h1 class="reveal-item font-display font-semibold tracking-tight leading-[0.95] text-[clamp(4rem,11vw,11rem)] mt-6">
+          AI<br />Agents
+        </h1>
+        <p class="reveal-item text-muted text-2xl md:text-3xl mt-10 max-w-3xl leading-snug">
+          ثلاث درجات. ثلاثون دقيقة. صفر مصطلحات متبقِّية.
+        </p>
+        <div class="reveal-item mt-16 flex flex-wrap gap-12 text-sm">
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted ltr">Instructor</div>
+            <div class="text-ink mt-1 text-base">محمود صلاح الدين أبو جادالله</div>
+          </div>
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted ltr">Date</div>
+            <div class="text-ink mt-1 text-base">23 أبريل 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · HOOK — Buzzword wall -->
+    <section class="slide"
+             data-slide="2"
+             data-section="INTRO"
+             data-title="HOOK · BUZZWORDS"
+             data-notes="الافتتاحيَّة الصريحة. الكلُّ يقول AI Agent الآن، ومُعظم الشروحات إمَّا تقنيَّة جدًّا أو بسيطة جدًّا. نُقرُّ بذلك، ونشطب الكلمات التي لن نستخدمها قبل تعريفها. الوعد: كلَّ مُصطلح في هذا العرض سيُعرَّف قبل استعماله.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the room is tired of hearing these</div>
+        <div class="reveal-item buzz-wall text-center" id="buzz-wall" aria-hidden="true">
+          <span class="buzz-word struck" style="font-size:clamp(2rem,5vw,5rem)">AI</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3.5vw,3rem);transform:rotate(-3deg)">agent</span>
+          <span class="buzz-word struck" style="font-size:clamp(2rem,4.5vw,4rem)">agentic</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(2deg)">AI agent</span>
+          <br/>
+          <span class="buzz-word struck" style="font-size:clamp(2.5rem,6vw,6rem)">agentic workflows</span>
+          <span class="buzz-word kept" style="font-size:clamp(3rem,7vw,7rem)">LLM</span>
+          <br/>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(-2deg)">agents</span>
+          <span class="buzz-word kept" style="font-size:clamp(2rem,5vw,5rem)">ReAct</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.75rem,4vw,3.5rem);transform:rotate(3deg)">agentic AI</span>
+          <span class="buzz-word kept" style="font-size:clamp(2rem,4.5vw,4rem)">RAG</span>
+          <br/>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem)">copilot</span>
+          <span class="buzz-word struck" style="font-size:clamp(2rem,4.5vw,4rem);transform:rotate(-1deg)">autonomous</span>
+          <span class="buzz-word kept" style="font-size:clamp(2rem,5vw,5rem)">MCP</span>
+        </div>
+        <div class="reveal-item mt-12 max-w-3xl">
+          <p class="text-muted text-lg md:text-xl leading-relaxed">
+            مُعظم الشُّروحات إمَّا تقنيَّة جدًّا أو بسيطة جدًّا. <span class="text-ink">هذه للبَيْن.</span>
+          </p>
+          <p class="text-muted text-base mt-4 leading-relaxed">
+            الوعد: كلُّ مُصطلح في هذا العرض سيُعرَّف <em class="not-italic" style="font-style:italic">قبل</em> استخدامه.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · THE PROMISE — three levels preview -->
+    <section class="slide"
+             data-slide="3"
+             data-section="INTRO"
+             data-title="THREE LEVELS"
+             data-notes="خارطة الطريق. ثلاث درجات نصعدها بالتتابع، وكلُّ درجةٍ مبنيَّة على التي قبلها. LLM ما تستعمله كلَّ يوم (ChatGPT, Claude). AI Workflow هو LLM مع مسارٍ مكتوبٍ من إنسان. AI Agent هو حين يُصبح LLM نفسه صاحب القرار. هذه الجُملة الأخيرة هي كلُّ الفرق.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the ladder</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mb-12 leading-tight">
+          ثلاث درجات. نصعدها بالتَّرتيب.
+        </h2>
+        <div class="space-y-4 max-w-4xl">
+          <div class="reveal-item level-step lvl-01">
+            <div class="ls-num">LEVEL 01</div>
+            <div class="ls-title">LLM</div>
+            <div class="ls-tag">// large language model</div>
+            <div class="ls-hint">ما تستعمله كلَّ يوم — ChatGPT, Claude, Gemini.</div>
+          </div>
+          <div class="reveal-item level-step lvl-02">
+            <div class="ls-num">LEVEL 02</div>
+            <div class="ls-title">AI Workflow</div>
+            <div class="ls-tag">// LLM + مسار محدَّد سلفًا</div>
+            <div class="ls-hint">الإنسان يكتب المسار. LLM يتبعه.</div>
+          </div>
+          <div class="reveal-item level-step lvl-03">
+            <div class="ls-num">LEVEL 03</div>
+            <div class="ls-title">AI Agent</div>
+            <div class="ls-tag">// LLM = صاحب القرار</div>
+            <div class="ls-hint">لا إنسان في المُنتصف. LLM يُقرِّر المسار بنفسه.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · SECTION DIVIDER · LEVEL 01 / LLM -->
+    <section class="slide divider"
+             data-slide="4"
+             data-section="LEVEL 01 · LLM"
+             data-title="SECTION · LEVEL 01"
+             data-notes="الدَّرجة الأولى. الأبسط، والأكثر انتشارًا. LLM نموذج يأخذ نصًّا ويُرجع نصًّا. لا أكثر. كلُّ تعقيد نراه فوقه مبنيٌّ على هذه العمليَّة الواحدة.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">01</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ LLM</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          ما تعرفه فعلًا — <span class="ltr">ChatGPT</span>، <span class="ltr">Claude</span>، <span class="ltr">Gemini</span>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 05 · LLM = function -->
+    <section class="slide"
+             data-slide="5"
+             data-section="LEVEL 01 · LLM"
+             data-title="LLM = FUNCTION"
+             data-notes="المنظور الأبسط. LLM دالَّة: مُدخَل نصِّي يدخل، مُخرَج نصِّي يخرج. لا ذاكرة، لا أدوات، لا مُبادرة. كلُّ التطبيقات الشهيرة — ChatGPT, Claude, Gemini, Copilot — تطبيقات مبنيَّة فوق LLM واحد أو أكثر.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// just a function</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          <span class="ltr">LLM</span> = دالَّة.
+        </h2>
+        <div class="reveal-item flow-chain mb-12" style="direction:ltr">
+          <span class="flow-step">أنت</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Prompt</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step llm">LLM</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Output</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">أنت</span>
+        </div>
+        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed mb-10">
+          التَّطبيقات الشَّهيرة هي واجهات فوق <span class="ltr">LLMs</span>.
+        </p>
+        <div class="reveal-item flex flex-wrap items-center gap-10">
+          <div class="flex items-center gap-3"><img class="brand-row" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" style="filter:brightness(0) invert(1)" alt="OpenAI" /><span class="ltr font-display text-lg">ChatGPT</span></div>
+          <div class="flex items-center gap-3"><img class="brand-row" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" /><span class="ltr font-display text-lg">Claude</span></div>
+          <div class="flex items-center gap-3"><img class="brand-row" src="https://cdn.simpleicons.org/googlegemini" alt="Gemini" /><span class="ltr font-display text-lg">Gemini</span></div>
+          <div class="flex items-center gap-3"><img class="brand-row" src="https://cdn.simpleicons.org/github/FAFAF9" alt="Copilot" /><span class="ltr font-display text-lg">Copilot</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · Works / Fails -->
+    <section class="slide"
+             data-slide="6"
+             data-section="LEVEL 01 · LLM"
+             data-title="WORKS vs FAILS"
+             data-notes="المثال الأهمُّ في الجزء الأوَّل. «اكتب لي email أطلب coffee chat» — يعمل، لأنَّ LLM مُدرَّب على مليارات النُّصوص، والصياغة المُهذَّبة داخل تدريبه. لكن «متى coffee chat التالي؟» — يفشل. لماذا؟ ببساطة: LLM ما عنده access لـcalendar الخاص بك. هذا الفرق يفتح الباب للدَّرجة الثانية.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// same tool, two outcomes</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          متى يعمل <span class="ltr">LLM</span>… ومتى يفشل؟
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="reveal-item concept-card" style="border-right: 3px solid #84cc16">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-secondary ltr">✓ WORKS</div>
+            <div class="mt-5 font-display text-2xl leading-snug">«اكتب لي <span class="ltr">email</span> أطلب فيه <span class="ltr">coffee chat</span>.»</div>
+            <div class="mt-6 flow-chain" style="direction:ltr">
+              <span class="flow-step">prompt</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">email مُنمَّق</span>
+            </div>
+            <p class="mt-auto pt-8 text-muted text-[0.95rem] leading-relaxed">
+              الصِّياغة المُهذَّبة داخل بيانات التَّدريب. مُهمَّة نصيَّة بحتة.
+            </p>
+          </div>
+          <div class="reveal-item concept-card" style="border-right: 3px solid #f87171">
+            <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#f87171">✗ FAILS</div>
+            <div class="mt-5 font-display text-2xl leading-snug">«متى <span class="ltr">coffee chat</span> التَّالي معي؟»</div>
+            <div class="mt-6 flow-chain" style="direction:ltr">
+              <span class="flow-step">prompt</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step fail">I don't know</span>
+            </div>
+            <p class="mt-auto pt-8 text-muted text-[0.95rem] leading-relaxed">
+              <span class="ltr">LLM</span> ما عنده <span class="ltr">access</span> لـ<span class="ltr">calendar</span> الخاص بك. ليست مُدرَّبة داخل بياناته.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · Two LLM traits -->
+    <section class="slide"
+             data-slide="7"
+             data-section="LEVEL 01 · LLM"
+             data-title="TWO LLM TRAITS"
+             data-notes="القصَّة كلُّها في هاتين الخاصَّتين. أوَّلًا: LLM مُدرَّب على بياناتٍ عامَّة — لا يعرف ملفَّاتك، calendar الشَّخصيَّ، أو مستندات شركتك. ثانيًا: passive — لا يبدأ شيئًا، ينتظر prompt. الدَّرجات القادمة تُعالج هاتين المحدوديَّتين بالذَّات.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// two ceilings</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
+          خاصَّتان تُحدِّدان <span class="ltr">LLM</span>.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="reveal-item concept-card">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">01 / LIMITED KNOWLEDGE</div>
+            <div class="mt-5 font-display text-3xl font-semibold">معرفة محدودة.</div>
+            <p class="mt-5 text-muted text-[0.98rem] leading-relaxed">
+              مُدرَّب على بياناتٍ عامَّة. لا يعرف <span class="ltr">calendar</span>ك، ولا ملفَّاتك، ولا مستندات شركتك الدَّاخليَّة.
+            </p>
+            <div class="mt-auto pt-8 font-mono text-xs ltr text-muted">// trained ≠ connected</div>
+          </div>
+          <div class="reveal-item concept-card">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">02 / PASSIVE</div>
+            <div class="mt-5 font-display text-3xl font-semibold">سلبيّ.</div>
+            <p class="mt-5 text-muted text-[0.98rem] leading-relaxed">
+              ينتظر <span class="ltr">prompt</span>، ثمَّ يُجيب. لا يُبادر، لا يتصرَّف من نفسه.
+            </p>
+            <div class="mt-auto pt-8 font-mono text-xs ltr text-muted">// waits for input</div>
+          </div>
+        </div>
+        <div class="reveal-item mt-10 font-mono text-xs text-muted ltr">
+          // remember these two — the next levels exist to fix them.
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · SECTION DIVIDER · LEVEL 02 / AI WORKFLOW -->
+    <section class="slide divider"
+             data-slide="8"
+             data-section="LEVEL 02 · WORKFLOW"
+             data-title="SECTION · LEVEL 02"
+             data-notes="الدَّرجة الثَّانية. نُعالج المحدوديَّة الأولى: نصل LLM بمصادر خارجيَّة. لكن عبر مسارٍ يكتبه إنسان. هذا هو الـWorkflow.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">02</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ AI Workflow</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          <span class="ltr">LLM</span> + مسار مكتوبٌ من إنسان.
+        </p>
+      </div>
+    </section>
+
+    <!-- 09 · Workflow works -->
+    <section class="slide"
+             data-slide="9"
+             data-section="LEVEL 02 · WORKFLOW"
+             data-title="WORKFLOW · WORKS"
+             data-notes="حلُّ المثال السَّابق. نُعلِّم LLM: «كلَّما سُئلت عن موعد، ابحث في Google Calendar أوَّلًا، ثمَّ أجِب.» الآن نفس السُّؤال «متى coffee chat التَّالي؟» — يعمل، لأنَّنا صمَّمنا له المسار.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// add a pre-defined path</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          نفس السُّؤال، مسارٌ جديد.
+        </h2>
+        <div class="reveal-item mb-8 max-w-4xl">
+          <div class="flow-chain" style="direction:ltr">
+            <span class="flow-step">«متى coffee chat؟»</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step tool">Google Calendar</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step llm">LLM</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step">«الإثنين، 3 عصرًا»</span>
+          </div>
+        </div>
+        <div class="reveal-item example-card max-w-3xl mb-6">
+          <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// the rule we wrote</div>
+          <div class="mt-3 font-display text-xl text-ink leading-snug">
+            «كلَّما سُئلت عن موعد، افحص <span class="ltr">Google Calendar</span> أوَّلًا، ثمَّ أجِب.»
+          </div>
+        </div>
+        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed">
+          يعمل. لكن <em class="not-italic" style="font-style:italic">أنا</em> كتبت المسار — لا <span class="ltr">LLM</span>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10 · Workflow breaks + RAG sidebar -->
+    <section class="slide"
+             data-slide="10"
+             data-section="LEVEL 02 · WORKFLOW"
+             data-title="WORKFLOW · BREAKS"
+             data-notes="كسر الـWorkflow عن عَمْد. ثمَّ أسأل: «كيف سيكون الطَّقس ذاك اليوم؟». الـLLM سيذهب للـCalendar — لأنَّ المسار مكتوبٌ هكذا — ويفشل. الحَلُّ ليس في LLM أذكى، بل في مسارٍ أوسع يكتبه الإنسان أيضًا. هذه الحدود الجوهريَّة لـWorkflow. RAG ملاحظة جانبيَّة: مُصطلح كبير لفكرة بسيطة — Workflow يبحث قبل الإجابة.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-10 items-start">
+          <div class="col-span-12 md:col-span-7">
+            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// one-track mind</div>
+            <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+              سؤالٌ جديد يكسره.
+            </h2>
+            <div class="reveal-item mb-6">
+              <div class="flow-chain" style="direction:ltr">
+                <span class="flow-step">«كيف الطَّقس ذاك اليوم؟»</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step tool">Google Calendar</span>
+                <span class="flow-arrow">→</span>
+                <span class="flow-step fail">no weather here</span>
+              </div>
+            </div>
+            <p class="reveal-item text-muted text-lg max-w-xl leading-relaxed mb-5">
+              المسار محدَّد سلفًا. لا يستطيع التَّفرُّع. لتُجيب عن الطَّقس، إنسانٌ يجب أن يكتب فرعًا جديدًا لـ<span class="ltr">Weather API</span>.
+            </p>
+            <p class="reveal-item text-ink text-lg max-w-xl leading-relaxed">
+              الخاصَّة الجوهريَّة: <span class="text-primary">الإنسان هو صاحب القرار.</span> لا <span class="ltr">LLM</span>.
+            </p>
+          </div>
+          <div class="col-span-12 md:col-span-5">
+            <div class="reveal-item concept-card" style="min-height:auto">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">SIDEBAR · RAG</div>
+              <div class="mt-4 font-display text-2xl font-semibold ltr" style="direction:ltr;text-align:left">Retrieval-Augmented<br/>Generation</div>
+              <p class="mt-5 text-muted text-[0.95rem] leading-relaxed">
+                مُصطلحٌ كبير، فكرةٌ بسيطة: <span class="ltr">Workflow</span> يبحث في مصدرٍ ما قبل أن يُجيب.
+              </p>
+              <div class="mt-4 font-mono text-xs ltr text-muted">
+                // RAG ⊂ Workflow
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · Real-world: Make.com -->
+    <section class="slide"
+             data-slide="11"
+             data-section="LEVEL 02 · WORKFLOW"
+             data-title="WORKFLOW · REAL"
+             data-notes="مثال حقيقيّ مرئيّ. أداة اسمها Make.com، تربط أدواتٍ عبر مسار: Google Sheets يجمع روابط الأخبار، Perplexity يُلخِّصها، Claude يكتب منشور LinkedIn، المنشور يُنشر تلقائيًّا كلَّ يوم الـ8 صباحًا. هذا Workflow حقيقيٌّ يعمل الآن لكثيرين. ولسَّه Workflow — لأنَّ إنسانًا كتب كلَّ خطوة، وإذا المنشور طلع ضعيفًا، الإنسان يُعدِّل الـprompt يدويًّا.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// workflow in the wild</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          <span class="ltr">Workflow</span> حقيقيّ يعمل الآن.
+        </h2>
+        <div class="reveal-item mb-8 overflow-x-auto">
+          <div class="flow-chain" style="direction:ltr">
+            <span class="flow-step tool">Google Sheets</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step tool">Perplexity</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step llm">Claude</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step tool">LinkedIn</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-step" style="background:rgba(132,204,22,0.08);border-color:#84cc16;color:#bef264">@ 8:00 يوميًّا</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
+          <div class="reveal-item example-card">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// the steps</div>
+            <ol class="mt-3 text-ink text-[0.98rem] leading-[1.9] list-none pl-0 space-y-1">
+              <li>1. <span class="ltr">Google Sheets</span>: يُجمِّع روابط أخبار.</li>
+              <li>2. <span class="ltr">Perplexity</span>: يُلخِّصها.</li>
+              <li>3. <span class="ltr">Claude</span>: يكتب منشور <span class="ltr">LinkedIn</span>.</li>
+              <li>4. جدولة: يوميًّا 8 صباحًا.</li>
+            </ol>
+          </div>
+          <div class="reveal-item example-card" style="border-right-color:#f87171">
+            <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#f87171">// why it's still a workflow</div>
+            <p class="mt-3 text-ink text-[0.98rem] leading-relaxed">
+              إذا المنشور طلع ضعيفًا، <em class="not-italic" style="font-style:italic">أنا</em> أرجع وأُعدِّل <span class="ltr">prompt</span> <span class="ltr">Claude</span> يدويًّا.
+            </p>
+            <p class="mt-3 text-muted text-[0.9rem]">
+              مِئة خطوةٍ أو ألف — إن كان الإنسان يتَّخذ القرار، فهو <span class="ltr">Workflow</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 · SECTION DIVIDER · LEVEL 03 / AI AGENT -->
+    <section class="slide divider"
+             data-slide="12"
+             data-section="LEVEL 03 · AGENT"
+             data-title="SECTION · LEVEL 03"
+             data-notes="الدَّرجة الثَّالثة. الجُملة الواحدة التي يجب أن تخرج بها من هذه المحاضرة كلِّها قادمة في الشَّريحة التَّالية. استعدَّ.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">03</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ AI Agent</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          حين يُصبح <span class="ltr">LLM</span> نفسه صاحب القرار.
+        </p>
+      </div>
+    </section>
+
+    <!-- 13 · THE PIVOT — replace human with LLM -->
+    <section class="slide"
+             data-slide="13"
+             data-section="LEVEL 03 · AGENT"
+             data-title="THE PIVOT"
+             data-notes="أهمُّ جُملة في المحاضرة كلِّها. التَّحوُّل الوحيد من Workflow إلى Agent: استبدل الإنسان صاحب القرار بـLLM. المسار لم يعد مكتوبًا — LLM يختار الأدوات، يُقرِّر متى يتوقَّف، ومتى يُعيد. هذا الفرق الوحيد. ليس عشرين فرق، فرقٌ واحد.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// the one change</div>
+        <h2 class="reveal-item font-display text-[clamp(2.5rem,7vw,7rem)] font-medium tracking-tight leading-[1.05] mb-14 max-w-5xl">
+          استبدِل <span class="pivot-strike">الإنسان</span> صاحب القرار<br/>
+          بـ<span class="text-primary">LLM</span>.
+        </h2>
+        <div class="reveal-item flex flex-wrap items-center gap-6 mb-10">
+          <div class="pivot-box before">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">WORKFLOW</div>
+            <div class="mt-2 font-display text-xl">مسار يكتبه <span class="pivot-strike">إنسان</span></div>
+          </div>
+          <div class="pivot-arrow">→</div>
+          <div class="pivot-box after">
+            <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#a78bfa">AGENT</div>
+            <div class="mt-2 font-display text-xl">مسار يُقرِّره <span class="text-primary ltr">LLM</span></div>
+          </div>
+        </div>
+        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed">
+          هذا الفرق الوحيد. ليس عشرة فروق. فرقٌ واحد — والباقي نتائج له.
+        </p>
+      </div>
+    </section>
+
+    <!-- 14 · THE LOOP + ReAct -->
+    <section class="slide"
+             data-slide="14"
+             data-section="LEVEL 03 · AGENT"
+             data-title="LOOP · REACT"
+             data-notes="كيف يُقرِّر LLM المسار؟ عبر حلقة. أشهر نمط اسمه ReAct — Reason + Act. LLM يُفكِّر (Reason): ما الأداة الصَّحيحة الآن؟ ثمَّ يُنفِّذ (Act): يستدعي الأداة. ثمَّ يُراقب (Observe) النَّتيجة، ويُقرِّر: هل انتهيت، أم أُكرِّر؟ هذا الـLoop هو الصُّورة الكاملة.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-10 items-center">
+          <div class="col-span-12 md:col-span-5">
+            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-5 ltr">// the mechanism</div>
+            <h2 class="reveal-item font-display text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] mb-6">
+              الحَلقة.
+            </h2>
+            <div class="reveal-item mb-6">
+              <span class="mcp-badge">ReAct · REASON + ACT</span>
+            </div>
+            <p class="reveal-item text-muted text-lg leading-relaxed mb-4 max-w-md">
+              <span class="ltr">LLM</span> يُفكِّر: ما الأداة الصَّحيحة الآن؟ يُنفِّذ: يستدعيها. يُراقب النَّتيجة. يُقرِّر: انتهيت، أم أُكرِّر؟
+            </p>
+            <pre class="reveal-item code-block mt-6 font-mono text-xs text-muted leading-relaxed bg-surface border border-edge rounded-md p-4 max-w-md"><span class="text-primary">while</span> (<span class="text-secondary">!done</span>) {
+  thought  <span class="text-muted">= </span>llm.reason(ctx);
+  result   <span class="text-muted">= </span>tool.run(thought);
+  ctx.push(result);
+  done     <span class="text-muted">= </span>llm.check(ctx);
+}</pre>
+          </div>
+          <div class="col-span-12 md:col-span-7 flex justify-center reveal-item">
+            <div id="loop-big" class="loop-big" data-state="0">
+              <svg viewBox="0 0 560 560" width="100%" style="max-width: 560px; height: auto;">
+                <circle class="ring" cx="280" cy="280" r="200"/>
+                <polygon class="arrow arrow-0" points="480,270 492,280 480,290"/>
+                <polygon class="arrow arrow-1" points="270,480 280,492 290,480"/>
+                <polygon class="arrow arrow-2" points="80,290 68,280 80,270"/>
+                <polygon class="arrow arrow-3" points="290,80 280,68 270,80"/>
+                <g class="node-0">
+                  <circle class="node-circle" cx="280" cy="80" r="66"/>
+                  <text class="node-label" x="280" y="78">Reason</text>
+                  <text class="node-sub" x="280" y="102">01 · THINK</text>
+                </g>
+                <g class="node-1">
+                  <circle class="node-circle" cx="480" cy="280" r="66"/>
+                  <text class="node-label" x="480" y="278">Act</text>
+                  <text class="node-sub" x="480" y="302">02 · TOOL</text>
+                </g>
+                <g class="node-2">
+                  <circle class="node-circle" cx="280" cy="480" r="66"/>
+                  <text class="node-label" x="280" y="478">Observe</text>
+                  <text class="node-sub" x="280" y="502">03 · READ</text>
+                </g>
+                <g class="node-3">
+                  <circle class="node-circle" cx="80" cy="280" r="66"/>
+                  <text class="node-label" x="80" y="278">Repeat</text>
+                  <text class="node-sub" x="80" y="302">04 · OR STOP</text>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · INTERACTIVE · RUN AGENT -->
+    <section class="slide"
+             data-slide="15"
+             data-section="LEVEL 03 · AGENT"
+             data-title="INTERACTIVE"
+             data-notes="عرض حيٌّ قصير. اضغط الزرَّ، شاهد الحَلقة تتحلَّل إلى مراحل — كلُّ مرحلةٍ 600 مللي ثانية. في الجولة الثَّانية اروِ ما يفعله الـAgent في كلِّ خطوة: يُفكِّر، يستدعي Tool، يقرأ النَّتيجة، يُقرِّر.">
+      <div class="slide-inner text-center">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// interactive · try it</div>
+        <h2 class="reveal-item font-display text-5xl md:text-6xl font-medium tracking-tight mt-6 mb-3 leading-tight">
+          شاهِد <span class="ltr">Loop</span> واحدة تعمل.
+        </h2>
+        <p class="reveal-item text-muted text-lg mb-14 max-w-xl mx-auto leading-relaxed">
+          اضغط الزرَّ. كلُّ مرحلةٍ نحو 600 مللي ثانية. قابلٌ للتَّشغيل مُجدَّدًا.
+        </p>
+
+        <div class="reveal-item flex flex-wrap gap-3 justify-center mb-12 ltr" id="interactive-stages" style="direction:ltr">
+          <div class="stage-pill" data-stage="0">01 · Reason</div>
+          <div class="stage-pill" data-stage="1">02 · Act</div>
+          <div class="stage-pill" data-stage="2">03 · Observe</div>
+          <div class="stage-pill" data-stage="3">04 · Done</div>
+        </div>
+
+        <button id="run-agent-btn" class="reveal-item run-btn ltr" type="button" style="direction:ltr">Run Agent</button>
+
+        <div id="run-log" class="reveal-item mt-10 font-mono text-sm text-muted min-h-[1.5rem]">
+          &nbsp;
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · Iteration + Skier example -->
+    <section class="slide"
+             data-slide="16"
+             data-section="LEVEL 03 · AGENT"
+             data-title="ITERATE · REAL"
+             data-notes="مثالان سريعان. الأوَّل نظريّ، الثَّاني حقيقيّ. النَّظريّ: Agent يكتب V1 للمنشور، LLM ثاني ينتقده، يكتب V2، إلى أن تنطبق المعايير — كلُّها بلا إنسان بين النُّسخ. الحقيقيّ: ديمو Andrew Ng للـSkier Vision Agent: تبحث عن «skier»، Agent يُفكِّر ما شكل skier (شخصٌ على skis في الثَّلج)، ثمَّ يفحص مقاطع الفيديو ويُرجع المطابقات. بدلًا من إنسان يُعَنْوِن كلَّ مقطع يدويًّا.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// agents in the wild</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          <span class="ltr">Agent</span> يُكرِّر من نفسه.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="reveal-item concept-card">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">01 · SELF-CRITIC LOOP</div>
+            <div class="mt-4 font-display text-2xl font-semibold leading-snug">منشور يُنقَد ذاتيًّا.</div>
+            <div class="mt-6 flow-chain" style="direction:ltr">
+              <span class="flow-step">V1</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">Critic LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">V2</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">Critic LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step" style="border-color:#84cc16;color:#bef264">✓</span>
+            </div>
+            <p class="mt-auto pt-8 text-muted text-[0.95rem] leading-relaxed">
+              بلا إنسانٍ بين النُّسخ. <span class="ltr">Agent</span> يُقرِّر متى «انتهى».
+            </p>
+          </div>
+          <div class="reveal-item concept-card">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">02 · VISION AGENT · ANDREW NG</div>
+            <div class="mt-4 font-display text-2xl font-semibold leading-snug">ابحث: «<span class="ltr">skier</span>».</div>
+            <div class="mt-5 space-y-2 text-[0.95rem] text-ink leading-relaxed">
+              <div><span class="text-primary font-mono text-xs mr-2 ltr">01 reason →</span>شخصٌ على <span class="ltr">skis</span>، في ثلج، بسرعة.</div>
+              <div><span class="text-primary font-mono text-xs mr-2 ltr">02 act →</span>يفحص مقاطع الفيديو.</div>
+              <div><span class="text-primary font-mono text-xs mr-2 ltr">03 observe →</span>يُعَنْوِن ويُرجع المطابقات.</div>
+            </div>
+            <p class="mt-auto pt-8 text-muted text-[0.95rem] leading-relaxed">
+              بدلًا من إنسانٍ يُعَنْوِن كلَّ مقطعٍ يدويًّا قبل البحث.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 · THREE LEVELS · SIDE BY SIDE -->
+    <section class="slide"
+             data-slide="17"
+             data-section="PAYOFF"
+             data-title="THREE LEVELS"
+             data-notes="شريحة المُلخَّص الكُبرى. ثلاث أعمدة، سؤالٌ واحد يفصلها: من صاحب القرار؟ في LLM لا قرار — input/output. في Workflow الإنسان. في Agent، الـLLM. هذا هو التَّحوُّل الجوهريّ. إذا نسيت كلَّ شيءٍ آخر، تذكَّر هذه الشَّريحة.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the payoff</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mb-10 leading-tight">
+          السُّؤال الذي يفصلها: من صاحب القرار؟
+        </h2>
+        <div class="compare-grid">
+          <div class="reveal-item compare-col">
+            <div class="cc-num">LEVEL 01</div>
+            <div class="cc-title ltr" style="direction:ltr;text-align:left">LLM</div>
+            <div class="cc-flow flow-chain" style="direction:ltr">
+              <span class="flow-step">Input</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">Output</span>
+            </div>
+            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُحوِّل نصًّا إلى نص.</div>
+            <div class="cc-decider">
+              <div class="cc-decider-label">// decision maker</div>
+              <div class="cc-decider-val">—</div>
+            </div>
+          </div>
+          <div class="reveal-item compare-col">
+            <div class="cc-num">LEVEL 02</div>
+            <div class="cc-title ltr" style="direction:ltr;text-align:left">AI Workflow</div>
+            <div class="cc-flow flow-chain" style="direction:ltr">
+              <span class="flow-step">Goal</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step tool">Tool</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">Out</span>
+            </div>
+            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يتبع مسارًا يكتبه إنسان.</div>
+            <div class="cc-decider">
+              <div class="cc-decider-label">// decision maker</div>
+              <div class="cc-decider-val">الإنسان</div>
+            </div>
+          </div>
+          <div class="reveal-item compare-col highlight">
+            <div class="cc-num">LEVEL 03</div>
+            <div class="cc-title ltr" style="direction:ltr;text-align:left">AI Agent</div>
+            <div class="cc-flow flow-chain" style="direction:ltr">
+              <span class="flow-step">Goal</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">Reason</span>
+              <span class="flow-arrow">↻</span>
+              <span class="flow-step tool">Act</span>
+              <span class="flow-arrow">↻</span>
+              <span class="flow-step">Observe</span>
+            </div>
+            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُقرِّر المسار، يُنفِّذه، يُراقب، يُكرِّر.</div>
+            <div class="cc-decider">
+              <div class="cc-decider-label">// decision maker</div>
+              <div class="cc-decider-val ltr" style="direction:ltr">LLM itself</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18 · MARKET NUMBERS -->
+    <section class="slide"
+             data-slide="18"
+             data-section="PAYOFF"
+             data-title="NUMBERS"
+             data-notes="ثلاثة أرقام تُؤكِّد أنَّ الدَّرجة الثَّالثة خرجت من المختبر. 4.7 مليون مُشترك في GitHub Copilot منذ يناير. Cursor بلغ 2 مليار دولار إيرادًا سنويًّا في Q1. Claude Code يُحرز ~80% على SWE-bench Verified — مشكلات GitHub حقيقيَّة. هذه الأرقام هي السَّبب وراء أنَّ كلَّ شركة SaaS كُبرى تُركِّب Agent على مُنتجها.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// the market, measured</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
+          ثلاثة أرقام تُؤكِّد ذلك.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="reveal-item stat-card">
+            <img class="brand-stat" src="https://cdn.simpleicons.org/github/FAFAF9" alt="GitHub" />
+            <div class="stat-num">01 / REACH</div>
+            <div class="stat-value"><span class="stat-count" data-end="4.7" data-decimals="1">4.7</span><span class="text-primary">M</span></div>
+            <div class="stat-caption">مُشترِك في <span class="ltr">GitHub Copilot</span></div>
+            <div class="stat-context">Jan 2026</div>
+          </div>
+          <div class="reveal-item stat-card">
+            <img class="brand-stat" src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="Cursor" />
+            <div class="stat-num">02 / REVENUE</div>
+            <div class="stat-value">$<span class="stat-count" data-end="2" data-decimals="0">2</span><span class="text-secondary">B</span></div>
+            <div class="stat-caption">الإيراد السَّنويُّ لـ <span class="ltr">Cursor</span></div>
+            <div class="stat-context">Q1 2026</div>
+          </div>
+          <div class="reveal-item stat-card">
+            <img class="brand-stat" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" />
+            <div class="stat-num">03 / CAPABILITY</div>
+            <div class="stat-value">~<span class="stat-count" data-end="80" data-decimals="0">80</span><span class="text-primary">%</span></div>
+            <div class="stat-caption">درجة <span class="ltr">Claude Code</span> في <span class="ltr">SWE-bench Verified</span></div>
+            <div class="stat-context">benchmark score</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 · RULE OF THUMB -->
+    <section class="slide"
+             data-slide="19"
+             data-section="PAYOFF"
+             data-title="RULE OF THUMB"
+             data-notes="متى تستخدم أيَّ درجة؟ قاعدةٌ عمليَّة بسيطة. مُهمَّة واضحة + Tools مُتاحة + مخاطر منخفضة = Agent. عدا ذلك، Workflow مكتوب يدويًّا، أو لا شيء. الفخُّ: استخدام Agent في عملٍ فشله مُكلِف.">
+      <div class="slide-inner text-center">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// when to use which</div>
+        <div class="reveal-item font-display font-medium tracking-tight leading-[1.3] max-w-5xl mx-auto text-[clamp(1.75rem,3.8vw,3.8rem)]">
+          <span class="text-secondary">مُهمَّة واضحة</span>
+          <span class="text-muted mx-3">+</span>
+          <span class="text-secondary"><span class="ltr">Tools</span> مُتاحة</span>
+          <span class="text-muted mx-3">+</span>
+          <span class="text-secondary">مخاطر منخفضة</span>
+          <br/>
+          <span class="text-muted">=</span>
+          <span class="text-primary"><span class="ltr">Agent</span>.</span>
+        </div>
+        <div class="reveal-item mt-14 text-muted text-lg max-w-3xl mx-auto leading-relaxed">
+          عدا ذلك، الزم <span class="ltr">Workflow</span> مكتوبًا، أو نفِّذها بنفسك.
+        </div>
+      </div>
+    </section>
+
+    <!-- 20 · MCP CALLOUT -->
+    <section class="slide"
+             data-slide="20"
+             data-section="PAYOFF"
+             data-title="MCP"
+             data-notes="اختصارٌ واحد احفظه: MCP، Model Context Protocol. ابتكرته Anthropic، ثمَّ في ديسمبر 2025 سلَّمته إلى Linux Foundation. الخبر الحقيقيّ: المقبس الذي تتَّصل به Tool بـAgent صار معيارًا مفتوحًا. هذا ما يُحوِّل Agents إلى منصَّة، كما صار HTTP للويب. توقَّع أن يبدو العامان القادمان كعصر HTTP المُبكِّر.">
+      <div class="slide-inner max-w-5xl">
+        <div class="reveal-item font-mono text-xs text-primary tracking-[0.25em] mb-5 ltr">// remember this term</div>
+        <div class="reveal-item mcp-badge mb-8">MCP · MODEL CONTEXT PROTOCOL</div>
+        <div class="reveal-item flex items-center gap-8 mb-8 ltr" aria-hidden="true">
+          <img class="brand-mcp" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" />
+          <svg class="mcp-arrow" width="56" height="16" viewBox="0 0 56 16" fill="none" stroke="#a78bfa" stroke-width="1.5">
+            <path class="mcp-arrow-line" d="M2 8 H46" stroke-linecap="round"/>
+            <path class="mcp-arrow-head" d="M40 2 L50 8 L40 14" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <img class="brand-mcp" src="https://cdn.simpleicons.org/linuxfoundation/FAFAF9" alt="Linux Foundation" />
+        </div>
+        <h2 class="reveal-item font-display text-4xl md:text-[3.5rem] font-medium tracking-tight leading-[1.2]">
+          ديسمبر 2025:<br/>
+          تبرَّعت <span class="ltr">Anthropic</span> بـ<span class="text-primary ltr">Model Context Protocol</span> لمُؤسَّسة <span class="ltr">Linux</span>.
+        </h2>
+        <p class="reveal-item mt-8 text-muted text-xl leading-relaxed max-w-3xl">
+          المقبس الذي تتَّصل به <span class="ltr">Tool</span> بـ<span class="ltr">Agent</span> صار معيارًا مفتوحًا — كما صار <span class="ltr">HTTP</span> للويب.
+        </p>
+      </div>
+    </section>
+
+    <!-- 21 · TAKEAWAY -->
+    <section class="slide"
+             data-slide="21"
+             data-section="CLOSE"
+             data-title="TAKEAWAY"
+             data-notes="جُملةٌ واحدة تخرج بها. إن نسيت الدَّرجات الثَّلاث، والأرقام، وMCP — تذكَّر هذه: Agent هو LLM يستطيع أن يفعل أشياء. وحين يتَّخذ القرار بنفسه، صار Agent.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// one sentence</div>
+        <h2 class="reveal-item font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.5rem,7.5vw,8rem)]">
+          الـ<span class="ltr">Agent</span> هو <span class="text-primary ltr">LLM</span><br/>
+          يستطيع أن <span style="font-style: italic;">يفعل أشياء</span>.
+        </h2>
+        <div class="reveal-item mt-12 font-mono text-muted tracking-[0.22em] text-sm ltr">
+          // if you remember nothing else.
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · CLOSE -->
+    <section class="slide"
+             data-slide="22"
+             data-section="CLOSE"
+             data-title="CLOSE"
+             data-notes="اختم بسلاسة. ادعُ إلى الأسئلة. إن بقي وقت، اسأل القاعة: «ما المُهمَّة الواحدة التي ستُسلِّمها لـAgent غدًا؟» — الإجابات عادةً هي أفضل جزءٍ من النِّقاش.">
+      <div class="slide-inner text-center">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// session</div>
+        <div id="complete-stamp" class="complete-stamp" style="opacity: 0">
+          <div class="font-display font-semibold tracking-tight text-[clamp(2.5rem,7vw,7rem)]">
+            TASK_COMPLETE <span class="text-secondary">✓</span>
+          </div>
+        </div>
+        <div class="reveal-item mt-16 font-display text-5xl md:text-6xl font-medium tracking-tight">
+          أسئلة؟
+        </div>
+        <div class="reveal-item mt-6 font-mono text-muted tracking-widest">
+          شكرًا لكم.
+        </div>
+        <div class="reveal-item mt-16 font-mono text-xs text-muted tracking-[0.22em] ltr">
+          // session closed · loop frozen on OBSERVE · tools_called = <span id="final-tool-count" class="text-secondary">—</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Overlay: shortcuts -->
+  <div class="overlay" id="shortcuts-overlay" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+    <div class="overlay-card">
+      <div class="overlay-title" id="shortcuts-title">// keyboard shortcuts</div>
+      <dl class="space-y-3 text-sm">
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الشَّريحة التَّالية</dt>
+          <dd class="flex gap-2"><span class="kbd">→</span><span class="kbd">Space</span><span class="kbd">PgDn</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الشَّريحة السَّابقة</dt>
+          <dd class="flex gap-2"><span class="kbd">←</span><span class="kbd">PgUp</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الأولى / الأخيرة</dt>
+          <dd class="flex gap-2"><span class="kbd">Home</span><span class="kbd">End</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">ملء الشَّاشة</dt>
+          <dd><span class="kbd">F</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">ملاحظات المُحاضر</dt>
+          <dd><span class="kbd">S</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">نقش خطوط المَسح</dt>
+          <dd><span class="kbd">T</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">الاختصارات</dt>
+          <dd class="flex gap-2"><span class="kbd">?</span><span class="kbd">H</span></dd>
+        </div>
+        <div class="flex justify-between items-center gap-4">
+          <dt class="text-muted">إغلاق النَّافذة</dt>
+          <dd><span class="kbd">Esc</span></dd>
+        </div>
+      </dl>
+      <div class="mt-6 text-xs text-muted font-mono ltr">press <span class="kbd">Esc</span> to dismiss</div>
+    </div>
+  </div>
+
+  <!-- Overlay: speaker notes -->
+  <div class="overlay" id="notes-overlay" role="dialog" aria-modal="true" aria-labelledby="notes-title">
+    <div class="overlay-card">
+      <div class="overlay-title">// speaker notes</div>
+      <div class="notes-title font-display text-xl mb-4" id="notes-title">—</div>
+      <div class="notes-body text-muted leading-relaxed text-[0.95rem]" id="notes-body">—</div>
+      <div class="mt-6 text-xs text-muted font-mono ltr"><span class="kbd">S</span> or <span class="kbd">Esc</span> to dismiss</div>
+    </div>
+  </div>
+
+  <!-- Main script -->
+  <script>
+    (function () {
+      "use strict";
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const LOOP_STATES = ["THINK", "ACT", "OBSERVE", "REPEAT"];
+
+      const slides = Array.from(document.querySelectorAll("[data-slide]"));
+      const total = slides.length;
+      let currentIdx = 0;
+      let isTransitioning = false;
+      let toolCount = 0;
+      let loopStateIdx = 0;
+      let loopFrozen = false;
+      let ambientTimer = null;
+
+      const $slideNumber = document.getElementById("slide-number");
+      const $sectionName = document.getElementById("section-name");
+      const $loopStateLabel = document.getElementById("loop-state-label");
+      const $toolCounter = document.getElementById("tool-counter");
+      const $jsonBadge = document.getElementById("json-badge");
+      const $loopMini = document.getElementById("loop-mini");
+      const $scanlines = document.getElementById("scanlines");
+
+      const pad2 = (n) => String(n).padStart(2, "0");
+
+      /* Split divider numbers into char spans */
+      document.querySelectorAll(".divider-number[data-char-split]").forEach((el) => {
+        const text = el.textContent;
+        el.textContent = "";
+        text.split("").forEach((ch) => {
+          const span = document.createElement("span");
+          span.className = "char";
+          span.textContent = ch === " " ? " " : ch;
+          el.appendChild(span);
+        });
+      });
+
+      /* Loop state */
+      function setLoopState(n) {
+        loopStateIdx = n;
+        $loopMini.setAttribute("data-state", String(n));
+        const big = document.getElementById("loop-big");
+        if (big) big.setAttribute("data-state", String(n));
+        $loopStateLabel.textContent = LOOP_STATES[n];
+        popLoopNode(n);
+      }
+
+      function popLoopNode(n) {
+        if (reducedMotion) return;
+        const miniNode = $loopMini.querySelector(`.node-${n}`);
+        if (miniNode) {
+          gsap.fromTo(miniNode, { attr: { r: 10 } }, { attr: { r: 7 }, duration: 0.45, ease: "expo.out", overwrite: true });
+        }
+        const big = document.getElementById("loop-big");
+        if (big) {
+          const bigCircle = big.querySelector(`.node-${n} .node-circle`);
+          if (bigCircle) {
+            gsap.fromTo(bigCircle, { attr: { r: 76 } }, { attr: { r: 66 }, duration: 0.55, ease: "expo.out", overwrite: true });
+          }
+        }
+      }
+      function tickLoop() {
+        if (loopFrozen) return;
+        setLoopState((loopStateIdx + 1) % 4);
+      }
+      function startAmbientLoop() {
+        if (reducedMotion) return;
+        if (ambientTimer) return;
+        ambientTimer = setInterval(tickLoop, 1000);
+      }
+      function stopAmbientLoop() {
+        if (ambientTimer) clearInterval(ambientTimer);
+        ambientTimer = null;
+      }
+
+      function updateTopBar(slide, idx) {
+        $slideNumber.textContent = `${pad2(idx + 1)} / ${pad2(total)}`;
+        $sectionName.textContent = slide.dataset.section || "";
+      }
+      function showJsonBadge(id) {
+        $jsonBadge.textContent = `{"tool":"render_slide","id":${id}}`;
+        gsap.killTweensOf($jsonBadge);
+        gsap.fromTo(
+          $jsonBadge,
+          { opacity: 0, y: -6 },
+          {
+            opacity: 1, y: 0,
+            duration: reducedMotion ? 0.1 : 0.2, ease: "expo.out",
+            onComplete: () => {
+              gsap.to($jsonBadge, { opacity: 0, delay: 0.9, duration: reducedMotion ? 0.1 : 0.35, ease: "power2.in" });
+            },
+          }
+        );
+      }
+      function incrementToolCount() {
+        toolCount += 1;
+        $toolCounter.textContent = toolCount;
+      }
+
+      function goToSlide(idx) {
+        if (isTransitioning || idx < 0 || idx >= total || idx === currentIdx) return;
+        isTransitioning = true;
+        const fromSlide = slides[currentIdx];
+        const toSlide = slides[idx];
+        const direction = idx > currentIdx ? 1 : -1;
+
+        fromSlide.setAttribute("aria-current", "false");
+        toSlide.setAttribute("aria-current", "true");
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            fromSlide.style.visibility = "hidden";
+            isTransitioning = false;
+          },
+        });
+
+        tl.to(fromSlide, { opacity: 0, y: -20 * direction, duration: reducedMotion ? 0.12 : 0.3, ease: "expo.in" });
+
+        tl.call(() => {
+          toSlide.style.visibility = "visible";
+          updateTopBar(toSlide, idx);
+          showJsonBadge(idx + 1);
+          incrementToolCount();
+          runSlideInit(toSlide, idx);
+        });
+
+        tl.fromTo(
+          toSlide,
+          { opacity: 0, y: 30 * direction },
+          { opacity: 1, y: 0, duration: reducedMotion ? 0.15 : 0.45, ease: "expo.out" }
+        );
+
+        const items = toSlide.querySelectorAll(".reveal-item");
+        if (items.length && !reducedMotion) {
+          tl.fromTo(
+            items,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.45, stagger: 0.07, ease: "expo.out" },
+            "-=0.25"
+          );
+        } else if (items.length) {
+          tl.set(items, { opacity: 1, y: 0 });
+        }
+
+        currentIdx = idx;
+      }
+
+      /* Per-slide initializers (v2: 22-slide map) */
+      function runSlideInit(slide, idx) {
+        const n = idx + 1;
+        if ([4, 8, 12].includes(n)) animateDividerChars(slide);
+        if (n === 2) animateBuzzStrikes(slide);
+        if (n === 15) setupInteractive(slide);
+        if (n === 18) animateStats(slide);
+        if (n === 20) animateMCPArrow(slide);
+        if (n === 22) runFinale(slide);
+        if (n !== 22 && loopFrozen) {
+          loopFrozen = false;
+          startAmbientLoop();
+        }
+      }
+
+      function animateBuzzStrikes(slide) {
+        const struck = slide.querySelectorAll(".buzz-word.struck");
+        if (!struck.length) return;
+        if (reducedMotion) {
+          struck.forEach((el) => el.style.setProperty("--sx", "1"));
+          return;
+        }
+        struck.forEach((el, i) => {
+          el.style.setProperty("--sx", "0");
+          const obj = { sx: 0 };
+          gsap.to(obj, {
+            sx: 1,
+            delay: 0.35 + i * 0.08,
+            duration: 0.45,
+            ease: "power2.out",
+            onUpdate: () => { el.style.setProperty("--sx", String(obj.sx)); },
+          });
+        });
+      }
+
+      function animateStats(slide) {
+        const counters = slide.querySelectorAll(".stat-count");
+        counters.forEach((el) => {
+          const end = parseFloat(el.dataset.end);
+          const dec = parseInt(el.dataset.decimals || "0", 10);
+          if (reducedMotion) {
+            el.textContent = end.toFixed(dec);
+            return;
+          }
+          const obj = { v: 0 };
+          gsap.to(obj, {
+            v: end,
+            duration: 1.4,
+            delay: 0.25,
+            ease: "expo.out",
+            onUpdate: () => { el.textContent = obj.v.toFixed(dec); },
+          });
+        });
+      }
+
+      function animateMCPArrow(slide) {
+        const line = slide.querySelector(".mcp-arrow-line");
+        const head = slide.querySelector(".mcp-arrow-head");
+        if (!line) return;
+        if (reducedMotion) {
+          gsap.set(line, { strokeDashoffset: 0 });
+          gsap.set(head, { opacity: 1, x: 0 });
+          return;
+        }
+        gsap.set(line, { strokeDasharray: 46, strokeDashoffset: 46 });
+        gsap.set(head, { opacity: 0, x: -10 });
+        gsap.to(line, { strokeDashoffset: 0, duration: 0.95, delay: 0.5, ease: "power2.out" });
+        gsap.to(head, { opacity: 1, x: 0, duration: 0.4, delay: 1.25, ease: "back.out(2)" });
+      }
+
+      function animateDividerChars(slide) {
+        const chars = slide.querySelectorAll(".divider-number .char");
+        if (!chars.length) return;
+        if (reducedMotion) {
+          gsap.set(chars, { opacity: 1, y: 0, scale: 1 });
+          return;
+        }
+        gsap.fromTo(
+          chars,
+          { opacity: 0, y: 60, scale: 0.65 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.85, stagger: 0.15, ease: "expo.out" }
+        );
+      }
+
+      function setupInteractive(slide) {
+        const btn = slide.querySelector("#run-agent-btn");
+        const pills = slide.querySelectorAll(".stage-pill");
+        const log = slide.querySelector("#run-log");
+        if (!btn || btn.dataset.wired === "1") return;
+        btn.dataset.wired = "1";
+
+        btn.addEventListener("click", () => {
+          pills.forEach((p) => p.classList.remove("active", "done"));
+          log.textContent = "";
+          btn.disabled = true;
+
+          const messages = [
+            "&lt; Reason: تفكيك الهدف إلى خطوات",
+            "&lt; Act: استدعاء Tool (بحث)",
+            "&lt; Observe: قراءة 12 نتيجة",
+            "&lt; Done: تجميع التَّقرير",
+          ];
+
+          const tl = gsap.timeline({ onComplete: () => { btn.disabled = false; } });
+          pills.forEach((pill, i) => {
+            tl.call(() => {
+              pill.classList.add("active");
+              log.innerHTML = messages[i];
+            });
+            tl.to({}, { duration: 0.6 });
+            tl.call(() => {
+              pill.classList.remove("active");
+              pill.classList.add("done");
+            });
+          });
+          tl.call(() => {
+            log.innerHTML = '<span style="color:#84CC16">&lt; TASK_COMPLETE ✓</span>';
+          });
+        });
+      }
+
+      function runFinale(slide) {
+        loopFrozen = true;
+        stopAmbientLoop();
+        setLoopState(2);
+        const final = slide.querySelector("#final-tool-count");
+        if (final) final.textContent = String(toolCount);
+        const stamp = slide.querySelector("#complete-stamp");
+        if (!stamp) return;
+        if (reducedMotion) {
+          gsap.set(stamp, { opacity: 1, scale: 1, rotate: 0 });
+          return;
+        }
+        const tl = gsap.timeline();
+        tl.fromTo(
+          stamp,
+          { opacity: 0, scale: 0.45, rotate: -3 },
+          { opacity: 1, scale: 1, rotate: 0, duration: 0.95, ease: "back.out(2)" }
+        );
+        tl.to(stamp, { rotate: 1.8, duration: 0.18, ease: "power2.out" });
+        tl.to(stamp, { rotate: -1, duration: 0.18, ease: "power2.inOut" });
+        tl.to(stamp, { rotate: 0, duration: 0.2, ease: "power2.out" });
+      }
+
+      /* Navigation */
+      const next = () => { if (currentIdx < total - 1) goToSlide(currentIdx + 1); };
+      const prev = () => { if (currentIdx > 0) goToSlide(currentIdx - 1); };
+
+      document.addEventListener("keydown", (e) => {
+        if (e.target && e.target.matches && e.target.matches("input, textarea")) return;
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+        const shortcutsOpen = document.getElementById("shortcuts-overlay").classList.contains("show");
+        const notesOpen = document.getElementById("notes-overlay").classList.contains("show");
+
+        if (e.key === "Escape") { e.preventDefault(); closeOverlays(); return; }
+        if (e.key === "?" || e.key === "h" || e.key === "H") { e.preventDefault(); toggleShortcuts(); return; }
+        if (e.key === "s" || e.key === "S") { e.preventDefault(); toggleNotes(); return; }
+        if (e.key === "t" || e.key === "T") { e.preventDefault(); $scanlines.classList.toggle("on"); return; }
+        if (e.key === "f" || e.key === "F") { e.preventDefault(); toggleFullscreen(); return; }
+        if (shortcutsOpen || notesOpen) return;
+
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); next(); }
+        else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); prev(); }
+        else if (e.key === "Home") { e.preventDefault(); goToSlide(0); }
+        else if (e.key === "End") { e.preventDefault(); goToSlide(total - 1); }
+      });
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.().catch(() => {});
+        else document.exitFullscreen?.();
+      }
+      function toggleShortcuts() {
+        document.getElementById("notes-overlay").classList.remove("show");
+        document.getElementById("shortcuts-overlay").classList.toggle("show");
+      }
+      function toggleNotes() {
+        document.getElementById("shortcuts-overlay").classList.remove("show");
+        const overlay = document.getElementById("notes-overlay");
+        const slide = slides[currentIdx];
+        document.getElementById("notes-title").textContent =
+          `${pad2(currentIdx + 1)} / ${pad2(total)} · ${slide.dataset.title || ""}`;
+        document.getElementById("notes-body").textContent = slide.dataset.notes || "(no notes)";
+        overlay.classList.toggle("show");
+      }
+      function closeOverlays() {
+        document.getElementById("shortcuts-overlay").classList.remove("show");
+        document.getElementById("notes-overlay").classList.remove("show");
+      }
+      document.querySelectorAll(".overlay").forEach((ov) => {
+        ov.addEventListener("click", (e) => { if (e.target === ov) ov.classList.remove("show"); });
+      });
+
+      /* Pre-roll */
+      function runPreroll() {
+        const preroll = document.getElementById("preroll");
+        const text = document.getElementById("preroll-text");
+        const full = `start_lecture() → loading slides[${total}]...`;
+
+        if (reducedMotion) {
+          text.textContent = full;
+          setTimeout(() => {
+            gsap.to(preroll, {
+              opacity: 0, duration: 0.25,
+              onComplete: () => { preroll.style.display = "none"; enterFirstSlide(); },
+            });
+          }, 350);
+          return;
+        }
+
+        let i = 0;
+        const typeInterval = setInterval(() => {
+          text.textContent = full.slice(0, i);
+          i += 1;
+          if (i > full.length) {
+            clearInterval(typeInterval);
+            setTimeout(() => {
+              gsap.to(preroll, {
+                opacity: 0, duration: 0.45, ease: "expo.out",
+                onComplete: () => { preroll.style.display = "none"; enterFirstSlide(); },
+              });
+            }, 550);
+          }
+        }, 45);
+      }
+
+      function enterFirstSlide() {
+        const first = slides[0];
+        first.style.visibility = "visible";
+        first.setAttribute("aria-current", "true");
+        updateTopBar(first, 0);
+        showJsonBadge(1);
+        incrementToolCount();
+        startAmbientLoop();
+
+        const items = first.querySelectorAll(".reveal-item");
+        const tl = gsap.timeline();
+        tl.fromTo(first, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: reducedMotion ? 0.2 : 0.55, ease: "expo.out" });
+        if (items.length && !reducedMotion) {
+          tl.fromTo(items, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: "expo.out" }, "-=0.25");
+        } else if (items.length) {
+          tl.set(items, { opacity: 1, y: 0 });
+        }
+        runSlideInit(first, 0);
+      }
+
+      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", runPreroll);
+      else runPreroll();
+    })();
+  </script>
+</body>
+</html>
