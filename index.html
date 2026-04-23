@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>وكلاء الذكاء الاصطناعي · جولة في ثلاثين دقيقة</title>
-  <meta name="description" content="محاضرة ثلاثين دقيقة عن وكلاء الذكاء الاصطناعي." />
+  <title>AI Agents · جولة في ثلاثين دقيقة</title>
+  <meta name="description" content="محاضرة ثلاثين دقيقة عن AI Agents." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -91,7 +91,7 @@
 
     .loop-big .ring { fill: none; stroke: #27272a; stroke-width: 1.5; stroke-dasharray: 4 8; }
     .loop-big .node-circle { fill: #151518; stroke: #3f3f46; stroke-width: 2; transition: fill 450ms ease, stroke 450ms ease; }
-    .loop-big .node-label { fill: #e4e4e7; font-family: "Readex Pro", "Space Grotesk", sans-serif; font-weight: 600; font-size: 22px; text-anchor: middle; letter-spacing: 0; transition: fill 450ms ease; }
+    .loop-big .node-label { fill: #e4e4e7; font-family: "Space Grotesk", "Readex Pro", sans-serif; font-weight: 600; font-size: 22px; text-anchor: middle; letter-spacing: -0.01em; transition: fill 450ms ease; }
     .loop-big .node-sub { fill: #71717a; font-family: "JetBrains Mono", monospace; font-size: 10px; text-anchor: middle; letter-spacing: 0.2em; transition: fill 450ms ease; }
     .loop-big[data-state="0"] .node-0 .node-circle,
     .loop-big[data-state="1"] .node-1 .node-circle,
@@ -258,7 +258,7 @@
   <div class="scanlines" id="scanlines" aria-hidden="true"></div>
 
   <!-- Main stage ------------------------------------------------- -->
-  <main class="stage" id="stage" role="main" aria-label="عرض وكلاء الذكاء الاصطناعي">
+  <main class="stage" id="stage" role="main" aria-label="عرض AI Agents">
 
     <!-- 01 · COVER -->
     <section class="slide"
@@ -269,7 +269,7 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// lecture.begin()</div>
         <h1 class="reveal-item font-display font-semibold tracking-tight leading-[0.95] text-[clamp(4rem,11vw,11rem)] mt-6">
-          وكلاء الذكاء<br />الاصطناعي
+          AI<br />Agents
         </h1>
         <p class="reveal-item text-muted text-2xl md:text-3xl mt-10 max-w-3xl leading-snug">
           جولة في ثلاثين دقيقة مع شُركاء البُناة الجُدد.
@@ -298,7 +298,7 @@
           <div class="col-span-12 md:col-span-7">
             <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the hook</div>
             <blockquote class="reveal-item font-display font-medium leading-[1.1] tracking-tight text-[clamp(2.5rem,6vw,6rem)]">
-              ماذا لو استطاعت <span class="text-primary">أدواتُك</span> أن <em class="not-italic" style="font-style: italic">تُفكِّر</em>؟
+              ماذا لو استطاعت <span class="text-primary ltr">Tools</span> أن <em class="not-italic" style="font-style: italic">تُفكِّر</em>؟
             </blockquote>
           </div>
           <div class="col-span-12 md:col-span-5 reveal-item">
@@ -360,14 +360,14 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// definitions</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
-          نموذج لُغوي <span class="text-muted">·</span> دردشة <span class="text-muted">·</span> وكيل
+          LLM <span class="text-muted">·</span> Chatbot <span class="text-muted">·</span> Agent
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="reveal-item concept-card">
             <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">01 / BASE MODEL</div>
-            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">نموذج لُغوي</div>
+            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">LLM</div>
             <p class="mt-4 text-muted text-[0.95rem] leading-relaxed">
-              دالَّة. مُدخَلٌ نصِّيٌّ يدخل، نصٌّ ناتجٌ يخرج. لا ذاكرة بين الاستدعاءات، ولا أيدٍ.
+              دالَّة. مُدخَلٌ نصِّيٌّ يدخل، نصٌّ ناتجٌ يخرج. لا Memory بين الاستدعاءات، ولا أيدٍ.
             </p>
             <div class="mt-auto pt-8 font-mono text-xs ltr">
               <span class="text-secondary">verb →</span> <span class="text-ink">answers</span>
@@ -376,9 +376,9 @@
 
           <div class="reveal-item concept-card">
             <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">02 / WRAPPER</div>
-            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">دردشة</div>
+            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">Chatbot</div>
             <p class="mt-4 text-muted text-[0.95rem] leading-relaxed">
-              نموذج لُغوي + حالة محادثة. يتذكَّر الجلسة، لكن بلا يدٍ تمتدُّ إلى العالم.
+              <span class="ltr">LLM</span> + حالة محادثة. يتذكَّر الجلسة، لكن بلا يدٍ تمتدُّ إلى العالم.
             </p>
             <div class="mt-auto pt-8 font-mono text-xs ltr">
               <span class="text-secondary">verb →</span> <span class="text-ink">converses</span>
@@ -387,9 +387,9 @@
 
           <div class="reveal-item concept-card highlight">
             <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">03 / AGENT</div>
-            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">وكيل</div>
+            <div class="mt-6 font-display text-4xl font-semibold tracking-tight">Agent</div>
             <p class="mt-4 text-ink/90 text-[0.95rem] leading-relaxed">
-              نموذج لُغوي مع أدوات وحلقة. يُفكِّر، يعمل في العالم، يُراقب، ويستمرُّ حتى تكتمل المُهمَّة.
+              <span class="ltr">LLM</span> مع <span class="ltr">Tools</span> و<span class="ltr">Loop</span>. يُفكِّر، يعمل في العالم، يُراقب، ويستمرُّ حتى تكتمل المُهمَّة.
             </p>
             <div class="mt-auto pt-8 font-mono text-xs ltr">
               <span class="text-secondary">verb →</span> <span class="text-ink">thinks, acts, loops</span>
@@ -411,10 +411,10 @@
           <div class="col-span-12 md:col-span-5">
             <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the mechanic</div>
             <h2 class="reveal-item font-display text-5xl md:text-7xl font-medium tracking-tight leading-[1.0]">
-              الحَلقة.
+              The Loop.
             </h2>
             <p class="reveal-item text-muted mt-6 text-lg leading-relaxed max-w-md">
-              كلُّ وكيلٍ ببساطة: يُفكِّر، يُنفِّذ بأداة، يُراقب النتيجة، ويُقرِّر إن كان سيُكرِّر.
+              كلُّ <span class="ltr">Agent</span> ببساطة: <span class="ltr">Think</span>، <span class="ltr">Act</span> بأداة، <span class="ltr">Observe</span> النتيجة، ويُقرِّر إن كان سيُكرِّر.
             </p>
             <pre class="reveal-item code-block mt-8 font-mono text-xs text-muted leading-relaxed bg-surface border border-edge rounded-md p-4 max-w-md"><span class="text-primary">while</span> (<span class="text-secondary">!done</span>) {
   thought  <span class="text-muted">= </span>llm.plan(ctx);
@@ -433,22 +433,22 @@
                 <polygon class="arrow arrow-3" points="290,80 280,68 270,80"/>
                 <g class="node-0">
                   <circle class="node-circle" cx="280" cy="80" r="66"/>
-                  <text class="node-label" x="280" y="78">تفكير</text>
+                  <text class="node-label" x="280" y="78">Think</text>
                   <text class="node-sub" x="280" y="102">01 · PLAN</text>
                 </g>
                 <g class="node-1">
                   <circle class="node-circle" cx="480" cy="280" r="66"/>
-                  <text class="node-label" x="480" y="278">تنفيذ</text>
+                  <text class="node-label" x="480" y="278">Act</text>
                   <text class="node-sub" x="480" y="302">02 · TOOL</text>
                 </g>
                 <g class="node-2">
                   <circle class="node-circle" cx="280" cy="480" r="66"/>
-                  <text class="node-label" x="280" y="478">مراقبة</text>
+                  <text class="node-label" x="280" y="478">Observe</text>
                   <text class="node-sub" x="280" y="502">03 · READ</text>
                 </g>
                 <g class="node-3">
                   <circle class="node-circle" cx="80" cy="280" r="66"/>
-                  <text class="node-label" x="80" y="278">تكرار</text>
+                  <text class="node-label" x="80" y="278">Repeat</text>
                   <text class="node-sub" x="80" y="302">04 · OR STOP</text>
                 </g>
               </svg>
@@ -466,19 +466,19 @@
              data-notes="اضغط التعريف إلى مُعادلة. هذه الأجزاء الأربعة هي ما سنُفصِّله لاحقًا: النموذج اللُّغوي للتفكير، الأدوات للتنفيذ، الذاكرة للسياق، والحلقة التي تربط الجميع. أزِل أيًّا منها يصبح شيئًا آخر.">
       <div class="slide-inner text-center">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// definition</div>
-        <div class="eq-row flex items-baseline flex-wrap justify-center gap-x-10 gap-y-4 font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.25rem,5.5vw,5.5rem)]">
-          <span class="eq-piece">وكيل</span>
+        <div class="eq-row ltr flex items-baseline flex-wrap justify-center gap-x-10 gap-y-4 font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.25rem,5.5vw,5.5rem)]" style="direction:ltr">
+          <span class="eq-piece">Agent</span>
           <span class="eq-piece">
-            <span class="text-muted ml-4">=</span>نموذج لُغوي
+            <span class="text-muted mr-4">=</span>LLM
           </span>
           <span class="eq-piece">
-            <span class="text-muted ml-4">+</span><span class="text-secondary">أدوات</span>
+            <span class="text-muted mr-4">+</span><span class="text-secondary">Tools</span>
           </span>
           <span class="eq-piece">
-            <span class="text-muted ml-4">+</span><span class="text-secondary">ذاكرة</span>
+            <span class="text-muted mr-4">+</span><span class="text-secondary">Memory</span>
           </span>
           <span class="eq-piece">
-            <span class="text-muted ml-4">+</span><span class="text-primary">حلقة</span>
+            <span class="text-muted mr-4">+</span><span class="text-primary">Loop</span>
           </span>
         </div>
         <div class="reveal-item mt-16 text-muted text-lg max-w-2xl mx-auto leading-relaxed">
@@ -496,13 +496,13 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// anatomy</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
-          ممَّ يتكوَّن الوكيل.
+          ممَّ يتكوَّن <span class="ltr">Agent</span>.
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div class="reveal-item quadrant">
             <div class="q-num">01</div>
-            <div class="q-title">العقل</div>
-            <div class="q-tag">// LLM</div>
+            <div class="q-title">LLM</div>
+            <div class="q-tag">// THE BRAIN</div>
             <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
               <circle cx="12" cy="12" r="9"/>
               <path d="M6 12h3m6 0h3M12 6v3m0 6v3"/>
@@ -512,8 +512,8 @@
           </div>
           <div class="reveal-item quadrant">
             <div class="q-num">02</div>
-            <div class="q-title">الأيدي</div>
-            <div class="q-tag">// TOOLS</div>
+            <div class="q-title">Tools</div>
+            <div class="q-tag">// THE HANDS</div>
             <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
               <path d="M4 12h12M16 6l6 6-6 6"/>
             </svg>
@@ -521,8 +521,8 @@
           </div>
           <div class="reveal-item quadrant">
             <div class="q-num">03</div>
-            <div class="q-title">الذاكرة</div>
-            <div class="q-tag">// CONTEXT</div>
+            <div class="q-title">Memory</div>
+            <div class="q-tag">// THE NOTEBOOK</div>
             <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
               <rect x="3" y="5"  width="18" height="3" rx="1"/>
               <rect x="3" y="10" width="18" height="3" rx="1"/>
@@ -532,8 +532,8 @@
           </div>
           <div class="reveal-item quadrant">
             <div class="q-num">04</div>
-            <div class="q-title">المُنسِّق</div>
-            <div class="q-tag">// LOOP</div>
+            <div class="q-title">Loop</div>
+            <div class="q-tag">// THE ORCHESTRATOR</div>
             <svg class="q-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
               <path d="M21 12a9 9 0 1 1-3-6.7"/>
               <path d="M21 4v5h-5"/>
@@ -558,7 +558,7 @@
           <div class="font-display text-3xl md:text-4xl tracking-tight">/ خمس خصائص</div>
         </div>
         <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
-          القُدرات الخمس التي تفصل الوكيل عن نافذة الدردشة.
+          القُدرات الخمس التي تفصل الـ<span class="ltr">Agent</span> عن نافذة الـ<span class="ltr">Chatbot</span>.
         </p>
       </div>
     </section>
@@ -576,7 +576,7 @@
             <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 01 / 05</div>
           </div>
           <div class="col-span-12 md:col-span-8">
-            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">استخدام الأدوات.</h2>
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">Tool Use.</h2>
             <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
               لا يكتفي بالإجابة — يستدعي دوالَّ. يُعدِّل ملفَّات. يُشغِّل أوامر. يستدعي واجهات. يبحث في الويب.
             </p>
@@ -604,14 +604,14 @@
             <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 02 / 05</div>
           </div>
           <div class="col-span-12 md:col-span-8">
-            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">التفكير والتخطيط.</h2>
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">Reasoning &amp; Planning.</h2>
             <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
               فكِّك الهدف إلى خطوات، واحتفظ بالخُطَّة في ذهنك عبر جولاتٍ كثيرة دون أن تفقد الخيط.
             </p>
             <div class="reveal-item example-card mt-10 max-w-3xl">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
               <div class="mt-3 font-display text-2xl text-ink leading-snug">
-                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/google" alt="Google" /></span>وكيل التصميم في <span class="text-primary ltr">Google Stitch</span> يُفكِّر عبر تاريخ المشروع كاملًا، لا آخر مُطالبة فحسب.
+                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/google" alt="Google" /></span>الـ<span class="ltr">Design Agent</span> في <span class="text-primary ltr">Google Stitch</span> يُفكِّر عبر تاريخ المشروع كاملًا، لا آخر مُطالبة فحسب.
               </div>
             </div>
           </div>
@@ -632,14 +632,14 @@
             <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 03 / 05</div>
           </div>
           <div class="col-span-12 md:col-span-8">
-            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">الحَلقة.</h2>
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">The Loop.</h2>
             <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
-              استقلاليَّة. كلُّ خطوةٍ مبنيَّة على نتيجة سابقتها، وتستمرُّ دون إنسانٍ بين الجولات.
+              <span class="ltr">Autonomy</span>. كلُّ خطوةٍ مبنيَّة على نتيجة سابقتها، وتستمرُّ دون إنسانٍ بين الجولات.
             </p>
             <div class="reveal-item example-card mt-10 max-w-3xl">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
               <div class="mt-3 font-display text-2xl text-ink leading-snug">
-                <span class="brand" aria-hidden="true" style="display:inline-flex;width:28px;height:28px;border-radius:6px;background:#fafaf9;color:#0a0a0b;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;margin-inline-end:10px;vertical-align:-6px;letter-spacing:-0.02em">M</span><span class="text-primary ltr">Manus</span> يُشغِّل سير عمل المتصفِّح تلقائيًّا لساعات دون إنسانٍ في الحَلقة.
+                <span class="brand" aria-hidden="true" style="display:inline-flex;width:28px;height:28px;border-radius:6px;background:#fafaf9;color:#0a0a0b;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk',sans-serif;font-size:0.85rem;margin-inline-end:10px;vertical-align:-6px;letter-spacing:-0.02em">M</span><span class="text-primary ltr">Manus</span> يُشغِّل <span class="ltr">Browser Workflow</span> تلقائيًّا لساعات دون إنسانٍ في الـ<span class="ltr">Loop</span>.
               </div>
             </div>
           </div>
@@ -660,14 +660,14 @@
             <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 04 / 05</div>
           </div>
           <div class="col-span-12 md:col-span-8">
-            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">الذاكرة والسياق.</h2>
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">Memory &amp; Context.</h2>
             <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
-              اقرأ المحيط. الوكيل يسحب حالة المشروع لتأتي مُخرجاته مُتَّفقة مع طريقة عمل الفريق.
+              اقرأ المحيط. الـ<span class="ltr">Agent</span> يسحب حالة المشروع لتأتي مُخرجاته مُتَّفقة مع طريقة عمل الفريق.
             </p>
             <div class="reveal-item example-card mt-10 max-w-3xl">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// in the wild</div>
               <div class="mt-3 font-display text-2xl text-ink leading-snug">
-                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/figma" alt="Figma" /></span>وكلاء <span class="text-primary ltr">Figma AI</span> يسحبون مكتبة المُكوِّنات والمُتغيِّرات والرُّموز كاملةً، لتأتي النتيجة مُتوافقة مع نظام تصميم الفريق.
+                <span class="brand"><img class="brand-inline" src="https://cdn.simpleicons.org/figma" alt="Figma" /></span><span class="text-primary ltr">Figma AI Agents</span> يسحبون مكتبة المُكوِّنات والمُتغيِّرات والرُّموز كاملةً، لتأتي النتيجة مُتوافقة مع نظام تصميم الفريق.
               </div>
             </div>
           </div>
@@ -688,7 +688,7 @@
             <div class="reveal-item mt-4 font-mono text-xs text-muted tracking-[0.22em] ltr">feature · 05 / 05</div>
           </div>
           <div class="col-span-12 md:col-span-8">
-            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">التصحيح الذاتيّ.</h2>
+            <h2 class="reveal-item feature-headline text-[clamp(2.5rem,5.5vw,5rem)]">Self-Correction.</h2>
             <p class="reveal-item text-muted text-xl mt-8 max-w-2xl leading-relaxed">
               يُلاحظ الفشل. يقرأ الخطأ. يُحاول مرَّةً أُخرى. هذا ما يُحوِّل العرض التجريبيَّ إلى مُنتَج.
             </p>
@@ -713,20 +713,20 @@
         <div class="text-center">
           <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// interactive · try it</div>
           <h2 class="reveal-item font-display text-5xl md:text-6xl font-medium tracking-tight mt-6 mb-3 leading-tight">
-            شاهِد حَلقةً واحدة تعمل.
+            شاهِد <span class="ltr">Loop</span> واحدة تعمل.
           </h2>
           <p class="reveal-item text-muted text-lg mb-14 max-w-xl mx-auto leading-relaxed">
             اضغط الزرَّ. كلُّ مرحلةٍ تستغرق نحو 600 مللي ثانية. قابلٌ للتشغيل مُجدَّدًا.
           </p>
 
-          <div class="reveal-item flex flex-wrap gap-3 justify-center mb-12" id="interactive-stages">
-            <div class="stage-pill" data-stage="0">01 · تفكير</div>
-            <div class="stage-pill" data-stage="1">02 · تنفيذ</div>
-            <div class="stage-pill" data-stage="2">03 · مراقبة</div>
-            <div class="stage-pill" data-stage="3">04 · انتهى</div>
+          <div class="reveal-item flex flex-wrap gap-3 justify-center mb-12 ltr" id="interactive-stages" style="direction:ltr">
+            <div class="stage-pill" data-stage="0">01 · Think</div>
+            <div class="stage-pill" data-stage="1">02 · Act</div>
+            <div class="stage-pill" data-stage="2">03 · Observe</div>
+            <div class="stage-pill" data-stage="3">04 · Done</div>
           </div>
 
-          <button id="run-agent-btn" class="reveal-item run-btn" type="button">شَغِّل الوكيل</button>
+          <button id="run-agent-btn" class="reveal-item run-btn ltr" type="button" style="direction:ltr">Run Agent</button>
 
           <div id="run-log" class="reveal-item mt-10 font-mono text-sm text-muted min-h-[1.5rem]">
             &nbsp;
@@ -749,7 +749,7 @@
           <div class="font-display text-3xl md:text-4xl tracking-tight">/ على أرض الواقع</div>
         </div>
         <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
-          أين يعمل الوكلاء اليوم، وكم كَبُر السوق.
+          أين يعمل الـ<span class="ltr">Agents</span> اليوم، وكم كَبُر السوق.
         </p>
       </div>
     </section>
@@ -763,7 +763,7 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// market map</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
-          أين يعمل الوكلاء الآن.
+          أين يعمل الـ<span class="ltr">Agents</span> الآن.
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div class="reveal-item domain-tile">
@@ -863,7 +863,7 @@
           <div class="font-display text-3xl md:text-4xl tracking-tight">/ كيف تختار</div>
         </div>
         <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
-          ليس كلُّ مُهمَّةٍ تحتاج وكيلًا. هذا هو إطار القرار.
+          ليس كلُّ مُهمَّةٍ تحتاج <span class="ltr">Agent</span>. هذا هو إطار القرار.
         </p>
       </div>
     </section>
@@ -877,7 +877,7 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// decision framework</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-14 leading-tight max-w-3xl">
-          قبل أن تمُدَّ يدك إلى وكيل، اسأل ثلاثة أسئلة.
+          قبل أن تمُدَّ يدك إلى <span class="ltr">Agent</span>، اسأل ثلاثة أسئلة.
         </h2>
         <div>
           <div class="reveal-item question-row">
@@ -886,11 +886,11 @@
           </div>
           <div class="reveal-item question-row">
             <span class="q-num">02</span>
-            <span class="q-text">هل تحتاج استخدامَ أدوات؟</span>
+            <span class="q-text">هل تحتاج <span class="ltr">Tool Use</span>؟</span>
           </div>
           <div class="reveal-item question-row">
             <span class="q-num">03</span>
-            <span class="q-text">كم من الاستقلاليَّة مقبول؟</span>
+            <span class="q-text">كم من <span class="ltr">Autonomy</span> مقبول؟</span>
           </div>
         </div>
       </div>
@@ -907,15 +907,15 @@
         <div class="reveal-item font-display font-medium tracking-tight leading-[1.3] max-w-5xl mx-auto text-[clamp(1.75rem,3.8vw,3.8rem)]">
           <span class="text-secondary">مُهمَّة واضحة</span>
           <span class="text-muted mx-3">+</span>
-          <span class="text-secondary">أدوات مُتاحة</span>
+          <span class="text-secondary"><span class="ltr">Tools</span> مُتاحة</span>
           <span class="text-muted mx-3">+</span>
           <span class="text-secondary">مخاطر منخفضة</span>
           <br/>
           <span class="text-muted">=</span>
-          <span class="text-primary">استخدم وكيلًا.</span>
+          <span class="text-primary">استخدم <span class="ltr">Agent</span>.</span>
         </div>
         <div class="reveal-item mt-16 text-muted text-lg max-w-3xl mx-auto leading-relaxed">
-          عدا ذلك، الزم مسار عملٍ مكتوبًا، أو نفِّذها بنفسك.
+          عدا ذلك، الزم <span class="ltr">Workflow</span> مكتوبًا، أو نفِّذها بنفسك.
         </div>
       </div>
     </section>
@@ -939,10 +939,10 @@
         </div>
         <h2 class="reveal-item font-display text-4xl md:text-[3.5rem] font-medium tracking-tight leading-[1.2]">
           ديسمبر 2025:<br/>
-          تبرَّعت <span class="ltr">Anthropic</span> ببروتوكول <span class="text-primary">سياق النموذج</span> لمُؤسَّسة <span class="ltr">Linux</span>.
+          تبرَّعت <span class="ltr">Anthropic</span> بـ<span class="text-primary ltr">Model Context Protocol</span> لمُؤسَّسة <span class="ltr">Linux</span>.
         </h2>
         <p class="reveal-item mt-10 text-muted text-xl leading-relaxed max-w-3xl">
-          الوكلاء يتحوَّلون إلى منصَّة. المقبس الذي تتَّصل به الأداة صار معيارًا مفتوحًا — كما صار <span class="ltr">HTTP</span> للويب.
+          الـ<span class="ltr">Agents</span> يتحوَّلون إلى منصَّة. المقبس الذي تتَّصل به الـ<span class="ltr">Tool</span> صار معيارًا مفتوحًا — كما صار <span class="ltr">HTTP</span> للويب.
         </p>
       </div>
     </section>
@@ -1006,7 +1006,7 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// one sentence</div>
         <h2 class="reveal-item font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.5rem,7.5vw,8rem)]">
-          الوكيل <span class="text-primary">نموذجٌ لُغويّ</span><br/>
+          الـ<span class="ltr">Agent</span> هو <span class="text-primary ltr">LLM</span><br/>
           يستطيع أن <span style="font-style: italic;">يفعل أشياء</span>.
         </h2>
         <div class="reveal-item mt-16 font-mono text-muted tracking-[0.22em] text-sm ltr">
@@ -1380,10 +1380,10 @@
           btn.disabled = true;
 
           const messages = [
-            "&lt; يُفكِّر: تفكيك الهدف إلى خطوات",
-            "&lt; يُنفِّذ: استدعاء أداة (بحث)",
-            "&lt; يُراقب: قراءة 12 نتيجة",
-            "&lt; انتهى: تجميع التقرير",
+            "&lt; Think: تفكيك الهدف إلى خطوات",
+            "&lt; Act: استدعاء Tool (بحث)",
+            "&lt; Observe: قراءة 12 نتيجة",
+            "&lt; Done: تجميع التقرير",
           ];
 
           const tl = gsap.timeline({ onComplete: () => { btn.disabled = false; } });
