@@ -265,7 +265,7 @@
              data-slide="1"
              data-section="INTRO"
              data-title="COVER"
-             data-notes="مرحبًا. هذه محاضرة ثلاثين دقيقة عن وكلاء الذكاء الاصطناعي. سنُغطِّي: ما هو الوكيل، الخصائص الخمس التي تُعرِّفه، أين يعمل على أرض الواقع، وكيف تختار الأداة المناسبة. بنية المحاضرة نفسها تُحاكي حلقة الوكيل: إطار، خُطَّة، أمثلة، قاعدة عمليَّة.">
+             data-notes="مرحبًا. هذه محاضرة ثلاثين دقيقة عن AI Agents. سنُغطِّي: ما هو Agent، الخصائص الخمس التي تُعرِّفه، أين يعمل على أرض الواقع، وكيف تختار الأداة المناسبة. بنية المحاضرة نفسها تُحاكي Loop: إطار، خُطَّة، أمثلة، قاعدة عمليَّة.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// lecture.begin()</div>
         <h1 class="reveal-item font-display font-semibold tracking-tight leading-[0.95] text-[clamp(4rem,11vw,11rem)] mt-6">
@@ -292,7 +292,7 @@
              data-slide="2"
              data-section="INTRO"
              data-title="HOOK"
-             data-notes="انتقال من الإكمال التلقائي إلى التصرُّف الوكيلي. الكلُّ رأى نموذجًا لُغويًّا يُجيب. الوكيل هو حين يبدأ النموذج بالفعل. افتحها بلوحة ستيتش الصوتية — تصف ما تريد، والوكيل يبني أمامك. قبل عام، كان مُستحيلًا.">
+             data-notes="انتقال من الإكمال التلقائي إلى السلوك الـAgent-like. الكلُّ رأى LLM يُجيب. Agent هو حين يبدأ النموذج بالفعل. افتحها بلوحة Stitch الصوتية — تصف ما تريد، وAgent يبني أمامك. قبل عام، كان مُستحيلًا.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-12 items-center">
           <div class="col-span-12 md:col-span-7">
@@ -337,7 +337,7 @@
              data-slide="3"
              data-section="WHAT"
              data-title="SECTION · WHAT"
-             data-notes="القسم الأول: ما هو الوكيل؟ كثير من المنتجات ترتدي هذه التسمية. دعنا نُعرِّفها بدقَّة، ثم ننظر في آليَّتها.">
+             data-notes="القسم الأول: ما هو Agent؟ كثير من المنتجات ترتدي هذه التسمية. دعنا نُعرِّفها بدقَّة، ثم ننظر في آليَّتها.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
         <div class="mt-2 divider-number" data-char-split="1">01</div>
@@ -356,7 +356,7 @@
              data-slide="4"
              data-section="WHAT"
              data-title="LLM vs CHATBOT vs AGENT"
-             data-notes="ثلاث مُصطلحات مُتجاورة، ثلاثة أشياء مُختلفة. النموذج اللُّغوي دالَّة — مُطالبة تدخل، إجابة تخرج، ولا ذاكرة بين الاستدعاءات. الدردشة تُغلِّف النموذج بحالة محادثة. الوكيل يُضيف الأدوات والحلقة — يُغيِّر العالم الخارجي. الصندوق الذي نتذكَّره هو الوكيل.">
+             data-notes="ثلاث مُصطلحات مُتجاورة، ثلاثة أشياء مُختلفة. LLM دالَّة — مُطالبة تدخل، إجابة تخرج، ولا Memory بين الاستدعاءات. Chatbot يُغلِّف LLM بحالة محادثة. Agent يُضيف Tools وLoop — يُغيِّر العالم الخارجي. الصندوق الذي نتذكَّره هو Agent.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// definitions</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
@@ -405,7 +405,7 @@
              data-slide="5"
              data-section="WHAT"
              data-title="THE LOOP"
-             data-notes="الآليَّة الجوهريَّة: الحَلقة. الوكيل يُخطِّط للعمل، يستدعي أداة، يُراقب ما عاد، ويُقرِّر إن كان سيُكرِّر. سواء كانت بالمِلِّي ثانية أو بالدقائق — المهمُّ ألَّا يكون هناك إنسانٌ بين الخطوات. كلُّ وكيلٍ هو نُسخة من هذه الصورة.">
+             data-notes="الآليَّة الجوهريَّة: Loop. Agent يُخطِّط للعمل (Think)، يستدعي Tool (Act)، يُراقب ما عاد (Observe)، ويُقرِّر إن كان سيُكرِّر. سواء كانت بالمِلِّي ثانية أو بالدقائق — المهمُّ ألَّا يكون هناك إنسانٌ بين الخطوات. كلُّ Agent هو نُسخة من هذه الصورة.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-10 items-center">
           <div class="col-span-12 md:col-span-5">
@@ -463,7 +463,7 @@
              data-slide="6"
              data-section="WHAT"
              data-title="EQUATION"
-             data-notes="اضغط التعريف إلى مُعادلة. هذه الأجزاء الأربعة هي ما سنُفصِّله لاحقًا: النموذج اللُّغوي للتفكير، الأدوات للتنفيذ، الذاكرة للسياق، والحلقة التي تربط الجميع. أزِل أيًّا منها يصبح شيئًا آخر.">
+             data-notes="اضغط التعريف إلى مُعادلة. هذه الأجزاء الأربعة هي ما سنُفصِّله لاحقًا: LLM للتفكير، Tools للتنفيذ، Memory للـContext، وLoop التي تربط الجميع. أزِل أيًّا منها يصبح شيئًا آخر.">
       <div class="slide-inner text-center">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// definition</div>
         <div class="eq-row ltr flex items-baseline flex-wrap justify-center gap-x-10 gap-y-4 font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.25rem,5.5vw,5.5rem)]" style="direction:ltr">
@@ -492,7 +492,7 @@
              data-slide="7"
              data-section="WHAT"
              data-title="ANATOMY"
-             data-notes="فرِّد المعادلة إلى أجزاءٍ يستطيع المهندس بناءها. النموذج اللُّغوي هو صاحب القرار. الأدوات هي مجموعة الدوالِّ التي يستدعيها. الذاكرة هي ما يُنقَل بين الخطوات — محادثة، ملفَّات مُسترجعة، نتائج وسيطة. المُنسِّق هو الكود الذي يُدير الحلقة ويفرض السلامة.">
+             data-notes="فرِّد المعادلة إلى أجزاءٍ يستطيع المهندس بناءها. LLM هو صاحب القرار. Tools هي مجموعة الدوالِّ التي يستدعيها. Memory هي ما يُنقَل بين الخطوات — محادثة، ملفَّات مُسترجعة، نتائج وسيطة. المُنسِّق (Loop) هو الكود الذي يُدير الدورة ويفرض السلامة.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// anatomy</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
@@ -549,7 +549,7 @@
              data-slide="8"
              data-section="FEATURES"
              data-title="SECTION · FIVE FEATURES"
-             data-notes="خمس خصائص تُعرِّف الوكيل الحديث. ليست أربعًا، ولا ستًّا — خمس. كلٌّ منها قُدرةٌ يمكن تمييزها، ولكلٍّ منها مُنتجٌ حقيقي نُشير إليه.">
+             data-notes="خمس خصائص تُعرِّف Agent الحديث. ليست أربعًا، ولا ستًّا — خمس. كلٌّ منها قُدرةٌ يمكن تمييزها، ولكلٍّ منها مُنتجٌ حقيقي نُشير إليه.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
         <div class="mt-2 divider-number" data-char-split="1">02</div>
@@ -568,7 +568,7 @@
              data-slide="9"
              data-section="FEATURES"
              data-title="01 · TOOL USE"
-             data-notes="الخاصَّة الأولى: استخدام الأدوات. الوكيل يستدعي دوالَّ. تعديل ملفَّات، طلبات HTTP، أوامر صَدَفَة، وبحث. هذه هي المسافة بين الإجابة والفعل. Claude Code هو المثال الكلاسيكي — لا يصف الإصلاح، بل يُطبِّقه، ويُشغِّل الاختبارات، ويفتح طلب الدمج.">
+             data-notes="الخاصَّة الأولى: Tool Use. Agent يستدعي دوالَّ. تعديل ملفَّات، طلبات HTTP، أوامر صَدَفَة، وبحث. هذه هي المسافة بين الإجابة والفعل. Claude Code هو المثال الكلاسيكي — لا يصف الإصلاح، بل يُطبِّقه، ويُشغِّل الاختبارات، ويفتح طلب الدمج.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-12 items-start">
           <div class="col-span-12 md:col-span-4">
@@ -596,7 +596,7 @@
              data-slide="10"
              data-section="FEATURES"
              data-title="02 · REASONING & PLANNING"
-             data-notes="الخاصَّة الثانية: التفكير والتخطيط. الوكلاء الحديثون لا يكتفون بالردِّ على آخر رسالة — يُفكِّرون عبر المشروع كلِّه. وكيل التصميم في ستيتش يقرأ تاريخ التصميم كاملًا قبل اقتراح التعديل. التخطيط هو ما يُمكِّن الوكيل من عملٍ مُتعدِّد الخطوات دون أن يضيع.">
+             data-notes="الخاصَّة الثانية: Reasoning &amp; Planning. Agents الحديثة لا تكتفي بالردِّ على آخر رسالة — تُفكِّر عبر المشروع كلِّه. الـDesign Agent في Stitch يقرأ تاريخ التصميم كاملًا قبل اقتراح التعديل. Planning هو ما يُمكِّن Agent من عملٍ مُتعدِّد الخطوات دون أن يضيع.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-12 items-start">
           <div class="col-span-12 md:col-span-4">
@@ -624,7 +624,7 @@
              data-slide="11"
              data-section="FEATURES"
              data-title="03 · THE LOOP"
-             data-notes="الخاصَّة الثالثة: الحَلقة نفسها، مرفوعة إلى مرتبة خاصَّة. الاستقلاليَّة هي ما يُشعرك بأنَّ الوكيل مُختلف. مانوس يتصفَّح، يُسجِّل دخولًا، يضغط، يملأ نماذج، ويستمرُّ لساعات — كلُّ استدعاء أداة مبنيٌّ على نتيجة سابقه.">
+             data-notes="الخاصَّة الثالثة: Loop نفسها، مرفوعة إلى مرتبة خاصَّة. Autonomy هي ما يُشعرك بأنَّ Agent مُختلف. Manus يتصفَّح، يُسجِّل دخولًا، يضغط، يملأ نماذج، ويستمرُّ لساعات — كلُّ Tool call مبنيٌّ على نتيجة سابقه.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-12 items-start">
           <div class="col-span-12 md:col-span-4">
@@ -652,7 +652,7 @@
              data-slide="12"
              data-section="FEATURES"
              data-title="04 · MEMORY & CONTEXT"
-             data-notes="الخاصَّة الرابعة: الذاكرة والسياق. كلَّما عرف الوكيل عالمك أكثر، صار ناتجه أفضل. وكلاء فيجما لا يقرؤون الإطار الواحد — يسحبون نظام التصميم كاملًا: الرُّموز، المُتغيِّرات، والمُكوِّنات. والنتيجة تأتي داخل معايير الفريق.">
+             data-notes="الخاصَّة الرابعة: Memory &amp; Context. كلَّما عرف Agent عالمك أكثر، صار ناتجه أفضل. Figma Agents لا تقرأ الإطار الواحد — تسحب نظام التصميم كاملًا: الرُّموز، المُتغيِّرات، والمُكوِّنات. والنتيجة تأتي داخل معايير الفريق.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-12 items-start">
           <div class="col-span-12 md:col-span-4">
@@ -680,7 +680,7 @@
              data-slide="13"
              data-section="FEATURES"
              data-title="05 · SELF-CORRECTION"
-             data-notes="الخاصَّة الخامسة، التي تُحوِّل العرض إلى مُنتج. الوكيل يُلاحظ أنَّه أخطأ فيُصلِح. كيرسر يُعيد التشغيل بعد اختبارٍ فاشل. Claude Code يقرأ آثار الأخطاء ويُكرِّر. بلا هذه الخاصَّة، كلُّ خطأٍ صغيرٍ يعود إليك.">
+             data-notes="الخاصَّة الخامسة، التي تُحوِّل العرض إلى مُنتج: Self-Correction. Agent يُلاحظ أنَّه أخطأ فيُصلِح. Cursor يُعيد التشغيل بعد اختبارٍ فاشل. Claude Code يقرأ آثار الأخطاء ويُكرِّر. بلا هذه الخاصَّة، كلُّ خطأٍ صغيرٍ يعود إليك.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-12 items-start">
           <div class="col-span-12 md:col-span-4">
@@ -708,7 +708,7 @@
              data-slide="14"
              data-section="FEATURES"
              data-title="INTERACTIVE"
-             data-notes="عرض حيٍّ. اضغط الزرَّ وشاهد الحَلقة تتحلَّل. كلُّ مرحلةٍ تستغرق 600 مللي ثانية. إن بدا الحُضور مُتفاعلًا، أعِد تشغيلها — في المرَّة الثانية، اروِ ما يُفكِّر فيه الوكيل في كلِّ خطوة.">
+             data-notes="عرض حيٍّ. اضغط الزرَّ وشاهد Loop تتحلَّل. كلُّ مرحلةٍ تستغرق 600 مللي ثانية. إن بدا الحُضور مُتفاعلًا، أعِد تشغيلها — في المرَّة الثانية، اروِ ما يُفكِّر فيه Agent في كلِّ خطوة.">
       <div class="slide-inner">
         <div class="text-center">
           <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// interactive · try it</div>
@@ -759,7 +759,7 @@
              data-slide="16"
              data-section="IN THE WILD"
              data-title="DOMAINS"
-             data-notes="خمس مجالات، خمس أكداس من المُنتجات. البرمجة هي الأنضج. التصميم والبحث هما الأعلى صوتًا الآن. وكلاء المتصفِّح هم الغرب المُتوحِّش. المُستهلك ما زال مُبكِّرًا لكنَّه شخصيٌّ — تكامل DoorDash هو نظرة مُسبقة على وكلاء يُعاملون باسمك.">
+             data-notes="خمس مجالات، خمس أكداس من المُنتجات. Coding هي الأنضج. Design وResearch هما الأعلى صوتًا الآن. Browser Agents هم الغرب المُتوحِّش. Consumer ما زال مُبكِّرًا لكنَّه شخصيٌّ — تكامل DoorDash هو نظرة مُسبقة على Agents يُعاملون باسمك.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// market map</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
@@ -817,7 +817,7 @@
              data-slide="17"
              data-section="IN THE WILD"
              data-title="NUMBERS"
-             data-notes="ثلاثة أرقام تُثبِّت أنَّ هذا سوقٌ حقيقيٌّ. 4.7 مليون مُشترك مدفوع في GitHub Copilot منذ يناير. Cursor بلغ 2 مليار دولار إيرادًا سنويًّا في الربع الأوَّل. Claude Code يُحرِز نحو 80% على SWE-bench Verified — مجموعة كاملة من مشكلات GitHub حقيقيَّة. هذه الأرقام هي السبب وراء أنَّ كلَّ شركة SaaS كُبرى تُركِّب وكيلًا على مُنتجها.">
+             data-notes="ثلاثة أرقام تُثبِّت أنَّ هذا سوقٌ حقيقيٌّ. 4.7 مليون مُشترك مدفوع في GitHub Copilot منذ يناير. Cursor بلغ 2 مليار دولار إيرادًا سنويًّا في الربع الأوَّل. Claude Code يُحرِز نحو 80% على SWE-bench Verified — مجموعة كاملة من مشكلات GitHub حقيقيَّة. هذه الأرقام هي السبب وراء أنَّ كلَّ شركة SaaS كُبرى تُركِّب Agent على مُنتجها.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// the market, measured</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
@@ -854,7 +854,7 @@
              data-slide="18"
              data-section="HOW TO PICK"
              data-title="SECTION · HOW TO PICK"
-             data-notes="القسم الرابع: متى نستخدم وكيلًا. ليس كلُّ مُهمَّةٍ تحتاجه. سكريبت bash من ثلاثة أسطر يظلُّ أفضل من وكيل متصفِّح ذاتيٍّ في مُعظم الأيَّام. الشرائح القادمة هي إطار القرار.">
+             data-notes="القسم الرابع: متى نستخدم Agent. ليس كلُّ مُهمَّةٍ تحتاجه. سكريبت bash من ثلاثة أسطر يظلُّ أفضل من Browser Agent ذاتيٍّ في مُعظم الأيَّام. الشرائح القادمة هي إطار القرار.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
         <div class="mt-2 divider-number" data-char-split="1">04</div>
@@ -873,7 +873,7 @@
              data-slide="19"
              data-section="HOW TO PICK"
              data-title="QUESTIONS"
-             data-notes="ثلاثة أسئلة قبل أن تستدعي وكيلًا. التكرار: هل هذا شيءٌ تفعله أنت أو فريقك أكثر من مرَّة؟ استخدام الأدوات: هل تحتاج لمسَ ملفَّات، واجهات، متصفِّح؟ الاستقلاليَّة: ما مدى سوء خطأ لن تكتشفه إلَّا مُتأخِّرًا؟ إن كان الجواب الثالث سيِّئًا جدًّا، فأنت تحتاج مسار عملٍ بإنسانٍ في الحلقة، لا وكيلًا.">
+             data-notes="ثلاثة أسئلة قبل أن تستدعي Agent. التكرار: هل هذا شيءٌ تفعله أنت أو فريقك أكثر من مرَّة؟ Tool Use: هل تحتاج لمسَ ملفَّات، واجهات، متصفِّح؟ Autonomy: ما مدى سوء خطأ لن تكتشفه إلَّا مُتأخِّرًا؟ إن كان الجواب الثالث سيِّئًا جدًّا، فأنت تحتاج Workflow بإنسانٍ في الـLoop، لا Agent.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// decision framework</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-14 leading-tight max-w-3xl">
@@ -901,7 +901,7 @@
              data-slide="20"
              data-section="HOW TO PICK"
              data-title="RULE OF THUMB"
-             data-notes="القاعدة العمليَّة في سطرٍ واحد. مُهمَّة واضحة + أدوات مُتاحة + مخاطر منخفضة = استخدم وكيلًا. عدا ذلك، مسار عملٍ مكتوبٌ يدويًّا أو تنفيذها بنفسك أسرع. الفخُّ هو استخدام وكيلٍ في عملٍ فشله مُكلِف.">
+             data-notes="القاعدة العمليَّة في سطرٍ واحد. مُهمَّة واضحة + Tools مُتاحة + مخاطر منخفضة = استخدم Agent. عدا ذلك، Workflow مكتوبٌ يدويًّا أو تنفيذها بنفسك أسرع. الفخُّ هو استخدام Agent في عملٍ فشله مُكلِف.">
       <div class="slide-inner text-center">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// rule of thumb</div>
         <div class="reveal-item font-display font-medium tracking-tight leading-[1.3] max-w-5xl mx-auto text-[clamp(1.75rem,3.8vw,3.8rem)]">
@@ -925,7 +925,7 @@
              data-slide="21"
              data-section="HOW TO PICK"
              data-title="MCP"
-             data-notes="احفظ هذا الاختصار: MCP. بروتوكول سياق النموذج. ابتكرته أنثروبيك، ثم في ديسمبر 2025 سلَّمته إلى مُؤسَّسة لينكس. هذه هي الخطوة التي تقول لك إنَّ الوكلاء صاروا منصَّة — الطريقة التي تتَّصل بها الأداة صارت معيارًا مفتوحًا. توقَّع أن تبدو العامان القادمان كعصر HTTP المُبكِّر.">
+             data-notes="احفظ هذا الاختصار: MCP — Model Context Protocol. ابتكرته Anthropic، ثم في ديسمبر 2025 سلَّمته إلى Linux Foundation. هذه هي الخطوة التي تقول لك إنَّ Agents صاروا منصَّة — الطريقة التي تتَّصل بها Tool صارت معيارًا مفتوحًا. توقَّع أن تبدو العامان القادمان كعصر HTTP المُبكِّر.">
       <div class="slide-inner max-w-5xl">
         <div class="reveal-item font-mono text-xs text-primary tracking-[0.25em] mb-5 ltr">// remember this term</div>
         <div class="reveal-item mcp-badge mb-8">MCP · MODEL CONTEXT PROTOCOL</div>
@@ -952,7 +952,7 @@
              data-slide="22"
              data-section="HOW TO PICK"
              data-title="RESOURCES"
-             data-notes="إلى أين بعد ذلك. ثلاث نقاط انطلاق لثلاث فئاتٍ أراها في القاعة: البُناة يقرؤون وثائق Agent SDK من أنثروبيك. المُصمِّمون يُجرِّبون Stitch. ومن هو فضوليٌّ حول وكلاء البرمجة، وثائق Cursor مكتوبة جيِّدًا وسريعة القراءة.">
+             data-notes="إلى أين بعد ذلك. ثلاث نقاط انطلاق لثلاث فئاتٍ أراها في القاعة: البُناة يقرؤون وثائق Agent SDK من Anthropic. المُصمِّمون يُجرِّبون Stitch. ومن هو فضوليٌّ حول Coding Agents، وثائق Cursor مكتوبة جيِّدًا وسريعة القراءة.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-12 items-center">
           <div class="col-span-12 md:col-span-7">
@@ -1002,7 +1002,7 @@
              data-slide="23"
              data-section="CLOSE"
              data-title="TAKEAWAY"
-             data-notes="جُملةٌ واحدة تخرج بها. إن نسيت الخصائص الخمس، وأرقام السوق، ونداء MCP — تذكَّر هذه: الوكيل نموذج لُغويٌّ يستطيع أن يفعل أشياء.">
+             data-notes="جُملةٌ واحدة تخرج بها. إن نسيت الخصائص الخمس، وأرقام السوق، ونداء MCP — تذكَّر هذه: Agent هو LLM يستطيع أن يفعل أشياء.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// one sentence</div>
         <h2 class="reveal-item font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.5rem,7.5vw,8rem)]">
@@ -1020,7 +1020,7 @@
              data-slide="24"
              data-section="CLOSE"
              data-title="CLOSE"
-             data-notes="اختم بسلاسة. ادعُ إلى الأسئلة. إن بقي وقت، اسأل القاعة: «ما المُهمَّة الواحدة التي ستُسلِّمها لوكيلٍ غدًا؟» — الإجابات عادةً هي أفضل جزءٍ من النقاش.">
+             data-notes="اختم بسلاسة. ادعُ إلى الأسئلة. إن بقي وقت، اسأل القاعة: «ما المُهمَّة الواحدة التي ستُسلِّمها لـAgent غدًا؟» — الإجابات عادةً هي أفضل جزءٍ من النقاش.">
       <div class="slide-inner text-center">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// session</div>
         <div id="complete-stamp" class="complete-stamp" style="opacity: 0">
