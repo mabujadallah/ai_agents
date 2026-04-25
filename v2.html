@@ -1535,6 +1535,278 @@
       </div>
     </section>
 
+    <!-- 28 · GIRLS IN ICT · Flutter UI Demo -->
+    <section class="slide"
+             data-slide="28"
+             data-section="DEMO"
+             data-title="Girls in ICT · Flutter App"
+             data-notes="عرضٌ تفاعليٌّ لتطبيق Flutter مُستوحى من صفحة Girls in ICT. استخدم أزرار التَّنقُّل داخل الهاتف أو نقاط المؤشِّر للتَّنقُّل بين الشَّاشات الثَّلاث: الرَّئيسيَّة، القصص، والمشاركة.">
+      <div class="slide-inner">
+        <div class="grid grid-cols-12 gap-8 items-center" style="min-height:0">
+
+          <!-- Left: title + indicators -->
+          <div class="col-span-12 md:col-span-4 flex flex-col gap-6">
+            <div class="font-mono text-xs text-muted tracking-[0.22em] ltr">// flutter · girls-in-ict</div>
+            <h2 class="font-display font-semibold tracking-tight leading-tight" style="font-size:clamp(2rem,3.5vw,3rem)">
+              Girls in ICT<br><span class="text-primary-soft">Flutter App</span>
+            </h2>
+            <p class="text-muted leading-relaxed" style="font-size:1rem">
+              تطبيق Flutter تفاعليٌّ مُستوحى من اليوم العالمي للفتيات في تكنولوجيا المعلومات.
+            </p>
+            <!-- Screen indicator dots -->
+            <div class="flex flex-col gap-3">
+              <div id="flutter-screen-label" class="font-mono text-xs tracking-[0.2em] ltr" style="color:#84cc16">// SCREEN: HOME</div>
+              <div class="flex gap-2 ltr" dir="ltr">
+                <button onclick="flutterNav(0)" id="fd-0" aria-label="Home screen" style="width:28px;height:6px;border-radius:3px;background:#8b5cf6;border:none;cursor:pointer;transition:all .35s;padding:0"></button>
+                <button onclick="flutterNav(1)" id="fd-1" aria-label="Stories screen" style="width:6px;height:6px;border-radius:50%;background:#3f3f46;border:none;cursor:pointer;transition:all .35s;padding:0"></button>
+                <button onclick="flutterNav(2)" id="fd-2" aria-label="Action screen" style="width:6px;height:6px;border-radius:50%;background:#3f3f46;border:none;cursor:pointer;transition:all .35s;padding:0"></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Center: phone frame -->
+          <div class="col-span-12 md:col-span-4 flex justify-center">
+            <div style="width:300px;height:620px;background:#18181b;border-radius:44px;border:3px solid #3f3f46;box-shadow:0 40px 80px -20px rgba(0,0,0,0.75),0 0 0 1px rgba(255,255,255,0.04);position:relative;overflow:hidden;display:flex;flex-direction:column">
+
+              <!-- Notch -->
+              <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:90px;height:26px;background:#18181b;border-radius:0 0 14px 14px;z-index:10;display:flex;align-items:center;justify-content:center;gap:6px">
+                <div style="width:8px;height:8px;border-radius:50%;background:#2a2a2e"></div>
+                <div style="width:4px;height:4px;border-radius:50%;background:#2a2a2e"></div>
+              </div>
+
+              <!-- Status bar -->
+              <div style="height:26px;background:#F2EBDF;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#161312;flex-shrink:0;z-index:5">
+                <span>9:41</span><span style="letter-spacing:3px">●●●</span>
+              </div>
+
+              <!-- Screens container -->
+              <div style="flex:1;overflow:hidden;position:relative;background:#F2EBDF">
+
+                <!-- SCREEN 0 · HOME -->
+                <div class="fl-screen" id="fsc-0" style="position:absolute;inset:0;overflow-y:auto;background:#F2EBDF;transition:transform .4s cubic-bezier(.7,0,.3,1);transform:translateX(0)">
+                  <div style="background:#E5306C;padding:14px 16px 12px;color:#fff;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px rgba(229,48,108,.3)">
+                    <div style="font-size:8px;letter-spacing:.16em;opacity:.8;font-family:'JetBrains Mono',monospace">GIRLS IN ICT · 2026</div>
+                    <div style="font-size:16px;font-weight:600;margin-top:2px;font-family:'Tajawal',sans-serif;direction:rtl">اليوم العالمي للفتيات</div>
+                  </div>
+                  <div style="margin:10px;background:linear-gradient(135deg,#E5306C,#E89F3F);border-radius:16px;padding:14px;color:#fff;position:relative;overflow:hidden">
+                    <div style="font-size:8px;letter-spacing:.18em;opacity:.75;font-family:'JetBrains Mono',monospace">23 APRIL · 2026</div>
+                    <div style="font-size:17px;font-weight:700;margin-top:3px;font-family:'Tajawal',sans-serif;direction:rtl;line-height:1.3">الفتيات يصنعن المستقبل</div>
+                    <div style="position:absolute;bottom:-10px;right:-8px;font-size:54px;opacity:.12;pointer-events:none">✦</div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0 10px">
+                    <div style="background:#fff;border-radius:12px;padding:11px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+                      <div style="font-size:20px;font-weight:700;color:#E5306C;font-family:'JetBrains Mono',monospace;direction:ltr">≈25%</div>
+                      <div style="font-size:9px;color:#4A413E;margin-top:3px;font-family:'Tajawal',sans-serif;direction:rtl;line-height:1.45">من العاملين في تقنية المعلومات نساء</div>
+                    </div>
+                    <div style="background:#1E3D59;border-radius:12px;padding:11px;color:#fff">
+                      <div style="font-size:20px;font-weight:700;color:#E89F3F;font-family:'JetBrains Mono',monospace;direction:ltr">2011</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,.7);margin-top:3px;font-family:'Tajawal',sans-serif;direction:rtl;line-height:1.45">أوَّل احتفالٍ دوليٍّ رسميّ</div>
+                    </div>
+                    <div style="background:#fff;border-radius:12px;padding:11px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+                      <div style="font-size:20px;font-weight:700;color:#6B4FA0;font-family:'JetBrains Mono',monospace;direction:ltr">≈28%</div>
+                      <div style="font-size:9px;color:#4A413E;margin-top:3px;font-family:'Tajawal',sans-serif;direction:rtl;line-height:1.45">من القيادة التقنية نساء</div>
+                    </div>
+                    <div style="background:#E5306C;border-radius:12px;padding:11px;color:#fff">
+                      <div style="font-size:20px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace;direction:ltr">35%</div>
+                      <div style="font-size:9px;color:rgba(255,255,255,.8);margin-top:3px;font-family:'Tajawal',sans-serif;direction:rtl;line-height:1.45">هدف رؤية 2030 للمرأة</div>
+                    </div>
+                  </div>
+                  <div style="margin:10px;background:#fff;border-radius:12px;padding:12px;text-align:center;border:2px solid rgba(229,48,108,.3)">
+                    <div style="font-size:11px;font-weight:600;color:#161312;font-family:'Tajawal',sans-serif;direction:rtl;line-height:1.55">
+                      عندما تَحضر الفتيات غرفةَ الخوارزميَّات<br>
+                      <span style="color:#E5306C">يُصبح الذَّكاء اصطناعيًّا للجميع</span>
+                    </div>
+                  </div>
+                  <div style="height:12px"></div>
+                </div>
+
+                <!-- SCREEN 1 · STORIES -->
+                <div class="fl-screen" id="fsc-1" style="position:absolute;inset:0;overflow-y:auto;background:#F2EBDF;transition:transform .4s cubic-bezier(.7,0,.3,1);transform:translateX(100%)">
+                  <div style="background:#1E3D59;padding:14px 16px 12px;color:#fff;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px rgba(30,61,89,.3)">
+                    <div style="font-size:8px;letter-spacing:.16em;opacity:.8;font-family:'JetBrains Mono',monospace">// VOICES</div>
+                    <div style="font-size:16px;font-weight:600;margin-top:2px;font-family:'Tajawal',sans-serif;direction:rtl">قصص ملهِمة</div>
+                  </div>
+                  <div style="padding:10px;display:flex;flex-direction:column;gap:9px">
+                    <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;gap:10px;align-items:flex-start">
+                      <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#E5306C,#E89F3F);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;font-family:'Tajawal',sans-serif;flex-shrink:0">ل</div>
+                      <div style="direction:rtl;flex:1;min-width:0">
+                        <div style="font-size:12px;font-weight:700;color:#161312;font-family:'Tajawal',sans-serif">ليان الحربي</div>
+                        <div style="font-size:8px;letter-spacing:.1em;color:#8A7E78;font-family:'JetBrains Mono',monospace;direction:ltr;margin-top:2px">SOFTWARE ENGINEER · RIYADH</div>
+                        <div style="font-size:10px;color:#4A413E;margin-top:5px;line-height:1.5;font-family:'Tajawal',sans-serif">«بدأت بكتابة أوَّل سطر Python في الصَّفِّ الثَّامن.»</div>
+                      </div>
+                    </div>
+                    <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;gap:10px;align-items:flex-start">
+                      <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#1E3D59,#4FB1C7);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;font-family:'Tajawal',sans-serif;flex-shrink:0">ر</div>
+                      <div style="direction:rtl;flex:1;min-width:0">
+                        <div style="font-size:12px;font-weight:700;color:#161312;font-family:'Tajawal',sans-serif">رهف القحطاني</div>
+                        <div style="font-size:8px;letter-spacing:.1em;color:#8A7E78;font-family:'JetBrains Mono',monospace;direction:ltr;margin-top:2px">DATA SCIENTIST · JEDDAH</div>
+                        <div style="font-size:10px;color:#4A413E;margin-top:5px;line-height:1.5;font-family:'Tajawal',sans-serif">«الذَّكاء الاصطناعيُّ رياضيَّاتٌ مُنظَّمةٌ وفضول.»</div>
+                      </div>
+                    </div>
+                    <div style="background:#fff;border-radius:14px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);display:flex;gap:10px;align-items:flex-start">
+                      <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#6B4FA0,#E5306C);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;font-family:'Tajawal',sans-serif;flex-shrink:0">س</div>
+                      <div style="direction:rtl;flex:1;min-width:0">
+                        <div style="font-size:12px;font-weight:700;color:#161312;font-family:'Tajawal',sans-serif">سارة بن عيسى</div>
+                        <div style="font-size:8px;letter-spacing:.1em;color:#8A7E78;font-family:'JetBrains Mono',monospace;direction:ltr;margin-top:2px">PRODUCT DESIGNER · DUBAI</div>
+                        <div style="font-size:10px;color:#4A413E;margin-top:5px;line-height:1.5;font-family:'Tajawal',sans-serif">«كلُّ زرٍّ فُرصةٌ لجَعل التَّكنولوجيا إنسانيَّة.»</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="height:12px"></div>
+                </div>
+
+                <!-- SCREEN 2 · ACTION -->
+                <div class="fl-screen" id="fsc-2" style="position:absolute;inset:0;overflow-y:auto;background:#F2EBDF;transition:transform .4s cubic-bezier(.7,0,.3,1);transform:translateX(100%)">
+                  <div style="background:#6B4FA0;padding:14px 16px 12px;color:#fff;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px rgba(107,79,160,.3)">
+                    <div style="font-size:8px;letter-spacing:.16em;opacity:.8;font-family:'JetBrains Mono',monospace">// PARTICIPATE</div>
+                    <div style="font-size:16px;font-weight:600;margin-top:2px;font-family:'Tajawal',sans-serif;direction:rtl">شارِك. علِّم. ابنِ.</div>
+                  </div>
+                  <div style="padding:10px;direction:rtl;display:flex;flex-direction:column;gap:7px">
+                    <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:center;gap:10px">
+                      <div style="width:34px;height:34px;border-radius:10px;background:#E5306C;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      </div>
+                      <div>
+                        <div style="font-size:12px;font-weight:600;color:#161312;font-family:'Tajawal',sans-serif">احضر ورشة عمل</div>
+                        <div style="font-size:9px;color:#8A7E78;margin-top:2px;font-family:'Tajawal',sans-serif">سجِّلي في مساق ICT مفتوح</div>
+                      </div>
+                    </div>
+                    <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:center;gap:10px">
+                      <div style="width:34px;height:34px;border-radius:10px;background:#1E3D59;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                      </div>
+                      <div>
+                        <div style="font-size:12px;font-weight:600;color:#161312;font-family:'Tajawal',sans-serif">كوني Mentor</div>
+                        <div style="font-size:9px;color:#8A7E78;margin-top:2px;font-family:'Tajawal',sans-serif">خصِّصي ساعةً لطالبةٍ محتاجة</div>
+                      </div>
+                    </div>
+                    <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:center;gap:10px">
+                      <div style="width:34px;height:34px;border-radius:10px;background:#6B4FA0;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      </div>
+                      <div>
+                        <div style="font-size:12px;font-weight:600;color:#161312;font-family:'Tajawal',sans-serif">أعلِني المشروع</div>
+                        <div style="font-size:9px;color:#8A7E78;margin-top:2px;font-family:'Tajawal',sans-serif">شاركي repo أو مدوَّنتك</div>
+                      </div>
+                    </div>
+                    <div style="background:#fff;border-radius:12px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:center;gap:10px">
+                      <div style="width:34px;height:34px;border-radius:10px;background:#E89F3F;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                      </div>
+                      <div>
+                        <div style="font-size:12px;font-weight:600;color:#161312;font-family:'Tajawal',sans-serif">ادعمي مدرسة</div>
+                        <div style="font-size:9px;color:#8A7E78;margin-top:2px;font-family:'Tajawal',sans-serif">تبرَّعي بأجهزة أو ساعات تدريس</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="padding:0 10px 14px">
+                    <div style="background:#E5306C;border-radius:100px;padding:12px;text-align:center;color:#fff;font-family:'Tajawal',sans-serif;font-weight:600;font-size:12px;box-shadow:0 6px 20px rgba(229,48,108,.4)">
+                      تواجدُكِ ليس استثناءً — هو القاعدة الجديدة ✦
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom Navigation Bar -->
+              <div style="background:#fff;height:58px;display:flex;align-items:center;justify-content:space-around;border-top:1px solid rgba(0,0,0,.08);flex-shrink:0">
+                <button onclick="flutterNav(0)" id="fn-0" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:10px;transition:background .2s">
+                  <svg id="fn-icon-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E5306C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  <span id="fn-lbl-0" style="font-size:8px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;color:#E5306C">HOME</span>
+                </button>
+                <button onclick="flutterNav(1)" id="fn-1" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:10px;transition:background .2s">
+                  <svg id="fn-icon-1" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A7E78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span id="fn-lbl-1" style="font-size:8px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;color:#8A7E78">STORIES</span>
+                </button>
+                <button onclick="flutterNav(2)" id="fn-2" style="display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:10px;transition:background .2s">
+                  <svg id="fn-icon-2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A7E78" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                  <span id="fn-lbl-2" style="font-size:8px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em;color:#8A7E78">ACTION</span>
+                </button>
+              </div>
+
+              <!-- Home gesture bar -->
+              <div style="height:18px;background:#fff;display:flex;align-items:center;justify-content:center">
+                <div style="width:90px;height:4px;background:#e2e2e2;border-radius:2px"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: code snippet -->
+          <div class="col-span-12 md:col-span-4">
+            <pre class="code-block" style="background:#0e0e10;border:1px solid #27272a;border-radius:8px;padding:1.25rem;font-size:0.68rem;line-height:1.8;overflow-x:auto;color:#e4e4e7"><code><span style="color:#71717a">// main.dart</span>
+<span style="color:#8b5cf6">class</span> <span style="color:#84cc16">GirlsICTApp</span> <span style="color:#e4e4e7">{</span>
+  Widget <span style="color:#84cc16">build</span>(context) {
+    <span style="color:#8b5cf6">return</span> MaterialApp(
+      theme: ThemeData(
+        colorScheme:
+          ColorScheme.fromSeed(
+            seedColor: <span style="color:#f87171">Color(0xFFE5306C)</span>,
+          ),
+      ),
+      home: <span style="color:#84cc16">HomeScreen</span>(),
+    );
+  }
+}
+
+<span style="color:#71717a">// 3 screens:</span>
+<span style="color:#84cc16">HomeScreen</span>   <span style="color:#8b5cf6">→</span> stats + hero
+<span style="color:#84cc16">StoriesScreen</span> <span style="color:#8b5cf6">→</span> profiles
+<span style="color:#84cc16">ActionScreen</span>  <span style="color:#8b5cf6">→</span> participate</code></pre>
+            <div class="font-mono text-xs text-muted mt-4 ltr tracking-[0.18em]">// Flutter 3.x · Material 3</div>
+            <div class="font-mono text-xs mt-2 ltr tracking-[0.18em]" style="color:#84cc16">// interactive · tap to navigate</div>
+          </div>
+
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          var _flCurrent = 0;
+          var _flLabels  = ['// SCREEN: HOME', '// SCREEN: STORIES', '// SCREEN: ACTION'];
+          var _flColors  = ['#E5306C', '#1E3D59', '#6B4FA0'];
+
+          window.flutterNav = function (idx) {
+            if (_flCurrent === idx) return;
+            _flCurrent = idx;
+
+            /* slide screens */
+            document.querySelectorAll('.fl-screen').forEach(function (s, i) {
+              s.style.transform = i < idx ? 'translateX(-100%)' : i === idx ? 'translateX(0)' : 'translateX(100%)';
+            });
+
+            /* bottom nav icons + labels */
+            [0, 1, 2].forEach(function (i) {
+              var icon = document.getElementById('fn-icon-' + i);
+              var lbl  = document.getElementById('fn-lbl-'  + i);
+              var col  = i === idx ? _flColors[i] : '#8A7E78';
+              if (icon) icon.setAttribute('stroke', col);
+              if (lbl)  lbl.style.color = col;
+            });
+
+            /* dot indicators */
+            [0, 1, 2].forEach(function (i) {
+              var dot = document.getElementById('fd-' + i);
+              if (!dot) return;
+              if (i === idx) {
+                dot.style.width        = '28px';
+                dot.style.height       = '6px';
+                dot.style.borderRadius = '3px';
+                dot.style.background   = '#8b5cf6';
+              } else {
+                dot.style.width        = '6px';
+                dot.style.height       = '6px';
+                dot.style.borderRadius = '50%';
+                dot.style.background   = '#3f3f46';
+              }
+            });
+
+            /* label */
+            var lbl = document.getElementById('flutter-screen-label');
+            if (lbl) lbl.textContent = _flLabels[idx];
+          };
+        }());
+      </script>
+    </section>
+
   </main>
 
   <!-- Overlay: shortcuts -->
@@ -1690,6 +1962,7 @@
       function updateTopBar(slide, idx) {
         $slideNumber.textContent = `${pad2(idx + 1)} / ${pad2(total)}`;
         $sectionName.textContent = slide.dataset.section || "";
+        if (window._scrubSync) window._scrubSync(idx);
       }
       function showJsonBadge(id) {
         $jsonBadge.textContent = `{"tool":"render_slide","id":${id}}`;
@@ -1928,6 +2201,16 @@
       const next = () => { if (currentIdx < total - 1) goToSlide(currentIdx + 1); };
       const prev = () => { if (currentIdx > 0) goToSlide(currentIdx - 1); };
 
+      /* Mouse-wheel navigation */
+      let _wheelLock = false;
+      window.addEventListener("wheel", (e) => {
+        if (_wheelLock) return;
+        if (Math.abs(e.deltaY) < 10) return;
+        _wheelLock = true;
+        setTimeout(() => { _wheelLock = false; }, 600);
+        if (e.deltaY > 0) next(); else prev();
+      }, { passive: true });
+
       document.addEventListener("keydown", (e) => {
         if (e.target && e.target.matches && e.target.matches("input, textarea")) return;
         if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -2026,9 +2309,151 @@
         runSlideInit(first, 0);
       }
 
+      /* ── Expose for side scrubber ── */
+      window._v2GoTo = goToSlide;
+      window._v2Total = function () { return total; };
+      window._v2FastGoTo = function (idx) {
+        if (idx < 0 || idx >= total) return;
+        gsap.killTweensOf(slides[currentIdx]);
+        gsap.killTweensOf(slides[idx]);
+        slides[currentIdx].style.visibility = "hidden";
+        slides[currentIdx].setAttribute("aria-current", "false");
+        gsap.set(slides[currentIdx], { opacity: 0, y: 0 });
+        slides[idx].style.visibility = "visible";
+        slides[idx].setAttribute("aria-current", "true");
+        gsap.set(slides[idx], { opacity: 1, y: 0 });
+        isTransitioning = false;
+        currentIdx = idx;
+        updateTopBar(slides[idx], idx);
+        runSlideInit(slides[idx], idx);
+      };
+
       if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", runPreroll);
       else runPreroll();
     })();
+  </script>
+
+  <!-- ╔══════════════ SIDE SLIDE SCRUBBER ══════════════╗ -->
+  <style>
+    #v2-scrubber {
+      position: fixed;
+      right: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 8px 0;
+    }
+    #v2-scrub-track {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    #v2-scrub-track::before {
+      content: "";
+      position: absolute;
+      left: 50%; top: 0; bottom: 0;
+      width: 1px;
+      background: #27272a;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+    .v2-dot {
+      position: relative;
+      z-index: 1;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #3f3f46;
+      transition: background .22s, transform .22s, width .2s, height .2s, box-shadow .22s;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .v2-dot:hover  { transform: scale(1.7); background: #71717a; }
+    .v2-dot.is-divider { background: #52525b; }
+    .v2-dot.is-active {
+      background: #8b5cf6;
+      width: 7px; height: 7px;
+      box-shadow: 0 0 0 3px rgba(139,92,246,.28);
+    }
+    .v2-dot.is-divider.is-active { background: #84cc16; box-shadow: 0 0 0 3px rgba(132,204,22,.25); }
+    /* Tooltip */
+    .v2-dot::after {
+      content: attr(data-label);
+      position: absolute;
+      right: calc(100% + 9px);
+      top: 50%;
+      transform: translateY(-50%);
+      background: #151518;
+      border: 1px solid #27272a;
+      color: #e4e4e7;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      padding: 3px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s;
+      z-index: 60;
+    }
+    .v2-dot:hover::after { opacity: 1; }
+  </style>
+
+  <div id="v2-scrubber" aria-label="slide navigator" role="navigation">
+    <div id="v2-scrub-track"></div>
+  </div>
+
+  <script>
+    (function () {
+      var DIVIDER_SLIDES = [4, 8, 12, 16];
+
+      var track = document.getElementById("v2-scrub-track");
+      var dots  = [];
+
+      /* Wait until main script exposes the API */
+      function init() {
+        if (!window._v2Total) { setTimeout(init, 80); return; }
+
+        var total = window._v2Total();
+        var slideEls = Array.from(document.querySelectorAll("[data-slide]"));
+
+        /* Build dots */
+        slideEls.forEach(function (el, i) {
+          var num   = parseInt(el.dataset.slide, 10);
+          var title = el.dataset.title || ("Slide " + num);
+          var dot   = document.createElement("button");
+          dot.className = "v2-dot" + (DIVIDER_SLIDES.includes(num) ? " is-divider" : "");
+          dot.setAttribute("data-label", pad2(num) + " · " + title);
+          dot.setAttribute("aria-label", "Go to slide " + num + ": " + title);
+          dot.setAttribute("data-idx", i);
+          dot.addEventListener("click", function () {
+            window._v2GoTo(i);
+          });
+          track.appendChild(dot);
+          dots.push(dot);
+        });
+
+        /* Sync highlight */
+        window._scrubSync = function (idx) {
+          dots.forEach(function (d, i) {
+            d.classList.toggle("is-active", i === idx);
+          });
+        };
+
+        /* Trigger initial highlight on slide 0 */
+        if (dots.length) dots[0].classList.add("is-active");
+      }
+
+      function pad2(n) { return String(n).padStart(2, "0"); }
+
+      init();
+    }());
   </script>
 </body>
 </html>

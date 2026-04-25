@@ -1028,8 +1028,100 @@
     </div>
   </footer>
 
+  <!-- ╔══════════════════ SIDE SCROLL SCRUBBER ══════════════════╗ -->
+  <style>
+    /* Track */
+    #scrubber-track {
+      position: fixed;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      width: 4px;
+      height: min(65vh, 420px);
+      background: rgba(22, 19, 18, 0.12);
+      border-radius: 4px;
+      z-index: 9000;
+      cursor: pointer;
+      transition: width .25s, background .25s;
+    }
+    #scrubber-track:hover { width: 6px; background: rgba(22,19,18,.2); }
+
+    /* Thumb */
+    #scrubber-thumb {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 6px;
+      top: 0;
+      transition: height .2s, background .2s, box-shadow .2s;
+      box-shadow: 0 2px 10px rgba(229,48,108,.4);
+      cursor: grab;
+    }
+    #scrubber-thumb:active { cursor: grabbing; }
+    #scrubber-track:hover #scrubber-thumb { box-shadow: 0 3px 16px rgba(229,48,108,.65); }
+
+    /* Progress line behind thumb */
+    #scrubber-progress {
+      position: absolute;
+      left: 0; top: 0; right: 0;
+      background: var(--accent);
+      border-radius: 4px 4px 0 0;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    /* Auto-play button */
+    #scrubber-play {
+      position: fixed;
+      right: 10px;
+      z-index: 9001;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 12px rgba(229,48,108,.5);
+      transition: transform .2s, background .2s;
+      padding: 0;
+    }
+    #scrubber-play:hover { transform: scale(1.12); background: #c02259; }
+    #scrubber-play svg   { display: block; }
+
+    /* Section tick labels */
+    .scrub-tick {
+      position: absolute;
+      right: 14px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(22,19,18,.25);
+      transform: translateX(-50%) translateX(0.5px);
+      transition: background .3s;
+      pointer-events: none;
+    }
+    .scrub-tick.active { background: var(--gold); }
+  </style>
+
+  <div id="scrubber-track" role="scrollbar" aria-label="page progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div id="scrubber-progress"></div>
+    <div id="scrubber-thumb"></div>
+  </div>
+  <button id="scrubber-play" aria-label="Auto-scroll page" title="تشغيل تلقائي">
+    <!-- play icon -->
+    <svg id="play-icon" width="11" height="13" viewBox="0 0 11 13" fill="#fff"><polygon points="0,0 11,6.5 0,13"/></svg>
+    <!-- pause icon (hidden) -->
+    <svg id="pause-icon" width="10" height="12" viewBox="0 0 10 12" fill="#fff" style="display:none"><rect x="0" y="0" width="3.5" height="12" rx="1"/><rect x="6.5" y="0" width="3.5" height="12" rx="1"/></svg>
+  </button>
+
   <script>
-    // Reveal-on-scroll
+    // ─── Reveal-on-scroll ───────────────────────────────────────
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -1042,6 +1134,138 @@
       { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    // ─── Side Scrubber ──────────────────────────────────────────
+    (function () {
+      const track   = document.getElementById("scrubber-track");
+      const thumb   = document.getElementById("scrubber-thumb");
+      const prog    = document.getElementById("scrubber-progress");
+      const playBtn = document.getElementById("scrubber-play");
+      const playIco = document.getElementById("play-icon");
+      const pauseIco= document.getElementById("pause-icon");
+
+      // Position the play button just above the track centre
+      function positionPlayBtn() {
+        const r = track.getBoundingClientRect();
+        playBtn.style.top = (r.top - 38) + "px";
+      }
+      positionPlayBtn();
+      window.addEventListener("resize", positionPlayBtn);
+
+      // ── Sync scroll → thumb position ──
+      function scrollRatio() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        return max <= 0 ? 0 : Math.min(window.scrollY / max, 1);
+      }
+
+      function updateThumb() {
+        const trackH = track.clientHeight;
+        const thumbH = thumb.clientHeight;
+        const ratio  = scrollRatio();
+        const top    = ratio * (trackH - thumbH);
+        thumb.style.top    = top + "px";
+        prog.style.height  = (top + thumbH / 2) + "px";
+        track.setAttribute("aria-valuenow", Math.round(ratio * 100));
+      }
+
+      window.addEventListener("scroll", updateThumb, { passive: true });
+      updateThumb();
+
+      // ── Click on track → jump ──
+      track.addEventListener("click", function (e) {
+        if (e.target === thumb) return;
+        const rect  = track.getBoundingClientRect();
+        const ratio = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+        const max   = document.documentElement.scrollHeight - window.innerHeight;
+        window.scrollTo({ top: ratio * max, behavior: "smooth" });
+      });
+
+      // ── Drag thumb ──
+      let dragging = false, dragStartY = 0, dragStartScroll = 0;
+
+      thumb.addEventListener("pointerdown", function (e) {
+        dragging = true;
+        dragStartY = e.clientY;
+        dragStartScroll = window.scrollY;
+        thumb.setPointerCapture(e.pointerId);
+        e.stopPropagation();
+      });
+
+      thumb.addEventListener("pointermove", function (e) {
+        if (!dragging) return;
+        const trackH = track.clientHeight;
+        const thumbH = thumb.clientHeight;
+        const max    = document.documentElement.scrollHeight - window.innerHeight;
+        const delta  = (e.clientY - dragStartY) / (trackH - thumbH);
+        window.scrollTo({ top: dragStartScroll + delta * max });
+      });
+
+      thumb.addEventListener("pointerup",    function () { dragging = false; });
+      thumb.addEventListener("pointercancel",function () { dragging = false; });
+
+      // ── Auto-play: fast sweep of entire page ──
+      const SWEEP_DURATION = 4500; // ms — fast tour
+      let   playing   = false;
+      let   rafId     = null;
+      let   startTime = 0;
+      let   startScroll = 0;
+
+      function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+      function sweepFrame(now) {
+        if (!playing) return;
+        const elapsed = now - startTime;
+        const max     = document.documentElement.scrollHeight - window.innerHeight;
+
+        if (elapsed >= SWEEP_DURATION) {
+          // reached bottom → pause
+          window.scrollTo({ top: max });
+          stopPlay();
+          return;
+        }
+
+        const progress = easeInOut(elapsed / SWEEP_DURATION);
+        window.scrollTo({ top: startScroll + progress * (max - startScroll) });
+        rafId = requestAnimationFrame(sweepFrame);
+      }
+
+      function startPlay() {
+        playing     = true;
+        startTime   = performance.now();
+        startScroll = window.scrollY;
+        playIco.style.display  = "none";
+        pauseIco.style.display = "";
+        rafId = requestAnimationFrame(sweepFrame);
+      }
+
+      function stopPlay() {
+        playing = false;
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+        playIco.style.display  = "";
+        pauseIco.style.display = "none";
+      }
+
+      playBtn.addEventListener("click", function () {
+        if (playing) {
+          stopPlay();
+        } else {
+          // if already at bottom, reset to top first
+          const max = document.documentElement.scrollHeight - window.innerHeight;
+          if (window.scrollY >= max - 50) window.scrollTo({ top: 0 });
+          startPlay();
+        }
+      });
+
+      // Stop sweep on manual scroll (user interaction)
+      let userScrollTimer = null;
+      window.addEventListener("wheel",     handleUserScroll, { passive: true });
+      window.addEventListener("touchstart",handleUserScroll, { passive: true });
+      function handleUserScroll() {
+        if (!playing) return;
+        clearTimeout(userScrollTimer);
+        userScrollTimer = setTimeout(stopPlay, 80);
+      }
+    }());
   </script>
 </body>
 </html>
