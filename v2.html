@@ -178,14 +178,29 @@
     .buzz-word.kept { color: #fafaf9; }
 
     /* Level ladder preview (slide 3) */
-    .level-step { padding: 1.5rem 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; }
-    .level-step .ls-num { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.22em; color: #71717a; direction: ltr; }
-    .level-step .ls-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 2rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 0.3rem; }
-    .level-step .ls-tag { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: #8b5cf6; margin-top: 0.3rem; direction: ltr; }
-    .level-step .ls-hint { color: #a1a1aa; margin-top: 0.75rem; font-size: 1rem; line-height: 1.6; }
-    .level-step.lvl-01 { margin-inline-start: 0; }
-    .level-step.lvl-02 { margin-inline-start: 4rem; }
-    .level-step.lvl-03 { margin-inline-start: 8rem; background: rgba(139, 92, 246, 0.08); border-color: #8b5cf6; }
+    .level-step { padding: 0.95rem 1.4rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; display: grid; grid-template-columns: 1fr auto; column-gap: 1.5rem; align-items: center; }
+    .level-step > .ls-text { min-width: 0; }
+    .level-step .ls-num { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: #71717a; direction: ltr; }
+    .level-step .ls-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 0.05rem; line-height: 1.15; }
+    .level-step .ls-tag { display: none; }
+    .level-step .ls-hint { color: #a1a1aa; margin-top: 0.25rem; font-size: 0.86rem; line-height: 1.5; }
+    .level-step.lvl-01 { margin-inline-end: 0; }
+    .level-step.lvl-02 { margin-inline-end: 4rem; }
+    .level-step.lvl-03 { margin-inline-end: 8rem; background: rgba(139, 92, 246, 0.08); border-color: #8b5cf6; }
+    .level-stack { display: flex; flex-direction: column-reverse; gap: 0.65rem; }
+    .ls-logos { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-self: end; }
+    .logo-chip { position: relative; width: 38px; height: 38px; border: 1px solid #27272a; border-radius: 7px; background: #0e0e10; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 7px; transition: border-color .25s, transform .25s, background .25s; }
+    .logo-chip > img, .logo-chip > svg { width: 100%; height: 100%; object-fit: contain; filter: brightness(0.92); transition: filter .25s; }
+    .logo-chip:hover, .logo-chip:focus-visible, .logo-chip.pinned { border-color: #8b5cf6; background: rgba(139, 92, 246, 0.1); transform: translateY(-2px); outline: none; }
+    .logo-chip:hover > img, .logo-chip:focus-visible > img, .logo-chip.pinned > img,
+    .logo-chip:hover > svg, .logo-chip:focus-visible > svg, .logo-chip.pinned > svg { filter: brightness(1.1); }
+    .logo-pop { position: absolute; top: calc(100% + 10px); inset-inline-start: 0; min-width: 250px; max-width: 320px; background: #18181b; border: 1px solid #3f3f46; border-radius: 8px; padding: 0.75rem 0.9rem; opacity: 0; visibility: hidden; transform: translateY(-4px); transition: opacity .22s ease, transform .22s ease, visibility .22s; z-index: 20; box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55); pointer-events: none; }
+    .logo-pop::before { content: ""; position: absolute; bottom: 100%; inset-inline-start: 14px; border: 6px solid transparent; border-bottom-color: #3f3f46; }
+    .logo-pop::after { content: ""; position: absolute; bottom: 100%; inset-inline-start: 15px; border: 5px solid transparent; border-bottom-color: #18181b; }
+    .logo-chip:hover .logo-pop, .logo-chip:focus-visible .logo-pop, .logo-chip.pinned .logo-pop { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+    .lp-name { font-family: "Space Grotesk", sans-serif; font-weight: 600; font-size: 0.95rem; color: #fafaf9; margin-bottom: 0.35rem; direction: ltr; }
+    .lp-eg { font-size: 0.86rem; color: #d4d4d8; line-height: 1.55; }
+    .lp-eg em { color: #c4b5fd; font-style: italic; }
 
     /* Flow chain (slides 5, 9, 10, 11, 17) */
     .flow-chain { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; direction: ltr; }
@@ -388,31 +403,97 @@
              data-title="THREE LEVELS"
              data-notes="خارطة الطريق. ثلاث درجات نصعدها بالتتابع، وكلُّ درجةٍ مبنيَّة على التي قبلها. LLM ما تستعمله كلَّ يوم (ChatGPT, Claude). AI Workflow هو LLM مع مسارٍ مكتوبٍ من إنسان. AI Agent هو حين يُصبح LLM نفسه صاحب القرار. هذه الجُملة الأخيرة هي كلُّ الفرق.">
       <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the ladder</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mb-12 leading-tight">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-3 ltr">// the ladder</div>
+        <h2 class="reveal-item font-display text-3xl md:text-4xl font-medium tracking-tight mb-6 leading-tight">
           ثلاث درجات. نصعدها بالتَّرتيب.
         </h2>
-        <div class="space-y-4 max-w-4xl">
+        <div class="level-stack max-w-4xl">
           <div class="reveal-item level-step lvl-01">
-            <div class="ls-num">LEVEL 01</div>
-            <div class="ls-title">LLM</div>
-            <div class="ls-tag">// large language model</div>
-            <div class="ls-hint">ما تستعمله كلَّ يوم — ChatGPT, Claude, Gemini.</div>
-            <div class="ex-mini">تسأل ChatGPT: «<em>اشرح لي React في سطرين</em>» → يُجيب.</div>
+            <div class="ls-text">
+              <div class="ls-num">LEVEL 01 · LLM</div>
+              <div class="ls-hint">ما تستعمله كلَّ يوم.</div>
+            </div>
+            <div class="ls-logos">
+              <button type="button" class="logo-chip" aria-label="ChatGPT">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#FAFAF9" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">ChatGPT</div>
+                  <div class="lp-eg">«<em>اشرح لي React في سطرين</em>» → يُجيب.</div>
+                </div>
+              </button>
+              <button type="button" class="logo-chip" aria-label="Claude">
+                <img src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">Claude</div>
+                  <div class="lp-eg">«<em>ترجم رسالة العميل بنبرةٍ رسميَّة</em>» → ترجمة.</div>
+                </div>
+              </button>
+              <button type="button" class="logo-chip" aria-label="Gemini">
+                <img src="https://cdn.simpleicons.org/googlegemini/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">Gemini</div>
+                  <div class="lp-eg">«<em>لخِّص هذه الورقة العلميَّة في 5 نقاط</em>» → ملخَّص.</div>
+                </div>
+              </button>
+            </div>
           </div>
           <div class="reveal-item level-step lvl-02">
-            <div class="ls-num">LEVEL 02</div>
-            <div class="ls-title">AI Workflow</div>
-            <div class="ls-tag">// LLM + مسار محدَّد سلفًا</div>
-            <div class="ls-hint">الإنسان يكتب المسار. LLM يتبعه.</div>
-            <div class="ex-mini">Zapier: <em>email جديد → Slack → تلخيص → أرسل</em>.</div>
+            <div class="ls-text">
+              <div class="ls-num">LEVEL 02 · AI WORKFLOW</div>
+              <div class="ls-hint">الإنسان يكتب المسار. LLM يَتبعه.</div>
+            </div>
+            <div class="ls-logos">
+              <button type="button" class="logo-chip" aria-label="Zapier">
+                <img src="https://cdn.simpleicons.org/zapier/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">Zapier</div>
+                  <div class="lp-eg">trigger: <em>email جديد</em> → action: <em>Slack تنبيه</em> → action: <em>LLM تلخيص</em>.</div>
+                </div>
+              </button>
+              <button type="button" class="logo-chip" aria-label="n8n">
+                <img src="https://cdn.simpleicons.org/n8n/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">n8n</div>
+                  <div class="lp-eg"><em>form submission</em> → <em>DB write</em> → <em>email تأكيد</em>. كلُّ عقدةٍ يَكتبها إنسان.</div>
+                </div>
+              </button>
+              <button type="button" class="logo-chip" aria-label="Make">
+                <img src="https://cdn.simpleicons.org/make/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">Make.com</div>
+                  <div class="lp-eg"><em>tweet مذكور</em> → <em>ChatGPT analyze</em> → <em>Notion log</em>. سيناريو ثابت.</div>
+                </div>
+              </button>
+            </div>
           </div>
           <div class="reveal-item level-step lvl-03">
-            <div class="ls-num">LEVEL 03</div>
-            <div class="ls-title">AI Agent</div>
-            <div class="ls-tag">// LLM = صاحب القرار</div>
-            <div class="ls-hint">لا إنسان في المُنتصف. LLM يُقرِّر المسار بنفسه.</div>
-            <div class="ex-mini">Cursor: <em>يقرأ خطأ الاختبار، يختار الملفَّ، يُصلِحه، يُعيد التَّشغيل</em>.</div>
+            <div class="ls-text">
+              <div class="ls-num">LEVEL 03 · AI AGENT</div>
+              <div class="ls-hint">لا إنسان في المُنتصف. LLM يُقرِّر المسار بنفسه.</div>
+            </div>
+            <div class="ls-logos">
+              <button type="button" class="logo-chip" aria-label="Claude Code">
+                <img src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">Claude Code</div>
+                  <div class="lp-eg">«<em>أضِف dark mode للتَّطبيق</em>» → يَبحث الكود، يُخطِّط، يُعدِّل، يَختبر.</div>
+                </div>
+              </button>
+              <button type="button" class="logo-chip" aria-label="Cursor">
+                <img src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">Cursor</div>
+                  <div class="lp-eg">يقرأ خطأ الاختبار، يَختار الملفَّ، يُصلِحه، يُعيد التَّشغيل — بلا تَدخُّل.</div>
+                </div>
+              </button>
+              <button type="button" class="logo-chip" aria-label="GitHub Copilot">
+                <img src="https://cdn.simpleicons.org/github/FAFAF9" alt="" />
+                <div class="logo-pop" role="tooltip">
+                  <div class="lp-name">GitHub Copilot</div>
+                  <div class="lp-eg">في وضع Agent: «<em>أصلِح issue #42</em>» → يفتح PR كامل.</div>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1425,6 +1506,27 @@
           span.textContent = ch === " " ? " " : ch;
           el.appendChild(span);
         });
+      });
+
+      /* Logo-chip popovers (slide 3) — click to pin, ESC / outside-click to release */
+      document.querySelectorAll(".logo-chip").forEach((chip) => {
+        chip.addEventListener("click", (e) => {
+          if (e.target.closest(".logo-pop")) return;
+          e.stopPropagation();
+          const wasPinned = chip.classList.contains("pinned");
+          document.querySelectorAll(".logo-chip.pinned").forEach((c) => c.classList.remove("pinned"));
+          if (!wasPinned) chip.classList.add("pinned");
+        });
+      });
+      document.addEventListener("click", (e) => {
+        if (e.target.closest(".logo-chip")) return;
+        document.querySelectorAll(".logo-chip.pinned").forEach((c) => c.classList.remove("pinned"));
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          document.querySelectorAll(".logo-chip.pinned").forEach((c) => c.classList.remove("pinned"));
+          document.activeElement && document.activeElement.blur && document.activeElement.blur();
+        }
       });
 
       /* Loop state */
