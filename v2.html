@@ -161,6 +161,14 @@
     .brand-mcp    { width: 64px; height: 64px; }
     .brand-row   { width: 48px; height: 48px; opacity: 0.95; }
 
+    /* Micro-example chip — one concrete anchor under any talking point */
+    .ex-mini { margin-top: 0.55rem; font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: #a1a1aa; line-height: 1.55; letter-spacing: 0.02em; }
+    .ex-mini + .ex-mini { margin-top: 0.3rem; }
+    .ex-mini::before { content: "›"; color: #8b5cf6; margin-inline-end: 0.5rem; font-weight: 700; }
+    .ex-mini.good::before { content: "✓"; color: #84cc16; }
+    .ex-mini.bad::before  { content: "✗"; color: #f87171; }
+    .ex-mini em { font-style: normal; color: #e4e4e7; }
+
     /* ---------- v2-specific ---------- */
     /* Buzzword wall (slide 2) */
     .buzz-wall { position: relative; min-height: 320px; }
@@ -209,6 +217,49 @@
     .compare-col .cc-decider-val { font-family: "Space Grotesk", sans-serif; font-size: 1.35rem; font-weight: 600; margin-top: 0.35rem; color: #fafaf9; }
     .compare-col.highlight .cc-decider-val { color: #a78bfa; }
 
+    /* Prompt engineering interlude (slides 12-15) */
+    .pe-divider-mark { color: #bef264 !important; }
+    .pe-card { padding: 1.4rem 1.5rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; display: flex; flex-direction: column; gap: 0.55rem; min-height: 230px; }
+    .pe-card.pe-bad { border-color: rgba(248, 113, 113, 0.4); background: rgba(248, 113, 113, 0.03); }
+    .pe-card.pe-good { border-color: rgba(132, 204, 22, 0.45); background: rgba(132, 204, 22, 0.04); }
+    .pe-tag { font-family: "JetBrains Mono", monospace; font-size: 0.65rem; letter-spacing: 0.22em; color: #71717a; direction: ltr; }
+    .pe-bad .pe-tag { color: #f87171; }
+    .pe-good .pe-tag { color: #bef264; }
+    .pe-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; }
+    .pe-why { font-size: 0.9rem; color: #a1a1aa; line-height: 1.55; margin-top: 0.2rem; }
+
+    /* Before / After cards (slide 15) */
+    .pe-ba-card { padding: 1.3rem; background: #151518; border: 1px solid #27272a; border-radius: 10px; display: flex; flex-direction: column; gap: 0.7rem; }
+    .pe-ba-card.pe-bad { border-color: rgba(248, 113, 113, 0.4); }
+    .pe-ba-card.pe-good { border-color: rgba(132, 204, 22, 0.45); }
+    .pe-ba-head { display: flex; align-items: center; justify-content: space-between; }
+    .pe-ba-tag { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.22em; padding: 0.25rem 0.6rem; border-radius: 3px; direction: ltr; }
+    .pe-ba-card.pe-bad .pe-ba-tag { color: #fca5a5; background: rgba(248, 113, 113, 0.12); }
+    .pe-ba-card.pe-good .pe-ba-tag { color: #bef264; background: rgba(132, 204, 22, 0.12); }
+    .pe-ba-prompt { padding: 0.75rem 0.9rem; background: rgba(255, 255, 255, 0.02); border: 1px dashed #3f3f46; border-radius: 6px; font-size: 0.88rem; color: #d4d4d8; line-height: 1.6; }
+    .pe-ba-arrow { text-align: center; color: #52525b; font-family: "JetBrains Mono", monospace; font-size: 1.3rem; line-height: 1; }
+    .pe-ba-output { padding: 0.85rem 0.95rem; background: #0e0e10; border: 1px solid #27272a; border-radius: 6px; font-size: 0.88rem; color: #d4d4d8; line-height: 1.6; }
+    .pe-ba-output p { margin: 0; }
+    .pe-ba-out-tag { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: #52525b; margin-bottom: 0.45rem; direction: ltr; }
+    .pe-ba-flaw { margin-top: 0.55rem; font-size: 0.8rem; color: #fca5a5; line-height: 1.5; }
+    .pe-ba-code { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: #c4b5fd; line-height: 1.55; direction: ltr; text-align: left; white-space: pre; margin: 0; overflow-x: auto; }
+
+    /* Agent showcase (slide 17) */
+    .browser-frame { background: #0f0f12; border: 1px solid #27272a; border-radius: 12px; overflow: hidden; height: 460px; display: flex; flex-direction: column; direction: ltr; box-shadow: 0 24px 60px -20px rgba(139, 92, 246, 0.32), 0 0 0 1px rgba(255,255,255,0.02); }
+    .frame-bar { flex-shrink: 0; height: 36px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #1a1a1f; border-bottom: 1px solid #27272a; }
+    .frame-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .frame-bar .dot.r { background: #ff5f57; }
+    .frame-bar .dot.y { background: #ffbd2e; }
+    .frame-bar .dot.g { background: #28c840; }
+    .frame-bar .addr { margin-left: 16px; font-family: "JetBrains Mono", monospace; font-size: 0.72rem; color: #a1a1aa; letter-spacing: 0.04em; }
+    .frame-body { position: relative; overflow: hidden; flex: 1; background: #F2EBDF; }
+    .frame-body iframe { position: absolute; top: 0; left: 0; width: 200%; height: 200%; transform: scale(0.5); transform-origin: top left; border: 0; pointer-events: none; }
+    .trace-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+    .trace-list li { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.75rem; border: 1px solid #27272a; border-radius: 6px; background: rgba(139, 92, 246, 0.04); font-size: 0.92rem; color: #d4d4d8; line-height: 1.4; }
+    .trc-tag { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.18em; color: #c4b5fd; background: rgba(139, 92, 246, 0.16); padding: 0.22rem 0.55rem; border-radius: 3px; text-transform: uppercase; flex-shrink: 0; direction: ltr; }
+    .btn-open { display: inline-flex; align-items: center; justify-content: space-between; gap: 0.6rem; font-family: "JetBrains Mono", monospace; font-size: 0.78rem; letter-spacing: 0.2em; color: #0a0a0b; background: #84cc16; padding: 0.95rem 1.3rem; border-radius: 6px; text-decoration: none; transition: transform .25s, background .25s; direction: ltr; font-weight: 700; }
+    .btn-open:hover { transform: translateY(-2px); background: #a3e635; }
+
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
       .state-dot, .preroll .cursor { animation: none; }
@@ -226,7 +277,7 @@
 
   <!-- Top chrome -->
   <div class="chrome-top" aria-hidden="true">
-    <div><span class="accent" id="slide-number">01 / 22</span></div>
+    <div><span class="accent" id="slide-number">01 / 27</span></div>
     <div><span id="section-name">INTRO</span></div>
     <div><span class="state-dot"></span>STATE · <span class="accent" id="loop-state-label">THINK</span></div>
   </div>
@@ -347,18 +398,21 @@
             <div class="ls-title">LLM</div>
             <div class="ls-tag">// large language model</div>
             <div class="ls-hint">ما تستعمله كلَّ يوم — ChatGPT, Claude, Gemini.</div>
+            <div class="ex-mini">تسأل ChatGPT: «<em>اشرح لي React في سطرين</em>» → يُجيب.</div>
           </div>
           <div class="reveal-item level-step lvl-02">
             <div class="ls-num">LEVEL 02</div>
             <div class="ls-title">AI Workflow</div>
             <div class="ls-tag">// LLM + مسار محدَّد سلفًا</div>
             <div class="ls-hint">الإنسان يكتب المسار. LLM يتبعه.</div>
+            <div class="ex-mini">Zapier: <em>email جديد → Slack → تلخيص → أرسل</em>.</div>
           </div>
           <div class="reveal-item level-step lvl-03">
             <div class="ls-num">LEVEL 03</div>
             <div class="ls-title">AI Agent</div>
             <div class="ls-tag">// LLM = صاحب القرار</div>
             <div class="ls-hint">لا إنسان في المُنتصف. LLM يُقرِّر المسار بنفسه.</div>
+            <div class="ex-mini">Cursor: <em>يقرأ خطأ الاختبار، يختار الملفَّ، يُصلِحه، يُعيد التَّشغيل</em>.</div>
           </div>
         </div>
       </div>
@@ -405,9 +459,12 @@
           <span class="flow-arrow">→</span>
           <span class="flow-step">أنت</span>
         </div>
-        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed mb-10">
-          التَّطبيقات الشَّهيرة هي واجهات فوق <span class="ltr">LLMs</span>.
-        </p>
+        <div class="reveal-item mb-10 max-w-3xl">
+          <p class="text-muted text-lg leading-relaxed mb-3">
+            التَّطبيقات الشَّهيرة هي واجهات فوق <span class="ltr">LLMs</span>.
+          </p>
+          <div class="ex-mini"><em>prompt:</em> «ترجم 'hello world' للفرنسية» → <em>output:</em> «bonjour le monde».</div>
+        </div>
         <div class="reveal-item flex flex-wrap items-center gap-10">
           <div class="flex items-center gap-3"><img class="brand-row" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" style="filter:brightness(0) invert(1)" alt="OpenAI" /><span class="ltr font-display text-lg">ChatGPT</span></div>
           <div class="flex items-center gap-3"><img class="brand-row" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" /><span class="ltr font-display text-lg">Claude</span></div>
@@ -439,9 +496,15 @@
               <span class="flow-arrow">→</span>
               <span class="flow-step">email مُنمَّق</span>
             </div>
-            <p class="mt-auto pt-8 text-muted text-[0.95rem] leading-relaxed">
+            <p class="pt-6 text-muted text-[0.95rem] leading-relaxed">
               الصِّياغة المُهذَّبة داخل بيانات التَّدريب. مُهمَّة نصيَّة بحتة.
             </p>
+            <div class="mt-auto pt-4">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// more prompts that just work</div>
+              <div class="ex-mini good">«<em>لخِّص هذا المقال في 3 نقاط</em>».</div>
+              <div class="ex-mini good">«<em>حوِّل هذا البريد إلى نبرة رسميَّة</em>».</div>
+              <div class="ex-mini good">«<em>اكتب regex لأرقام هواتف سعوديَّة</em>».</div>
+            </div>
           </div>
           <div class="reveal-item concept-card" style="border-right: 3px solid #f87171">
             <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#f87171">✗ FAILS</div>
@@ -453,9 +516,15 @@
               <span class="flow-arrow">→</span>
               <span class="flow-step fail">I don't know</span>
             </div>
-            <p class="mt-auto pt-8 text-muted text-[0.95rem] leading-relaxed">
+            <p class="pt-6 text-muted text-[0.95rem] leading-relaxed">
               <span class="ltr">LLM</span> ما عنده <span class="ltr">access</span> لـ<span class="ltr">calendar</span> الخاص بك. ليست مُدرَّبة داخل بياناته.
             </p>
+            <div class="mt-auto pt-4">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// more prompts that hit a wall</div>
+              <div class="ex-mini bad">«<em>كم رصيد حسابي في البنك الآن؟</em>».</div>
+              <div class="ex-mini bad">«<em>هل وصل إيميل من مديري؟</em>».</div>
+              <div class="ex-mini bad">«<em>احجز لي غرفة اجتماعاتٍ 2 عصرًا</em>».</div>
+            </div>
           </div>
         </div>
       </div>
@@ -479,7 +548,11 @@
             <p class="mt-5 text-muted text-[0.98rem] leading-relaxed">
               مُدرَّب على بياناتٍ عامَّة. لا يعرف <span class="ltr">calendar</span>ك، ولا ملفَّاتك، ولا مستندات شركتك الدَّاخليَّة.
             </p>
-            <div class="mt-auto pt-8 font-mono text-xs ltr text-muted">// trained ≠ connected</div>
+            <div class="mt-auto pt-6">
+              <div class="ex-mini bad">اسأله: «<em>ما سعر سهم Aramco الآن؟</em>» → لا يعرف.</div>
+              <div class="ex-mini bad">اسأله: «<em>من ردَّ على PR رقم 42؟</em>» → لا يعرف.</div>
+              <div class="mt-3 font-mono text-xs ltr text-muted">// trained ≠ connected</div>
+            </div>
           </div>
           <div class="reveal-item concept-card">
             <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">02 / PASSIVE</div>
@@ -487,7 +560,11 @@
             <p class="mt-5 text-muted text-[0.98rem] leading-relaxed">
               ينتظر <span class="ltr">prompt</span>، ثمَّ يُجيب. لا يُبادر، لا يتصرَّف من نفسه.
             </p>
-            <div class="mt-auto pt-8 font-mono text-xs ltr text-muted">// waits for input</div>
+            <div class="mt-auto pt-6">
+              <div class="ex-mini bad">لن يُنبِّهك: «<em>اجتماعك خلال 5 دقائق</em>».</div>
+              <div class="ex-mini bad">لن يقول: «<em>وجدت bug، أصلحته</em>».</div>
+              <div class="mt-3 font-mono text-xs ltr text-muted">// waits for input</div>
+            </div>
           </div>
         </div>
         <div class="reveal-item mt-10 font-mono text-xs text-muted ltr">
@@ -543,9 +620,14 @@
             «كلَّما سُئلت عن موعد، افحص <span class="ltr">Google Calendar</span> أوَّلًا، ثمَّ أجِب.»
           </div>
         </div>
-        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed">
+        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed mb-3">
           يعمل. لكن <em class="not-italic" style="font-style:italic">أنا</em> كتبت المسار — لا <span class="ltr">LLM</span>.
         </p>
+        <div class="reveal-item max-w-3xl">
+          <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// same idea, different tool</div>
+          <div class="ex-mini good">«<em>متى عيد ميلاد صديقي طارق؟</em>» → يفحص Contacts → يُجيب.</div>
+          <div class="ex-mini good">«<em>كم فاتورة الكهرباء هذا الشَّهر؟</em>» → يفحص Gmail → يُجيب.</div>
+        </div>
       </div>
     </section>
 
@@ -585,6 +667,10 @@
               <p class="mt-5 text-muted text-[0.95rem] leading-relaxed">
                 مُصطلحٌ كبير، فكرةٌ بسيطة: <span class="ltr">Workflow</span> يبحث في مصدرٍ ما قبل أن يُجيب.
               </p>
+              <div class="mt-5 space-y-1">
+                <div class="ex-mini">بوت دعم يقرأ <em>FAQ</em> قبل كلِّ ردّ.</div>
+                <div class="ex-mini">Notion AI يقرأ <em>pages</em> المشروع قبل التَّلخيص.</div>
+              </div>
               <div class="mt-4 font-mono text-xs ltr text-muted">
                 // RAG ⊂ Workflow
               </div>
@@ -636,14 +722,168 @@
             <p class="mt-3 text-muted text-[0.9rem]">
               مِئة خطوةٍ أو ألف — إن كان الإنسان يتَّخذ القرار، فهو <span class="ltr">Workflow</span>.
             </p>
+            <div class="mt-3 pt-3 border-t border-edge">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// similar tools</div>
+              <div class="ex-mini">Zapier, n8n, Power Automate — كلُّها Workflow engines.</div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 12 · SECTION DIVIDER · LEVEL 03 / AI AGENT -->
+    <!-- 12 · INTERLUDE DIVIDER · PROMPT ENGINEERING -->
     <section class="slide divider"
              data-slide="12"
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT ENGINEERING"
+             data-notes="استراحةٌ قصيرة. عرفنا LLM والـWorkflow. قبل أن ندخل عالم Agents، نتوقَّف لنسأل: كيف نتحدَّث مع النَّموذج؟ Prompt Engineering ليس سحرًا — قواعد، ممارسة، هندسة. كلُّ ما يَلي يُحسِّن نتائجك في الدَّرجات الثَّلاث.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-secondary tracking-[0.25em] ltr">// interlude</div>
+        <div class="mt-2 divider-number pe-divider-mark" data-char-split="1">{·}</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-secondary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ Prompt Engineering</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          كيف تتحدَّث مع النَّموذج.
+        </p>
+      </div>
+    </section>
+
+    <!-- 13 · PROMPT · DON'T -->
+    <section class="slide"
+             data-slide="13"
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT · DON'T"
+             data-notes="أربعة أنماط شائعة تُفسد النَّتيجة. غامض: لا تَعرف ما تريد بالتَّحديد. بلا سياق: تَفترض أنَّ النَّموذج يَعلم ما تَعلمه. مُتعدِّد: 3 أسئلة في prompt واحد فيتشتَّت. بلا تَنسيق: لا تَعرف ماذا سيُعيد. كلُّ خطأٍ منها يُكلِّفك جودة، وقتًا، وtokens.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs tracking-[0.25em] ltr" style="color:#f87171">// don't</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          أربعةُ أنماطٍ <span style="color:#f87171">تُفسِد</span> النَّتيجة.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="reveal-item pe-card pe-bad">
+            <div class="pe-tag">01 · VAGUE</div>
+            <div class="pe-title">غامض.</div>
+            <div class="ex-mini bad">«<em>اكتب لي شيئًا عن AI</em>»</div>
+            <div class="pe-why">لا يَعرف الجمهور، النَّبرة، الطُّول. تأتي إجابةٌ عامَّةٌ لا تَخدمك.</div>
+          </div>
+          <div class="reveal-item pe-card pe-bad">
+            <div class="pe-tag">02 · NO CONTEXT</div>
+            <div class="pe-title">بلا سياق.</div>
+            <div class="ex-mini bad">«<em>أصلِح هذا الكود</em>» — بلا الكود.</div>
+            <div class="pe-why">يَفترض أنَّ النَّموذج يقرأ ذِهنك. يَخمِّن. يُجيب عن شيءٍ آخر.</div>
+          </div>
+          <div class="reveal-item pe-card pe-bad">
+            <div class="pe-tag">03 · COMPOUND</div>
+            <div class="pe-title">أسئلةٌ في كومة.</div>
+            <div class="ex-mini bad">«<em>اشرح REST، وقارِن GraphQL، واكتب API بـPython</em>»</div>
+            <div class="pe-why">3 مَهام في prompt واحد ← 3 إجاباتٍ سطحيَّة، لا واحدة عميقة.</div>
+          </div>
+          <div class="reveal-item pe-card pe-bad">
+            <div class="pe-tag">04 · NO FORMAT</div>
+            <div class="pe-title">بلا تَنسيق.</div>
+            <div class="ex-mini bad">«<em>لخِّص لي هذا</em>»</div>
+            <div class="pe-why">قد يأتي نقاطًا، أو فقرة، أو markdown. لا تَستطيع البناء فوق ما لا تَتنبَّأ به.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · PROMPT · DO -->
+    <section class="slide"
+             data-slide="14"
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT · DO"
+             data-notes="نفس الأربعة، معكوسة. كن محدَّدًا: جمهور، نبرة، طُول. أعطِ السِّياق: الكود، البيانات، الموقف. أعطِه دورًا: «أنت محرِّر صحفيّ» يَنقل النَّموذج لمنطقة أداءٍ أعلى. حدِّد التَّنسيق: JSON، قائمة، n كلمة. كلَّما زاد التَّحديد، قلَّت المُفاجآت.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs tracking-[0.25em] ltr" style="color:#bef264">// do</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
+          أربعةُ قواعدٍ <span style="color:#bef264">تَرفع</span> الجودة.
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="reveal-item pe-card pe-good">
+            <div class="pe-tag">01 · BE SPECIFIC</div>
+            <div class="pe-title">كن محدَّدًا.</div>
+            <div class="ex-mini good">«<em>اكتب 3 جُمل عن AI لمراهق، نبرةٌ حماسيَّة</em>»</div>
+            <div class="pe-why">جمهور + نبرة + طُول = مساحةُ جوابٍ أضيق وأدقّ.</div>
+          </div>
+          <div class="reveal-item pe-card pe-good">
+            <div class="pe-tag">02 · GIVE CONTEXT</div>
+            <div class="pe-title">أعطِ السِّياق.</div>
+            <div class="ex-mini good">«<em>هذا كود Python فيه TypeError بالسَّطر 12: [الكود]. أصلِحه واشرح.</em>»</div>
+            <div class="pe-why">كلُّ ما يَعرفه عن المشكلة = كلُّ ما تَكتبه له.</div>
+          </div>
+          <div class="reveal-item pe-card pe-good">
+            <div class="pe-tag">03 · SET A ROLE</div>
+            <div class="pe-title">أعطِه دورًا.</div>
+            <div class="ex-mini good">«<em>أنت محرِّرٌ صحفيٌّ متمرِّس. اقصُر كلَّ جُملةٍ تَتجاوز 20 كلمة.</em>»</div>
+            <div class="pe-why">«أنت X» يَنقل أسلوبه لمنطقة المُحترفين في X.</div>
+          </div>
+          <div class="reveal-item pe-card pe-good">
+            <div class="pe-tag">04 · SPECIFY FORMAT</div>
+            <div class="pe-title">حدِّد الشَّكل.</div>
+            <div class="ex-mini good">«<em>أعطِني الإجابة JSON بالحقول: title, summary, tags[3]</em>»</div>
+            <div class="pe-why">تَنسيقٌ محدَّد = إخراجٌ يُمكن البناء فوقه برمجيًّا.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 · PROMPT · BEFORE & AFTER -->
+    <section class="slide"
+             data-slide="15"
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT · BEFORE & AFTER"
+             data-notes="مَثلٌ واحد، prompt مُختلف، إخراجٌ مختلفٌ جدًّا. المهمَّة: تَلخيص اجتماع. على اليمين: prompt بدائيّ، تأتي فقرةٌ طويلةٌ لا تَخدم أحدًا. على اليسار: prompt مُنظَّم — دور، تَعليمات، تَنسيق — يأتي بـJSON قابلٍ للاستخدام مباشرةً في إيميل أو ticket. نفس النَّموذج، نفس البيانات، فرق هندسة الـprompt.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// same task. same model. different prompt.</div>
+        <h2 class="reveal-item font-display text-3xl md:text-4xl font-medium tracking-tight mt-3 mb-8 leading-tight">
+          المُهمَّة: <em class="not-italic" style="color:#a78bfa; font-style:italic">«لخِّص هذا الاجتماع.»</em>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="reveal-item pe-ba-card pe-bad">
+            <div class="pe-ba-head">
+              <span class="pe-ba-tag">✗ BAD PROMPT</span>
+            </div>
+            <div class="pe-ba-prompt">«لخِّص هذا الاجتماع: [نصُّ النِّقاش]»</div>
+            <div class="pe-ba-arrow">↓</div>
+            <div class="pe-ba-output">
+              <div class="pe-ba-out-tag">// output</div>
+              <p>«ناقش الفريق في هذا الاجتماع عددًا من المَواضيع المُهمَّة، وتطرَّق إلى عدَّة نقاطٍ منها التَّسعير والمنتج والعملاء، واتَّفق الجميع على ضرورة المُتابعة في الأسبوع القادم...»</p>
+              <div class="pe-ba-flaw">— فقرةٌ طويلة. لا قراراتٌ واضحة. لا أصحاب مَهام. غيرُ قابلةٍ للنَّسخ في ticket.</div>
+            </div>
+          </div>
+          <div class="reveal-item pe-ba-card pe-good">
+            <div class="pe-ba-head">
+              <span class="pe-ba-tag">✓ GOOD PROMPT</span>
+            </div>
+            <div class="pe-ba-prompt">«أنت سكرتير تنفيذيّ. أعطِني JSON بالحقول: decisions[], action_items[{task, owner, due}], open_questions[]. النَّصّ:»</div>
+            <div class="pe-ba-arrow">↓</div>
+            <div class="pe-ba-output">
+              <div class="pe-ba-out-tag">// output</div>
+<pre class="pe-ba-code">{
+  "decisions": ["تأجيل إطلاق v2 لمايو"],
+  "action_items": [
+    { "task": "مراجعة التسعير",
+      "owner": "سارة",
+      "due": "2026-04-30" }
+  ],
+  "open_questions": ["دعم العربية في v2؟"]
+}</pre>
+              <div class="pe-ba-flaw" style="color:#bef264">— يُلصَق مباشرةً في Linear/Jira. كلُّ حقلٍ لمكانه.</div>
+            </div>
+          </div>
+        </div>
+        <p class="reveal-item mt-7 text-muted text-sm leading-relaxed text-center">
+          نفس النَّموذج. نفس البيانات. فرقُ <span style="color:#bef264">هندسة الـprompt</span>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 16 · SECTION DIVIDER · LEVEL 03 / AI AGENT -->
+    <section class="slide divider"
+             data-slide="16"
              data-section="LEVEL 03 · AGENT"
              data-title="SECTION · LEVEL 03"
              data-notes="الدَّرجة الثَّالثة. الجُملة الواحدة التي يجب أن تخرج بها من هذه المحاضرة كلِّها قادمة في الشَّريحة التَّالية. استعدَّ.">
@@ -660,9 +900,9 @@
       </div>
     </section>
 
-    <!-- 13 · THE PIVOT — replace human with LLM -->
+    <!-- 17 · THE PIVOT — replace human with LLM -->
     <section class="slide"
-             data-slide="13"
+             data-slide="17"
              data-section="LEVEL 03 · AGENT"
              data-title="THE PIVOT"
              data-notes="أهمُّ جُملة في المحاضرة كلِّها. التَّحوُّل الوحيد من Workflow إلى Agent: استبدل الإنسان صاحب القرار بـLLM. المسار لم يعد مكتوبًا — LLM يختار الأدوات، يُقرِّر متى يتوقَّف، ومتى يُعيد. هذا الفرق الوحيد. ليس عشرين فرق، فرقٌ واحد.">
@@ -676,11 +916,13 @@
           <div class="pivot-box before">
             <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">WORKFLOW</div>
             <div class="mt-2 font-display text-xl">مسار يكتبه <span class="pivot-strike">إنسان</span></div>
+            <div class="ex-mini mt-3">Zapier: <em>email → Notion</em>.</div>
           </div>
           <div class="pivot-arrow">→</div>
           <div class="pivot-box after">
             <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#a78bfa">AGENT</div>
             <div class="mt-2 font-display text-xl">مسار يُقرِّره <span class="text-primary ltr">LLM</span></div>
+            <div class="ex-mini mt-3">Cursor: <em>يقرأ، يختار الملفَّ، يُصلِح، يُعيد الاختبار</em>.</div>
           </div>
         </div>
         <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed">
@@ -689,9 +931,9 @@
       </div>
     </section>
 
-    <!-- 14 · THE LOOP + ReAct -->
+    <!-- 18 · THE LOOP + ReAct -->
     <section class="slide"
-             data-slide="14"
+             data-slide="18"
              data-section="LEVEL 03 · AGENT"
              data-title="LOOP · REACT"
              data-notes="كيف يُقرِّر LLM المسار؟ عبر حلقة. أشهر نمط اسمه ReAct — Reason + Act. LLM يُفكِّر (Reason): ما الأداة الصَّحيحة الآن؟ ثمَّ يُنفِّذ (Act): يستدعي الأداة. ثمَّ يُراقب (Observe) النَّتيجة، ويُقرِّر: هل انتهيت، أم أُكرِّر؟ هذا الـLoop هو الصُّورة الكاملة.">
@@ -708,6 +950,13 @@
             <p class="reveal-item text-muted text-lg leading-relaxed mb-4 max-w-md">
               <span class="ltr">LLM</span> يُفكِّر: ما الأداة الصَّحيحة الآن؟ يُنفِّذ: يستدعيها. يُراقب النَّتيجة. يُقرِّر: انتهيت، أم أُكرِّر؟
             </p>
+            <div class="reveal-item max-w-md mb-2">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-1">// a real trace · "ابحث عن تذاكر الرِّياض→جدَّة"</div>
+              <div class="ex-mini"><em>Reason:</em> أحتاج flight search tool.</div>
+              <div class="ex-mini"><em>Act:</em> <span class="ltr">flights.search(RUH→JED, 2026-05-10)</span></div>
+              <div class="ex-mini"><em>Observe:</em> 14 نتيجة، أرخصها 420 ر.س.</div>
+              <div class="ex-mini"><em>Reason:</em> المُستخدم طلب الأرخص → انتهيت.</div>
+            </div>
             <pre class="reveal-item code-block mt-6 font-mono text-xs text-muted leading-relaxed bg-surface border border-edge rounded-md p-4 max-w-md"><span class="text-primary">while</span> (<span class="text-secondary">!done</span>) {
   thought  <span class="text-muted">= </span>llm.reason(ctx);
   result   <span class="text-muted">= </span>tool.run(thought);
@@ -750,9 +999,9 @@
       </div>
     </section>
 
-    <!-- 15 · INTERACTIVE · RUN AGENT -->
+    <!-- 19 · INTERACTIVE · RUN AGENT -->
     <section class="slide"
-             data-slide="15"
+             data-slide="19"
              data-section="LEVEL 03 · AGENT"
              data-title="INTERACTIVE"
              data-notes="عرض حيٌّ قصير. اضغط الزرَّ، شاهد الحَلقة تتحلَّل إلى مراحل — كلُّ مرحلةٍ 600 مللي ثانية. في الجولة الثَّانية اروِ ما يفعله الـAgent في كلِّ خطوة: يُفكِّر، يستدعي Tool، يقرأ النَّتيجة، يُقرِّر.">
@@ -780,9 +1029,9 @@
       </div>
     </section>
 
-    <!-- 16 · Iteration + Skier example -->
+    <!-- 20 · Iteration + Skier example -->
     <section class="slide"
-             data-slide="16"
+             data-slide="20"
              data-section="LEVEL 03 · AGENT"
              data-title="ITERATE · REAL"
              data-notes="مثالان سريعان. الأوَّل نظريّ، الثَّاني حقيقيّ. النَّظريّ: Agent يكتب V1 للمنشور، LLM ثاني ينتقده، يكتب V2، إلى أن تنطبق المعايير — كلُّها بلا إنسان بين النُّسخ. الحقيقيّ: ديمو Andrew Ng للـSkier Vision Agent: تبحث عن «skier»، Agent يُفكِّر ما شكل skier (شخصٌ على skis في الثَّلج)، ثمَّ يفحص مقاطع الفيديو ويُرجع المطابقات. بدلًا من إنسان يُعَنْوِن كلَّ مقطع يدويًّا.">
@@ -826,9 +1075,60 @@
       </div>
     </section>
 
-    <!-- 17 · THREE LEVELS · SIDE BY SIDE -->
+    <!-- 21 · AGENT SHOWCASE — proof artifact -->
     <section class="slide"
-             data-slide="17"
+             data-slide="21"
+             data-section="LEVEL 03 · AGENT"
+             data-title="AGENT · BUILT THIS"
+             data-notes="إثباتٌ حيّ. هذا الموقع كاملًا — التَّصميم، الكتابة، الحركة، الـRTL، إمكانيَّة الوصول — صنعَه Agent من هدفٍ واحد: «اصنع موقعًا للاحتفاء باليوم العالميِّ للفتيات في مجال تكنولوجيا المعلومات». بحث في ITU، اختار اللَّوحة والخطوط، كتب 600+ سطر، اختبر، عدَّل. لا إنسان يكتب المسار — Agent يُقرِّر كلَّ خطوة. افتح الرَّابط أمام الجمهور — هذه لحظة «aha».">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// agent · built this · live proof</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-3 leading-tight">
+          هذا الموقع كاملًا — <span class="text-primary">صَنَعَه <span class="ltr">Agent</span></span>.
+        </h2>
+        <p class="reveal-item text-muted mb-8 max-w-3xl text-base md:text-lg leading-relaxed">
+          هدفٌ واحد: «اصنع موقعًا للاحتفاء باليوم العالميِّ للفتيات في مجال تكنولوجيا المعلومات». <span class="ltr">Agent</span> يبحث، يُصمِّم، يَكتب، يُحرِّك — ويُقرِّر متى انتهى. لا إنسان يكتب المسار.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
+          <div class="reveal-item browser-frame">
+            <div class="frame-bar">
+              <span class="dot r"></span>
+              <span class="dot y"></span>
+              <span class="dot g"></span>
+              <div class="addr">girls-in-ict.html</div>
+            </div>
+            <div class="frame-body">
+              <iframe src="girls-in-ict.html" scrolling="no" title="agent-built site preview" loading="lazy"></iframe>
+            </div>
+          </div>
+
+          <div class="reveal-item flex flex-col gap-4">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// agent trace · what it actually did</div>
+            <ul class="trace-list">
+              <li><span class="trc-tag">research</span><span><span class="ltr">ITU Resolution 70</span> · تاريخ <span class="ltr">23 Apr 2026</span> · إحصائيَّات <span class="ltr">ICT</span></span></li>
+              <li><span class="trc-tag">design</span><span>اختار اللَّوحة، الخطوط، النِّظام الشَّبكيّ — لا قالب</span></li>
+              <li><span class="trc-tag">build</span><span>كتب <span class="ltr">600+</span> سطرًا، ملفٌّ واحد، بلا <span class="ltr">build step</span></span></li>
+              <li><span class="trc-tag">RTL</span><span>طباعة عربيَّة، <span class="ltr">bidi</span>، خَلْط عربيّ/إنجليزيّ</span></li>
+              <li><span class="trc-tag">motion</span><span>كشف عند التَّمرير، <span class="ltr">marquee</span>، تفاعلات دقيقة</span></li>
+              <li><span class="trc-tag">a11y</span><span><span class="ltr">reduced-motion</span>، <span class="ltr">semantic HTML</span>، تباين</span></li>
+            </ul>
+            <a class="btn-open" href="girls-in-ict.html" target="_blank" rel="noreferrer">
+              <span>OPEN LIVE SITE</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr leading-relaxed">
+              // human prompts: 1<br />
+              // human edits to output: 0
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 22 · THREE LEVELS · SIDE BY SIDE -->
+    <section class="slide"
+             data-slide="22"
              data-section="PAYOFF"
              data-title="THREE LEVELS"
              data-notes="شريحة المُلخَّص الكُبرى. ثلاث أعمدة، سؤالٌ واحد يفصلها: من صاحب القرار؟ في LLM لا قرار — input/output. في Workflow الإنسان. في Agent، الـLLM. هذا هو التَّحوُّل الجوهريّ. إذا نسيت كلَّ شيءٍ آخر، تذكَّر هذه الشَّريحة.">
@@ -849,6 +1149,7 @@
               <span class="flow-step">Output</span>
             </div>
             <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُحوِّل نصًّا إلى نص.</div>
+            <div class="ex-mini">«<em>لخِّص هذا العقد</em>» → تلخيص.</div>
             <div class="cc-decider">
               <div class="cc-decider-label">// decision maker</div>
               <div class="cc-decider-val">—</div>
@@ -867,6 +1168,7 @@
               <span class="flow-step">Out</span>
             </div>
             <div class="cc-row"><strong>ما الذي يفعله؟</strong> يتبع مسارًا يكتبه إنسان.</div>
+            <div class="ex-mini">Zapier: <em>form جديد → Sheet → Slack</em>.</div>
             <div class="cc-decider">
               <div class="cc-decider-label">// decision maker</div>
               <div class="cc-decider-val">الإنسان</div>
@@ -885,6 +1187,7 @@
               <span class="flow-step">Observe</span>
             </div>
             <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُقرِّر المسار، يُنفِّذه، يُراقب، يُكرِّر.</div>
+            <div class="ex-mini">Cursor: <em>«أصلح bug في PR #42»</em> → يقرأ، يُعدِّل، يُعيد الاختبار.</div>
             <div class="cc-decider">
               <div class="cc-decider-label">// decision maker</div>
               <div class="cc-decider-val ltr" style="direction:ltr">LLM itself</div>
@@ -894,9 +1197,9 @@
       </div>
     </section>
 
-    <!-- 18 · MARKET NUMBERS -->
+    <!-- 23 · MARKET NUMBERS -->
     <section class="slide"
-             data-slide="18"
+             data-slide="23"
              data-section="PAYOFF"
              data-title="NUMBERS"
              data-notes="ثلاثة أرقام تُؤكِّد أنَّ الدَّرجة الثَّالثة خرجت من المختبر. 4.7 مليون مُشترك في GitHub Copilot منذ يناير. Cursor بلغ 2 مليار دولار إيرادًا سنويًّا في Q1. Claude Code يُحرز ~80% على SWE-bench Verified — مشكلات GitHub حقيقيَّة. هذه الأرقام هي السَّبب وراء أنَّ كلَّ شركة SaaS كُبرى تُركِّب Agent على مُنتجها.">
@@ -931,9 +1234,9 @@
       </div>
     </section>
 
-    <!-- 19 · RULE OF THUMB -->
+    <!-- 24 · RULE OF THUMB -->
     <section class="slide"
-             data-slide="19"
+             data-slide="24"
              data-section="PAYOFF"
              data-title="RULE OF THUMB"
              data-notes="متى تستخدم أيَّ درجة؟ قاعدةٌ عمليَّة بسيطة. مُهمَّة واضحة + Tools مُتاحة + مخاطر منخفضة = Agent. عدا ذلك، Workflow مكتوب يدويًّا، أو لا شيء. الفخُّ: استخدام Agent في عملٍ فشله مُكلِف.">
@@ -949,15 +1252,21 @@
           <span class="text-muted">=</span>
           <span class="text-primary"><span class="ltr">Agent</span>.</span>
         </div>
-        <div class="reveal-item mt-14 text-muted text-lg max-w-3xl mx-auto leading-relaxed">
+        <div class="reveal-item mt-10 text-muted text-lg max-w-3xl mx-auto leading-relaxed">
           عدا ذلك، الزم <span class="ltr">Workflow</span> مكتوبًا، أو نفِّذها بنفسك.
+        </div>
+        <div class="reveal-item mt-10 max-w-3xl mx-auto text-start">
+          <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// concrete calls</div>
+          <div class="ex-mini good">«<em>راجع PR #42 وأصلِح التَّحذيرات</em>» — Agent مناسب.</div>
+          <div class="ex-mini good">«<em>نظِّم inbox يوميًّا 8ص</em>» — Workflow يكفي.</div>
+          <div class="ex-mini bad">«<em>ادفع 10,000$ من حساب الشَّركة</em>» — لا، فشله مُكلِف.</div>
         </div>
       </div>
     </section>
 
-    <!-- 20 · MCP CALLOUT -->
+    <!-- 25 · MCP CALLOUT -->
     <section class="slide"
-             data-slide="20"
+             data-slide="25"
              data-section="PAYOFF"
              data-title="MCP"
              data-notes="اختصارٌ واحد احفظه: MCP، Model Context Protocol. ابتكرته Anthropic، ثمَّ في ديسمبر 2025 سلَّمته إلى Linux Foundation. الخبر الحقيقيّ: المقبس الذي تتَّصل به Tool بـAgent صار معيارًا مفتوحًا. هذا ما يُحوِّل Agents إلى منصَّة، كما صار HTTP للويب. توقَّع أن يبدو العامان القادمان كعصر HTTP المُبكِّر.">
@@ -982,9 +1291,9 @@
       </div>
     </section>
 
-    <!-- 21 · TAKEAWAY -->
+    <!-- 26 · TAKEAWAY -->
     <section class="slide"
-             data-slide="21"
+             data-slide="26"
              data-section="CLOSE"
              data-title="TAKEAWAY"
              data-notes="جُملةٌ واحدة تخرج بها. إن نسيت الدَّرجات الثَّلاث، والأرقام، وMCP — تذكَّر هذه: Agent هو LLM يستطيع أن يفعل أشياء. وحين يتَّخذ القرار بنفسه، صار Agent.">
@@ -1000,9 +1309,9 @@
       </div>
     </section>
 
-    <!-- 22 · CLOSE -->
+    <!-- 27 · CLOSE -->
     <section class="slide"
-             data-slide="22"
+             data-slide="27"
              data-section="CLOSE"
              data-title="CLOSE"
              data-notes="اختم بسلاسة. ادعُ إلى الأسئلة. إن بقي وقت، اسأل القاعة: «ما المُهمَّة الواحدة التي ستُسلِّمها لـAgent غدًا؟» — الإجابات عادةً هي أفضل جزءٍ من النِّقاش.">
@@ -1228,16 +1537,16 @@
         currentIdx = idx;
       }
 
-      /* Per-slide initializers (v2: 22-slide map) */
+      /* Per-slide initializers (v2: 27-slide map) */
       function runSlideInit(slide, idx) {
         const n = idx + 1;
-        if ([4, 8, 12].includes(n)) animateDividerChars(slide);
+        if ([4, 8, 12, 16].includes(n)) animateDividerChars(slide);
         if (n === 2) animateBuzzStrikes(slide);
-        if (n === 15) setupInteractive(slide);
-        if (n === 18) animateStats(slide);
-        if (n === 20) animateMCPArrow(slide);
-        if (n === 22) runFinale(slide);
-        if (n !== 22 && loopFrozen) {
+        if (n === 19) setupInteractive(slide);
+        if (n === 23) animateStats(slide);
+        if (n === 25) animateMCPArrow(slide);
+        if (n === 27) runFinale(slide);
+        if (n !== 27 && loopFrozen) {
           loopFrozen = false;
           startAmbientLoop();
         }
