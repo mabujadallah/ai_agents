@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اليوم العالمي للفتيات في مجال تكنولوجيا المعلومات · 2026</title>
+  <meta name="description" content="نحتفي بالفتيات اللاتي يُعِدن تشكيل مستقبل التَّكنولوجيا. اليوم العالمي · 23 أبريل 2026." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Tajawal:wght@400;500;700&family=Fraunces:opsz,wght@9..144,200..900&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --paper:    #F2EBDF;
+      --paper-2:  #EAE0CD;
+      --ink:      #161312;
+      --ink-soft: #4A413E;
+      --muted:    #8A7E78;
+      --accent:   #E5306C;
+      --accent-2: #1E3D59;
+      --gold:     #E89F3F;
+      --line:     rgba(22, 19, 18, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Tajawal", system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        radial-gradient(circle at 18% 12%, rgba(229, 48, 108, 0.06), transparent 42%),
+        radial-gradient(circle at 82% 78%, rgba(232, 159, 63, 0.06), transparent 50%);
+    }
+
+    /* Paper grain — SVG noise overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+      opacity: 0.5;
+      z-index: 1000;
+      mix-blend-mode: multiply;
+    }
+
+    .ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+    .mono { font-family: "JetBrains Mono", monospace; letter-spacing: 0.04em; }
+    em { font-style: italic; color: var(--accent); }
+
+    /* ─── TOP BAR ────────────────────────────────────────── */
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(242,235,223,0.96), rgba(242,235,223,0.6));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .brand {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      direction: ltr;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .brand-dot {
+      width: 9px; height: 9px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.4); opacity: 0.6; }
+    }
+    .topbar-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      direction: ltr;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      padding: 9rem 2.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 3.5rem;
+      position: relative;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.22em;
+      color: var(--ink-soft);
+      margin-bottom: 2.2rem;
+      direction: ltr;
+    }
+    .hero-eyebrow::before {
+      content: "";
+      width: 28px; height: 1px;
+      background: var(--ink);
+    }
+
+    .hero h1 {
+      font-family: "Reem Kufi", "Tajawal", sans-serif;
+      font-weight: 600;
+      font-size: clamp(3.2rem, 9vw, 8.4rem);
+      line-height: 0.94;
+      letter-spacing: -0.025em;
+      margin-bottom: 2.4rem;
+      max-width: 12ch;
+    }
+    .hero h1 .accent-word {
+      color: var(--accent);
+      font-weight: 700;
+      font-style: italic;
+    }
+    .hero h1 .underline-word {
+      position: relative;
+      white-space: nowrap;
+      z-index: 1;
+    }
+    .hero h1 .underline-word::after {
+      content: "";
+      position: absolute;
+      bottom: 0.06em; left: 0; right: 0;
+      height: 0.22em;
+      background: var(--gold);
+      z-index: -1;
+      opacity: 0.75;
+      transform-origin: right;
+      transform: scaleX(0);
+      animation: drawUnderline 0.95s 1.5s cubic-bezier(.7,0,.3,1) forwards;
+    }
+    @keyframes drawUnderline { to { transform: scaleX(1); } }
+
+    .hero-lede {
+      font-size: 1.18rem;
+      color: var(--ink-soft);
+      max-width: 42ch;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.05rem 2.2rem;
+      font-family: "Tajawal", sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform .35s cubic-bezier(.7,0,.3,1), background .3s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+    .btn-primary svg { width: 14px; height: 14px; transition: transform .3s; }
+    .btn-primary:hover svg { transform: translateX(-4px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      direction: ltr;
+      transition: color .3s, border-color .3s;
+    }
+    .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* hero side */
+    .hero-side {
+      border-inline-end: 1px solid var(--line);
+      padding-inline-end: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 3rem;
+    }
+    .date-stamp {
+      direction: ltr;
+      display: block;
+    }
+    .date-stamp .label {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .date-stamp .day {
+      font-family: "Fraunces", serif;
+      font-variation-settings: "opsz" 144, "wght" 250;
+      font-size: 7rem;
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+      color: var(--ink);
+      display: block;
+    }
+    .date-stamp .my {
+      display: block;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      margin-top: 0.5rem;
+    }
+
+    .spinner {
+      width: 96px; height: 96px;
+      align-self: flex-end;
+    }
+    .spinner svg {
+      width: 100%; height: 100%;
+      animation: spin 22s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      inset-inline-start: 2.5rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      direction: ltr;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(4px); }
+    }
+
+    /* ─── MARQUEE ────────────────────────────────────────── */
+    .marquee {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 1.4rem 0;
+      overflow: hidden;
+      direction: ltr;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+    .marquee-track {
+      display: inline-flex;
+      gap: 4rem;
+      white-space: nowrap;
+      animation: scroll 38s linear infinite;
+      font-family: "Reem Kufi", sans-serif;
+      font-size: 1.55rem;
+      font-weight: 500;
+      align-items: center;
+    }
+    .marquee-track .star {
+      color: var(--accent);
+      font-family: "Fraunces", serif;
+      font-size: 1.4rem;
+    }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTIONS ───────────────────────────────────────── */
+    section { padding: 7rem 2.5rem; position: relative; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.8rem;
+      margin: 0 auto 4rem;
+      max-width: 1400px;
+    }
+    .section-num {
+      font-family: "Fraunces", serif;
+      font-variation-settings: "opsz" 144, "wght" 300;
+      font-size: 4rem;
+      color: var(--accent);
+      line-height: 0.8;
+    }
+    .section-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      direction: ltr;
+    }
+    .section-title {
+      font-family: "Reem Kufi", sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.01em;
+      margin-top: 0.4rem;
+      line-height: 1.15;
+    }
+
+    /* ─── MANIFESTO ──────────────────────────────────────── */
+    .manifesto {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 8rem 2.5rem;
+      position: relative;
+    }
+    .manifesto-quote {
+      font-family: "Reem Kufi", sans-serif;
+      font-weight: 500;
+      font-size: clamp(2rem, 4.6vw, 3.6rem);
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      position: relative;
+    }
+    .manifesto-quote::before {
+      content: "\201D";
+      font-family: "Fraunces", serif;
+      font-size: 14rem;
+      color: var(--accent);
+      position: absolute;
+      top: -7rem;
+      inset-inline-end: -2.5rem;
+      line-height: 1;
+      z-index: -1;
+      opacity: 0.55;
+      font-variation-settings: "wght" 300;
+    }
+    .manifesto-cite {
+      margin-top: 2.8rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      direction: ltr;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+    .manifesto-cite::before {
+      content: "";
+      width: 24px; height: 1px;
+      background: var(--muted);
+    }
+
+    /* ─── STATS ──────────────────────────────────────────── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.45);
+      padding: 2.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .35s, transform .35s;
+    }
+    .stat:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    .stat-num {
+      font-family: "Fraunces", serif;
+      font-variation-settings: "opsz" 144, "wght" 300;
+      font-size: clamp(4rem, 7.5vw, 6.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      direction: ltr;
+    }
+    .stat-num .unit {
+      font-size: 0.4em;
+      color: var(--accent);
+      font-variation-settings: "wght" 600;
+    }
+    .stat-label {
+      margin-top: 1.5rem;
+      font-family: "Tajawal", sans-serif;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      max-width: 38ch;
+    }
+    .stat-tag {
+      position: absolute;
+      top: 1.2rem;
+      inset-inline-start: 1.2rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      direction: ltr;
+    }
+    .stat:nth-child(1) { grid-column: span 7; }
+    .stat:nth-child(2) {
+      grid-column: span 5;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .stat:nth-child(2) .stat-num { color: var(--paper); }
+    .stat:nth-child(2) .stat-label { color: rgba(242, 235, 223, 0.75); }
+    .stat:nth-child(2):hover { border-color: var(--gold); }
+    .stat:nth-child(3) { grid-column: span 5; }
+    .stat:nth-child(4) { grid-column: span 7; }
+
+    /* ─── STORIES ────────────────────────────────────────── */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .story {
+      background: var(--paper-2);
+      padding: 2.4rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      transition: transform .4s cubic-bezier(.7,0,.3,1);
+    }
+    .story:hover { transform: translateY(-6px); }
+    .story:nth-child(2) { transform: translateY(2.5rem); }
+    .story:nth-child(2):hover { transform: translateY(calc(2.5rem - 6px)); }
+    .avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Reem Kufi", sans-serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: white;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .avatar-1 { background: linear-gradient(135deg, #E5306C 0%, #E89F3F 100%); }
+    .avatar-2 { background: linear-gradient(135deg, #1E3D59 0%, #4FB1C7 100%); }
+    .avatar-3 { background: linear-gradient(135deg, #6B4FA0 0%, #E5306C 100%); }
+    .story-name {
+      font-family: "Reem Kufi", sans-serif;
+      font-weight: 600;
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+    .story-role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-top: -1.05rem;
+      direction: ltr;
+    }
+    .story-quote {
+      font-size: 1.04rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+    .story-link {
+      margin-top: auto;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      direction: ltr;
+    }
+    .story-link::after {
+      content: "←";
+      transition: transform .3s;
+    }
+    .story-link:hover { color: var(--accent); }
+    .story-link:hover::after { transform: translateX(-4px); }
+
+    /* ─── TIMELINE ───────────────────────────────────────── */
+    .timeline-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+    .timeline {
+      display: flex;
+      align-items: stretch;
+      gap: 2rem;
+      padding: 2rem 0;
+      position: relative;
+      direction: ltr;
+      min-width: 900px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 4.4rem;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--line);
+    }
+    .tl-node {
+      flex: 1;
+      min-width: 170px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 4rem;
+    }
+    .tl-dot {
+      position: absolute;
+      top: calc(4.4rem - 7px);
+      left: 0;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      z-index: 1;
+    }
+    .tl-node.major .tl-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 6px rgba(229, 48, 108, 0.15);
+    }
+    .tl-year {
+      font-family: "Fraunces", serif;
+      font-variation-settings: "opsz" 144, "wght" 350;
+      font-size: 2.6rem;
+      line-height: 1;
+      margin-top: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+    .tl-text {
+      font-family: "Tajawal", sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.55;
+      direction: rtl;
+      max-width: 28ch;
+    }
+
+    /* ─── ACTION GRID ────────────────────────────────────── */
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .action {
+      background: var(--paper);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      cursor: pointer;
+      transition: background .35s, color .35s;
+      min-height: 240px;
+    }
+    .action:hover { background: var(--ink); color: var(--paper); }
+    .action:hover .action-num { color: var(--gold); }
+    .action:hover .action-text { color: rgba(242, 235, 223, 0.7); }
+    .action-num {
+      font-family: "Fraunces", serif;
+      font-size: 2.2rem;
+      font-variation-settings: "wght" 300;
+      color: var(--accent);
+      direction: ltr;
+      transition: color .35s;
+    }
+    .action-title {
+      font-family: "Reem Kufi", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-top: auto;
+    }
+    .action-text {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      transition: color .35s;
+    }
+
+    /* ─── CTA BANNER ─────────────────────────────────────── */
+    .cta-banner {
+      background: var(--accent);
+      color: var(--paper);
+      padding: 6rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner h2 {
+      font-family: "Reem Kufi", sans-serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      max-width: 22ch;
+      margin: 0 auto 2.4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-banner .btn-primary {
+      background: var(--paper);
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+    .cta-banner .btn-primary:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .cta-banner::before,
+    .cta-banner::after {
+      content: "✦";
+      position: absolute;
+      font-family: "Fraunces", serif;
+      font-size: 18rem;
+      opacity: 0.08;
+      font-variation-settings: "wght" 300;
+      pointer-events: none;
+    }
+    .cta-banner::before {
+      top: -4rem;
+      inset-inline-end: -1rem;
+      transform: rotate(-12deg);
+    }
+    .cta-banner::after {
+      bottom: -6rem;
+      inset-inline-start: -2rem;
+      transform: rotate(18deg);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      padding: 3rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      direction: ltr;
+    }
+    footer .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    footer a {
+      color: inherit;
+      text-decoration: none;
+      transition: color .25s;
+    }
+    footer a:hover { color: var(--accent); }
+
+    /* ─── REVEAL ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .9s cubic-bezier(.16,1,.3,1),
+                  transform .9s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+
+    .hero-load > * {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroIn 0.95s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .hero-load > *:nth-child(1) { animation-delay: 0.20s; }
+    .hero-load > *:nth-child(2) { animation-delay: 0.42s; }
+    .hero-load > *:nth-child(3) { animation-delay: 0.64s; }
+    .hero-load > *:nth-child(4) { animation-delay: 0.86s; }
+    @keyframes heroIn { to { opacity: 1; transform: none; } }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 7rem;
+      }
+      .hero-side {
+        border: none;
+        padding: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        gap: 1rem;
+      }
+      .date-stamp .day { font-size: 4.5rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stats-grid .stat { grid-column: span 1 !important; }
+      .stories-grid { grid-template-columns: 1fr; }
+      .stories-grid .story:nth-child(2) { transform: none; }
+      .stories-grid .story:nth-child(2):hover { transform: translateY(-6px); }
+      .action-grid { grid-template-columns: 1fr 1fr; }
+      section { padding: 5rem 1.5rem; }
+      .topbar { padding: 1rem 1.5rem; }
+      .topbar-meta { display: none; }
+      .scroll-cue { display: none; }
+    }
+    @media (max-width: 540px) {
+      .action-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      GIRLS · IN · ICT — 2026
+    </div>
+    <div class="topbar-meta">23 / 04 / 2026 · INTERNATIONAL OBSERVANCE</div>
+  </header>
+
+  <!-- ╔═══════════════════════════════════ HERO ═══════════════════════════════════╗ -->
+  <section class="hero">
+    <div class="hero-main hero-load">
+      <div class="hero-eyebrow">04 · INTERNATIONAL DAY</div>
+      <h1>
+        الفتيات
+        <span class="accent-word">يصنعن</span>
+        <span class="underline-word">المستقبل.</span>
+      </h1>
+      <p class="hero-lede">
+        اليوم العالمي للفتيات في مجال تكنولوجيا المعلومات — مناسبةٌ سنويَّةٌ يُطلقها
+        <span class="ltr">ITU</span> لإلهام الفتيات لاكتشاف مهنٍ في
+        <span class="ltr">ICT</span>. هذا العام، نحتفي بمَن يَبنين، ويُصمِّمن، ويَقُدن.
+      </p>
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="#participate">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12,19 5,12 12,5" />
+          </svg>
+          كيف تحتفي
+        </a>
+        <a class="btn-ghost" href="#stories">READ THE STORIES</a>
+      </div>
+    </div>
+
+    <aside class="hero-side hero-load">
+      <div class="date-stamp">
+        <span class="label">DATE · OBSERVED</span>
+        <span class="day">23</span>
+        <span class="my">APR · 2026</span>
+      </div>
+      <div class="spinner" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <path id="spinpath" d="M 50,50 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0" />
+          </defs>
+          <text font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#161312">
+            <textPath href="#spinpath">✦ GIRLS · IN · ICT · 2026 · ✦ CELEBRATE · </textPath>
+          </text>
+          <circle cx="50" cy="50" r="6" fill="#E5306C" />
+        </svg>
+      </div>
+    </aside>
+
+    <div class="scroll-cue">SCROLL ↓</div>
+  </section>
+
+  <!-- ╔══════════════════════════════════ MARQUEE ════════════════════════════════╗ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>تكنولوجيا للجميع</span>
+      <span class="star">✦</span>
+      <span>BRIDGE THE DIGITAL DIVIDE</span>
+      <span class="star">✦</span>
+      <span>مستقبلٌ تَصنعه الفتيات</span>
+      <span class="star">✦</span>
+      <span>EMPOWER THE NEXT GENERATION</span>
+      <span class="star">✦</span>
+      <span>تكنولوجيا للجميع</span>
+      <span class="star">✦</span>
+      <span>BRIDGE THE DIGITAL DIVIDE</span>
+      <span class="star">✦</span>
+      <span>مستقبلٌ تَصنعه الفتيات</span>
+      <span class="star">✦</span>
+      <span>EMPOWER THE NEXT GENERATION</span>
+      <span class="star">✦</span>
+    </div>
+  </div>
+
+  <!-- ╔═════════════════════════════════ MANIFESTO ═══════════════════════════════╗ -->
+  <section class="manifesto reveal">
+    <p class="manifesto-quote">
+      عندما تَحضر الفتيات الغرفة الَّتي تُكتب فيها الخوارزميَّات،
+      يُصبح الذَّكاء الاصطناعيُّ <em>ذكيًّا للجميع</em>.
+    </p>
+    <div class="manifesto-cite">FROM THE OBSERVANCE · ITU 2026</div>
+  </section>
+
+  <!-- ╔════════════════════════════════════ STATS ════════════════════════════════╗ -->
+  <section>
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <div class="section-meta">// THE GAP · BY THE NUMBERS</div>
+        <h2 class="section-title">الفجوةُ تُقاس. ثمَّ تُغلَق.</h2>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <article class="stat reveal">
+        <div class="stat-tag">// GLOBAL · ICT WORKFORCE</div>
+        <div class="stat-num">≈25<span class="unit">%</span></div>
+        <div class="stat-label">من العاملين في قطاع تكنولوجيا المعلومات والاتِّصالات حول العالم هنَّ نساء — والرَّقم في تحوُّلٍ بطيء.</div>
+      </article>
+
+      <article class="stat reveal">
+        <div class="stat-tag">// SINCE</div>
+        <div class="stat-num">2011</div>
+        <div class="stat-label">العام الَّذي احتُفِل فيه باليوم لأوَّل مرَّة، إثر <span class="ltr">ITU Resolution 70</span>.</div>
+      </article>
+
+      <article class="stat reveal">
+        <div class="stat-tag">// LEADERSHIP</div>
+        <div class="stat-num">≈28<span class="unit">%</span></div>
+        <div class="stat-label">من الأدوار القياديَّة في شركات التِّكنولوجيا الكبرى تشغلها نساء — والمنحنى يَصعد.</div>
+      </article>
+
+      <article class="stat reveal">
+        <div class="stat-tag">// KSA · VISION 2030</div>
+        <div class="stat-num">35<span class="unit">%</span></div>
+        <div class="stat-label">هدف مشاركة المرأة في القوى العاملة، وفق <span class="ltr">رؤية 2030</span> — وقد تجاوز الواقع التَّوقُّعات.</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ╔═══════════════════════════════════ STORIES ═══════════════════════════════╗ -->
+  <section id="stories">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <div class="section-meta">// VOICES · IN THE FIELD</div>
+        <h2 class="section-title">صوتٌ واحد. ثلاثُ قصص.</h2>
+      </div>
+    </div>
+    <div class="stories-grid">
+      <article class="story reveal">
+        <div class="avatar avatar-1">ل</div>
+        <div>
+          <div class="story-name">ليان الحربي</div>
+        </div>
+        <div class="story-role">SOFTWARE ENGINEER · RIYADH</div>
+        <p class="story-quote">«بدأت بكتابة أوَّل سطر <span class="ltr">Python</span> في الصَّفِّ الثَّامن. اليوم أُصمِّم الأنظمة الَّتي يُستدعى فيها هذا السَّطر مليون مرَّةٍ في الدَّقيقة.»</p>
+        <a class="story-link" href="#">قصَّة كاملة</a>
+      </article>
+
+      <article class="story reveal">
+        <div class="avatar avatar-2">ر</div>
+        <div>
+          <div class="story-name">رهف القحطاني</div>
+        </div>
+        <div class="story-role">DATA SCIENTIST · JEDDAH</div>
+        <p class="story-quote">«الذَّكاء الاصطناعيُّ ليس سحرًا — هو رياضيَّاتٌ مُنظَّمةٌ وفضولٌ لا ينتهي. الفتيات يَملكن الاثنين.»</p>
+        <a class="story-link" href="#">قصَّة كاملة</a>
+      </article>
+
+      <article class="story reveal">
+        <div class="avatar avatar-3">س</div>
+        <div>
+          <div class="story-name">سارة بن عيسى</div>
+        </div>
+        <div class="story-role">PRODUCT DESIGNER · DUBAI</div>
+        <p class="story-quote">«أُصمِّم منتجاتٍ يَستخدمها ملايين النَّاس يوميًّا. كلُّ زرٍّ، كلُّ تفاعل، فُرصةٌ لجَعل التَّكنولوجيا أكثر إنسانيَّة.»</p>
+        <a class="story-link" href="#">قصَّة كاملة</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════ TIMELINE ═══════════════════════════════╗ -->
+  <section>
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <div class="section-meta">// MILESTONES · ROAD TO TODAY</div>
+        <h2 class="section-title">من قرارٍ صغير، إلى حركةٍ عالميَّة.</h2>
+      </div>
+    </div>
+    <div class="timeline-wrap reveal">
+      <div class="timeline">
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-year">1995</div>
+          <div class="tl-text">إعلان <span class="ltr">Beijing</span> يُسلِّط الضَّوء على المشاركة الرَّقميَّة للنِّساء.</div>
+        </div>
+        <div class="tl-node major">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2010</div>
+          <div class="tl-text"><span class="ltr">ITU</span> يُصدر القرار <span class="ltr">70</span> ويُؤسِّس اليوم العالميَّ.</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2011</div>
+          <div class="tl-text">أوَّل احتفالٍ رسميٍّ — أكثر من <span class="ltr">100</span> دولة تشارك.</div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2020</div>
+          <div class="tl-text">الجائحة تكشف الفجوة الرَّقميَّة، فتُعيد للقضيَّة زَخمها.</div>
+        </div>
+        <div class="tl-node major">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2026</div>
+          <div class="tl-text">جيلٌ جديدٌ يُعيد تعريف من يَكتب الكود — ومن يَملك المستقبل.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ╔═════════════════════════════════ PARTICIPATE ═════════════════════════════╗ -->
+  <section id="participate">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div>
+        <div class="section-meta">// HOW TO CELEBRATE</div>
+        <h2 class="section-title">شارِك. علِّم. ابنِ. شارِكها.</h2>
+      </div>
+    </div>
+    <div class="action-grid">
+      <article class="action reveal">
+        <div class="action-num">01</div>
+        <h3 class="action-title">احضر ورشة عمل</h3>
+        <p class="action-text">انضمِّي لورشة برمجةٍ محلِّيَّة، أو سجِّلي في مساق <span class="ltr">ICT</span> مفتوح. الخطوة الأولى أهمُّ من الكاملة.</p>
+      </article>
+      <article class="action reveal">
+        <div class="action-num">02</div>
+        <h3 class="action-title">كوني <span class="ltr">mentor</span></h3>
+        <p class="action-text">إن كنتِ في القطاع، خصِّصي ساعةً لطالبة. تجربتك دليلٌ لا يُقدَّر بثمن.</p>
+      </article>
+      <article class="action reveal">
+        <div class="action-num">03</div>
+        <h3 class="action-title">أعلِني المشروع</h3>
+        <p class="action-text">شاركي ما تَبنينه — مدوَّنة، <span class="ltr">repo</span>، أو خيطًا على <span class="ltr">X</span>. الظُّهور يُلهم.</p>
+      </article>
+      <article class="action reveal">
+        <div class="action-num">04</div>
+        <h3 class="action-title">ادعمي مدرسة</h3>
+        <p class="action-text">تبرَّعي بأجهزة، أو موِّلي ساعات تدريس، أو زوري صفًّا واحدًا واحكي عن مهنتك.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ╔════════════════════════════════════ CTA ══════════════════════════════════╗ -->
+  <section class="cta-banner reveal">
+    <h2>تواجدُكِ ليس استثناءً — هو القاعدة الجديدة.</h2>
+    <a class="btn-primary" href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12" />
+        <polyline points="12,19 5,12 12,5" />
+      </svg>
+      سجِّلي في فعاليَّة
+    </a>
+  </section>
+
+  <footer>
+    <div>© 2026 · OBSERVANCE PAGE · UNOFFICIAL</div>
+    <div class="footer-links">
+      <a href="https://www.itu.int/women-and-girls/girls-in-ict/" target="_blank" rel="noopener noreferrer">ITU.INT</a>
+      <a href="#">PRESS KIT</a>
+      <a href="#">CONTACT</a>
+      <a href="#">RSS</a>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal-on-scroll
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
