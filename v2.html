@@ -162,7 +162,7 @@
     .brand-row   { width: 48px; height: 48px; opacity: 0.95; }
 
     /* Micro-example chip — one concrete anchor under any talking point */
-    .ex-mini { margin-top: 0.55rem; font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: #a1a1aa; line-height: 1.55; letter-spacing: 0.02em; }
+    .ex-mini { margin-top: 0.55rem; font-size: 0.92rem; color: #a1a1aa; line-height: 1.6; }
     .ex-mini + .ex-mini { margin-top: 0.3rem; }
     .ex-mini::before { content: "›"; color: #8b5cf6; margin-inline-end: 0.5rem; font-weight: 700; }
     .ex-mini.good::before { content: "✓"; color: #84cc16; }
@@ -210,30 +210,55 @@
     .flow-step.fail { border-color: #f87171; color: #fca5a5; background: rgba(248,113,113,0.06); text-decoration: line-through; text-decoration-color: #f87171; }
     .flow-arrow { color: #52525b; font-family: "JetBrains Mono", monospace; font-size: 1.1rem; }
 
-    /* LLM = function diagram (slide 5) */
-    .llm-diagram { display: grid; grid-template-columns: 1fr auto auto auto 1fr; gap: 0; align-items: center; max-width: 1100px; margin-inline: auto; justify-items: center; }
-    .ld-port { padding: 0.95rem 1.15rem; background: rgba(24, 24, 27, 0.7); border: 1px solid #27272a; border-radius: 10px; min-width: 220px; }
+    /* LLM limitations cards (slide 7) — centered around the example */
+    .limit-card { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .limit-card .font-mono { align-self: center; }
+    .limit-spotlight { margin: 1.6rem 0 1.4rem; padding: 1.5rem 1.4rem; border: 1px solid #27272a; border-radius: 12px; background: rgba(248, 113, 113, 0.04); width: 100%; max-width: 360px; display: flex; flex-direction: column; align-items: center; gap: 0.55rem; }
+    .ls-quote { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1.3rem; font-weight: 500; color: #fafaf9; line-height: 1.4; }
+    .ls-quote.code, .ls-answer.code { font-family: "JetBrains Mono", monospace; letter-spacing: 0.04em; }
+    .ls-divider { font-family: "JetBrains Mono", monospace; color: #52525b; font-size: 1.15rem; line-height: 1; }
+    .ls-answer { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1.1rem; color: #f87171; font-weight: 500; }
+
+    /* LLM diagram — generic flow (slides 5, 9, 10, 11) */
+    .llm-diagram { display: flex; align-items: center; justify-content: center; gap: 0; max-width: 1300px; margin-inline: auto; flex-wrap: nowrap; direction: ltr; }
+    .llm-diagram > * { flex-shrink: 0; }
+    .ld-port { padding: 0.85rem 1.05rem; background: rgba(24, 24, 27, 0.7); border: 1px solid #27272a; border-radius: 10px; flex: 0 1 220px; min-width: 180px; max-width: 260px; direction: rtl; }
     .ld-input { border-color: rgba(167, 139, 250, 0.4); }
     .ld-output { border-color: rgba(190, 242, 100, 0.4); }
-    .ld-port-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; direction: ltr; }
-    .ld-port-tag { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: #71717a; }
+    .ld-fail { border-color: rgba(248, 113, 113, 0.45); background: rgba(248, 113, 113, 0.04); }
+    .ld-port-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; direction: ltr; }
+    .ld-port-tag { font-family: "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.22em; color: #71717a; }
     .ld-input .ld-port-tag { color: #c4b5fd; }
     .ld-output .ld-port-tag { color: #bef264; }
+    .ld-fail .ld-port-tag { color: #fca5a5; }
     .ld-port-icon { font-size: 0.7rem; color: #52525b; }
-    .ld-port-text { font-size: 1rem; color: #e4e4e7; line-height: 1.5; }
-    .ld-wire-wrap { height: 8px; min-width: 70px; display: flex; align-items: center; }
+    .ld-port-text { font-size: 0.95rem; color: #e4e4e7; line-height: 1.5; }
+    .ld-wire-wrap { height: 8px; flex: 0 0 56px; min-width: 40px; display: flex; align-items: center; }
     .ld-wire { width: 100%; height: 100%; }
     .ld-wire path { fill: none; stroke: #52525b; stroke-width: 1.5; stroke-dasharray: 6 5; animation: ld-flow 1.4s linear infinite; }
     @keyframes ld-flow { to { stroke-dashoffset: -22; } }
-    .ld-box { position: relative; width: 200px; height: 130px; border-radius: 14px; background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.18), rgba(24, 24, 27, 0.95)), #18181b; border: 1px solid rgba(139, 92, 246, 0.5); box-shadow: 0 0 40px rgba(139, 92, 246, 0.2), inset 0 0 40px rgba(139, 92, 246, 0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+    .ld-box { position: relative; flex: 0 0 auto; width: 200px; height: 130px; border-radius: 14px; background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.18), rgba(24, 24, 27, 0.95)), #18181b; border: 1px solid rgba(139, 92, 246, 0.5); box-shadow: 0 0 40px rgba(139, 92, 246, 0.2), inset 0 0 40px rgba(139, 92, 246, 0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
     .ld-box::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent 0, transparent 11px, rgba(139, 92, 246, 0.05) 11px, rgba(139, 92, 246, 0.05) 12px), repeating-linear-gradient(-45deg, transparent 0, transparent 11px, rgba(139, 92, 246, 0.05) 11px, rgba(139, 92, 246, 0.05) 12px); pointer-events: none; }
     .ld-box::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(139, 92, 246, 0.22), transparent 60%); opacity: 0.5; animation: ld-pulse 2.6s ease-in-out infinite; }
     @keyframes ld-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.75; } }
     .ld-box-fx { position: absolute; top: 8px; left: 12px; font-family: "JetBrains Mono", monospace; font-size: 0.66rem; color: #71717a; direction: ltr; letter-spacing: 0.06em; z-index: 3; }
-    .ld-box-name { position: relative; font-family: "Space Grotesk", sans-serif; font-size: 2.6rem; font-weight: 700; letter-spacing: -0.03em; color: #fafaf9; text-shadow: 0 0 18px rgba(139, 92, 246, 0.55); z-index: 3; direction: ltr; line-height: 1; }
+    .ld-box-name { position: relative; font-family: "Space Grotesk", sans-serif; font-size: 2.4rem; font-weight: 700; letter-spacing: -0.03em; color: #fafaf9; text-shadow: 0 0 18px rgba(139, 92, 246, 0.55); z-index: 3; direction: ltr; line-height: 1; text-align: center; }
     .ld-box-sub { position: relative; margin-top: 0.4rem; font-family: "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: #71717a; z-index: 3; direction: ltr; }
+    /* Tool box variant — lime/secondary */
+    .ld-box.tool { background: radial-gradient(ellipse at center, rgba(132, 204, 22, 0.16), rgba(24, 24, 27, 0.95)), #18181b; border-color: rgba(132, 204, 22, 0.5); box-shadow: 0 0 36px rgba(132, 204, 22, 0.18), inset 0 0 36px rgba(132, 204, 22, 0.07); }
+    .ld-box.tool::before { background-image: repeating-linear-gradient(45deg, transparent 0, transparent 11px, rgba(132, 204, 22, 0.05) 11px, rgba(132, 204, 22, 0.05) 12px), repeating-linear-gradient(-45deg, transparent 0, transparent 11px, rgba(132, 204, 22, 0.05) 11px, rgba(132, 204, 22, 0.05) 12px); }
+    .ld-box.tool::after { background: radial-gradient(circle at center, rgba(132, 204, 22, 0.22), transparent 60%); }
+    .ld-box.tool .ld-box-name { color: #fafaf9; text-shadow: 0 0 18px rgba(132, 204, 22, 0.5); }
+    /* Fail box variant — red */
+    .ld-box.fail { background: radial-gradient(ellipse at center, rgba(248, 113, 113, 0.14), rgba(24, 24, 27, 0.95)), #18181b; border-color: rgba(248, 113, 113, 0.5); box-shadow: 0 0 36px rgba(248, 113, 113, 0.18), inset 0 0 36px rgba(248, 113, 113, 0.07); }
+    .ld-box.fail .ld-box-name { color: #fafaf9; text-shadow: 0 0 18px rgba(248, 113, 113, 0.5); }
+    /* Compact box for multi-stage flows */
+    .ld-box-sm { width: 140px; height: 92px; }
+    .ld-box-sm .ld-box-name { font-size: 1.35rem; }
+    .ld-box-sm .ld-box-fx { top: 6px; left: 9px; font-size: 0.55rem; }
+    .ld-box-sm .ld-box-sub { font-size: 0.52rem; margin-top: 0.25rem; letter-spacing: 0.16em; }
     @media (prefers-reduced-motion: reduce) { .ld-wire path, .ld-box::after { animation: none; } }
-    @media (max-width: 900px) { .llm-diagram { grid-template-columns: 1fr; gap: 0.75rem; max-width: 480px; } .ld-wire-wrap { display: none; } .ld-box { margin: 0 auto; } }
+    @media (max-width: 900px) { .llm-diagram { flex-direction: column; gap: 0.75rem; max-width: 480px; } .ld-wire-wrap { display: none; } .ld-box, .ld-port { margin: 0 auto; } }
 
     /* Pivot slide (slide 13) */
     .pivot-box { padding: 1.5rem 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; }
@@ -566,7 +591,7 @@
               <span class="ld-port-tag">PROMPT</span>
               <span class="ld-port-icon" aria-hidden="true">◀</span>
             </div>
-            <div class="ld-port-text">«ترجم <span class="ltr">'hello world'</span> للفرنسيَّة»</div>
+            <div class="ld-port-text">«اكتب <span class="ltr">function</span> تَعكس <span class="ltr">string</span> في <span class="ltr">JavaScript</span>»</div>
           </div>
 
           <div class="ld-wire-wrap" aria-hidden="true">
@@ -592,7 +617,7 @@
               <span class="ld-port-tag">OUTPUT</span>
               <span class="ld-port-icon" aria-hidden="true">▶</span>
             </div>
-            <div class="ld-port-text">«<span class="ltr">bonjour le monde</span>»</div>
+            <div class="ld-port-text"><span class="ltr">const reverse = s =&gt; s.split('').reverse().join('');</span></div>
           </div>
         </div>
 
@@ -615,7 +640,7 @@
              data-slide="6"
              data-section="LEVEL 01 · LLM"
              data-title="WORKS vs FAILS"
-             data-notes="المثال الأهمُّ في الجزء الأوَّل. «اكتب لي email أطلب coffee chat» — يعمل، لأنَّ LLM مُدرَّب على مليارات النُّصوص، والصياغة المُهذَّبة داخل تدريبه. لكن «متى coffee chat التالي؟» — يفشل. لماذا؟ ببساطة: LLM ما عنده access لـcalendar الخاص بك. هذا الفرق يفتح الباب للدَّرجة الثانية.">
+             data-notes="المثال الأهمُّ في الجزء الأوَّل. «اشرح لي ما الفرق بين Promise و async/await» — يعمل، لأنَّ LLM مُدرَّب على ملايين أسطر الكود والشُّروحات، والمفهوم داخل تدريبه. لكن «لماذا لا يظهر لون الزرّ في صفحتي؟» — يفشل. لماذا؟ ببساطة: LLM ما عنده access لـHTML أو CSS الخاصَّة بك. هذا الفرق يفتح الباب للدَّرجة الثانية.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// same tool, two outcomes</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
@@ -624,27 +649,27 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div class="reveal-item concept-card" style="border-right: 3px solid #84cc16">
             <div class="font-mono text-[10px] tracking-[0.22em] text-secondary ltr">✓ WORKS</div>
-            <div class="mt-5 font-display text-2xl leading-snug">«اكتب لي <span class="ltr">email</span> أطلب فيه <span class="ltr">coffee chat</span>.»</div>
+            <div class="mt-5 font-display text-2xl leading-snug">«اشرح لي الفرق بين <span class="ltr">Promise</span> و <span class="ltr">async/await</span>.»</div>
             <div class="mt-6 flow-chain" style="direction:ltr">
               <span class="flow-step">prompt</span>
               <span class="flow-arrow">→</span>
               <span class="flow-step llm">LLM</span>
               <span class="flow-arrow">→</span>
-              <span class="flow-step">email مُنمَّق</span>
+              <span class="flow-step">شرح + كود</span>
             </div>
             <p class="pt-6 text-muted text-[0.95rem] leading-relaxed">
-              الصِّياغة المُهذَّبة داخل بيانات التَّدريب. مُهمَّة نصيَّة بحتة.
+              مفهومٌ عامٌّ في بيانات التَّدريب — مليون شرحٍ مماثل في <span class="ltr">Stack Overflow</span> و <span class="ltr">MDN</span>.
             </p>
             <div class="mt-auto pt-4">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// more prompts that just work</div>
-              <div class="ex-mini good">«<em>لخِّص هذا المقال في 3 نقاط</em>».</div>
-              <div class="ex-mini good">«<em>حوِّل هذا البريد إلى نبرة رسميَّة</em>».</div>
-              <div class="ex-mini good">«<em>اكتب regex لأرقام هواتف سعوديَّة</em>».</div>
+              <div class="ex-mini good">«<em>اكتب <span class="ltr">regex</span> لـ <span class="ltr">validate email</span></em>».</div>
+              <div class="ex-mini good">«<em>ما <span class="ltr">time complexity</span> لـ <span class="ltr">binary search</span>؟</em>».</div>
+              <div class="ex-mini good">«<em>حوِّل هذا الكود من <span class="ltr">JS</span> إلى <span class="ltr">TypeScript</span></em>».</div>
             </div>
           </div>
           <div class="reveal-item concept-card" style="border-right: 3px solid #f87171">
             <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#f87171">✗ FAILS</div>
-            <div class="mt-5 font-display text-2xl leading-snug">«متى <span class="ltr">coffee chat</span> التَّالي معي؟»</div>
+            <div class="mt-5 font-display text-2xl leading-snug">«لماذا لا يَظهر لون الزِّرِّ في صفحتي؟»</div>
             <div class="mt-6 flow-chain" style="direction:ltr">
               <span class="flow-step">prompt</span>
               <span class="flow-arrow">→</span>
@@ -653,13 +678,13 @@
               <span class="flow-step fail">I don't know</span>
             </div>
             <p class="pt-6 text-muted text-[0.95rem] leading-relaxed">
-              <span class="ltr">LLM</span> ما عنده <span class="ltr">access</span> لـ<span class="ltr">calendar</span> الخاص بك. ليست مُدرَّبة داخل بياناته.
+              <span class="ltr">LLM</span> ما عنده <span class="ltr">access</span> لـ<span class="ltr">HTML</span> ولا <span class="ltr">CSS</span> الخاصَّة بك. كودك ليس داخل بيانات تدريبه.
             </p>
             <div class="mt-auto pt-4">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// more prompts that hit a wall</div>
-              <div class="ex-mini bad">«<em>كم رصيد حسابي في البنك الآن؟</em>».</div>
-              <div class="ex-mini bad">«<em>هل وصل إيميل من مديري؟</em>».</div>
-              <div class="ex-mini bad">«<em>احجز لي غرفة اجتماعاتٍ 2 عصرًا</em>».</div>
+              <div class="ex-mini bad">«<em>لماذا الـ<span class="ltr">form</span> عندي لا يُرسِل البيانات؟</em>».</div>
+              <div class="ex-mini bad">«<em>لماذا الصُّورة لا تَظهر في صفحتي؟</em>».</div>
+              <div class="ex-mini bad">«<em>لماذا الـ<span class="ltr">console</span> يُعطيني <span class="ltr">undefined</span>؟</em>».</div>
             </div>
           </div>
         </div>
@@ -675,32 +700,34 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// two ceilings</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
-          خاصَّتان تُحدِّدان <span class="ltr">LLM</span>.
+          قيودٌ مُحدَّدة لـ<span class="ltr">LLMs</span>.
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="reveal-item concept-card">
+          <div class="reveal-item concept-card limit-card">
             <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">01 / LIMITED KNOWLEDGE</div>
-            <div class="mt-5 font-display text-3xl font-semibold">معرفة محدودة.</div>
-            <p class="mt-5 text-muted text-[0.98rem] leading-relaxed">
-              مُدرَّب على بياناتٍ عامَّة. لا يعرف <span class="ltr">calendar</span>ك، ولا ملفَّاتك، ولا مستندات شركتك الدَّاخليَّة.
-            </p>
-            <div class="mt-auto pt-6">
-              <div class="ex-mini bad">اسأله: «<em>ما سعر سهم Aramco الآن؟</em>» → لا يعرف.</div>
-              <div class="ex-mini bad">اسأله: «<em>من ردَّ على PR رقم 42؟</em>» → لا يعرف.</div>
-              <div class="mt-3 font-mono text-xs ltr text-muted">// trained ≠ connected</div>
+            <div class="mt-3 font-display text-2xl md:text-3xl font-semibold">معرفة محدودة.</div>
+            <div class="limit-spotlight">
+              <div class="ls-quote">«من ردَّ على <span class="ltr">PR #42</span>؟»</div>
+              <div class="ls-divider">↓</div>
+              <div class="ls-answer">«لا أعلم.»</div>
             </div>
+            <p class="text-muted text-[0.95rem] leading-relaxed max-w-md mx-auto">
+              مُدرَّب على بياناتٍ عامَّة. لا يعرف ملفَّاتك، ولا كودك، ولا <span class="ltr">console logs</span> الخاصَّة بك.
+            </p>
+            <div class="mt-3 font-mono text-xs ltr text-muted">// trained ≠ connected</div>
           </div>
-          <div class="reveal-item concept-card">
+          <div class="reveal-item concept-card limit-card">
             <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">02 / PASSIVE</div>
-            <div class="mt-5 font-display text-3xl font-semibold">سلبيّ.</div>
-            <p class="mt-5 text-muted text-[0.98rem] leading-relaxed">
-              ينتظر <span class="ltr">prompt</span>، ثمَّ يُجيب. لا يُبادر، لا يتصرَّف من نفسه.
-            </p>
-            <div class="mt-auto pt-6">
-              <div class="ex-mini bad">لن يُنبِّهك: «<em>اجتماعك خلال 5 دقائق</em>».</div>
-              <div class="ex-mini bad">لن يقول: «<em>وجدت bug، أصلحته</em>».</div>
-              <div class="mt-3 font-mono text-xs ltr text-muted">// waits for input</div>
+            <div class="mt-3 font-display text-2xl md:text-3xl font-semibold">يَنتظر الأوامر.</div>
+            <div class="limit-spotlight">
+              <div class="ls-quote code"><span class="ltr">prompt = 0</span></div>
+              <div class="ls-divider">⇒</div>
+              <div class="ls-answer code"><span class="ltr">output = 0</span></div>
             </div>
+            <p class="text-muted text-[0.95rem] leading-relaxed max-w-md mx-auto">
+              لا يُبادر، لا يُنبِّهك، لا يَتصرَّف من نفسه. بدون <span class="ltr">prompt</span>، لا شيء يَحدث.
+            </p>
+            <div class="mt-3 font-mono text-xs ltr text-muted">// waits for input</div>
           </div>
         </div>
         <div class="reveal-item mt-10 font-mono text-xs text-muted ltr">
@@ -733,27 +760,39 @@
              data-slide="9"
              data-section="LEVEL 02 · WORKFLOW"
              data-title="WORKFLOW · WORKS"
-             data-notes="حلُّ المثال السَّابق. نُعلِّم LLM: «كلَّما سُئلت عن موعد، ابحث في Google Calendar أوَّلًا، ثمَّ أجِب.» الآن نفس السُّؤال «متى coffee chat التَّالي؟» — يعمل، لأنَّنا صمَّمنا له المسار.">
+             data-notes="حلُّ المثال السَّابق. نُعلِّم LLM: «كلَّما سُئلت عن مشكلةٍ في الكود، اقرأ ملفَّات HTML/CSS/JS أوَّلًا، ثمَّ أجِب.» الآن نفس السُّؤال «لماذا لا يظهر لون الزِّرِّ؟» — يعمل، لأنَّنا صمَّمنا له المسار.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// add a pre-defined path</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
           نفس السُّؤال، مسارٌ جديد.
         </h2>
-        <div class="reveal-item mb-8 max-w-4xl">
-          <div class="flow-chain" style="direction:ltr">
-            <span class="flow-step">«متى coffee chat؟»</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step tool">Google Calendar</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step llm">LLM</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step">«الإثنين، 3 عصرًا»</span>
+        <div class="reveal-item llm-diagram mb-8">
+          <div class="ld-port ld-input">
+            <div class="ld-port-head"><span class="ld-port-tag">PROMPT</span><span class="ld-port-icon" aria-hidden="true">◀</span></div>
+            <div class="ld-port-text">«لماذا لا يَظهر لون الزِّرِّ؟»</div>
+          </div>
+          <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+          <div class="ld-box ld-box-sm tool">
+            <span class="ld-box-fx">tool</span>
+            <div class="ld-box-name">File Reader</div>
+            <div class="ld-box-sub">reads HTML/CSS</div>
+          </div>
+          <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+          <div class="ld-box ld-box-sm">
+            <span class="ld-box-fx">f(x)</span>
+            <div class="ld-box-name">LLM</div>
+            <div class="ld-box-sub">stateless</div>
+          </div>
+          <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+          <div class="ld-port ld-output">
+            <div class="ld-port-head"><span class="ld-port-tag">OUTPUT</span><span class="ld-port-icon" aria-hidden="true">▶</span></div>
+            <div class="ld-port-text">«<span class="ltr">style.css:42</span> يَستخدم <span class="ltr">!important</span>»</div>
           </div>
         </div>
         <div class="reveal-item example-card max-w-3xl mb-6">
           <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// the rule we wrote</div>
           <div class="mt-3 font-display text-xl text-ink leading-snug">
-            «كلَّما سُئلت عن موعد، افحص <span class="ltr">Google Calendar</span> أوَّلًا، ثمَّ أجِب.»
+            «كلَّما سُئلت عن مشكلةٍ في الكود، اقرأ ملفَّات <span class="ltr">HTML/CSS/JS</span> أوَّلًا، ثمَّ أجِب.»
           </div>
         </div>
         <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed mb-3">
@@ -761,8 +800,8 @@
         </p>
         <div class="reveal-item max-w-3xl">
           <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// same idea, different tool</div>
-          <div class="ex-mini good">«<em>متى عيد ميلاد صديقي طارق؟</em>» → يفحص Contacts → يُجيب.</div>
-          <div class="ex-mini good">«<em>كم فاتورة الكهرباء هذا الشَّهر؟</em>» → يفحص Gmail → يُجيب.</div>
+          <div class="ex-mini good">«<em>لماذا الصُّورة لا تَظهر؟</em>» → يقرأ <span class="ltr">HTML</span> → يُجيب.</div>
+          <div class="ex-mini good">«<em>لماذا الـ<span class="ltr">form</span> لا يُرسل؟</em>» → يَفحص <span class="ltr">JS handler</span> → يُجيب.</div>
         </div>
       </div>
     </section>
@@ -780,13 +819,21 @@
             <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
               سؤالٌ جديد يكسره.
             </h2>
-            <div class="reveal-item mb-6">
-              <div class="flow-chain" style="direction:ltr">
-                <span class="flow-step">«كيف الطَّقس ذاك اليوم؟»</span>
-                <span class="flow-arrow">→</span>
-                <span class="flow-step tool">Google Calendar</span>
-                <span class="flow-arrow">→</span>
-                <span class="flow-step fail">no weather here</span>
+            <div class="reveal-item llm-diagram mb-6" style="max-width:780px">
+              <div class="ld-port ld-input">
+                <div class="ld-port-head"><span class="ld-port-tag">PROMPT</span><span class="ld-port-icon" aria-hidden="true">◀</span></div>
+                <div class="ld-port-text">«كيف الطَّقس ذاك اليوم؟»</div>
+              </div>
+              <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+              <div class="ld-box ld-box-sm tool">
+                <span class="ld-box-fx">tool</span>
+                <div class="ld-box-name" style="font-size:1.05rem">Google Calendar</div>
+                <div class="ld-box-sub">wrong tool</div>
+              </div>
+              <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+              <div class="ld-port ld-fail">
+                <div class="ld-port-head"><span class="ld-port-tag">FAILS</span><span class="ld-port-icon" aria-hidden="true">▶</span></div>
+                <div class="ld-port-text"><span class="ltr">no weather here</span></div>
               </div>
             </div>
             <p class="reveal-item text-muted text-lg max-w-xl leading-relaxed mb-5">
@@ -827,17 +874,35 @@
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
           <span class="ltr">Workflow</span> حقيقيّ يعمل الآن.
         </h2>
-        <div class="reveal-item mb-8 overflow-x-auto">
-          <div class="flow-chain" style="direction:ltr">
-            <span class="flow-step tool">Google Sheets</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step tool">Perplexity</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step llm">Claude</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step tool">LinkedIn</span>
-            <span class="flow-arrow">→</span>
-            <span class="flow-step" style="background:rgba(132,204,22,0.08);border-color:#84cc16;color:#bef264">@ 8:00 يوميًّا</span>
+        <div class="reveal-item llm-diagram mb-8" style="max-width:1300px">
+          <div class="ld-box ld-box-sm tool">
+            <span class="ld-box-fx">step 1</span>
+            <div class="ld-box-name" style="font-size:1.05rem">Google Sheets</div>
+            <div class="ld-box-sub">collect links</div>
+          </div>
+          <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+          <div class="ld-box ld-box-sm tool">
+            <span class="ld-box-fx">step 2</span>
+            <div class="ld-box-name" style="font-size:1.2rem">Perplexity</div>
+            <div class="ld-box-sub">summarize</div>
+          </div>
+          <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+          <div class="ld-box ld-box-sm">
+            <span class="ld-box-fx">step 3</span>
+            <div class="ld-box-name">Claude</div>
+            <div class="ld-box-sub">write post</div>
+          </div>
+          <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+          <div class="ld-box ld-box-sm tool">
+            <span class="ld-box-fx">step 4</span>
+            <div class="ld-box-name">LinkedIn</div>
+            <div class="ld-box-sub">publish</div>
+          </div>
+          <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
+          <div class="ld-box ld-box-sm tool">
+            <span class="ld-box-fx">cron</span>
+            <div class="ld-box-name" style="font-size:1.1rem">@ 8:00</div>
+            <div class="ld-box-sub">daily</div>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
