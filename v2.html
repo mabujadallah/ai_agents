@@ -178,18 +178,18 @@
     .buzz-word.kept { color: #fafaf9; }
 
     /* Level ladder preview (slide 3) */
-    .level-step { padding: 0.95rem 1.4rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; display: grid; grid-template-columns: 1fr auto; column-gap: 1.5rem; align-items: center; }
-    .level-step > .ls-text { min-width: 0; }
-    .level-step .ls-num { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: #71717a; direction: ltr; }
-    .level-step .ls-title { font-family: "Readex Pro", "Space Grotesk", sans-serif; font-size: 1.4rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 0.05rem; line-height: 1.15; }
+    .level-step { padding: 1rem 1.5rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; display: grid; grid-template-columns: 1fr auto; column-gap: 1.5rem; align-items: center; }
+    .level-step > .ls-text { min-width: 0; text-align: right; }
+    .level-step .ls-num { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.22em; color: #71717a; text-align: right; }
+    .level-step .ls-title { font-family: "Space Grotesk", "Readex Pro", sans-serif; font-size: 1.65rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 0.1rem; line-height: 1.1; text-align: right; }
     .level-step .ls-tag { display: none; }
-    .level-step .ls-hint { color: #a1a1aa; margin-top: 0.25rem; font-size: 0.86rem; line-height: 1.5; }
+    .level-step .ls-hint { color: #a1a1aa; margin-top: 0.3rem; font-size: 0.95rem; line-height: 1.55; text-align: right; }
     .level-step.lvl-01 { margin-inline-end: 0; }
     .level-step.lvl-02 { margin-inline-end: 4rem; }
     .level-step.lvl-03 { margin-inline-end: 8rem; background: rgba(139, 92, 246, 0.08); border-color: #8b5cf6; }
     .level-stack { display: flex; flex-direction: column-reverse; gap: 0.65rem; }
     .ls-logos { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; justify-self: end; }
-    .logo-chip { position: relative; width: 38px; height: 38px; border: 1px solid #27272a; border-radius: 7px; background: #0e0e10; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 7px; transition: border-color .25s, transform .25s, background .25s; }
+    .logo-chip { position: relative; width: 42px; height: 42px; border: 1px solid #27272a; border-radius: 7px; background: #0e0e10; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 8px; transition: border-color .25s, transform .25s, background .25s; }
     .logo-chip > img, .logo-chip > svg { width: 100%; height: 100%; object-fit: contain; filter: brightness(0.92); transition: filter .25s; }
     .logo-chip:hover, .logo-chip:focus-visible, .logo-chip.pinned { border-color: #8b5cf6; background: rgba(139, 92, 246, 0.1); transform: translateY(-2px); outline: none; }
     .logo-chip:hover > img, .logo-chip:focus-visible > img, .logo-chip.pinned > img,
@@ -209,6 +209,31 @@
     .flow-step.tool { border-color: #84cc16; color: #bef264; background: rgba(132,204,22,0.06); }
     .flow-step.fail { border-color: #f87171; color: #fca5a5; background: rgba(248,113,113,0.06); text-decoration: line-through; text-decoration-color: #f87171; }
     .flow-arrow { color: #52525b; font-family: "JetBrains Mono", monospace; font-size: 1.1rem; }
+
+    /* LLM = function diagram (slide 5) */
+    .llm-diagram { display: grid; grid-template-columns: 1fr auto auto auto 1fr; gap: 0; align-items: center; max-width: 1100px; margin-inline: auto; justify-items: center; }
+    .ld-port { padding: 0.95rem 1.15rem; background: rgba(24, 24, 27, 0.7); border: 1px solid #27272a; border-radius: 10px; min-width: 220px; }
+    .ld-input { border-color: rgba(167, 139, 250, 0.4); }
+    .ld-output { border-color: rgba(190, 242, 100, 0.4); }
+    .ld-port-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; direction: ltr; }
+    .ld-port-tag { font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: #71717a; }
+    .ld-input .ld-port-tag { color: #c4b5fd; }
+    .ld-output .ld-port-tag { color: #bef264; }
+    .ld-port-icon { font-size: 0.7rem; color: #52525b; }
+    .ld-port-text { font-size: 1rem; color: #e4e4e7; line-height: 1.5; }
+    .ld-wire-wrap { height: 8px; min-width: 70px; display: flex; align-items: center; }
+    .ld-wire { width: 100%; height: 100%; }
+    .ld-wire path { fill: none; stroke: #52525b; stroke-width: 1.5; stroke-dasharray: 6 5; animation: ld-flow 1.4s linear infinite; }
+    @keyframes ld-flow { to { stroke-dashoffset: -22; } }
+    .ld-box { position: relative; width: 200px; height: 130px; border-radius: 14px; background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.18), rgba(24, 24, 27, 0.95)), #18181b; border: 1px solid rgba(139, 92, 246, 0.5); box-shadow: 0 0 40px rgba(139, 92, 246, 0.2), inset 0 0 40px rgba(139, 92, 246, 0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+    .ld-box::before { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent 0, transparent 11px, rgba(139, 92, 246, 0.05) 11px, rgba(139, 92, 246, 0.05) 12px), repeating-linear-gradient(-45deg, transparent 0, transparent 11px, rgba(139, 92, 246, 0.05) 11px, rgba(139, 92, 246, 0.05) 12px); pointer-events: none; }
+    .ld-box::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(139, 92, 246, 0.22), transparent 60%); opacity: 0.5; animation: ld-pulse 2.6s ease-in-out infinite; }
+    @keyframes ld-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.75; } }
+    .ld-box-fx { position: absolute; top: 8px; left: 12px; font-family: "JetBrains Mono", monospace; font-size: 0.66rem; color: #71717a; direction: ltr; letter-spacing: 0.06em; z-index: 3; }
+    .ld-box-name { position: relative; font-family: "Space Grotesk", sans-serif; font-size: 2.6rem; font-weight: 700; letter-spacing: -0.03em; color: #fafaf9; text-shadow: 0 0 18px rgba(139, 92, 246, 0.55); z-index: 3; direction: ltr; line-height: 1; }
+    .ld-box-sub { position: relative; margin-top: 0.4rem; font-family: "JetBrains Mono", monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: #71717a; z-index: 3; direction: ltr; }
+    @media (prefers-reduced-motion: reduce) { .ld-wire path, .ld-box::after { animation: none; } }
+    @media (max-width: 900px) { .llm-diagram { grid-template-columns: 1fr; gap: 0.75rem; max-width: 480px; } .ld-wire-wrap { display: none; } .ld-box { margin: 0 auto; } }
 
     /* Pivot slide (slide 13) */
     .pivot-box { padding: 1.5rem 2rem; background: #151518; border: 1px solid #27272a; border-radius: 8px; position: relative; }
@@ -408,28 +433,29 @@
           ثلاث درجات. نصعدها بالتَّرتيب.
         </h2>
         <div class="level-stack max-w-4xl">
-          <div class="reveal-item level-step lvl-01">
+          <div class="level-step lvl-01">
             <div class="ls-text">
-              <div class="ls-num">LEVEL 01 · LLM</div>
+              <div class="ls-num">LEVEL 01</div>
+              <div class="ls-title">LLM</div>
               <div class="ls-hint">ما تستعمله كلَّ يوم.</div>
             </div>
             <div class="ls-logos">
               <button type="button" class="logo-chip" aria-label="ChatGPT">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#FAFAF9" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#10A37F" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">ChatGPT</div>
                   <div class="lp-eg">«<em>اشرح لي React في سطرين</em>» → يُجيب.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Claude">
-                <img src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/anthropic/D97757" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Claude</div>
                   <div class="lp-eg">«<em>ترجم رسالة العميل بنبرةٍ رسميَّة</em>» → ترجمة.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Gemini">
-                <img src="https://cdn.simpleicons.org/googlegemini/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Gemini</div>
                   <div class="lp-eg">«<em>لخِّص هذه الورقة العلميَّة في 5 نقاط</em>» → ملخَّص.</div>
@@ -437,28 +463,29 @@
               </button>
             </div>
           </div>
-          <div class="reveal-item level-step lvl-02">
+          <div class="level-step lvl-02">
             <div class="ls-text">
-              <div class="ls-num">LEVEL 02 · AI WORKFLOW</div>
+              <div class="ls-num">LEVEL 02</div>
+              <div class="ls-title">AI Workflow</div>
               <div class="ls-hint">الإنسان يكتب المسار. LLM يَتبعه.</div>
             </div>
             <div class="ls-logos">
               <button type="button" class="logo-chip" aria-label="Zapier">
-                <img src="https://cdn.simpleicons.org/zapier/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/zapier/FF4A00" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Zapier</div>
                   <div class="lp-eg">trigger: <em>email جديد</em> → action: <em>Slack تنبيه</em> → action: <em>LLM تلخيص</em>.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="n8n">
-                <img src="https://cdn.simpleicons.org/n8n/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">n8n</div>
                   <div class="lp-eg"><em>form submission</em> → <em>DB write</em> → <em>email تأكيد</em>. كلُّ عقدةٍ يَكتبها إنسان.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Make">
-                <img src="https://cdn.simpleicons.org/make/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/make/6D00CC" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Make.com</div>
                   <div class="lp-eg"><em>tweet مذكور</em> → <em>ChatGPT analyze</em> → <em>Notion log</em>. سيناريو ثابت.</div>
@@ -466,28 +493,29 @@
               </button>
             </div>
           </div>
-          <div class="reveal-item level-step lvl-03">
+          <div class="level-step lvl-03">
             <div class="ls-text">
-              <div class="ls-num">LEVEL 03 · AI AGENT</div>
+              <div class="ls-num">LEVEL 03</div>
+              <div class="ls-title">AI Agent</div>
               <div class="ls-hint">لا إنسان في المُنتصف. LLM يُقرِّر المسار بنفسه.</div>
             </div>
             <div class="ls-logos">
               <button type="button" class="logo-chip" aria-label="Claude Code">
-                <img src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/anthropic/D97757" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Claude Code</div>
                   <div class="lp-eg">«<em>أضِف dark mode للتَّطبيق</em>» → يَبحث الكود، يُخطِّط، يُعدِّل، يَختبر.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Cursor">
-                <img src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/cursor/D7D7D7" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Cursor</div>
                   <div class="lp-eg">يقرأ خطأ الاختبار، يَختار الملفَّ، يُصلِحه، يُعيد التَّشغيل — بلا تَدخُّل.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="GitHub Copilot">
-                <img src="https://cdn.simpleicons.org/github/FAFAF9" alt="" />
+                <img src="https://cdn.simpleicons.org/github/6E40C9" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">GitHub Copilot</div>
                   <div class="lp-eg">في وضع Agent: «<em>أصلِح issue #42</em>» → يفتح PR كامل.</div>
@@ -525,26 +553,53 @@
              data-title="LLM = FUNCTION"
              data-notes="المنظور الأبسط. LLM دالَّة: مُدخَل نصِّي يدخل، مُخرَج نصِّي يخرج. لا ذاكرة، لا أدوات، لا مُبادرة. كلُّ التطبيقات الشهيرة — ChatGPT, Claude, Gemini, Copilot — تطبيقات مبنيَّة فوق LLM واحد أو أكثر.">
       <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// just a function</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
-          <span class="ltr">LLM</span> = دالَّة.
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// large language model</div>
+        <h2 class="reveal-item font-display text-3xl md:text-4xl font-medium tracking-tight mt-3 mb-3 leading-tight max-w-5xl">
+          <span class="ltr">LLM</span> هو نموذجُ ذكاءٍ اصطناعيٍّ مُدرَّبٌ على نصوصٍ ضخمة، يَتنبَّأ بالكلمة التَّالية بناءً على ما سَبَق.
         </h2>
-        <div class="reveal-item flow-chain mb-12" style="direction:ltr">
-          <span class="flow-step">أنت</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step">Prompt</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step llm">LLM</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step">Output</span>
-          <span class="flow-arrow">→</span>
-          <span class="flow-step">أنت</span>
+        <p class="reveal-item text-muted text-base md:text-lg leading-relaxed mb-8 max-w-4xl">
+          المنظور الأبسط: <span class="ltr">function</span> تأخذ نصًّا، وتُرجع نصًّا.
+        </p>
+        <div class="reveal-item llm-diagram mb-10">
+          <div class="ld-port ld-input">
+            <div class="ld-port-head">
+              <span class="ld-port-tag">PROMPT</span>
+              <span class="ld-port-icon" aria-hidden="true">◀</span>
+            </div>
+            <div class="ld-port-text">«ترجم <span class="ltr">'hello world'</span> للفرنسيَّة»</div>
+          </div>
+
+          <div class="ld-wire-wrap" aria-hidden="true">
+            <svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none">
+              <path d="M0,4 L100,4" />
+            </svg>
+          </div>
+
+          <div class="ld-box" aria-label="LLM function">
+            <span class="ld-box-fx">f(x)</span>
+            <div class="ld-box-name">LLM</div>
+            <div class="ld-box-sub">stateless · text → text</div>
+          </div>
+
+          <div class="ld-wire-wrap" aria-hidden="true">
+            <svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none">
+              <path d="M0,4 L100,4" />
+            </svg>
+          </div>
+
+          <div class="ld-port ld-output">
+            <div class="ld-port-head">
+              <span class="ld-port-tag">OUTPUT</span>
+              <span class="ld-port-icon" aria-hidden="true">▶</span>
+            </div>
+            <div class="ld-port-text">«<span class="ltr">bonjour le monde</span>»</div>
+          </div>
         </div>
-        <div class="reveal-item mb-10 max-w-3xl">
-          <p class="text-muted text-lg leading-relaxed mb-3">
-            التَّطبيقات الشَّهيرة هي واجهات فوق <span class="ltr">LLMs</span>.
+
+        <div class="reveal-item mb-8 max-w-3xl">
+          <p class="text-muted text-lg leading-relaxed">
+            بلا ذاكرة، بلا أدوات، بلا مُبادرة. التَّطبيقات الشَّهيرة هي واجهاتٌ فوق <span class="ltr">LLMs</span>.
           </p>
-          <div class="ex-mini"><em>prompt:</em> «ترجم 'hello world' للفرنسية» → <em>output:</em> «bonjour le monde».</div>
         </div>
         <div class="reveal-item flex flex-wrap items-center gap-10">
           <div class="flex items-center gap-3"><img class="brand-row" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg" style="filter:brightness(0) invert(1)" alt="OpenAI" /><span class="ltr font-display text-lg">ChatGPT</span></div>
@@ -564,7 +619,7 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// same tool, two outcomes</div>
         <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
-          متى يعمل <span class="ltr">LLM</span>… ومتى يفشل؟
+          ما يُجيده <span class="ltr">LLM</span>… وما يَعجِز عنه.
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div class="reveal-item concept-card" style="border-right: 3px solid #84cc16">
@@ -1644,6 +1699,7 @@
         const n = idx + 1;
         if ([4, 8, 12, 16].includes(n)) animateDividerChars(slide);
         if (n === 2) animateBuzzStrikes(slide);
+        if (n === 3) animateStairs(slide);
         if (n === 19) setupInteractive(slide);
         if (n === 23) animateStats(slide);
         if (n === 25) animateMCPArrow(slide);
@@ -1652,6 +1708,26 @@
           loopFrozen = false;
           startAmbientLoop();
         }
+      }
+
+      function animateStairs(slide) {
+        const steps = slide.querySelectorAll(".level-step");
+        if (!steps.length) return;
+        if (reducedMotion) {
+          gsap.set(steps, { opacity: 1, x: 0, y: 0 });
+          return;
+        }
+        gsap.killTweensOf(steps);
+        gsap.set(steps, { opacity: 0, x: 40, y: 8 });
+        gsap.to(steps, {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          duration: 0.7,
+          stagger: { each: 0.25, from: "start" },
+          ease: "expo.out",
+          delay: 1.0,
+        });
       }
 
       function animateBuzzStrikes(slide) {
