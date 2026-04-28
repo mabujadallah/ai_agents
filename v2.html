@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -232,7 +232,7 @@
     .ld-output .ld-port-tag { color: #bef264; }
     .ld-fail .ld-port-tag { color: #fca5a5; }
     .ld-port-icon { font-size: 0.7rem; color: #52525b; }
-    .ld-port-text { font-size: 0.95rem; color: #e4e4e7; line-height: 1.5; }
+    .ld-port-text { font-size: 0.95rem; color: #e4e4e7; line-height: 1.5; overflow-wrap: anywhere; word-break: break-word; }
     .ld-wire-wrap { height: 8px; flex: 0 0 56px; min-width: 40px; display: flex; align-items: center; }
     .ld-wire { width: 100%; height: 100%; }
     .ld-wire path { fill: none; stroke: #52525b; stroke-width: 1.5; stroke-dasharray: 6 5; animation: ld-flow 1.4s linear infinite; }
@@ -377,7 +377,7 @@
     <span id="preroll-text"></span><span class="cursor" id="preroll-cursor"></span>
   </div>
 
-  <!-- Top chrome -->
+  <!-- op chrome -->
   <div class="chrome-top" aria-hidden="true">
     <div><span class="accent" id="slide-number">01 / 28</span></div>
     <div><span id="section-name">INTRO</span></div>
@@ -431,17 +431,44 @@
           AI<br />Agents
         </h1>
         <p class="reveal-item text-muted text-2xl md:text-3xl mt-10 max-w-3xl leading-snug">
-          ثلاث درجات. ثلاثون دقيقة. صفر مصطلحات متبقِّية.
+          LLM · Workflow · Agent — كيف يُفكِّر الذكاء الاصطناعي؟
         </p>
-        <div class="reveal-item mt-16 flex flex-wrap gap-12 text-sm">
-          <div>
+        <div class="reveal-item mt-14 flex flex-wrap gap-10 items-start text-sm">
+
+          <!-- Instructor card -->
+          <div style="min-width:260px">
             <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted ltr">Instructor</div>
-            <div class="text-ink mt-1 text-base">محمود صلاح الدين أبو جادالله</div>
+            <div class="text-ink mt-1 text-lg font-semibold">م. محمود صلاح الدين أبو جادالله</div>
+            <!-- Institution row with logo -->
+            <div class="flex items-center gap-3 mt-3">
+              <!-- replace src with actual UCAS logo path -->
+              <img src="ucas-logo.png"
+                   alt="شعار الكلية الجامعية للعلوم التطبيقية"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                   style="width:40px;height:40px;object-fit:contain;border-radius:6px;border:1px solid #3f3f46;background:#151518;padding:4px" />
+              <!-- text fallback shown when logo is missing -->
+              <div style="display:none;width:40px;height:40px;border:1px solid #8b5cf6;border-radius:6px;background:rgba(139,92,246,0.12);align-items:center;justify-content:center;font-family:monospace;font-size:9px;font-weight:700;color:#c4b5fd;letter-spacing:0.05em;direction:ltr">UCAS</div>
+              <div>
+                <div class="text-muted text-[0.82rem] leading-snug">محاضر في عمادة تكنولوجيا المعلومات</div>
+                <div class="text-muted text-[0.75rem] leading-snug">الكلية الجامعية للعلوم التطبيقية</div>
+              </div>
+            </div>
           </div>
+
+          <!-- PhD & Research -->
+          <div style="min-width:260px">
+            <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted ltr">PhD Candidate</div>
+            <div class="text-ink mt-1 text-sm">هندسة البرمجيات · جامعة كيبيك، كندا</div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted mt-3 ltr">Research Area</div>
+            <div class="text-primary-soft mt-1 text-sm ltr font-semibold">Agentic AI</div>
+          </div>
+
+          <!-- Date -->
           <div>
             <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-muted ltr">Date</div>
             <div class="text-ink mt-1 text-base">23 أبريل 2026</div>
           </div>
+
         </div>
       </div>
     </section>
@@ -455,30 +482,28 @@
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the room is tired of hearing these</div>
         <div class="reveal-item buzz-wall text-center" id="buzz-wall" aria-hidden="true">
-          <span class="buzz-word struck" style="font-size:clamp(2rem,5vw,5rem)">AI</span>
-          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3.5vw,3rem);transform:rotate(-3deg)">agent</span>
-          <span class="buzz-word struck" style="font-size:clamp(2rem,4.5vw,4rem)">agentic</span>
-          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(2deg)">AI agent</span>
+          <!-- row 1 -->
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.8rem);transform:rotate(-2deg)">agentic</span>
+          <span class="buzz-word kept" style="font-size:clamp(2.5rem,6vw,6rem)">LLM</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(2deg)">copilot</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(-1deg)">autonomous</span>
           <br/>
-          <span class="buzz-word struck" style="font-size:clamp(2.5rem,6vw,6rem)">agentic workflows</span>
-          <span class="buzz-word kept" style="font-size:clamp(3rem,7vw,7rem)">LLM</span>
+          <!-- row 2 — AI Agent centre, large, glowing -->
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(1deg)">agents</span>
+          <span class="buzz-word kept" style="font-size:clamp(4rem,10vw,9rem);color:#fafaf9;text-shadow:0 0 40px rgba(139,92,246,0.7),0 0 80px rgba(139,92,246,0.35);letter-spacing:-0.03em;margin:0 1rem">AI Agent</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(-2deg)">agentic AI</span>
           <br/>
-          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(-2deg)">agents</span>
-          <span class="buzz-word kept" style="font-size:clamp(2rem,5vw,5rem)">ReAct</span>
-          <span class="buzz-word struck" style="font-size:clamp(1.75rem,4vw,3.5rem);transform:rotate(3deg)">agentic AI</span>
-          <span class="buzz-word kept" style="font-size:clamp(2rem,4.5vw,4rem)">RAG</span>
+          <!-- row 3 -->
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(2deg)">RAG</span>
+          <span class="buzz-word kept" style="font-size:clamp(2.5rem,5.5vw,5rem)">AI Workflow</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(-2deg)">MCP</span>
+          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem);transform:rotate(1deg)">ReAct</span>
           <br/>
-          <span class="buzz-word struck" style="font-size:clamp(1.5rem,3vw,2.5rem)">copilot</span>
-          <span class="buzz-word struck" style="font-size:clamp(2rem,4.5vw,4rem);transform:rotate(-1deg)">autonomous</span>
-          <span class="buzz-word kept" style="font-size:clamp(2rem,5vw,5rem)">MCP</span>
+          <!-- row 4 -->
+          <span class="buzz-word kept" style="font-size:clamp(2rem,4.5vw,4rem);transform:rotate(-1deg)">Vibe Coding</span>
+          <span class="buzz-word kept" style="font-size:clamp(2rem,4vw,3.5rem);transform:rotate(1.5deg)">Prompt Engineering</span>
         </div>
         <div class="reveal-item mt-12 max-w-3xl">
-          <p class="text-muted text-lg md:text-xl leading-relaxed">
-            مُعظم الشُّروحات إمَّا تقنيَّة جدًّا أو بسيطة جدًّا. <span class="text-ink">هذه للبَيْن.</span>
-          </p>
-          <p class="text-muted text-base mt-4 leading-relaxed">
-            الوعد: كلُّ مُصطلح في هذا العرض سيُعرَّف <em class="not-italic" style="font-style:italic">قبل</em> استخدامه.
-          </p>
         </div>
       </div>
     </section>
@@ -506,21 +531,21 @@
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#10A37F" d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">ChatGPT</div>
-                  <div class="lp-eg">«<em>اشرح لي React في سطرين</em>» → يُجيب.</div>
+                  <div class="lp-eg">«<em>اشرح لي Jetpack Compose في سطرين</em>» → يُجيب.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Claude">
                 <img src="https://cdn.simpleicons.org/anthropic/D97757" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Claude</div>
-                  <div class="lp-eg">«<em>ترجم رسالة العميل بنبرةٍ رسميَّة</em>» → ترجمة.</div>
+                  <div class="lp-eg">«<em>ما الفرق بين ViewModel و LiveData في Android؟</em>» → شرح فوري.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Gemini">
                 <img src="https://cdn.simpleicons.org/googlegemini/4285F4" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Gemini</div>
-                  <div class="lp-eg">«<em>لخِّص هذه الورقة العلميَّة في 5 نقاط</em>» → ملخَّص.</div>
+                  <div class="lp-eg">«<em>لخِّص توثيق Android Room في 5 نقاط</em>» → ملخَّص.</div>
                 </div>
               </button>
             </div>
@@ -536,21 +561,21 @@
                 <img src="https://cdn.simpleicons.org/zapier/FF4A00" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Zapier</div>
-                  <div class="lp-eg">trigger: <em>email جديد</em> → action: <em>Slack تنبيه</em> → action: <em>LLM تلخيص</em>.</div>
+                  <div class="lp-eg">trigger: <em>إصدار جديد على GitHub</em> → action: <em>بناء APK</em> → action: <em>LLM يكتب Release Notes</em>.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="n8n">
                 <img src="https://cdn.simpleicons.org/n8n/EA4B71" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">n8n</div>
-                  <div class="lp-eg"><em>form submission</em> → <em>DB write</em> → <em>email تأكيد</em>. كلُّ عقدةٍ يَكتبها إنسان.</div>
+                  <div class="lp-eg"><em>Crash Report جديد</em> → <em>تحليل Logcat</em> → <em>إشعار Slack للفريق</em>. كلُّ خطوةٍ يَكتبها إنسان.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Make">
                 <img src="https://cdn.simpleicons.org/make/6D00CC" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Make.com</div>
-                  <div class="lp-eg"><em>tweet مذكور</em> → <em>ChatGPT analyze</em> → <em>Notion log</em>. سيناريو ثابت.</div>
+                  <div class="lp-eg"><em>تقييم سلبي على Play Store</em> → <em>ChatGPT يحلِّل</em> → <em>Notion log</em>. سيناريو ثابت.</div>
                 </div>
               </button>
             </div>
@@ -566,21 +591,21 @@
                 <img src="https://cdn.simpleicons.org/anthropic/D97757" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Claude Code</div>
-                  <div class="lp-eg">«<em>أضِف dark mode للتَّطبيق</em>» → يَبحث الكود، يُخطِّط، يُعدِّل، يَختبر.</div>
+                  <div class="lp-eg">«<em>أضِف Dark Mode لتطبيق Android</em>» → يبحث في styles.xml، يُعدِّل themes، يُشغِّل instrumented tests.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="Cursor">
                 <img src="https://cdn.simpleicons.org/cursor/D7D7D7" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">Cursor</div>
-                  <div class="lp-eg">يقرأ خطأ الاختبار، يَختار الملفَّ، يُصلِحه، يُعيد التَّشغيل — بلا تَدخُّل.</div>
+                  <div class="lp-eg">يقرأ خطأ Gradle build، يَختار build.gradle، يُصلِح dependency conflict، يُعيد التَّشغيل — بلا تَدخُّل.</div>
                 </div>
               </button>
               <button type="button" class="logo-chip" aria-label="GitHub Copilot">
                 <img src="https://cdn.simpleicons.org/github/6E40C9" alt="" />
                 <div class="logo-pop" role="tooltip">
                   <div class="lp-name">GitHub Copilot</div>
-                  <div class="lp-eg">في وضع Agent: «<em>أصلِح issue #42</em>» → يفتح PR كامل.</div>
+                  <div class="lp-eg">في وضع Agent: «<em>حوِّل Activity إلى Jetpack Compose</em>» → يقرأ الكود، يُعيد الكتابة، يفتح PR.</div>
                 </div>
               </button>
             </div>
@@ -628,7 +653,7 @@
               <span class="ld-port-tag">PROMPT</span>
               <span class="ld-port-icon" aria-hidden="true">◀</span>
             </div>
-            <div class="ld-port-text">«اكتب <span class="ltr">function</span> تَعكس <span class="ltr">string</span> في <span class="ltr">JavaScript</span>»</div>
+            <div class="ld-port-text">«كيف أُظهِر رسالة للمستخدم في <span class="ltr">Android</span>?»</div>
           </div>
 
           <div class="ld-wire-wrap" aria-hidden="true">
@@ -654,7 +679,7 @@
               <span class="ld-port-tag">OUTPUT</span>
               <span class="ld-port-icon" aria-hidden="true">▶</span>
             </div>
-            <div class="ld-port-text"><span class="ltr">const reverse = s =&gt; s.split('').reverse().join('');</span></div>
+            <div class="ld-port-text" style="font-size:0.78rem;font-family:'JetBrains Mono',monospace"><span class="ltr">Toast.makeText(this,<br>  "مرحباً",<br>  Toast.LENGTH_SHORT).show()</span></div>
           </div>
         </div>
 
@@ -686,27 +711,27 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div class="reveal-item concept-card" style="border-right: 3px solid #84cc16">
             <div class="font-mono text-[10px] tracking-[0.22em] text-secondary ltr">✓ WORKS</div>
-            <div class="mt-5 font-display text-2xl leading-snug">«اشرح لي الفرق بين <span class="ltr">Promise</span> و <span class="ltr">async/await</span>.»</div>
+            <div class="mt-5 font-display text-2xl leading-snug">«كيف أُضيف زرًا يفتح شاشةً جديدة في <span class="ltr">Android</span>?»</div>
             <div class="mt-6 flow-chain" style="direction:ltr">
               <span class="flow-step">prompt</span>
               <span class="flow-arrow">→</span>
               <span class="flow-step llm">LLM</span>
               <span class="flow-arrow">→</span>
-              <span class="flow-step">شرح + كود</span>
+              <span class="flow-step">كود جاهز</span>
             </div>
             <p class="pt-6 text-muted text-[0.95rem] leading-relaxed">
-              مفهومٌ عامٌّ في بيانات التَّدريب — مليون شرحٍ مماثل في <span class="ltr">Stack Overflow</span> و <span class="ltr">MDN</span>.
+              سؤال عام موجود في ملايين المرجع — <span class="ltr">LLM</span> يجيب فوراً.
             </p>
             <div class="mt-auto pt-4">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// more prompts that just work</div>
-              <div class="ex-mini good">«<em>اكتب <span class="ltr">regex</span> لـ <span class="ltr">validate email</span></em>».</div>
-              <div class="ex-mini good">«<em>ما <span class="ltr">time complexity</span> لـ <span class="ltr">binary search</span>؟</em>».</div>
-              <div class="ex-mini good">«<em>حوِّل هذا الكود من <span class="ltr">JS</span> إلى <span class="ltr">TypeScript</span></em>».</div>
+              <div class="ex-mini good">«<em>كيف أُظهِر قائمة بالعناصر في <span class="ltr">Android</span>?</em>».</div>
+              <div class="ex-mini good">«<em>ما الفرق بين <span class="ltr">Activity</span> و <span class="ltr">Fragment</span>?</em>».</div>
+              <div class="ex-mini good">«<em>كيف أحفظ بيانات المستخدم محلياً في التطبيق?</em>».</div>
             </div>
           </div>
           <div class="reveal-item concept-card" style="border-right: 3px solid #f87171">
             <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#f87171">✗ FAILS</div>
-            <div class="mt-5 font-display text-2xl leading-snug">«لماذا لا يَظهر لون الزِّرِّ في صفحتي؟»</div>
+            <div class="mt-5 font-display text-2xl leading-snug">«لماذا الزر لا يعمل في تطبيقي?»</div>
             <div class="mt-6 flow-chain" style="direction:ltr">
               <span class="flow-step">prompt</span>
               <span class="flow-arrow">→</span>
@@ -715,13 +740,13 @@
               <span class="flow-step fail">I don't know</span>
             </div>
             <p class="pt-6 text-muted text-[0.95rem] leading-relaxed">
-              <span class="ltr">LLM</span> ما عنده <span class="ltr">access</span> لـ<span class="ltr">HTML</span> ولا <span class="ltr">CSS</span> الخاصَّة بك. كودك ليس داخل بيانات تدريبه.
+              <span class="ltr">LLM</span> لا يرى كودك ولا ملفات مشروعك — ما عنده إلا ما كتبته في السؤال.
             </p>
             <div class="mt-auto pt-4">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// more prompts that hit a wall</div>
-              <div class="ex-mini bad">«<em>لماذا الـ<span class="ltr">form</span> عندي لا يُرسِل البيانات؟</em>».</div>
-              <div class="ex-mini bad">«<em>لماذا الصُّورة لا تَظهر في صفحتي؟</em>».</div>
-              <div class="ex-mini bad">«<em>لماذا الـ<span class="ltr">console</span> يُعطيني <span class="ltr">undefined</span>؟</em>».</div>
+              <div class="ex-mini bad">«<em>لماذا تطبيقي يتوقف فجأة?</em>».</div>
+              <div class="ex-mini bad">«<em>لماذا البيانات لا تُحفظ بعد إغلاق التطبيق?</em>».</div>
+              <div class="ex-mini bad">«<em>لماذا الصورة لا تظهر في شاشتي?</em>».</div>
             </div>
           </div>
         </div>
@@ -744,12 +769,12 @@
             <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">01 / LIMITED KNOWLEDGE</div>
             <div class="mt-3 font-display text-2xl md:text-3xl font-semibold">معرفة محدودة.</div>
             <div class="limit-spotlight">
-              <div class="ls-quote">«من ردَّ على <span class="ltr">PR #42</span>؟»</div>
+              <div class="ls-quote">«لماذا الزر لا يعمل في تطبيقي?»</div>
               <div class="ls-divider">↓</div>
-              <div class="ls-answer">«لا أعلم.»</div>
+              <div class="ls-answer">«لا أعلم — أرسل الكود.»</div>
             </div>
             <p class="text-muted text-[0.95rem] leading-relaxed max-w-md mx-auto">
-              مُدرَّب على بياناتٍ عامَّة. لا يعرف ملفَّاتك، ولا كودك، ولا <span class="ltr">console logs</span> الخاصَّة بك.
+              لا يرى كودك ولا ملفات مشروعك. يحتاج منك أن تُرسل الكود حتى يستطيع المساعدة.
             </p>
             <div class="mt-3 font-mono text-xs ltr text-muted">// trained ≠ connected</div>
           </div>
@@ -757,12 +782,12 @@
             <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">02 / PASSIVE</div>
             <div class="mt-3 font-display text-2xl md:text-3xl font-semibold">يَنتظر الأوامر.</div>
             <div class="limit-spotlight">
-              <div class="ls-quote code"><span class="ltr">prompt = 0</span></div>
+              <div class="ls-quote">تطبيقك فيه <span class="ltr">bug</span> منذ أمس…</div>
               <div class="ls-divider">⇒</div>
-              <div class="ls-answer code"><span class="ltr">output = 0</span></div>
+              <div class="ls-answer">LLM لا يعلم. لم يَسأله أحد.</div>
             </div>
             <p class="text-muted text-[0.95rem] leading-relaxed max-w-md mx-auto">
-              لا يُبادر، لا يُنبِّهك، لا يَتصرَّف من نفسه. بدون <span class="ltr">prompt</span>، لا شيء يَحدث.
+              لا يراقب تطبيقك، لا يُنبِّهك، لا يتصرف وحده. بدون <span class="ltr">prompt</span> منك، لا شيء يحدث.
             </p>
             <div class="mt-3 font-mono text-xs ltr text-muted">// waits for input</div>
           </div>
@@ -806,13 +831,13 @@
         <div class="reveal-item llm-diagram mb-8">
           <div class="ld-port ld-input">
             <div class="ld-port-head"><span class="ld-port-tag">PROMPT</span><span class="ld-port-icon" aria-hidden="true">◀</span></div>
-            <div class="ld-port-text">«لماذا لا يَظهر لون الزِّرِّ؟»</div>
+            <div class="ld-port-text">«لماذا الزر لا يستجيب عند الضغط في تطبيقي؟»</div>
           </div>
           <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
           <div class="ld-box ld-box-sm tool">
             <span class="ld-box-fx">tool</span>
             <div class="ld-box-name">File Reader</div>
-            <div class="ld-box-sub">reads HTML/CSS</div>
+            <div class="ld-box-sub">reads Kotlin/XML</div>
           </div>
           <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
           <div class="ld-box ld-box-sm">
@@ -823,7 +848,7 @@
           <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
           <div class="ld-port ld-output">
             <div class="ld-port-head"><span class="ld-port-tag">OUTPUT</span><span class="ld-port-icon" aria-hidden="true">▶</span></div>
-            <div class="ld-port-text">«<span class="ltr">style.css:42</span> يَستخدم <span class="ltr">!important</span>»</div>
+            <div class="ld-port-text">«<span class="ltr">activity_main.xml:34</span> الزر بلا <span class="ltr">setOnClickListener</span>»</div>
           </div>
         </div>
         <div class="reveal-item example-card max-w-3xl mb-6">
@@ -837,79 +862,15 @@
         </p>
         <div class="reveal-item max-w-3xl">
           <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// same idea, different tool</div>
-          <div class="ex-mini good">«<em>لماذا الصُّورة لا تَظهر؟</em>» → يقرأ <span class="ltr">HTML</span> → يُجيب.</div>
-          <div class="ex-mini good">«<em>لماذا الـ<span class="ltr">form</span> لا يُرسل؟</em>» → يَفحص <span class="ltr">JS handler</span> → يُجيب.</div>
+          <div class="ex-mini good">«<em>لماذا الصورة لا تظهر؟</em>» → يقرأ <span class="ltr">ImageView XML</span> → يُجيب.</div>
+          <div class="ex-mini good">«<em>لماذا البيانات لا تظهر في القائمة؟</em>» → يفحص <span class="ltr">Adapter</span> → يُجيب.</div>
         </div>
       </div>
     </section>
 
-    <!-- 10 · Workflow breaks + RAG sidebar -->
+    <!-- 10 · Real-world: Make.com -->
     <section class="slide"
              data-slide="10"
-             data-section="LEVEL 02 · WORKFLOW"
-             data-title="WORKFLOW · BREAKS"
-             data-notes="كسر الـWorkflow عن عَمْد. نفس الـWorkflow الذي بنيناه (File Reader يَقرأ HTML/CSS) — نسأله سؤالًا من نوعٍ مُختلف: «كم مستخدم زار صفحتي اليوم؟». الـtool لا يعرف هذا — يَقرأ ملفَّات، لا يَقرأ analytics. النَّتيجة: فشل. الحَلُّ ليس في LLM أذكى، بل في مسارٍ جديد، tool جديد، تَوصيلات جديدة — كلُّها يَكتبها إنسان. هنا الحدُّ الجوهريّ: الإنسان هو صاحب القرار. RAG: مُصطلحٌ كبير لفكرةٍ بسيطة — Workflow يَبحث في مصدرٍ خارجيّ قبل أن يُجيب. مثال مألوف: Cursor يَقرأ الـcodebase قبل أن يَقترح كودًا.">
-      <div class="slide-inner">
-        <div class="grid grid-cols-12 gap-10 items-start">
-          <div class="col-span-12 md:col-span-7">
-            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// rigid path</div>
-            <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-3 leading-tight">
-              نفس المسار، سؤالٌ جديد — يَنكسر.
-            </h2>
-            <p class="reveal-item text-muted text-base md:text-lg leading-relaxed mb-8 max-w-xl">
-              نفس <span class="ltr">Workflow</span> الذي بَنيناه. <span class="ltr">tool</span> واحد فقط: <span class="ltr">File Reader</span>. ماذا لو غَيَّرنا <em class="not-italic" style="font-style:italic">نوع</em> السُّؤال؟
-            </p>
-            <div class="reveal-item llm-diagram mb-6" style="max-width:820px">
-              <div class="ld-port ld-input">
-                <div class="ld-port-head"><span class="ld-port-tag">PROMPT</span><span class="ld-port-icon" aria-hidden="true">◀</span></div>
-                <div class="ld-port-text">«كم مستخدمًا زار صفحتي اليوم؟»</div>
-              </div>
-              <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
-              <div class="ld-box ld-box-sm tool">
-                <span class="ld-box-fx">tool</span>
-                <div class="ld-box-name" style="font-size:1.1rem">File Reader</div>
-                <div class="ld-box-sub">no live data</div>
-              </div>
-              <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
-              <div class="ld-port ld-fail">
-                <div class="ld-port-head"><span class="ld-port-tag">FAILS</span><span class="ld-port-icon" aria-hidden="true">▶</span></div>
-                <div class="ld-port-text">«لا أعلم — البيانات ليست في الملفَّات.»</div>
-              </div>
-            </div>
-            <p class="reveal-item text-muted text-base md:text-lg max-w-xl leading-relaxed mb-3">
-              <span class="ltr">Workflow</span> صارم. لإضافة سؤالٍ من نوعٍ جديد: <em class="not-italic" style="font-style:italic">إنسانٌ</em> يَكتب مسارًا جديدًا — يُوصِّل <span class="ltr">Analytics API</span>، يَكتب القواعد، يَختبر.
-            </p>
-            <p class="reveal-item text-ink text-base md:text-lg max-w-xl leading-relaxed">
-              الخاصَّة الجوهريَّة: <span class="text-primary">الإنسان هو صاحب القرار.</span> لا <span class="ltr">LLM</span>.
-            </p>
-          </div>
-          <div class="col-span-12 md:col-span-5">
-            <div class="reveal-item concept-card" style="min-height:auto">
-              <div class="font-mono text-[10px] tracking-[0.22em] text-primary ltr">SIDEBAR · RAG</div>
-              <div class="mt-4 font-display text-2xl font-semibold ltr" style="direction:ltr;text-align:left">Retrieval-Augmented<br/>Generation</div>
-              <p class="mt-4 text-muted text-[0.95rem] leading-relaxed">
-                <strong class="text-ink font-medium">الفكرة:</strong> <span class="ltr">Workflow</span> يَبحث في مصدرٍ خارجيّ قبل أن يُجيب — حتَّى يَتَكلَّم عن أشياء ليست في تدريبه.
-              </p>
-              <div class="mt-3 text-muted text-[0.9rem] leading-relaxed">
-                <strong class="text-ink font-medium">لماذا تَهمُّك؟</strong> أيُّ مرَّةٍ شِفتَ <span class="ltr">AI</span> يُجيب عن مستنداتك أو كودك — هذا <span class="ltr">RAG</span>.
-              </div>
-              <div class="mt-5 space-y-1">
-                <div class="ex-mini"><em>Cursor</em>: يَقرأ <em>codebase</em>ك قبل أن يَقترح كودًا.</div>
-                <div class="ex-mini"><em>Claude مع PDF</em>: يَقرأ المستند قبل أن يُلخِّص.</div>
-                <div class="ex-mini"><em>ChatGPT + browsing</em>: يَبحث في الويب أوَّلًا.</div>
-              </div>
-              <div class="mt-4 font-mono text-xs ltr text-muted">
-                // RAG ⊂ Workflow
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 11 · Real-world: Make.com -->
-    <section class="slide"
-             data-slide="11"
              data-section="LEVEL 02 · WORKFLOW"
              data-title="WORKFLOW · REAL"
              data-notes="مثال حقيقيّ مرئيّ. أداة اسمها Make.com، تربط أدواتٍ عبر مسار: Google Sheets يجمع روابط الأخبار، Perplexity يُلخِّصها، Claude يكتب منشور LinkedIn، المنشور يُنشر تلقائيًّا كلَّ يوم الـ8 صباحًا. هذا Workflow حقيقيٌّ يعمل الآن لكثيرين. ولسَّه Workflow — لأنَّ إنسانًا كتب كلَّ خطوة، وإذا المنشور طلع ضعيفًا، الإنسان يُعدِّل الـprompt يدويًّا.">
@@ -921,67 +882,436 @@
         <div class="reveal-item llm-diagram mb-8" style="max-width:1300px">
           <div class="ld-box ld-box-sm tool">
             <span class="ld-box-fx">step 1</span>
-            <div class="ld-box-name" style="font-size:1.05rem">Google Sheets</div>
-            <div class="ld-box-sub">collect links</div>
+            <div class="ld-box-name" style="font-size:1.05rem">Git Push</div>
+            <div class="ld-box-sub">trigger CI</div>
           </div>
           <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
           <div class="ld-box ld-box-sm tool">
             <span class="ld-box-fx">step 2</span>
-            <div class="ld-box-name" style="font-size:1.2rem">Perplexity</div>
-            <div class="ld-box-sub">summarize</div>
+            <div class="ld-box-name" style="font-size:1.1rem">Gradle Build</div>
+            <div class="ld-box-sub">build APK</div>
           </div>
           <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
           <div class="ld-box ld-box-sm">
             <span class="ld-box-fx">step 3</span>
             <div class="ld-box-name">Claude</div>
-            <div class="ld-box-sub">write post</div>
+            <div class="ld-box-sub">release notes</div>
           </div>
           <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
           <div class="ld-box ld-box-sm tool">
             <span class="ld-box-fx">step 4</span>
-            <div class="ld-box-name">LinkedIn</div>
+            <div class="ld-box-name">Play Store</div>
             <div class="ld-box-sub">publish</div>
           </div>
           <div class="ld-wire-wrap" aria-hidden="true"><svg class="ld-wire" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0,4 L100,4" /></svg></div>
           <div class="ld-box ld-box-sm tool">
             <span class="ld-box-fx">cron</span>
-            <div class="ld-box-name" style="font-size:1.1rem">@ 8:00</div>
-            <div class="ld-box-sub">daily</div>
+            <div class="ld-box-name" style="font-size:1.1rem">on merge</div>
+            <div class="ld-box-sub">auto-trigger</div>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
           <div class="reveal-item example-card">
             <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// the steps</div>
             <ol class="mt-3 text-ink text-[0.98rem] leading-[1.9] list-none pl-0 space-y-1">
-              <li>1. <span class="ltr">Google Sheets</span>: يُجمِّع روابط أخبار.</li>
-              <li>2. <span class="ltr">Perplexity</span>: يُلخِّصها.</li>
-              <li>3. <span class="ltr">Claude</span>: يكتب منشور <span class="ltr">LinkedIn</span>.</li>
-              <li>4. جدولة: يوميًّا 8 صباحًا.</li>
+              <li>1. <span class="ltr">Git Push</span>: يُشغِّل الـ<span class="ltr">CI</span> تلقائيًّا.</li>
+              <li>2. <span class="ltr">Gradle</span>: يبني <span class="ltr">APK</span> ويُشغِّل الاختبارات.</li>
+              <li>3. <span class="ltr">Claude</span>: يكتب <span class="ltr">Release Notes</span>.</li>
+              <li>4. <span class="ltr">Play Store</span>: ينشر الإصدار الجديد.</li>
             </ol>
           </div>
           <div class="reveal-item example-card" style="border-right-color:#f87171">
             <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#f87171">// why it's still a workflow</div>
             <p class="mt-3 text-ink text-[0.98rem] leading-relaxed">
-              إذا المنشور طلع ضعيفًا، <em class="not-italic" style="font-style:italic">أنا</em> أرجع وأُعدِّل <span class="ltr">prompt</span> <span class="ltr">Claude</span> يدويًّا.
+              إذا البناء فشل أو <span class="ltr">Release Notes</span> جاءت خاطئة، <em class="not-italic" style="font-style:italic">أنا</em> أرجع وأُعدِّل المسار يدويًّا.
             </p>
             <p class="mt-3 text-muted text-[0.9rem]">
               مِئة خطوةٍ أو ألف — إن كان الإنسان يتَّخذ القرار، فهو <span class="ltr">Workflow</span>.
             </p>
             <div class="mt-3 pt-3 border-t border-edge">
               <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// similar tools</div>
-              <div class="ex-mini">Zapier, n8n, Power Automate — كلُّها Workflow engines.</div>
+              <div class="ex-mini">GitHub Actions, Fastlane, Bitrise — كلُّها <span class="ltr">Android CI/CD Workflow</span> engines.</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 12 · INTERLUDE DIVIDER · PROMPT ENGINEERING -->
+    <!-- 11 · SECTION DIVIDER · LEVEL 03 / AI AGENT -->
     <section class="slide divider"
+             data-slide="11"
+             data-section="LEVEL 03 · AGENT"
+             data-title="SECTION · LEVEL 03"
+             data-notes="الدَّرجة الثَّالثة. الجُملة الواحدة التي يجب أن تخرج بها من هذه المحاضرة كلِّها قادمة في الشَّريحة التَّالية. استعدَّ.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
+        <div class="mt-2 divider-number" data-char-split="1">03</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-primary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ AI Agent</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          حين يُصبح <span class="ltr">LLM</span> نفسه صاحب القرار.
+        </p>
+      </div>
+    </section>
+
+    <!-- 12 · THE PIVOT — replace human with LLM -->
+    <section class="slide"
              data-slide="12"
+             data-section="LEVEL 03 · AGENT"
+             data-title="THE PIVOT"
+             data-notes="أهمُّ جُملة في المحاضرة كلِّها. التَّحوُّل الوحيد من Workflow إلى Agent: استبدل الإنسان صاحب القرار بـLLM. المسار لم يعد مكتوبًا — LLM يختار الأدوات، يُقرِّر متى يتوقَّف، ومتى يُعيد. هذا الفرق الوحيد. ليس عشرين فرق، فرقٌ واحد.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// the one change</div>
+        <h2 class="reveal-item font-display text-[clamp(2.5rem,7vw,7rem)] font-medium tracking-tight leading-[1.05] mb-14 max-w-5xl">
+          استبدِل <span class="pivot-strike">الإنسان</span> صاحب القرار<br/>
+          بـ<span class="text-primary">LLM</span>.
+        </h2>
+        <div class="reveal-item flex flex-wrap items-center gap-6 mb-10">
+          <div class="pivot-box before">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">WORKFLOW</div>
+            <div class="mt-2 font-display text-xl">مسار يكتبه <span class="pivot-strike">إنسان</span></div>
+            <div class="ex-mini mt-3">GitHub Actions: <em>git push → Gradle → Play Store</em>.</div>
+          </div>
+          <div class="pivot-arrow">→</div>
+          <div class="pivot-box after">
+            <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#a78bfa">AGENT</div>
+            <div class="mt-2 font-display text-xl">مسار يُقرِّره <span class="text-primary ltr">LLM</span></div>
+            <div class="ex-mini mt-3">Cursor: <em>يقرأ، يختار الملفَّ، يُصلِح، يُعيد الاختبار</em>.</div>
+          </div>
+        </div>
+        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed">
+          هذا الفرق الوحيد. ليس عشرة فروق. فرقٌ واحد — والباقي نتائج له.
+        </p>
+      </div>
+    </section>
+
+    <!-- 13 · THE LOOP + ReAct -->
+    <section class="slide"
+             data-slide="13"
+             data-section="LEVEL 03 · AGENT"
+             data-title="كيف يُفكِّر الـ Agent؟"
+             data-notes="كيف يُقرِّر الـ Agent ماذا يفعل؟ عبر دورة تفكير اسمها ReAct. الخطوة الأولى: Reason — يُفكِّر بصوتٍ عالٍ: ما الخطوة التَّالية؟ أيُّ أداة أستخدم؟ الثَّانية: Act — يُنفِّذ فعلًا: يبحث، يحجز، يرسل. الثَّالثة: Observe — يقرأ النَّتيجة ويُقرِّر: انتهيت أم أُكرِّر؟ المثال حجز طيران: دورة 1 بحث → دورة 2 تحقق من التفاصيل → دورة 3 حجز. هذا هو الفرق الجوهري بين الـ Workflow (الإنسان يُقرِّر) والـ Agent (الـ LLM يُقرِّر بنفسه).">
+      <div class="slide-inner flex flex-col gap-5">
+
+        <!-- header -->
+        <div class="flex items-baseline gap-5 flex-wrap">
+          <div>
+            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-2 ltr">// how agents think</div>
+            <h2 class="reveal-item font-display text-5xl font-medium tracking-tight">كيف يُفكِّر الـ Agent؟</h2>
+          </div>
+          <div class="reveal-item"><span class="mcp-badge ltr">ReAct · Reason → Act → Observe</span></div>
+        </div>
+
+        <!-- body: steps left + big circle right -->
+        <div class="grid grid-cols-12 gap-6 items-center">
+
+          <!-- LEFT: 3 step cards + example -->
+          <div class="col-span-12 md:col-span-4 flex flex-col gap-3">
+
+            <!-- step cards -->
+            <div class="reveal-item" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.35);border-radius:10px">
+              <div style="width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(139,92,246,0.18);border:2px solid #8b5cf6;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#a78bfa;flex-shrink:0;font-weight:700">R</div>
+              <div>
+                <div style="font-weight:700;color:#e4e4e7;font-size:1rem">فكِّر — Reason</div>
+                <div style="color:#71717a;font-size:0.82rem;margin-top:0.15rem">ما الخطوة التَّالية؟ أيُّ أداةٍ أستخدم؟</div>
+              </div>
+            </div>
+
+            <div class="reveal-item" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.35);border-radius:10px">
+              <div style="width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(56,189,248,0.15);border:2px solid #38bdf8;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#7dd3fc;flex-shrink:0;font-weight:700">A</div>
+              <div>
+                <div style="font-weight:700;color:#e4e4e7;font-size:1rem">نفِّذ — Act</div>
+                <div style="color:#71717a;font-size:0.82rem;margin-top:0.15rem">استدعِ الأداة — ابحَث، اقرأ، أرسِل.</div>
+              </div>
+            </div>
+
+            <div class="reveal-item" style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.35);border-radius:10px">
+              <div style="width:2.4rem;height:2.4rem;border-radius:50%;background:rgba(132,204,22,0.15);border:2px solid #84cc16;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:#bef264;flex-shrink:0;font-weight:700">O</div>
+              <div>
+                <div style="font-weight:700;color:#e4e4e7;font-size:1rem">راقِب — Observe</div>
+                <div style="color:#71717a;font-size:0.82rem;margin-top:0.15rem">اقرأ النَّتيجة ← انتهيت أم أُكرِّر؟</div>
+              </div>
+            </div>
+
+            <!-- simple everyday example -->
+            <div class="reveal-item" style="background:#0c0c0e;border:1px solid #1f1f23;border-radius:10px;overflow:hidden;font-family:'JetBrains Mono',monospace;font-size:0.78rem;direction:ltr;margin-top:0.25rem">
+              <div style="background:#18181b;padding:0.4rem 0.9rem;border-bottom:1px solid #27272a;color:#52525b;font-size:0.65rem;letter-spacing:0.18em;direction:rtl">مثال · «احجُز أرخص طيران لدبي غدًا»</div>
+              <div style="padding:0.8rem 1rem;display:flex;flex-direction:column;gap:0.55rem">
+                <div>
+                  <div style="color:#3f3f46;margin-bottom:0.25rem;font-size:0.68rem">── cycle 01 ──</div>
+                  <div><span style="color:#a78bfa">R</span> <span style="color:#71717a;direction:rtl;unicode-bidi:embed"> سأبحث في المواقع.</span></div>
+                  <div><span style="color:#7dd3fc">A</span> <span style="color:#e4e4e7">search_flights(<span style="color:#bef264">"Dubai"</span>)</span></div>
+                  <div><span style="color:#86efac">O</span> <span style="color:#71717a;direction:rtl;unicode-bidi:embed"> 4 رحلات، أرخصها 249$.</span></div>
+                </div>
+                <div>
+                  <div style="color:#3f3f46;margin-bottom:0.25rem;font-size:0.68rem">── cycle 02 ──</div>
+                  <div><span style="color:#a78bfa">R</span> <span style="color:#71717a;direction:rtl;unicode-bidi:embed"> أتحقَّق من تفاصيل الأرخص.</span></div>
+                  <div><span style="color:#7dd3fc">A</span> <span style="color:#e4e4e7">get_details(<span style="color:#fcd34d">"EK204"</span>)</span></div>
+                  <div><span style="color:#86efac">O</span> <span style="color:#71717a;direction:rtl;unicode-bidi:embed"> مباشرة، 9ص، مقاعد متاحة.</span></div>
+                </div>
+                <div>
+                  <div style="color:#3f3f46;margin-bottom:0.25rem;font-size:0.68rem">── cycle 03 ──</div>
+                  <div><span style="color:#a78bfa">R</span> <span style="color:#71717a;direction:rtl;unicode-bidi:embed"> الرحلة مناسبة، سأحجز.</span></div>
+                  <div><span style="color:#7dd3fc">A</span> <span style="color:#e4e4e7">book_flight(<span style="color:#fcd34d">"EK204"</span>)</span></div>
+                  <div><span style="color:#86efac">O</span> <span style="color:#bef264;font-weight:600">✓ تم الحجز — PNR1234.</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: BIG circular diagram -->
+          <div class="col-span-12 md:col-span-8 flex justify-center reveal-item">
+            <svg viewBox="0 0 580 530" width="100%" style="max-width:640px;height:auto">
+              <defs>
+                <marker id="arr-r" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#8b5cf6"/>
+                </marker>
+                <marker id="arr-a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/>
+                </marker>
+                <marker id="arr-o" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#84cc16"/>
+                </marker>
+                <marker id="arr-back" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#52525b"/>
+                </marker>
+                <filter id="glow-p" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="8" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+
+              <!-- subtle glow rings behind nodes -->
+              <circle cx="290" cy="105" r="95" fill="rgba(139,92,246,0.05)" stroke="rgba(139,92,246,0.12)" stroke-width="1"/>
+              <circle cx="490" cy="405" r="95" fill="rgba(56,189,248,0.05)" stroke="rgba(56,189,248,0.12)" stroke-width="1"/>
+              <circle cx="90" cy="405" r="95" fill="rgba(132,204,22,0.05)" stroke="rgba(132,204,22,0.12)" stroke-width="1"/>
+
+              <!-- Arrow: Reason → Act (purple solid) -->
+              <path d="M 336,172 Q 445,272 448,332"
+                    fill="none" stroke="#8b5cf6" stroke-width="2.8"
+                    marker-end="url(#arr-r)" opacity="0.85"/>
+              <text x="432" y="248" text-anchor="middle" fill="#a78bfa"
+                    font-size="14" font-family="'Readex Pro',sans-serif" direction="rtl">نفِّذ الأداة</text>
+
+              <!-- Arrow: Act → Observe (sky solid) -->
+              <path d="M 412,405 L 168,405"
+                    fill="none" stroke="#38bdf8" stroke-width="2.8"
+                    marker-end="url(#arr-a)" opacity="0.85"/>
+              <text x="290" y="392" text-anchor="middle" fill="#7dd3fc"
+                    font-size="14" font-family="'Readex Pro',sans-serif" direction="rtl">اقرأ النَّتيجة</text>
+
+              <!-- Arrow: Observe → Reason (dashed gray = repeat) -->
+              <path d="M 90,323 Q 18,205 244,172"
+                    fill="none" stroke="#52525b" stroke-width="2.2"
+                    stroke-dasharray="7,5" marker-end="url(#arr-back)" opacity="0.75"/>
+              <text x="42" y="242" text-anchor="middle" fill="#71717a"
+                    font-size="14" font-family="'Readex Pro',sans-serif" direction="rtl">↺ كرِّر</text>
+
+              <!-- Done exit: downward from Observe -->
+              <line x1="90" y1="482" x2="90" y2="510"
+                    stroke="#84cc16" stroke-width="2.8" marker-end="url(#arr-o)" opacity="0.9"/>
+              <text x="90" y="524" text-anchor="middle" fill="#bef264"
+                    font-size="15" font-family="'Readex Pro',sans-serif" font-weight="700" direction="rtl">✓ انتهيت</text>
+
+              <!-- Node: Reason (top center) — PURPLE -->
+              <circle cx="290" cy="105" r="82" fill="rgba(139,92,246,0.13)" stroke="#8b5cf6" stroke-width="2.5"/>
+              <text x="290" y="88" text-anchor="middle" fill="#e4e4e7"
+                    font-size="24" font-family="'Readex Pro',sans-serif" font-weight="700" direction="rtl">فكِّر</text>
+              <text x="290" y="115" text-anchor="middle" fill="#a78bfa"
+                    font-size="15" font-family="'JetBrains Mono',monospace">Reason</text>
+              <text x="290" y="138" text-anchor="middle" fill="#3f3f46"
+                    font-size="12" font-family="'JetBrains Mono',monospace">01</text>
+
+              <!-- Node: Act (bottom right) — SKY -->
+              <circle cx="490" cy="405" r="82" fill="rgba(56,189,248,0.11)" stroke="#38bdf8" stroke-width="2.5"/>
+              <text x="490" y="388" text-anchor="middle" fill="#e4e4e7"
+                    font-size="24" font-family="'Readex Pro',sans-serif" font-weight="700" direction="rtl">نفِّذ</text>
+              <text x="490" y="415" text-anchor="middle" fill="#7dd3fc"
+                    font-size="15" font-family="'JetBrains Mono',monospace">Act</text>
+              <text x="490" y="438" text-anchor="middle" fill="#3f3f46"
+                    font-size="12" font-family="'JetBrains Mono',monospace">02</text>
+
+              <!-- Node: Observe (bottom left) — LIME -->
+              <circle cx="90" cy="405" r="82" fill="rgba(132,204,22,0.09)" stroke="#84cc16" stroke-width="2.5"/>
+              <text x="90" y="388" text-anchor="middle" fill="#e4e4e7"
+                    font-size="24" font-family="'Readex Pro',sans-serif" font-weight="700" direction="rtl">راقِب</text>
+              <text x="90" y="415" text-anchor="middle" fill="#bef264"
+                    font-size="15" font-family="'JetBrains Mono',monospace">Observe</text>
+              <text x="90" y="438" text-anchor="middle" fill="#3f3f46"
+                    font-size="12" font-family="'JetBrains Mono',monospace">03</text>
+
+            </svg>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 · Iteration + Skier example -->
+    <section class="slide"
+             data-slide="14"
+             data-section="LEVEL 03 · AGENT"
+             data-title="الـ Agent يُصحِّح نفسه"
+             data-notes="الفكرة الجوهرية: الـ Agent لا يُسلّم الإجابة الأولى — بل يُراجعها بنفسه ويُعيد المحاولة. مثال بسيط: تطلب منه كتابة دالة Kotlin. يكتب v1. ناقد داخلي يختبرها ويجد خطأ. يُصلح ويكتب v2. الناقد يُجيزها. كل هذا بدون أن تتدخل أنت. الفرق عن الـ Workflow: في الـ Workflow أنت من يقرأ الخطأ ويُعيد الإرسال. في الـ Agent هو من يفعل ذلك تلقائياً.">
+      <div class="slide-inner flex flex-col gap-6">
+
+        <!-- header -->
+        <div>
+          <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-2 ltr">// self-correcting loop</div>
+          <h2 class="reveal-item font-display text-5xl font-medium tracking-tight">الـ Agent يُصحِّح نفسه.</h2>
+          <p class="reveal-item text-muted text-lg mt-3">بلا تدخُّلٍ منك — يُكرِّر حتَّى يُتقِن.</p>
+        </div>
+
+        <!-- main visual: 3 rounds -->
+        <div class="reveal-item grid grid-cols-12 gap-5 items-stretch">
+
+          <!-- Round 1 -->
+          <div class="col-span-12 md:col-span-4" style="border:1px solid #27272a;border-radius:12px;overflow:hidden">
+            <div style="background:#8b5cf6;padding:0.55rem 1rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.18em;color:#fff">المحاولة الأولى</div>
+            <div style="padding:1rem 1.1rem;display:flex;flex-direction:column;gap:0.7rem">
+              <div style="background:#0c0c0e;border-radius:8px;padding:0.7rem 0.9rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;direction:ltr;color:#e4e4e7;line-height:1.7">
+                <span style="color:#71717a">// Writer يكتب v1</span><br/>
+                fun sum(list: List&lt;Int&gt;): Int {<br/>
+                &nbsp;&nbsp;return list.sum()<br/>
+                }
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:0.7rem 0.9rem">
+                <span style="color:#f87171;font-size:1rem;flex-shrink:0">✗</span>
+                <div style="font-size:0.85rem;color:#fca5a5;direction:rtl">Critic: القائمة الفارغة تُعطي 0 بدل رسالة خطأ واضحة.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="col-span-12 md:col-span-1 flex items-center justify-center">
+            <div style="font-size:2rem;color:#52525b">←</div>
+          </div>
+
+          <!-- Round 2 -->
+          <div class="col-span-12 md:col-span-4" style="border:1px solid #27272a;border-radius:12px;overflow:hidden">
+            <div style="background:#38bdf8;padding:0.55rem 1rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.18em;color:#082f49">المحاولة الثَّانية</div>
+            <div style="padding:1rem 1.1rem;display:flex;flex-direction:column;gap:0.7rem">
+              <div style="background:#0c0c0e;border-radius:8px;padding:0.7rem 0.9rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;direction:ltr;color:#e4e4e7;line-height:1.7">
+                <span style="color:#71717a">// Writer يُصلح v2</span><br/>
+                fun sum(list: List&lt;Int&gt;): Int {<br/>
+                &nbsp;&nbsp;<span style="color:#bef264">if (list.isEmpty())</span><br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#bef264">return 0</span><br/>
+                &nbsp;&nbsp;return list.sum()<br/>
+                }
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem;background:rgba(132,204,22,0.08);border:1px solid rgba(132,204,22,0.3);border-radius:8px;padding:0.7rem 0.9rem">
+                <span style="color:#bef264;font-size:1rem;flex-shrink:0">✓</span>
+                <div style="font-size:0.85rem;color:#bef264;direction:rtl">Critic: جميع الاختبارات تَنجح — مُجاز.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div class="col-span-12 md:col-span-1 flex items-center justify-center">
+            <div style="font-size:2rem;color:#52525b">←</div>
+          </div>
+
+          <!-- Outcome -->
+          <div class="col-span-12 md:col-span-2 flex flex-col items-center justify-center gap-4" style="border:1px solid rgba(132,204,22,0.4);border-radius:12px;background:rgba(132,204,22,0.05);padding:1.2rem 1rem;text-align:center">
+            <div style="font-size:2.8rem">✓</div>
+            <div style="font-family:'Readex Pro',sans-serif;font-weight:700;color:#bef264;font-size:1.1rem">انتهى</div>
+            <div style="font-size:0.8rem;color:#71717a">بدون تدخُّل<br/>بشريّ</div>
+          </div>
+
+        </div>
+
+        <!-- key insight callout -->
+        <div class="reveal-item" style="display:flex;align-items:center;gap:1.2rem;background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.25);border-radius:12px;padding:1rem 1.3rem">
+          <div style="font-size:1.6rem;flex-shrink:0">💡</div>
+          <div>
+            <span style="color:#e4e4e7;font-weight:600">الفرق عن الـ Workflow:</span>
+            <span style="color:#a1a1aa;font-size:0.92rem"> في الـ Workflow <strong style="color:#e4e4e7">أنت</strong> تقرأ الخطأ وتُعيد الإرسال. في الـ Agent <strong style="color:#a78bfa">هو</strong> من يفعل ذلك تلقائيًّا.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 15 · THREE LEVELS · SIDE BY SIDE -->
+    <section class="slide"
+             data-slide="15"
+             data-section="PAYOFF"
+             data-title="THREE LEVELS"
+             data-notes="شريحة المُلخَّص الكُبرى. ثلاث أعمدة، سؤالٌ واحد يفصلها: من صاحب القرار؟ في LLM لا قرار — input/output. في Workflow الإنسان. في Agent، الـLLM. هذا هو التَّحوُّل الجوهريّ. إذا نسيت كلَّ شيءٍ آخر، تذكَّر هذه الشَّريحة.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the payoff</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mb-10 leading-tight">
+          من صاحب القرار؟
+        </h2>
+        <div class="compare-grid">
+          <div class="reveal-item compare-col">
+            <div class="cc-num">LEVEL 01</div>
+            <div class="cc-title ltr" style="direction:ltr;text-align:left">LLM</div>
+            <div class="cc-flow flow-chain" style="direction:ltr">
+              <span class="flow-step">Input</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">Output</span>
+            </div>
+            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُحوِّل نصًّا إلى نص.</div>
+            <div class="ex-mini">«<em>راجِع هذا الكلاس وأصلح التحذيرات</em>» → مراجعة.</div>
+            <div class="cc-decider">
+              <div class="cc-decider-label">// decision maker</div>
+              <div class="cc-decider-val">—</div>
+            </div>
+          </div>
+          <div class="reveal-item compare-col">
+            <div class="cc-num">LEVEL 02</div>
+            <div class="cc-title ltr" style="direction:ltr;text-align:left">AI Workflow</div>
+            <div class="cc-flow flow-chain" style="direction:ltr">
+              <span class="flow-step">Goal</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step tool">Tool</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">LLM</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step">Out</span>
+            </div>
+            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يتبع مسارًا يكتبه إنسان.</div>
+            <div class="ex-mini">GitHub Actions: <em>git push → Gradle → Play Store</em>.</div>
+            <div class="cc-decider">
+              <div class="cc-decider-label">// decision maker</div>
+              <div class="cc-decider-val">الإنسان</div>
+            </div>
+          </div>
+          <div class="reveal-item compare-col highlight">
+            <div class="cc-num">LEVEL 03</div>
+            <div class="cc-title ltr" style="direction:ltr;text-align:left">AI Agent</div>
+            <div class="cc-flow flow-chain" style="direction:ltr">
+              <span class="flow-step">Goal</span>
+              <span class="flow-arrow">→</span>
+              <span class="flow-step llm">Reason</span>
+              <span class="flow-arrow">↻</span>
+              <span class="flow-step tool">Act</span>
+              <span class="flow-arrow">↻</span>
+              <span class="flow-step">Observe</span>
+            </div>
+            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُقرِّر المسار، يُنفِّذه، يُراقب، يُكرِّر.</div>
+            <div class="ex-mini">Cursor: <em>«أصلح bug في PR #42»</em> → يقرأ، يُعدِّل، يُعيد الاختبار.</div>
+            <div class="cc-decider">
+              <div class="cc-decider-label">// decision maker</div>
+              <div class="cc-decider-val ltr" style="direction:ltr">LLM itself</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16 · INTERLUDE DIVIDER · PROMPT ENGINEERING -->
+    <section class="slide divider"
+             data-slide="16"
              data-section="INTERLUDE · CRAFT"
              data-title="PROMPT ENGINEERING"
-             data-notes="استراحةٌ قصيرة. عرفنا LLM والـWorkflow. قبل أن ندخل عالم Agents، نتوقَّف لنسأل: كيف نتحدَّث مع النَّموذج؟ Prompt Engineering ليس سحرًا — قواعد، ممارسة، هندسة. كلُّ ما يَلي يُحسِّن نتائجك في الدَّرجات الثَّلاث.">
+             data-notes="غطَّينا الدَّرجات الثَّلاث: LLM، Workflow، Agent. الآن نتوقَّف لنسأل: كيف نتحدَّث مع النَّموذج بشكلٍ صحيح؟ Prompt Engineering ليس سحرًا — قواعد، ممارسة، هندسة. كلُّ ما يَلي يُحسِّن نتائجك في الدَّرجات الثَّلاث.">
       <div class="slide-inner">
         <div class="reveal-item font-mono text-xs text-secondary tracking-[0.25em] ltr">// interlude</div>
         <div class="mt-2 divider-number pe-divider-mark" data-char-split="1">{·}</div>
@@ -1004,420 +1334,765 @@
       </div>
     </section>
 
-    <!-- 13 · PROMPT · DON'T -->
-    <section class="slide"
-             data-slide="13"
-             data-section="INTERLUDE · CRAFT"
-             data-title="PROMPT · DON'T"
-             data-notes="أربعة أنماط شائعة تُفسد النَّتيجة. غامض: لا تَعرف ما تريد بالتَّحديد. بلا سياق: تَفترض أنَّ النَّموذج يَعلم ما تَعلمه. مُتعدِّد: 3 أسئلة في prompt واحد فيتشتَّت. بلا تَنسيق: لا تَعرف ماذا سيُعيد. كلُّ خطأٍ منها يُكلِّفك جودة، وقتًا، وtokens.">
-      <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs tracking-[0.25em] ltr" style="color:#f87171">// don't</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
-          أربعةُ أنماطٍ <span style="color:#f87171">تُفسِد</span> النَّتيجة.
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div class="reveal-item pe-card pe-bad">
-            <div class="pe-tag">01 · VAGUE</div>
-            <div class="pe-title">غامض.</div>
-            <div class="ex-mini bad">«<em>اكتب لي شيئًا عن AI</em>»</div>
-            <div class="pe-why">لا يَعرف الجمهور، النَّبرة، الطُّول. تأتي إجابةٌ عامَّةٌ لا تَخدمك.</div>
-          </div>
-          <div class="reveal-item pe-card pe-bad">
-            <div class="pe-tag">02 · NO CONTEXT</div>
-            <div class="pe-title">بلا سياق.</div>
-            <div class="ex-mini bad">«<em>أصلِح هذا الكود</em>» — بلا الكود.</div>
-            <div class="pe-why">يَفترض أنَّ النَّموذج يقرأ ذِهنك. يَخمِّن. يُجيب عن شيءٍ آخر.</div>
-          </div>
-          <div class="reveal-item pe-card pe-bad">
-            <div class="pe-tag">03 · COMPOUND</div>
-            <div class="pe-title">أسئلةٌ في كومة.</div>
-            <div class="ex-mini bad">«<em>اشرح REST، وقارِن GraphQL، واكتب API بـPython</em>»</div>
-            <div class="pe-why">3 مَهام في prompt واحد ← 3 إجاباتٍ سطحيَّة، لا واحدة عميقة.</div>
-          </div>
-          <div class="reveal-item pe-card pe-bad">
-            <div class="pe-tag">04 · NO FORMAT</div>
-            <div class="pe-title">بلا تَنسيق.</div>
-            <div class="ex-mini bad">«<em>لخِّص لي هذا</em>»</div>
-            <div class="pe-why">قد يأتي نقاطًا، أو فقرة، أو markdown. لا تَستطيع البناء فوق ما لا تَتنبَّأ به.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 14 · PROMPT · DO -->
-    <section class="slide"
-             data-slide="14"
-             data-section="INTERLUDE · CRAFT"
-             data-title="PROMPT · DO"
-             data-notes="نفس الأربعة، معكوسة. كن محدَّدًا: جمهور، نبرة، طُول. أعطِ السِّياق: الكود، البيانات، الموقف. أعطِه دورًا: «أنت محرِّر صحفيّ» يَنقل النَّموذج لمنطقة أداءٍ أعلى. حدِّد التَّنسيق: JSON، قائمة، n كلمة. كلَّما زاد التَّحديد، قلَّت المُفاجآت.">
-      <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs tracking-[0.25em] ltr" style="color:#bef264">// do</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
-          أربعةُ قواعدٍ <span style="color:#bef264">تَرفع</span> الجودة.
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div class="reveal-item pe-card pe-good">
-            <div class="pe-tag">01 · BE SPECIFIC</div>
-            <div class="pe-title">كن محدَّدًا.</div>
-            <div class="ex-mini good">«<em>اكتب 3 جُمل عن AI لمراهق، نبرةٌ حماسيَّة</em>»</div>
-            <div class="pe-why">جمهور + نبرة + طُول = مساحةُ جوابٍ أضيق وأدقّ.</div>
-          </div>
-          <div class="reveal-item pe-card pe-good">
-            <div class="pe-tag">02 · GIVE CONTEXT</div>
-            <div class="pe-title">أعطِ السِّياق.</div>
-            <div class="ex-mini good">«<em>هذا كود Python فيه TypeError بالسَّطر 12: [الكود]. أصلِحه واشرح.</em>»</div>
-            <div class="pe-why">كلُّ ما يَعرفه عن المشكلة = كلُّ ما تَكتبه له.</div>
-          </div>
-          <div class="reveal-item pe-card pe-good">
-            <div class="pe-tag">03 · SET A ROLE</div>
-            <div class="pe-title">أعطِه دورًا.</div>
-            <div class="ex-mini good">«<em>أنت محرِّرٌ صحفيٌّ متمرِّس. اقصُر كلَّ جُملةٍ تَتجاوز 20 كلمة.</em>»</div>
-            <div class="pe-why">«أنت X» يَنقل أسلوبه لمنطقة المُحترفين في X.</div>
-          </div>
-          <div class="reveal-item pe-card pe-good">
-            <div class="pe-tag">04 · SPECIFY FORMAT</div>
-            <div class="pe-title">حدِّد الشَّكل.</div>
-            <div class="ex-mini good">«<em>أعطِني الإجابة JSON بالحقول: title, summary, tags[3]</em>»</div>
-            <div class="pe-why">تَنسيقٌ محدَّد = إخراجٌ يُمكن البناء فوقه برمجيًّا.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 15 · PROMPT · BEFORE & AFTER -->
-    <section class="slide"
-             data-slide="15"
-             data-section="INTERLUDE · CRAFT"
-             data-title="PROMPT · BEFORE & AFTER"
-             data-notes="مَثلٌ واحد، prompt مُختلف، إخراجٌ مختلفٌ جدًّا. المهمَّة: مُراجعة كود. على اليمين: prompt بدائيّ، تأتي فقرةٌ مُبهمة لا تَستطيع أن تَتصرَّف بها. على اليسار: prompt مُنظَّم — دور، معايير واضحة، تَنسيق JSON — يأتي بإخراجٍ يُمكن لِنظامٍ أن يَفتح به PR comments تلقائيًّا. نفس النَّموذج، نفس الكود، فرق هندسة الـprompt.">
-      <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// same task. same model. different prompt.</div>
-        <h2 class="reveal-item font-display text-3xl md:text-4xl font-medium tracking-tight mt-3 mb-8 leading-tight">
-          المُهمَّة: <em class="not-italic" style="color:#a78bfa; font-style:italic">«راجِع هذا الكود.»</em>
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div class="reveal-item pe-ba-card pe-bad">
-            <div class="pe-ba-head">
-              <span class="pe-ba-tag">✗ BAD PROMPT</span>
-            </div>
-            <div class="pe-ba-prompt">«راجِع هذا الكود: [<span class="ltr">login.py</span>]»</div>
-            <div class="pe-ba-arrow">↓</div>
-            <div class="pe-ba-output">
-              <div class="pe-ba-out-tag">// output</div>
-              <p>«الكود يَبدو جيِّدًا بشكلٍ عامّ، يُمكنك تَحسين القراءة باستخدام أسماء أوضح للمُتغيِّرات وإضافة تَعليقات. كذلك يُفضَّل التَّحقُّق من معالجة الأخطاء...»</p>
-              <div class="pe-ba-flaw">— عامّ، مُبهم. لا أرقام أسطر. لا أولويَّات. لا يُلصَق في <span class="ltr">PR review</span>.</div>
-            </div>
-          </div>
-          <div class="reveal-item pe-ba-card pe-good">
-            <div class="pe-ba-head">
-              <span class="pe-ba-tag">✓ GOOD PROMPT</span>
-            </div>
-            <div class="pe-ba-prompt">«أنت مُهندس مُراجِع backend. حدِّد كلَّ مشكلةٍ في الكود. أعطِني JSON: issues[{line, severity:critical|warning|nit, type:security|perf|style, msg, fix}]. الكود:»</div>
-            <div class="pe-ba-arrow">↓</div>
-            <div class="pe-ba-output">
-              <div class="pe-ba-out-tag">// output</div>
-<pre class="pe-ba-code">{
-  "issues": [
-    { "line": 12, "severity": "critical",
-      "type": "security",
-      "msg": "SQL injection — input concatenated",
-      "fix": "use parameterized query" },
-    { "line": 24, "severity": "warning",
-      "type": "perf",
-      "msg": "N+1 query in loop",
-      "fix": "fetch with JOIN" }
-  ]
-}</pre>
-              <div class="pe-ba-flaw" style="color:#bef264">— يُلصَق مباشرةً كـ<span class="ltr">PR comments</span>. كلُّ مشكلةٍ بسطرها وأولويَّتها.</div>
-            </div>
-          </div>
-        </div>
-        <p class="reveal-item mt-7 text-muted text-sm leading-relaxed text-center">
-          نفس النَّموذج. نفس الكود. فرقُ <span style="color:#bef264">هندسة الـprompt</span>.
-        </p>
-      </div>
-    </section>
-
-    <!-- 16 · SECTION DIVIDER · LEVEL 03 / AI AGENT -->
-    <section class="slide divider"
-             data-slide="16"
-             data-section="LEVEL 03 · AGENT"
-             data-title="SECTION · LEVEL 03"
-             data-notes="الدَّرجة الثَّالثة. الجُملة الواحدة التي يجب أن تخرج بها من هذه المحاضرة كلِّها قادمة في الشَّريحة التَّالية. استعدَّ.">
-      <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// section</div>
-        <div class="mt-2 divider-number" data-char-split="1">03</div>
-        <div class="reveal-item flex items-center gap-6 mt-8">
-          <div class="h-px w-40 bg-primary"></div>
-          <div class="font-display text-3xl md:text-4xl tracking-tight">/ AI Agent</div>
-        </div>
-        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
-          حين يُصبح <span class="ltr">LLM</span> نفسه صاحب القرار.
-        </p>
-      </div>
-    </section>
-
-    <!-- 17 · THE PIVOT — replace human with LLM -->
+    <!-- 17 · PROMPT · DON'T -->
     <section class="slide"
              data-slide="17"
-             data-section="LEVEL 03 · AGENT"
-             data-title="THE PIVOT"
-             data-notes="أهمُّ جُملة في المحاضرة كلِّها. التَّحوُّل الوحيد من Workflow إلى Agent: استبدل الإنسان صاحب القرار بـLLM. المسار لم يعد مكتوبًا — LLM يختار الأدوات، يُقرِّر متى يتوقَّف، ومتى يُعيد. هذا الفرق الوحيد. ليس عشرين فرق، فرقٌ واحد.">
-      <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// the one change</div>
-        <h2 class="reveal-item font-display text-[clamp(2.5rem,7vw,7rem)] font-medium tracking-tight leading-[1.05] mb-14 max-w-5xl">
-          استبدِل <span class="pivot-strike">الإنسان</span> صاحب القرار<br/>
-          بـ<span class="text-primary">LLM</span>.
-        </h2>
-        <div class="reveal-item flex flex-wrap items-center gap-6 mb-10">
-          <div class="pivot-box before">
-            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">WORKFLOW</div>
-            <div class="mt-2 font-display text-xl">مسار يكتبه <span class="pivot-strike">إنسان</span></div>
-            <div class="ex-mini mt-3">Zapier: <em>email → Notion</em>.</div>
-          </div>
-          <div class="pivot-arrow">→</div>
-          <div class="pivot-box after">
-            <div class="font-mono text-[10px] tracking-[0.22em] ltr" style="color:#a78bfa">AGENT</div>
-            <div class="mt-2 font-display text-xl">مسار يُقرِّره <span class="text-primary ltr">LLM</span></div>
-            <div class="ex-mini mt-3">Cursor: <em>يقرأ، يختار الملفَّ، يُصلِح، يُعيد الاختبار</em>.</div>
-          </div>
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT · DON'T"
+             data-notes="أربعة أنماط شائعة تُفسد النَّتيجة. غامض: لا تَعرف ما تريد بالتَّحديد. بلا سياق: تَفترض أنَّ النَّموذج يَعلم ما تَعلمه. مُتعدِّد: 3 أسئلة في prompt واحد فيتشتَّت. بلا تَنسيق: لا تَعرف ماذا سيُعيد.">
+      <div class="slide-inner flex flex-col gap-6">
+        <div>
+          <div class="reveal-item font-mono text-xs tracking-[0.25em] mb-2 ltr" style="color:#f87171">// don't — أربعة أنماط تُفسد النتيجة</div>
+          <h2 class="reveal-item font-display text-5xl font-medium tracking-tight leading-tight">
+            ماذا <span style="color:#f87171">لا</span> تفعل؟
+          </h2>
         </div>
-        <p class="reveal-item text-muted text-lg max-w-3xl leading-relaxed">
-          هذا الفرق الوحيد. ليس عشرة فروق. فرقٌ واحد — والباقي نتائج له.
-        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- 1 -->
+          <div class="reveal-item" style="border:1px solid rgba(248,113,113,0.35);border-radius:12px;background:rgba(248,113,113,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#f87171">01 · غامض VAGUE</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">لا تعرف ماذا تريد</div>
+            <div style="background:#18181b;border:1px solid #3f3f46;border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#fca5a5;direction:rtl">
+              💬 «اكتب لي شيئًا عن الذكاء الاصطناعي»
+            </div>
+            <div style="font-size:0.95rem;color:#71717a;line-height:1.6">← لا جمهور، لا طول، لا نبرة. ستحصل على إجابة عامة لا تفيدك.</div>
+          </div>
+
+          <!-- 2 -->
+          <div class="reveal-item" style="border:1px solid rgba(248,113,113,0.35);border-radius:12px;background:rgba(248,113,113,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#f87171">02 · بلا سياق NO CONTEXT</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">تفترض أنه يقرأ ذهنك</div>
+            <div style="background:#18181b;border:1px solid #3f3f46;border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#fca5a5;direction:rtl">
+              💬 «أصلِح هذا الكود» — بدون أن ترسل الكود
+            </div>
+            <div style="font-size:0.95rem;color:#71717a;line-height:1.6">← يخمّن ماذا تقصد. يجيب على شيء مختلف تماماً.</div>
+          </div>
+
+          <!-- 3 -->
+          <div class="reveal-item" style="border:1px solid rgba(248,113,113,0.35);border-radius:12px;background:rgba(248,113,113,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#f87171">03 · أسئلة كومة COMPOUND</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">3 أسئلة في رسالة واحدة</div>
+            <div style="background:#18181b;border:1px solid #3f3f46;border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#fca5a5;direction:rtl">
+              💬 «اشرح Kotlin، وقارن Fragments وActivities، واكتب ViewModel»
+            </div>
+            <div style="font-size:0.95rem;color:#71717a;line-height:1.6">← ستحصل على 3 إجابات سطحية بدل إجابة واحدة عميقة.</div>
+          </div>
+
+          <!-- 4 -->
+          <div class="reveal-item" style="border:1px solid rgba(248,113,113,0.35);border-radius:12px;background:rgba(248,113,113,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#f87171">04 · بلا شكل NO FORMAT</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">لا تحدد شكل الإجابة</div>
+            <div style="background:#18181b;border:1px solid #3f3f46;border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#fca5a5;direction:rtl">
+              💬 «لخّص لي هذا المقال»
+            </div>
+            <div style="font-size:0.95rem;color:#71717a;line-height:1.6">← قد يأتي كفقرة، نقاط، أو جدول. لا يمكنك البناء عليه برمجياً.</div>
+          </div>
+
+        </div>
       </div>
     </section>
 
-    <!-- 18 · THE LOOP + ReAct -->
+    <!-- 18 · PROMPT · DO -->
     <section class="slide"
              data-slide="18"
-             data-section="LEVEL 03 · AGENT"
-             data-title="LOOP · REACT"
-             data-notes="كيف يُقرِّر LLM المسار؟ عبر حَلقة. أشهر نمط اسمه ReAct — Reason + Act + Observe. (1) Reason: LLM يُفكِّر بصوتٍ عالٍ — ما الخطوة التَّالية؟ ما الأداة المُناسبة؟ (2) Act: يَستدعي الأداة فعلًا — يَقرأ ملفًّا، يُعدِّله، يَستعلم API. (3) Observe: يَقرأ نتيجة الأداة، يُحدِّث فهمه. ثمَّ يُقرِّر: انتهيت أم أُكرِّر؟ هذا الـLoop هو الفرق الجوهريّ بين Workflow (الإنسان يُقرِّر) و Agent (الـLLM يُقرِّر). في المثال: agent يُصلح bug. ثلاث دورات كاملة — يَقرأ الاختبار، يُعدِّل الكود، يُعيد الاختبار — ثمَّ يُقرِّر أنَّه انتهى.">
-      <div class="slide-inner">
-        <div class="grid grid-cols-12 gap-10 items-center">
-          <div class="col-span-12 md:col-span-5">
-            <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-4 ltr">// the mechanism</div>
-            <h2 class="reveal-item font-display text-5xl md:text-6xl font-medium tracking-tight leading-[1.05] mb-5">
-              الحَلقة.
-            </h2>
-            <div class="reveal-item mb-5">
-              <span class="mcp-badge">ReAct · REASON · ACT · OBSERVE</span>
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT · DO"
+             data-notes="نفس الأربعة، معكوسة. كن محدَّدًا: جمهور، نبرة، طُول. أعطِ السِّياق: الكود، البيانات، الموقف. أعطِه دورًا: «أنت محرِّر صحفيّ» يَنقل النَّموذج لمنطقة أداءٍ أعلى. حدِّد التَّنسيق: JSON، قائمة، n كلمة.">
+      <div class="slide-inner flex flex-col gap-6">
+        <div>
+          <div class="reveal-item font-mono text-xs tracking-[0.25em] mb-2 ltr" style="color:#bef264">// do — أربعة قواعد ترفع الجودة</div>
+          <h2 class="reveal-item font-display text-5xl font-medium tracking-tight leading-tight">
+            ماذا <span style="color:#bef264">تفعل</span>؟
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+          <!-- 1 -->
+          <div class="reveal-item" style="border:1px solid rgba(132,204,22,0.35);border-radius:12px;background:rgba(132,204,22,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#84cc16">01 · كن محدداً BE SPECIFIC</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">حدّد الجمهور والنبرة والطول</div>
+            <div style="background:#18181b;border:1px solid rgba(132,204,22,0.3);border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#bef264;direction:rtl">
+              💬 «اكتب 3 جُمل عن AI لطالب جامعي، نبرة حماسية»
             </div>
-            <p class="reveal-item text-muted text-base md:text-lg leading-relaxed mb-5 max-w-md">
-              <span class="ltr">LLM</span> يَعمل في حَلقة. كلُّ دورةٍ ثلاث خَطوات. يَستمرُّ حتَّى يُقرِّر بنفسه أنَّه انتهى.
-            </p>
-            <div class="reveal-item phase-list mb-6">
-              <div class="phase-row"><span class="phase-num">01</span><span class="phase-name">Reason</span><span class="phase-desc">يُفكِّر بصوتٍ عالٍ — ما الخطوة التَّالية؟</span></div>
-              <div class="phase-row"><span class="phase-num">02</span><span class="phase-name">Act</span><span class="phase-desc">يَستدعي الأداة — يَقرأ، يُعدِّل، يَستعلم.</span></div>
-              <div class="phase-row"><span class="phase-num">03</span><span class="phase-name">Observe</span><span class="phase-desc">يَقرأ النَّتيجة، يُحدِّث فهمه.</span></div>
-            </div>
-            <div class="reveal-item max-w-md">
-              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr mb-2">// real trace · «أصلِح bug في PR #42»</div>
-              <div class="trace-cycle">
-                <div class="tc-head">cycle 1</div>
-                <div class="tc-line"><span class="tc-tag r">R</span>أقرأ الاختبار الفاشل أوَّلًا.</div>
-                <div class="tc-line"><span class="tc-tag a">A</span><span class="ltr">read_file("test_user.py")</span></div>
-                <div class="tc-line"><span class="tc-tag o">O</span>assertion بسطر 23 — <em>mock</em> ناقص.</div>
-              </div>
-              <div class="trace-cycle">
-                <div class="tc-head">cycle 2</div>
-                <div class="tc-line"><span class="tc-tag r">R</span>أُضيف <span class="ltr">user_id</span> للـ<em>mock</em>.</div>
-                <div class="tc-line"><span class="tc-tag a">A</span><span class="ltr">edit_file(line 8, +"user_id: 1")</span></div>
-                <div class="tc-line"><span class="tc-tag o">O</span>الملفُّ مُحدَّث.</div>
-              </div>
-              <div class="trace-cycle">
-                <div class="tc-head">cycle 3</div>
-                <div class="tc-line"><span class="tc-tag r">R</span>أُعيد الاختبار.</div>
-                <div class="tc-line"><span class="tc-tag a">A</span><span class="ltr">run_tests()</span></div>
-                <div class="tc-line"><span class="tc-tag o">O</span><span style="color:#bef264">passed ✓ — انتهيت.</span></div>
-              </div>
-            </div>
+            <div style="font-size:0.95rem;color:#a1a1aa;line-height:1.6">← جمهور + نبرة + طول = مساحة جواب أضيق وأدق.</div>
           </div>
-          <div class="col-span-12 md:col-span-7 flex justify-center reveal-item">
-            <div id="loop-big" class="loop-big" data-state="0">
-              <svg viewBox="0 0 560 560" width="100%" style="max-width: 560px; height: auto;">
-                <circle class="ring" cx="280" cy="280" r="200"/>
-                <polygon class="arrow arrow-0" points="480,270 492,280 480,290"/>
-                <polygon class="arrow arrow-1" points="270,480 280,492 290,480"/>
-                <polygon class="arrow arrow-2" points="80,290 68,280 80,270"/>
-                <polygon class="arrow arrow-3" points="290,80 280,68 270,80"/>
-                <g class="node-0">
-                  <circle class="node-circle" cx="280" cy="80" r="66"/>
-                  <text class="node-label" x="280" y="78">Reason</text>
-                  <text class="node-sub" x="280" y="102">01 · THINK</text>
-                </g>
-                <g class="node-1">
-                  <circle class="node-circle" cx="480" cy="280" r="66"/>
-                  <text class="node-label" x="480" y="278">Act</text>
-                  <text class="node-sub" x="480" y="302">02 · TOOL</text>
-                </g>
-                <g class="node-2">
-                  <circle class="node-circle" cx="280" cy="480" r="66"/>
-                  <text class="node-label" x="280" y="478">Observe</text>
-                  <text class="node-sub" x="280" y="502">03 · READ</text>
-                </g>
-                <g class="node-3">
-                  <circle class="node-circle" cx="80" cy="280" r="66"/>
-                  <text class="node-label" x="80" y="278">Repeat</text>
-                  <text class="node-sub" x="80" y="302">04 · OR STOP</text>
-                </g>
-              </svg>
+
+          <!-- 2 -->
+          <div class="reveal-item" style="border:1px solid rgba(132,204,22,0.35);border-radius:12px;background:rgba(132,204,22,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#84cc16">02 · أعطِ السياق GIVE CONTEXT</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">أرسل كل ما يحتاج معرفته</div>
+            <div style="background:#18181b;border:1px solid rgba(132,204,22,0.3);border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#bef264;direction:rtl">
+              💬 «هذا كود Kotlin فيه NullPointerException بسطر 12: [الكود]. أصلحه واشرح لماذا حدث.»
             </div>
+            <div style="font-size:0.95rem;color:#a1a1aa;line-height:1.6">← كل ما يعرفه = كل ما كتبته له. لا تخمين.</div>
           </div>
+
+          <!-- 3 -->
+          <div class="reveal-item" style="border:1px solid rgba(132,204,22,0.35);border-radius:12px;background:rgba(132,204,22,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#84cc16">03 · أعطِه دوراً SET A ROLE</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">«أنت X» ينقله لمستوى أعلى</div>
+            <div style="background:#18181b;border:1px solid rgba(132,204,22,0.3);border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#bef264;direction:rtl">
+              💬 «أنت مطوّر Android متمرّس. راجع هذا الكود وحدّد المشاكل التقنية.»
+            </div>
+            <div style="font-size:0.95rem;color:#a1a1aa;line-height:1.6">← «أنت X» يُفعّل سلوك المحترف في X تلقائياً.</div>
+          </div>
+
+          <!-- 4 -->
+          <div class="reveal-item" style="border:1px solid rgba(132,204,22,0.35);border-radius:12px;background:rgba(132,204,22,0.05);padding:1.1rem 1.3rem;display:flex;flex-direction:column;gap:0.8rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;color:#84cc16">04 · حدّد الشكل SPECIFY FORMAT</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#e4e4e7">قل له كيف تريد الجواب</div>
+            <div style="background:#18181b;border:1px solid rgba(132,204,22,0.3);border-radius:8px;padding:0.75rem 1rem;font-size:1rem;color:#bef264;direction:rtl">
+              💬 «أعطني الإجابة كـ JSON بالحقول: issue, line, fix»
+            </div>
+            <div style="font-size:0.95rem;color:#a1a1aa;line-height:1.6">← شكل محدد = إخراج يمكن استخدامه مباشرة في الكود.</div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- 19 · INTERACTIVE · RUN AGENT -->
+    <!-- 19 · PROMPT · BEFORE & AFTER -->
     <section class="slide"
              data-slide="19"
-             data-section="LEVEL 03 · AGENT"
-             data-title="INTERACTIVE"
-             data-notes="عرض حيٌّ قصير. اضغط الزرَّ، شاهد الحَلقة تتحلَّل إلى مراحل — كلُّ مرحلةٍ 600 مللي ثانية. في الجولة الثَّانية اروِ ما يفعله الـAgent في كلِّ خطوة: يُفكِّر، يستدعي Tool، يقرأ النَّتيجة، يُقرِّر.">
-      <div class="slide-inner text-center">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// interactive · try it</div>
-        <h2 class="reveal-item font-display text-5xl md:text-6xl font-medium tracking-tight mt-6 mb-3 leading-tight">
-          شاهِد <span class="ltr">Loop</span> واحدة تعمل.
-        </h2>
-        <p class="reveal-item text-muted text-lg mb-14 max-w-xl mx-auto leading-relaxed">
-          اضغط الزرَّ. كلُّ مرحلةٍ نحو 600 مللي ثانية. قابلٌ للتَّشغيل مُجدَّدًا.
-        </p>
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT · BEFORE & AFTER"
+             data-notes="نفس المهمة، نفس النموذج، لكن prompt مختلف = نتيجة مختلفة تماماً. على اليمين: prompt بدائي بدون دور ولا تنسيق → إجابة عامة لا تُفيد. على اليسار: prompt محكم بدور + معايير + JSON → إخراج يُلصق مباشرة كـ PR review. الفرق ليس في الذكاء الاصطناعي، الفرق في طريقة السؤال.">
+      <div class="slide-inner flex flex-col gap-5">
 
-        <div class="reveal-item flex flex-wrap gap-3 justify-center mb-12 ltr" id="interactive-stages" style="direction:ltr">
-          <div class="stage-pill" data-stage="0">01 · Reason</div>
-          <div class="stage-pill" data-stage="1">02 · Act</div>
-          <div class="stage-pill" data-stage="2">03 · Observe</div>
-          <div class="stage-pill" data-stage="3">04 · Done</div>
+        <!-- header -->
+        <div>
+          <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-2 ltr">// same task · same model · different prompt</div>
+          <h2 class="reveal-item font-display text-5xl font-medium tracking-tight">المهمة واحدة — النتيجة مختلفة.</h2>
+          <p class="reveal-item text-muted text-lg mt-2">«راجِع هذا الكود: <span class="ltr" style="color:#a78bfa">MainActivity.kt</span>»</p>
         </div>
 
-        <button id="run-agent-btn" class="reveal-item run-btn ltr" type="button" style="direction:ltr">Run Agent</button>
+        <!-- comparison -->
+        <div class="grid grid-cols-2 gap-5 reveal-item" style="flex:1;min-height:0">
 
-        <div id="run-log" class="reveal-item mt-10 font-mono text-sm text-muted min-h-[1.5rem]">
-          &nbsp;
+          <!-- BAD -->
+          <div style="display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;border:1.5px solid rgba(248,113,113,0.4)">
+            <!-- header bar -->
+            <div style="background:rgba(248,113,113,0.15);padding:0.6rem 1.1rem;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(248,113,113,0.25)">
+              <span style="font-size:1.1rem">✗</span>
+              <span style="font-family:'Readex Pro',sans-serif;font-size:1rem;font-weight:700;color:#fca5a5">الطريقة الخاطئة</span>
+            </div>
+            <!-- prompt box -->
+            <div style="background:#0e0e10;padding:0.9rem 1.1rem;border-bottom:1px solid #1f1f23">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#52525b;margin-bottom:0.5rem">PROMPT</div>
+              <div style="font-size:1rem;color:#fca5a5;line-height:1.6;direction:rtl">«راجِع هذا الكود: [MainActivity.kt]»</div>
+            </div>
+            <!-- output box -->
+            <div style="background:#0c0c0e;padding:0.9rem 1.1rem;flex:1">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#52525b;margin-bottom:0.5rem">OUTPUT</div>
+              <div style="font-size:0.95rem;color:#a1a1aa;line-height:1.7;direction:rtl">
+                «الكود يبدو جيداً بشكل عام، يمكنك تحسين أسماء المتغيرات وإضافة تعليقات. يُفضَّل أيضاً التحقق من معالجة الأخطاء...»
+              </div>
+              <div style="margin-top:0.8rem;padding:0.6rem 0.8rem;background:rgba(248,113,113,0.08);border-radius:6px;font-size:0.88rem;color:#f87171;direction:rtl">
+                ✗ عام ومبهم — لا أرقام أسطر، لا أولويات، لا يمكن استخدامه
+              </div>
+            </div>
+          </div>
+
+          <!-- GOOD -->
+          <div style="display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;border:1.5px solid rgba(132,204,22,0.4)">
+            <!-- header bar -->
+            <div style="background:rgba(132,204,22,0.1);padding:0.6rem 1.1rem;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(132,204,22,0.2)">
+              <span style="font-size:1.1rem">✓</span>
+              <span style="font-family:'Readex Pro',sans-serif;font-size:1rem;font-weight:700;color:#bef264">الطريقة الصحيحة</span>
+            </div>
+            <!-- prompt box -->
+            <div style="background:#0e0e10;padding:0.9rem 1.1rem;border-bottom:1px solid #1f1f23">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#52525b;margin-bottom:0.5rem">PROMPT</div>
+              <div style="font-size:0.92rem;color:#bef264;line-height:1.65;direction:rtl">
+                «<span style="color:#a78bfa">أنت مهندس مراجِع Android.</span> حدّد كل مشكلة في الكود.<br/>
+                أعطني <span style="color:#38bdf8">JSON</span>: issues[{line, severity: critical|warning|nit, msg, fix}]»
+              </div>
+            </div>
+            <!-- output box -->
+            <div style="background:#0c0c0e;padding:0.9rem 1.1rem;flex:1">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#52525b;margin-bottom:0.5rem">OUTPUT</div>
+              <pre style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#e4e4e7;line-height:1.7;margin:0;white-space:pre-wrap">{ "issues": [
+  { <span style="color:#fcd34d">"line"</span>: 12,
+    <span style="color:#fcd34d">"severity"</span>: <span style="color:#f87171">"critical"</span>,
+    <span style="color:#fcd34d">"msg"</span>: <span style="color:#bef264">"NullPointerException"</span>,
+    <span style="color:#fcd34d">"fix"</span>: <span style="color:#bef264">"use viewBinding"</span> },
+  { <span style="color:#fcd34d">"line"</span>: 24,
+    <span style="color:#fcd34d">"severity"</span>: <span style="color:#eab308">"warning"</span>,
+    <span style="color:#fcd34d">"msg"</span>: <span style="color:#bef264">"heavy work on main thread"</span>,
+    <span style="color:#fcd34d">"fix"</span>: <span style="color:#bef264">"move to coroutine"</span> }
+]}</pre>
+              <div style="margin-top:0.8rem;padding:0.6rem 0.8rem;background:rgba(132,204,22,0.08);border-radius:6px;font-size:0.88rem;color:#bef264;direction:rtl">
+                ✓ يُلصق مباشرة كـ PR review — سطر + مشكلة + حل
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <!-- bottom callout -->
+        <div class="reveal-item" style="text-align:center;font-family:'Readex Pro',sans-serif;font-size:1rem;color:#71717a">
+          نفس النموذج · نفس الكود · الفرق فقط في <span style="color:#a78bfa;font-weight:700">طريقة السؤال</span>
+        </div>
+
       </div>
     </section>
 
-    <!-- 20 · Iteration + Skier example -->
+    <!-- 20 · PROMPT · FULL EXAMPLE -->
     <section class="slide"
              data-slide="20"
-             data-section="LEVEL 03 · AGENT"
-             data-title="ITERATE · REAL"
-             data-notes="مثالان من العالم الحقيقيّ. الأوَّل: code-writing agent مع ناقدٍ ذاتيّ — يَكتب الكود، ناقدٌ يَختبره، يَجد مشكلة (SQL injection)، يُعدِّل، يُختبر مرَّةً أخرى، حتَّى يُجاز. كلُّه بلا إنسان. الثَّاني: ديمو Andrew Ng للـSkier Vision Agent — مكتبةٌ بـ1000 مقطع بدون عَناوين. تبحث «skier». Agent يُفكِّر ما شكل skier، يَفحص الإطارات، يُرجع 47 مطابقة. الفائدة: بدلًا من إنسانٍ يُعَنْوِن 1000 مقطع يدويًّا، Agent يَفعلها في دقائق.">
+             data-section="INTERLUDE · CRAFT"
+             data-title="PROMPT · FULL EXAMPLE"
+             data-notes="مثالٌ كاملٌ يجمع المبادئ الثَّلاث معًا في prompt واحد. الجزء الأرجوانيّ: الدَّور والقيود — يُحدِّد شخصيَّة النَّموذج وحدوده منذ البداية. الجزء الأخضر: السِّياق الكامل — المشروع، المشكلة، الكود المُرفق. الجزء الأزرق: التَّنسيق المطلوب — JSON بحقول محدَّدة وقابلة للقراءة آليًّا. النَّتيجة: إخراجٌ مباشرٌ يُلصق في PR pipeline دون معالجة إضافية.">
       <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// agents in the wild</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-10 leading-tight">
-          <span class="ltr">Agent</span> يُكرِّر حتَّى يُتقِن.
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// all rules · one prompt</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-8 leading-tight">
+          الـ<span class="ltr">prompt</span> المتكامل.
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="reveal-item concept-card">
-            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">01 · SELF-CRITIC LOOP</div>
-            <div class="mt-4 font-display text-2xl font-semibold leading-snug">كودٌ يُراجَع ذاتيًّا.</div>
-            <div class="mt-5 space-y-2 text-[0.92rem] text-ink leading-relaxed">
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">writer →</span>يَكتب <span class="ltr">v1</span> للدَّالَّة.</div>
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">critic →</span>«<em>v1 فيه <span class="ltr">SQL injection</span> بسطر 12.</em>»</div>
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">writer →</span>يَكتب <span class="ltr">v2</span> بـ <span class="ltr">parameterized query</span>.</div>
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">critic →</span>«<em>v2 آمن. الاختبارات تَنجح.</em>» <span style="color:#bef264">✓</span></div>
+        <div class="grid grid-cols-1 md:grid-cols-[1.25fr_1fr] gap-6 items-start max-w-6xl">
+
+          <!-- prompt code block -->
+          <div class="reveal-item" style="background:#0e0e10;border:1px solid #27272a;border-radius:10px;padding:1.75rem;direction:ltr;text-align:left;font-family:'JetBrains Mono',monospace;font-size:0.88rem;line-height:2;overflow-x:auto">
+            <div style="font-size:0.7rem;letter-spacing:0.22em;color:#52525b;margin-bottom:1.1rem">// FULL PROMPT · annotated</div>
+
+            <div style="border-left:3px solid #8b5cf6;padding-left:0.9rem;margin-bottom:1.1rem">
+              <div style="color:#8b5cf6;font-size:0.72rem;letter-spacing:0.18em;margin-bottom:0.4rem">① ROLE + CONSTRAINTS</div>
+              <div style="color:#e4e4e7">أنت مطوِّر Android متمرِّس</div>
+              <div style="color:#e4e4e7">متخصِّص في Kotlin وJetpack Compose.</div>
+              <div style="color:#a1a1aa;margin-top:0.35rem">— لا تقترح حلولًا خارج بيئة Android.</div>
+              <div style="color:#a1a1aa">— أجب بالعربية، الكود بالإنجليزية.</div>
+              <div style="color:#a1a1aa">— الردود: مشكلة → سبب → حل → كود.</div>
             </div>
-            <p class="mt-auto pt-6 text-muted text-[0.92rem] leading-relaxed">
-              بلا إنسانٍ بين الإصدارات. الـ<span class="ltr">Critic</span> يَعرف المعايير. الـ<span class="ltr">Writer</span> يُعدِّل. الـ<span class="ltr">Agent</span> يُقرِّر متى «انتهى».
-            </p>
+
+            <div style="border-left:3px solid #84cc16;padding-left:0.9rem;margin-bottom:1.1rem">
+              <div style="color:#84cc16;font-size:0.72rem;letter-spacing:0.18em;margin-bottom:0.4rem">② CONTEXT</div>
+              <div style="color:#e4e4e7">المشروع: تطبيق Android يعرض قائمة منتجات.</div>
+              <div style="color:#e4e4e7;margin-top:0.35rem">المشكلة: التطبيق يتجمَّد عند فتح الشاشة</div>
+              <div style="color:#e4e4e7">الرئيسية (ANR بعد 5 ثوانٍ).</div>
+              <div style="color:#71717a;margin-top:0.35rem">// MainActivity.kt — 30 سطرًا مُرفقة</div>
+            </div>
+
+            <div style="border-left:3px solid #38bdf8;padding-left:0.9rem">
+              <div style="color:#38bdf8;font-size:0.72rem;letter-spacing:0.18em;margin-bottom:0.4rem">③ FORMAT</div>
+              <div style="color:#e4e4e7">الشكل: JSON array</div>
+              <div style="color:#a1a1aa">[ { line, issue,</div>
+              <div style="color:#a1a1aa;padding-left:1.5rem">severity: critical|warning|nit,</div>
+              <div style="color:#a1a1aa;padding-left:1.5rem">fix, code_example } ]</div>
+            </div>
           </div>
-          <div class="reveal-item concept-card">
-            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">02 · VISION AGENT · ANDREW NG</div>
-            <div class="mt-4 font-display text-2xl font-semibold leading-snug">ابحث في 1000 مقطع: «<span class="ltr">skier</span>».</div>
-            <div class="mt-5 space-y-2 text-[0.92rem] text-ink leading-relaxed">
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">setup →</span>مكتبةٌ بـ<span class="ltr">1000</span> مقطع. صفر عناوين.</div>
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">reason →</span>«<em><span class="ltr">skier</span> = شخصٌ على <span class="ltr">skis</span>، في ثَلج.</em>»</div>
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">act →</span>يَستخرج إطارات، يَفحص كلَّ مقطع.</div>
-              <div><span class="text-primary font-mono text-xs mr-2 ltr">observe →</span><span class="ltr">47</span> مقطعًا تَحوي مطابقة. <span style="color:#bef264">✓</span></div>
+
+          <!-- annotation cards -->
+          <div class="flex flex-col gap-3">
+
+            <div class="reveal-item pe-card" style="border-color:rgba(139,92,246,0.5);background:rgba(139,92,246,0.05);min-height:auto;padding:1.1rem 1.4rem;gap:0.5rem">
+              <div class="pe-tag" style="color:#a78bfa">① ROLE + CONSTRAINTS</div>
+              <div class="font-display text-lg font-medium text-ink">تحديد الشَّخصيَّة والحدود.</div>
+              <div class="text-muted text-base leading-relaxed">«أنت X» يَنقل النَّموذج لمنطقة أداءٍ أعلى. القيود تَقطع التشتُّت قبل أن يبدأ.</div>
             </div>
-            <p class="mt-auto pt-6 text-muted text-[0.92rem] leading-relaxed">
-              البديل: إنسانٌ يُعَنْوِن <span class="ltr">1000</span> مقطعٍ يدويًّا قبل البحث. <span class="ltr">Agent</span> يَفعلها في دقائق.
-            </p>
+
+            <div class="reveal-item pe-card pe-good" style="min-height:auto;padding:1.1rem 1.4rem;gap:0.5rem">
+              <div class="pe-tag" style="color:#84cc16">② CONTEXT</div>
+              <div class="font-display text-lg font-medium text-ink">كلُّ ما يَعرفه = كلُّ ما تَكتبه.</div>
+              <div class="text-muted text-base leading-relaxed">المشروع + المشكلة + الكود. لا افتراضات — كلُّ شيءٍ مكتوب صراحةً.</div>
+            </div>
+
+            <div class="reveal-item pe-card" style="border-color:rgba(56,189,248,0.5);background:rgba(56,189,248,0.05);min-height:auto;padding:1.1rem 1.4rem;gap:0.5rem">
+              <div class="pe-tag" style="color:#38bdf8">③ FORMAT</div>
+              <div class="font-display text-lg font-medium text-ink">إخراجٌ يُمكن البناء فوقه.</div>
+              <div class="text-muted text-base leading-relaxed"><span class="ltr">JSON</span> بحقول محدَّدة = يُلصق مباشرةً في <span class="ltr">PR pipeline</span> أو <span class="ltr">CI check</span>.</div>
+            </div>
+
+            <div class="reveal-item example-card" style="padding:1rem 1.4rem">
+              <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// the payoff</div>
+              <div class="mt-2 text-ink text-base leading-relaxed">إخراجٌ يُغطِّي السَّطر، المشكلة، الشِّدَّة، الحلَّ، ومثال الكود — <span class="text-secondary">جاهزٌ للاستخدام الفوريّ.</span></div>
+            </div>
+
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 21 · AGENT SHOWCASE — proof artifact -->
-    <section class="slide"
+    <!-- 21 · SECTION DIVIDER · VIBE CODING -->
+    <section class="slide divider"
              data-slide="21"
-             data-section="LEVEL 03 · AGENT"
-             data-title="AGENT · BUILT THIS"
-             data-notes="إثباتٌ حيّ. هذا الموقع كاملًا — التَّصميم، الكتابة، الحركة، الـRTL، إمكانيَّة الوصول — صنعَه Agent من هدفٍ واحد: «اصنع موقعًا للاحتفاء باليوم العالميِّ للفتيات في مجال تكنولوجيا المعلومات». بحث في ITU، اختار اللَّوحة والخطوط، كتب 600+ سطر، اختبر، عدَّل. لا إنسان يكتب المسار — Agent يُقرِّر كلَّ خطوة. افتح الرَّابط أمام الجمهور — هذه لحظة «aha».">
+             data-section="VIBE CODING"
+             data-title="VIBE CODING"
+             data-notes="Vibe Coding — مصطلح صاغه Andrej Karpathy. البرمجة بالحدس: صِف ما تريد، وكرِّر حتى يصل.">
       <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// agent · built this · live proof</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-5 leading-tight">
-          هذا الموقع كاملًا — <span class="text-primary">صَنَعَه <span class="ltr">Agent</span></span>.
-        </h2>
-
-        <div class="reveal-item agent-prompt-call">
-          <div class="apc-tag">// the only thing I gave it · 1 prompt</div>
-          <div class="apc-prompt">
-            <span class="apc-cursor" aria-hidden="true">›</span>
-            <span class="apc-text">اصنع موقعًا للاحتفاء باليوم العالميِّ للفتيات في مجال تكنولوجيا المعلومات.</span>
-          </div>
+        <div class="reveal-item font-mono text-xs tracking-[0.25em] ltr" style="color:#a78bfa">// new chapter</div>
+        <div class="mt-2 divider-number pe-divider-mark" data-char-split="1">{·}</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40" style="background:#a78bfa"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight ltr">/ Vibe Coding</div>
         </div>
-
-        <p class="reveal-item text-muted mb-8 max-w-3xl text-base md:text-lg leading-relaxed">
-          من هذه الجُملة فقط: <span class="ltr">Agent</span> بَحث في <span class="ltr">ITU</span>، اختار اللَّوحة والخطوط، كَتَب <span class="ltr">600+</span> سطرًا، اختبر، عَدَّل، وقرَّر بنفسه متى انتهى. لا إنسانٌ يَكتب المسار.
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          برمجة بالكلام — لا بالكود.
         </p>
-
-        <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
-          <div class="reveal-item browser-frame">
-            <div class="frame-bar">
-              <span class="dot r"></span>
-              <span class="dot y"></span>
-              <span class="dot g"></span>
-              <div class="addr">girls-in-ict.html</div>
-            </div>
-            <div class="frame-body">
-              <iframe src="girls-in-ict.html" scrolling="no" title="agent-built site preview" loading="lazy"></iframe>
-            </div>
-          </div>
-
-          <div class="reveal-item flex flex-col gap-4">
-            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// agent trace · what it actually did</div>
-            <ul class="trace-list">
-              <li><span class="trc-tag">research</span><span><span class="ltr">ITU Resolution 70</span> · تاريخ <span class="ltr">23 Apr 2026</span> · إحصائيَّات <span class="ltr">ICT</span></span></li>
-              <li><span class="trc-tag">design</span><span>اختار اللَّوحة، الخطوط، النِّظام الشَّبكيّ — لا قالب</span></li>
-              <li><span class="trc-tag">build</span><span>كتب <span class="ltr">600+</span> سطرًا، ملفٌّ واحد، بلا <span class="ltr">build step</span></span></li>
-              <li><span class="trc-tag">RTL</span><span>طباعة عربيَّة، <span class="ltr">bidi</span>، خَلْط عربيّ/إنجليزيّ</span></li>
-              <li><span class="trc-tag">motion</span><span>كشف عند التَّمرير، <span class="ltr">marquee</span>، تفاعلات دقيقة</span></li>
-              <li><span class="trc-tag">a11y</span><span><span class="ltr">reduced-motion</span>، <span class="ltr">semantic HTML</span>، تباين</span></li>
-            </ul>
-            <a class="btn-open" href="girls-in-ict.html" target="_blank" rel="noreferrer">
-              <span>OPEN LIVE SITE</span>
-              <span aria-hidden="true">↗</span>
-            </a>
-            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr leading-relaxed">
-              // human prompts: 1<br />
-              // human edits to output: 0
-            </div>
+        <div class="reveal-item mt-8 max-w-2xl prompt-def">
+          <div class="prompt-def-tag ltr">// coined by andrej karpathy · 2025</div>
+          <div class="prompt-def-text">
+            صِف ما تريد بلغتك الطبيعية، النموذج يكتب الكود، أنت تُجرِّب وتُكرِّر.
+            لا تحتاج أن تفهم كل سطر — تحتاج أن تعرف <span style="color:#a78bfa">ماذا تريد.</span>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- 22 · GIRLS IN ICT · Flutter UI Demo -->
+    <!-- 22 · VIBE CODING · ما هو؟ -->
     <section class="slide"
              data-slide="22"
+             data-section="VIBE CODING"
+             data-title="VIBE CODING · INTRO"
+             data-notes="Vibe Coding: مصطلح صاغه Andrej Karpathy في فبراير 2025. الفكرة: تصف ما تريد بالكلام العادي، والنموذج يكتب الكود، وأنت تقبله أو ترفضه أو تُعدِّله. لا تفهم كل سطر — فقط تُجرِّب وتُكرِّر حتى يصل الشكل المطلوب.">
+      <div class="slide-inner flex flex-col gap-6">
+
+        <div>
+          <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr mb-2">// andrej karpathy · feb 2025</div>
+          <h2 class="reveal-item font-display font-medium tracking-tight leading-tight" style="font-size:clamp(2.4rem,4.5vw,4rem)">
+            الـ<span class="ltr" style="color:#a78bfa">Vibe Coding</span>
+          </h2>
+          <p class="reveal-item text-muted mt-2" style="font-size:1.1rem">برمجة بالحدس — لا بالكود.</p>
+        </div>
+
+        <!-- Karpathy quote -->
+        <div class="reveal-item" style="background:#0e0e10;border:1px solid #27272a;border-right:3px solid #a78bfa;border-radius:8px;padding:1.4rem 1.75rem;direction:ltr;text-align:left">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;color:#52525b;margin-bottom:0.8rem">// karpathy on X · Feb 2025</div>
+          <p style="font-size:1.15rem;color:#e4e4e7;line-height:1.75;font-style:italic">
+            "There's a new kind of coding I call <span style="color:#a78bfa">vibe coding</span>, where you fully give in to the vibes,<br>
+            embrace exponentials, and <span style="color:#84cc16">forget that the code even exists</span>."
+          </p>
+        </div>
+
+        <!-- 3 pillars -->
+        <div class="grid grid-cols-3 gap-4 reveal-item">
+          <div style="background:#151518;border:1px solid #27272a;border-top:2px solid #a78bfa;border-radius:8px;padding:1.2rem;text-align:center">
+            <div style="font-size:2rem;margin-bottom:0.5rem">💬</div>
+            <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1rem;color:#e4e4e7;margin-bottom:0.4rem">صِف</div>
+            <div style="font-size:0.88rem;color:#71717a;line-height:1.5">اكتب ما تريد بلغتك الطبيعية</div>
+          </div>
+          <div style="background:#151518;border:1px solid #27272a;border-top:2px solid #38bdf8;border-radius:8px;padding:1.2rem;text-align:center">
+            <div style="font-size:2rem;margin-bottom:0.5rem">⚡</div>
+            <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1rem;color:#e4e4e7;margin-bottom:0.4rem">جرِّب</div>
+            <div style="font-size:0.88rem;color:#71717a;line-height:1.5">النموذج يكتب، أنت تُشغِّل</div>
+          </div>
+          <div style="background:#151518;border:1px solid #27272a;border-top:2px solid #84cc16;border-radius:8px;padding:1.2rem;text-align:center">
+            <div style="font-size:2rem;margin-bottom:0.5rem">🔁</div>
+            <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1rem;color:#e4e4e7;margin-bottom:0.4rem">كرِّر</div>
+            <div style="font-size:0.88rem;color:#71717a;line-height:1.5">حتى يصل الشكل المطلوب</div>
+          </div>
+        </div>
+
+        <div class="reveal-item" style="text-align:center;font-size:0.95rem;color:#52525b">
+          لا تحتاج أن تفهم كل سطر — تحتاج أن تعرف <span style="color:#a78bfa">ماذا تريد</span>.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 23 · VIBE CODING · الحلقة -->
+    <section class="slide"
+             data-slide="23"
+             data-section="VIBE CODING"
+             data-title="VIBE CODING · THE LOOP"
+             data-notes="حلقة Vibe Coding: صف (prompt طبيعي) → النموذج يكتب الكود → شغِّل وانظر → إذا في خطأ ألصقه للنموذج وقل 'صحِّح هذا' → ابعث. لا تقضي وقتاً تفهم السبب — فقط كرِّر.">
+      <div class="slide-inner flex flex-col gap-5">
+
+        <div>
+          <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr mb-2">// the workflow</div>
+          <h2 class="reveal-item font-display text-4xl font-medium tracking-tight">كيف تعمل الحلقة؟</h2>
+        </div>
+
+        <!-- Loop steps -->
+        <div class="reveal-item" style="display:flex;flex-direction:column;gap:0;max-width:680px;margin:0 auto;width:100%">
+
+          <!-- Step 1 -->
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(167,139,250,0.15);border:1.5px solid #a78bfa;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#a78bfa;font-weight:700">01</div>
+              <div style="width:2px;height:40px;background:linear-gradient(to bottom,#a78bfa,#38bdf8)"></div>
+            </div>
+            <div style="padding-top:0.5rem">
+              <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1.1rem;color:#e4e4e7">صِف بكلامك</div>
+              <div style="font-size:0.92rem;color:#71717a;margin-top:0.2rem;direction:ltr;font-family:'JetBrains Mono',monospace">"أضف زر تسجيل دخول بـ Google، ردّ الفعل يُظهر spinner"</div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(56,189,248,0.12);border:1.5px solid #38bdf8;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#38bdf8;font-weight:700">02</div>
+              <div style="width:2px;height:40px;background:linear-gradient(to bottom,#38bdf8,#84cc16)"></div>
+            </div>
+            <div style="padding-top:0.5rem">
+              <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1.1rem;color:#e4e4e7">النموذج يكتب</div>
+              <div style="font-size:0.92rem;color:#71717a;margin-top:0.2rem">يولِّد الكود كاملاً — components، imports، logic</div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(132,204,22,0.12);border:1.5px solid #84cc16;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#84cc16;font-weight:700">03</div>
+              <div style="width:2px;height:40px;background:linear-gradient(to bottom,#84cc16,#f87171)"></div>
+            </div>
+            <div style="padding-top:0.5rem">
+              <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1.1rem;color:#e4e4e7">شغِّل وانظر</div>
+              <div style="font-size:0.92rem;color:#71717a;margin-top:0.2rem">يعمل؟ ممتاز. خطأ؟ انتقل للخطوة التالية.</div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(248,113,113,0.12);border:1.5px solid #f87171;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#f87171;font-weight:700">04</div>
+              <div style="width:2px;height:40px;background:linear-gradient(to bottom,#f87171,#a78bfa)"></div>
+            </div>
+            <div style="padding-top:0.5rem">
+              <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1.1rem;color:#e4e4e7">ألصق الخطأ وقل "صحِّح"</div>
+              <div style="font-size:0.92rem;color:#71717a;margin-top:0.2rem;direction:ltr;font-family:'JetBrains Mono',monospace">"getting NullPointerException on line 24, fix it"</div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+              <div style="width:40px;height:40px;border-radius:50%;background:rgba(167,139,250,0.15);border:1.5px solid #a78bfa;display:flex;align-items:center;justify-content:center;font-size:1rem">🚀</div>
+            </div>
+            <div style="padding-top:0.5rem">
+              <div style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1.1rem;color:#84cc16">ابعث</div>
+              <div style="font-size:0.92rem;color:#71717a;margin-top:0.2rem">من فكرة إلى نتيجة في دقائق.</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="reveal-item example-card" style="max-width:680px;margin:0 auto;width:100%">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;color:#52525b;margin-bottom:0.5rem">// the magic rule</div>
+          <div style="font-size:1rem;color:#e4e4e7;direction:rtl">لا تُضيِّع وقتاً تفهم الكود — <span style="color:#84cc16">ألصق الخطأ، وكرِّر.</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 24 · VIBE CODING · الأدوات -->
+    <section class="slide"
+             data-slide="24"
+             data-section="VIBE CODING"
+             data-title="VIBE CODING · TOOLS"
+             data-notes="الأدوات الرئيسية مع أمثلة استخدام: Cursor، Bolt.new، v0.dev، GitHub Copilot، Claude Code، Lovable.">
+      <div class="slide-inner flex flex-col gap-4">
+
+        <div>
+          <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr mb-2">// the ecosystem · pick your weapon</div>
+          <h2 class="reveal-item font-display text-4xl font-medium tracking-tight">الأدوات التي تُمكِّنك.</h2>
+        </div>
+
+        <!-- 3x2 grid -->
+        <div class="grid grid-cols-3 gap-3 reveal-item" style="flex:1;min-height:0">
+
+          <!-- Cursor -->
+          <div style="background:#151518;border:1px solid #27272a;border-radius:10px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:0.5rem;border-top:2px solid #a78bfa">
+            <div style="display:flex;align-items:center;gap:0.6rem">
+              <img src="https://cdn.simpleicons.org/cursor/FAFAF9" style="width:22px;height:22px;opacity:0.9" alt="Cursor" />
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#e4e4e7;direction:ltr">Cursor</span>
+            </div>
+            <div style="font-size:0.88rem;color:#a1a1aa;line-height:1.5">IDE ذكي يفهم كامل مشروعك.</div>
+            <div style="background:#0e0e10;border-radius:5px;padding:0.5rem 0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#a78bfa;direction:ltr;line-height:1.5">"add dark mode toggle to the navbar"</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3f3f46;direction:ltr">cursor.com · AI-first IDE</div>
+          </div>
+
+          <!-- Bolt.new -->
+          <div style="background:#151518;border:1px solid #27272a;border-radius:10px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:0.5rem;border-top:2px solid #38bdf8">
+            <div style="display:flex;align-items:center;gap:0.6rem">
+              <span style="font-size:1.2rem;line-height:1">⚡</span>
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#e4e4e7;direction:ltr">Bolt.new</span>
+            </div>
+            <div style="font-size:0.88rem;color:#a1a1aa;line-height:1.5">web app كامل في المتصفح من prompt.</div>
+            <div style="background:#0e0e10;border-radius:5px;padding:0.5rem 0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#38bdf8;direction:ltr;line-height:1.5">"build a todo app with auth and Supabase"</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3f3f46;direction:ltr">bolt.new · full-stack</div>
+          </div>
+
+          <!-- v0.dev -->
+          <div style="background:#151518;border:1px solid #27272a;border-radius:10px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:0.5rem;border-top:2px solid #84cc16">
+            <div style="display:flex;align-items:center;gap:0.6rem">
+              <span style="font-size:1.2rem;line-height:1">🎨</span>
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#e4e4e7;direction:ltr">v0.dev</span>
+            </div>
+            <div style="font-size:0.88rem;color:#a1a1aa;line-height:1.5">يولِّد UI components جاهزة من وصفك.</div>
+            <div style="background:#0e0e10;border-radius:5px;padding:0.5rem 0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#84cc16;direction:ltr;line-height:1.5">"dashboard card with chart and KPI stats"</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3f3f46;direction:ltr">v0.dev · by Vercel</div>
+          </div>
+
+          <!-- GitHub Copilot -->
+          <div style="background:#151518;border:1px solid #27272a;border-radius:10px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:0.5rem;border-top:2px solid #fbbf24">
+            <div style="display:flex;align-items:center;gap:0.6rem">
+              <img src="https://cdn.simpleicons.org/github/FAFAF9" style="width:22px;height:22px;opacity:0.9" alt="GitHub" />
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#e4e4e7;direction:ltr">GitHub Copilot</span>
+            </div>
+            <div style="font-size:0.88rem;color:#a1a1aa;line-height:1.5">مدمج في VS Code — يُكمل ويُفسِّر.</div>
+            <div style="background:#0e0e10;border-radius:5px;padding:0.5rem 0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#fbbf24;direction:ltr;line-height:1.5">"write unit tests for this ViewModel"</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3f3f46;direction:ltr">github.com/features/copilot</div>
+          </div>
+
+          <!-- Claude Code -->
+          <div style="background:#151518;border:1px solid #27272a;border-radius:10px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:0.5rem;border-top:2px solid #e879f9">
+            <div style="display:flex;align-items:center;gap:0.6rem">
+              <img src="https://cdn.simpleicons.org/anthropic/FAFAF9" style="width:22px;height:22px;opacity:0.9" alt="Anthropic" />
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#e4e4e7;direction:ltr">Claude Code</span>
+            </div>
+            <div style="font-size:0.88rem;color:#a1a1aa;line-height:1.5">Agent في الـ terminal — يقرأ ويُعدِّل ويُشغِّل.</div>
+            <div style="background:#0e0e10;border-radius:5px;padding:0.5rem 0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#e879f9;direction:ltr;line-height:1.5">"refactor this module and fix all tests"</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3f3f46;direction:ltr">claude.ai/code · terminal agent</div>
+          </div>
+
+          <!-- Lovable -->
+          <div style="background:#151518;border:1px solid #27272a;border-radius:10px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:0.5rem;border-top:2px solid #fb923c">
+            <div style="display:flex;align-items:center;gap:0.6rem">
+              <span style="font-size:1.2rem;line-height:1">🚀</span>
+              <span style="font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;color:#e4e4e7;direction:ltr">Lovable</span>
+            </div>
+            <div style="font-size:0.88rem;color:#a1a1aa;line-height:1.5">SaaS كامل من prompt — Frontend + Backend + DB.</div>
+            <div style="background:#0e0e10;border-radius:5px;padding:0.5rem 0.7rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#fb923c;direction:ltr;line-height:1.5">"build a job board with user profiles"</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3f3f46;direction:ltr">lovable.dev · full product</div>
+          </div>
+
+        </div>
+
+        <div class="reveal-item" style="text-align:center;font-size:0.85rem;color:#3f3f46">
+          كلها مجانية أو بتجربة — جرِّب واختر ما يناسب مشروعك.
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 25 · VIBE CODING · متى يصلح؟ -->
+    <section class="slide"
+             data-slide="25"
+             data-section="VIBE CODING"
+             data-title="VIBE CODING · WHEN"
+             data-notes="Vibe Coding ليس للكل. يصلح للـ prototypes والأفكار السريعة والـ UI. لا يصلح للـ security-critical systems أو production بحجم كبير — هناك تحتاج أن تفهم الكود وتراجعه. القاعدة: كلما زادت التكلفة عند الفشل، قلَّ اعتمادك على Vibe Coding.">
+      <div class="slide-inner flex flex-col gap-5">
+
+        <div>
+          <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr mb-2">// the honest answer</div>
+          <h2 class="reveal-item font-display text-4xl font-medium tracking-tight">متى يصلح؟ متى لا يصلح؟</h2>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 reveal-item" style="flex:1;min-height:0">
+
+          <!-- WORKS WELL -->
+          <div style="background:rgba(132,204,22,0.04);border:1.5px solid rgba(132,204,22,0.35);border-radius:10px;padding:1.4rem;display:flex;flex-direction:column;gap:0.9rem">
+            <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.3rem">
+              <span style="font-size:1.3rem">✓</span>
+              <span style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1.15rem;color:#bef264">يصلح</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.7rem">
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#84cc16;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">Prototypes سريعة</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">فكرة → demo في ساعة</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#84cc16;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">UI وتصميم الواجهات</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">screens، components، layouts</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#84cc16;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">مشاريع شخصية وتجارب</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">تعلّم، استكشاف، hackathon</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#84cc16;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">scripts وأدوات مساعدة</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">automation، data processing</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DOESN'T WORK -->
+          <div style="background:rgba(248,113,113,0.04);border:1.5px solid rgba(248,113,113,0.35);border-radius:10px;padding:1.4rem;display:flex;flex-direction:column;gap:0.9rem">
+            <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.3rem">
+              <span style="font-size:1.3rem">✗</span>
+              <span style="font-family:'Readex Pro',sans-serif;font-weight:700;font-size:1.15rem;color:#fca5a5">لا يصلح</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.7rem">
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#f87171;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">أنظمة تعالج بيانات حساسة</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">مدفوعات، صحة، هوية — تحتاج مراجعة عميقة</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#f87171;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">Production بمستخدمين حقيقيين</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">bugs مخفية تظهر بعد الإطلاق</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#f87171;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">Architecture معقدة</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">يحتاج فهماً حقيقياً للنظام كله</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.6rem">
+                <span style="color:#f87171;font-size:1rem;flex-shrink:0;margin-top:0.05rem">›</span>
+                <div>
+                  <div style="font-size:1rem;color:#e4e4e7;font-weight:600">فريق عمل مشترك</div>
+                  <div style="font-size:0.85rem;color:#71717a;margin-top:0.15rem">كود لا تفهمه صعب تحافظ عليه مع الآخرين</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- bottom rule -->
+        <div class="reveal-item" style="background:#0e0e10;border:1px solid #27272a;border-radius:8px;padding:0.9rem 1.4rem;text-align:center">
+          <span style="font-size:0.95rem;color:#a1a1aa">القاعدة: كلما زادت <span style="color:#f87171">تكلفة الفشل</span>، كلما احتجت لـ</span>
+          <span style="font-size:0.95rem;color:#84cc16;font-weight:600"> مهندس حقيقي يراجع الكود.</span>
+        </div>
+
+      </div>
+    </section>
+    <!-- 26 · SECTION DIVIDER · EXAMPLES -->
+    <section class="slide divider"
+             data-slide="26"
+             data-section="EXAMPLES"
+             data-title="EXAMPLES"
+             data-notes="من النظرية إلى التطبيق. مشاريع حقيقية بُنيت بهذه الأدوات.">
+      <div class="slide-inner">
+        <div class="reveal-item font-mono text-xs text-secondary tracking-[0.25em] ltr">// real work</div>
+        <div class="mt-2 divider-number pe-divider-mark" data-char-split="1">{·}</div>
+        <div class="reveal-item flex items-center gap-6 mt-8">
+          <div class="h-px w-40 bg-secondary"></div>
+          <div class="font-display text-3xl md:text-4xl tracking-tight">/ أمثلة حقيقية</div>
+        </div>
+        <p class="reveal-item text-muted mt-10 max-w-xl text-lg leading-relaxed">
+          من الفكرة إلى المنتج.
+        </p>
+        <div class="reveal-item mt-8 max-w-2xl prompt-def">
+          <div class="prompt-def-tag">// what you'll see</div>
+          <div class="prompt-def-text">
+            مشاريع بُنيت بـ<span class="ltr">AI Agents</span> وأدوات<span class="ltr"> Vibe Coding</span>.
+            الهدف: تخرج من هنا تعرف ماذا تبني وكيف تبدأ.
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- 27 · STITCH · UCAS Mobile UI -->
+    <section class="slide"
+             data-slide="27"
+             data-section="EXAMPLES"
+             data-title="STITCH · UCAS Mobile"
+             data-notes="مثال حقيقي: واجهة تطبيق UCAS المحمول صُمِّمت كاملاً بـ Google Stitch. 4 شاشات من PRD نصي واحد في دقائق.">
+      <div class="slide-inner">
+
+        <!-- header row -->
+        <div class="reveal-item" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem">
+          <div>
+            <div class="font-mono text-xs text-muted tracking-[0.25em] ltr" style="margin-bottom:0.3rem">// google stitch · vibe coding · real project</div>
+            <h2 class="font-display font-semibold tracking-tight" style="font-size:clamp(1.5rem,2.5vw,2.2rem);line-height:1.15">
+              UCAS Student App — <span style="color:#06b6d4">بـ Google Stitch</span>
+            </h2>
+          </div>
+          <a href="https://stitch.withgoogle.com/projects/5138069380813685562"
+             target="_blank" rel="noreferrer"
+             style="flex-shrink:0;display:inline-flex;align-items:center;gap:0.45rem;padding:0.5rem 1.1rem;background:rgba(6,182,212,0.1);border:1.5px solid rgba(6,182,212,0.45);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;color:#67e8f9;text-decoration:none;white-space:nowrap;transition:background .2s"
+             onmouseover="this.style.background='rgba(6,182,212,0.22)'"
+             onmouseout="this.style.background='rgba(6,182,212,0.1)'">
+            OPEN IN STITCH ↗
+          </a>
+        </div>
+
+        <!-- 4 screens row — fixed sizing via min() + aspect-ratio -->
+        <div class="reveal-item" style="display:flex;justify-content:center;align-items:flex-end;gap:clamp(0.75rem,2vw,2rem)">
+
+          <!-- Screen 1 · Home Dashboard -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.55rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;color:#06b6d4;text-align:center;white-space:nowrap">HOME DASHBOARD</div>
+            <div style="height:min(52vh,460px);aspect-ratio:9/19.5;border-radius:28px;border:2.5px solid #3f3f46;box-shadow:0 20px 60px -15px rgba(0,0,0,0.8);overflow:hidden;background:#f1f5f9">
+              <img src="stitch_ucas_unified_digital_platform/home_dashboard/screen.png"
+                   alt="Home Dashboard"
+                   style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block" />
+            </div>
+          </div>
+
+          <!-- Screen 2 · Schedule -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.55rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;color:#a78bfa;text-align:center;white-space:nowrap">SCHEDULE</div>
+            <div style="height:min(52vh,460px);aspect-ratio:9/19.5;border-radius:28px;border:2.5px solid #3f3f46;box-shadow:0 20px 60px -15px rgba(0,0,0,0.8);overflow:hidden;background:#f1f5f9">
+              <img src="stitch_ucas_unified_digital_platform/schedule_timetable/screen.png"
+                   alt="Schedule"
+                   style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block" />
+            </div>
+          </div>
+
+          <!-- Screen 3 · Assignments -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.55rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;color:#fb923c;text-align:center;white-space:nowrap">ASSIGNMENTS</div>
+            <div style="height:min(52vh,460px);aspect-ratio:9/19.5;border-radius:28px;border:2.5px solid #3f3f46;box-shadow:0 20px 60px -15px rgba(0,0,0,0.8);overflow:hidden;background:#f1f5f9">
+              <img src="stitch_ucas_unified_digital_platform/assignments_exams/screen.png"
+                   alt="Assignments"
+                   style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block" />
+            </div>
+          </div>
+
+          <!-- Screen 4 · Courses -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.55rem">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;color:#84cc16;text-align:center;white-space:nowrap">COURSES</div>
+            <div style="height:min(52vh,460px);aspect-ratio:9/19.5;border-radius:28px;border:2.5px solid #3f3f46;box-shadow:0 20px 60px -15px rgba(0,0,0,0.8);overflow:hidden;background:#f1f5f9">
+              <img src="stitch_ucas_unified_digital_platform/courses_page/screen.png"
+                   alt="Courses"
+                   style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block" />
+            </div>
+          </div>
+
+        </div>
+
+        <!-- bottom stats strip -->
+        <div class="reveal-item" style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:1rem;padding-top:0.75rem;border-top:1px solid #1f1f23">
+          <div style="display:flex;align-items:center;gap:0.4rem">
+            <span style="font-size:1.1rem">🪡</span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:0.88rem;font-weight:700;color:#e4e4e7;direction:ltr">Google Stitch</span>
+          </div>
+          <div style="width:1px;height:16px;background:#27272a"></div>
+          <div style="font-size:0.82rem;color:#a1a1aa">شاشات: <span style="color:#06b6d4;font-weight:700">4</span></div>
+          <div style="width:1px;height:16px;background:#27272a"></div>
+          <div style="font-size:0.82rem;color:#a1a1aa">وقت التوليد: <span style="color:#84cc16;font-weight:700">&lt; 5 min</span></div>
+          <div style="width:1px;height:16px;background:#27272a"></div>
+          <div style="font-size:0.82rem;color:#a1a1aa">كود يدوي: <span style="color:#bef264;font-weight:700">0 lines</span></div>
+        </div>
+
+      </div>
+    </section>
+    <!-- 28 · GIRLS IN ICT · Flutter UI Demo -->
+    <section class="slide"
+             data-slide="28"
              data-section="DEMO"
-             data-title="Girls in ICT · Flutter App"
+             data-title="Girls in ICT · Android App"
              data-notes="عرضٌ تفاعليٌّ لتطبيق Flutter مُستوحى من صفحة Girls in ICT. استخدم أزرار التَّنقُّل داخل الهاتف أو نقاط المؤشِّر للتَّنقُّل بين الشَّاشات الثَّلاث: الرَّئيسيَّة، القصص، والمشاركة.">
       <div class="slide-inner">
         <div class="grid grid-cols-12 gap-8 items-center" style="min-height:0">
 
           <!-- Left: title + indicators -->
           <div class="col-span-12 md:col-span-4 flex flex-col gap-6">
-            <div class="font-mono text-xs text-muted tracking-[0.22em] ltr">// flutter · girls-in-ict</div>
+            <div class="font-mono text-xs text-muted tracking-[0.22em] ltr">// android · girls-in-ict</div>
             <h2 class="font-display font-semibold tracking-tight leading-tight" style="font-size:clamp(2rem,3.5vw,3rem)">
-              Girls in ICT<br><span class="text-primary-soft">Flutter App</span>
+              Girls in ICT<br><span class="text-primary-soft">Android App</span>
             </h2>
             <p class="text-muted leading-relaxed" style="font-size:1rem">
-              تطبيق Flutter تفاعليٌّ مُستوحى من اليوم العالمي للفتيات في تكنولوجيا المعلومات.
+              تطبيق <span class="ltr">Android</span> تفاعليٌّ مُستوحى من اليوم العالمي للفتيات في تكنولوجيا المعلومات.
             </p>
             <!-- Screen indicator dots -->
             <div class="flex flex-col gap-3">
@@ -1598,26 +2273,25 @@
 
           <!-- Right: code snippet -->
           <div class="col-span-12 md:col-span-4">
-            <pre class="code-block" style="background:#0e0e10;border:1px solid #27272a;border-radius:8px;padding:1.25rem;font-size:0.68rem;line-height:1.8;overflow-x:auto;color:#e4e4e7"><code><span style="color:#71717a">// main.dart</span>
-<span style="color:#8b5cf6">class</span> <span style="color:#84cc16">GirlsICTApp</span> <span style="color:#e4e4e7">{</span>
-  Widget <span style="color:#84cc16">build</span>(context) {
-    <span style="color:#8b5cf6">return</span> MaterialApp(
-      theme: ThemeData(
-        colorScheme:
-          ColorScheme.fromSeed(
-            seedColor: <span style="color:#f87171">Color(0xFFE5306C)</span>,
-          ),
-      ),
-      home: <span style="color:#84cc16">HomeScreen</span>(),
-    );
+            <pre class="code-block" style="background:#0e0e10;border:1px solid #27272a;border-radius:8px;padding:1.25rem;font-size:0.68rem;line-height:1.8;overflow-x:auto;color:#e4e4e7"><code><span style="color:#71717a">// MainActivity.kt</span>
+<span style="color:#8b5cf6">class</span> <span style="color:#84cc16">MainActivity</span> : AppCompatActivity() {
+  <span style="color:#8b5cf6">override fun</span> <span style="color:#84cc16">onCreate</span>(savedInstanceState: Bundle?) {
+    <span style="color:#8b5cf6">super</span>.onCreate(savedInstanceState)
+    setContentView(R.layout.<span style="color:#f87171">activity_main</span>)
+
+    <span style="color:#71717a">// navigate on button click</span>
+    binding.btnStories.<span style="color:#84cc16">setOnClickListener</span> {
+      startActivity(Intent(<span style="color:#8b5cf6">this</span>,
+        <span style="color:#84cc16">StoriesActivity</span>::<span style="color:#8b5cf6">class</span>.java))
+    }
   }
 }
 
 <span style="color:#71717a">// 3 screens:</span>
-<span style="color:#84cc16">HomeScreen</span>   <span style="color:#8b5cf6">→</span> stats + hero
-<span style="color:#84cc16">StoriesScreen</span> <span style="color:#8b5cf6">→</span> profiles
-<span style="color:#84cc16">ActionScreen</span>  <span style="color:#8b5cf6">→</span> participate</code></pre>
-            <div class="font-mono text-xs text-muted mt-4 ltr tracking-[0.18em]">// Flutter 3.x · Material 3</div>
+<span style="color:#84cc16">MainActivity</span>    <span style="color:#8b5cf6">→</span> stats + hero
+<span style="color:#84cc16">StoriesActivity</span> <span style="color:#8b5cf6">→</span> profiles
+<span style="color:#84cc16">ActionActivity</span>  <span style="color:#8b5cf6">→</span> participate</code></pre>
+            <div class="font-mono text-xs text-muted mt-4 ltr tracking-[0.18em]">// Android · Kotlin · ViewBinding</div>
             <div class="font-mono text-xs mt-2 ltr tracking-[0.18em]" style="color:#84cc16">// interactive · tap to navigate</div>
           </div>
 
@@ -1673,86 +2347,69 @@
       </script>
     </section>
 
-    <!-- 23 · MARKET NUMBERS -->
+    <!-- 29 · AGENT SHOWCASE — proof artifact -->
     <section class="slide"
-             data-slide="23"
-             data-section="PAYOFF"
-             data-title="NUMBERS"
-             data-notes="ثلاثة أرقام تُؤكِّد أنَّ الدَّرجة الثَّالثة خرجت من المختبر. 4.7 مليون مُشترك في GitHub Copilot منذ يناير. Cursor بلغ 2 مليار دولار إيرادًا سنويًّا في Q1. Claude Code يُحرز ~80% على SWE-bench Verified — مشكلات GitHub حقيقيَّة. هذه الأرقام هي السَّبب وراء أنَّ كلَّ شركة SaaS كُبرى تُركِّب Agent على مُنتجها.">
+             data-slide="29"
+             data-section="LEVEL 03 · AGENT"
+             data-title="AGENT · BUILT THIS"
+             data-notes="إثباتٌ حيّ. هذا الموقع كاملًا — التَّصميم، الكتابة، الحركة، الـRTL، إمكانيَّة الوصول — صنعَه Agent من هدفٍ واحد: «اصنع موقعًا للاحتفاء باليوم العالميِّ للفتيات في مجال تكنولوجيا المعلومات». بحث في ITU، اختار اللَّوحة والخطوط، كتب 600+ سطر، اختبر، عدَّل. لا إنسان يكتب المسار — Agent يُقرِّر كلَّ خطوة. افتح الرَّابط أمام الجمهور — هذه لحظة «aha».">
       <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// the market, measured</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-12 leading-tight">
-          ثلاثة أرقام تُؤكِّد ذلك.
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="reveal-item stat-card">
-            <img class="brand-stat" src="https://cdn.simpleicons.org/github/FAFAF9" alt="GitHub" />
-            <div class="stat-num">01 / REACH</div>
-            <div class="stat-value"><span class="stat-count" data-end="4.7" data-decimals="1">4.7</span><span class="text-primary">M</span></div>
-            <div class="stat-caption">مُشترِك في <span class="ltr">GitHub Copilot</span></div>
-            <div class="stat-context">Jan 2026</div>
-          </div>
-          <div class="reveal-item stat-card">
-            <img class="brand-stat" src="https://cdn.simpleicons.org/cursor/FAFAF9" alt="Cursor" />
-            <div class="stat-num">02 / REVENUE</div>
-            <div class="stat-value">$<span class="stat-count" data-end="2" data-decimals="0">2</span><span class="text-secondary">B</span></div>
-            <div class="stat-caption">الإيراد السَّنويُّ لـ <span class="ltr">Cursor</span></div>
-            <div class="stat-context">Q1 2026</div>
-          </div>
-          <div class="reveal-item stat-card">
-            <img class="brand-stat" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" />
-            <div class="stat-num">03 / CAPABILITY</div>
-            <div class="stat-value">~<span class="stat-count" data-end="80" data-decimals="0">80</span><span class="text-primary">%</span></div>
-            <div class="stat-caption">درجة <span class="ltr">Claude Code</span> في <span class="ltr">SWE-bench Verified</span></div>
-            <div class="stat-context">benchmark score</div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- 24 · MCP CALLOUT -->
-    <section class="slide"
-             data-slide="24"
-             data-section="PAYOFF"
-             data-title="MCP"
-             data-notes="اختصارٌ واحد احفظه: MCP، Model Context Protocol. لماذا يَهمُّك؟ قبله، كلُّ agent يَكتب integration خاصًّا لكلِّ tool — N×M عذاب. بعده، كلُّ tool يَتكلَّم بلُغةٍ مُوَحَّدة، أيُّ agent يَفهمها — N+M. ابتكرته Anthropic، ثمَّ في ديسمبر 2025 سلَّمته إلى Linux Foundation. هذا التَّبرُّع يَجعله معيارًا مفتوحًا — مثل HTTP للويب. توقَّع أن يَبدو العامان القادمان كعصر HTTP المُبكِّر.">
-      <div class="slide-inner max-w-5xl">
-        <div class="reveal-item font-mono text-xs text-primary tracking-[0.25em] mb-4 ltr">// the standard you should know</div>
-        <h2 class="reveal-item font-display text-4xl md:text-[3.5rem] font-medium tracking-tight leading-[1.15] mb-8">
-          كلُّ <span class="ltr">Tool</span> يَتكلَّم كلَّ <span class="ltr">Agent</span> بلُغةٍ <span class="text-primary">مُوَحَّدة</span>.
+        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] ltr">// agent · built this · live proof</div>
+        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mt-3 mb-5 leading-tight">
+          هذا الموقع كاملًا — <span class="text-primary">صَنَعَه <span class="ltr">Agent</span></span>.
         </h2>
 
-        <div class="reveal-item grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 max-w-4xl">
-          <div class="mcp-compare mcp-before">
-            <div class="mcp-compare-tag">قبل <span class="ltr">MCP</span></div>
-            <div class="mcp-compare-formula"><span class="ltr">N × M</span></div>
-            <div class="mcp-compare-text">كلُّ <span class="ltr">agent</span> يَكتب <span class="ltr">integration</span> خاصًّا لكلِّ <span class="ltr">tool</span>. عذابُ التَّوصيلات يتضاعف.</div>
-          </div>
-          <div class="mcp-compare mcp-after">
-            <div class="mcp-compare-tag">بعد <span class="ltr">MCP</span></div>
-            <div class="mcp-compare-formula"><span class="ltr">N + M</span></div>
-            <div class="mcp-compare-text">كلُّ <span class="ltr">tool</span> يَتكلَّم <span class="ltr">MCP</span> مرَّةً واحدة. أيُّ <span class="ltr">agent</span> يَفهمه فورًا.</div>
+        <div class="reveal-item agent-prompt-call">
+          <div class="apc-tag">// the only thing I gave it · 1 prompt</div>
+          <div class="apc-prompt">
+            <span class="apc-cursor" aria-hidden="true">›</span>
+            <span class="apc-text">اصنع موقعًا للاحتفاء باليوم العالميِّ للفتيات في مجال تكنولوجيا المعلومات.</span>
           </div>
         </div>
 
-        <div class="reveal-item flex items-center gap-5 flex-wrap">
-          <div class="mcp-badge">MCP · MODEL CONTEXT PROTOCOL</div>
-          <div class="flex items-center gap-4 ltr" aria-hidden="true">
-            <img class="brand-mcp" src="https://cdn.simpleicons.org/anthropic/FAFAF9" alt="Anthropic" />
-            <svg class="mcp-arrow" width="56" height="16" viewBox="0 0 56 16" fill="none" stroke="#a78bfa" stroke-width="1.5">
-              <path class="mcp-arrow-line" d="M2 8 H46" stroke-linecap="round"/>
-              <path class="mcp-arrow-head" d="M40 2 L50 8 L40 14" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <img class="brand-mcp" src="https://cdn.simpleicons.org/linuxfoundation/FAFAF9" alt="Linux Foundation" />
-          </div>
-        </div>
-        <p class="reveal-item mt-5 text-muted text-base md:text-lg leading-relaxed max-w-3xl">
-          ديسمبر <span class="ltr">2025</span>: تبرَّعت <span class="ltr">Anthropic</span> بـ<span class="ltr">MCP</span> لمُؤسَّسة <span class="ltr">Linux</span>. صار معيارًا مفتوحًا — كما <span class="ltr">HTTP</span> للويب.
+        <p class="reveal-item text-muted mb-8 max-w-3xl text-base md:text-lg leading-relaxed">
+          من هذه الجُملة فقط: <span class="ltr">Agent</span> بَحث في <span class="ltr">ITU</span>، اختار اللَّوحة والخطوط، كَتَب <span class="ltr">600+</span> سطرًا، اختبر، عَدَّل، وقرَّر بنفسه متى انتهى. لا إنسانٌ يَكتب المسار.
         </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-6">
+          <div class="reveal-item browser-frame">
+            <div class="frame-bar">
+              <span class="dot r"></span>
+              <span class="dot y"></span>
+              <span class="dot g"></span>
+              <div class="addr">girls-in-ict.html</div>
+            </div>
+            <div class="frame-body">
+              <iframe src="girls-in-ict.html" scrolling="no" title="agent-built site preview" loading="lazy"></iframe>
+            </div>
+          </div>
+
+          <div class="reveal-item flex flex-col gap-4">
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr">// agent trace · what it actually did</div>
+            <ul class="trace-list">
+              <li><span class="trc-tag">research</span><span><span class="ltr">ITU Resolution 70</span> · تاريخ <span class="ltr">23 Apr 2026</span> · إحصائيَّات <span class="ltr">ICT</span></span></li>
+              <li><span class="trc-tag">design</span><span>اختار اللَّوحة، الخطوط، النِّظام الشَّبكيّ — لا قالب</span></li>
+              <li><span class="trc-tag">build</span><span>كتب <span class="ltr">600+</span> سطرًا، ملفٌّ واحد، بلا <span class="ltr">build step</span></span></li>
+              <li><span class="trc-tag">RTL</span><span>طباعة عربيَّة، <span class="ltr">bidi</span>، خَلْط عربيّ/إنجليزيّ</span></li>
+              <li><span class="trc-tag">motion</span><span>كشف عند التَّمرير، <span class="ltr">marquee</span>، تفاعلات دقيقة</span></li>
+              <li><span class="trc-tag">a11y</span><span><span class="ltr">reduced-motion</span>، <span class="ltr">semantic HTML</span>، تباين</span></li>
+            </ul>
+            <a class="btn-open" href="girls-in-ict.html" target="_blank" rel="noreferrer">
+              <span>OPEN LIVE SITE</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <div class="font-mono text-[10px] tracking-[0.22em] text-muted ltr leading-relaxed">
+              // human prompts: 1<br />
+              // human edits to output: 0
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-    <!-- 25 · RULE OF THUMB -->
+
+    <!-- 30 · RULE OF THUMB -->
     <section class="slide"
-             data-slide="25"
+             data-slide="30"
              data-section="PAYOFF"
              data-title="RULE OF THUMB"
              data-notes="متى تستخدم أيَّ درجة؟ قاعدةٌ عمليَّة بسيطة. مُهمَّة واضحة + Tools مُتاحة + مخاطر منخفضة = Agent. عدا ذلك، Workflow مكتوب يدويًّا، أو لا شيء. الفخُّ: استخدام Agent في عملٍ فشله مُكلِف.">
@@ -1779,98 +2436,9 @@
         </div>
       </div>
     </section>
-    <!-- 26 · THREE LEVELS · SIDE BY SIDE -->
+    <!-- 32 · CLOSE -->
     <section class="slide"
-             data-slide="26"
-             data-section="PAYOFF"
-             data-title="THREE LEVELS"
-             data-notes="شريحة المُلخَّص الكُبرى. ثلاث أعمدة، سؤالٌ واحد يفصلها: من صاحب القرار؟ في LLM لا قرار — input/output. في Workflow الإنسان. في Agent، الـLLM. هذا هو التَّحوُّل الجوهريّ. إذا نسيت كلَّ شيءٍ آخر، تذكَّر هذه الشَّريحة.">
-      <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-6 ltr">// the payoff</div>
-        <h2 class="reveal-item font-display text-4xl md:text-5xl font-medium tracking-tight mb-10 leading-tight">
-          السُّؤال الذي يفصلها: من صاحب القرار؟
-        </h2>
-        <div class="compare-grid">
-          <div class="reveal-item compare-col">
-            <div class="cc-num">LEVEL 01</div>
-            <div class="cc-title ltr" style="direction:ltr;text-align:left">LLM</div>
-            <div class="cc-flow flow-chain" style="direction:ltr">
-              <span class="flow-step">Input</span>
-              <span class="flow-arrow">→</span>
-              <span class="flow-step llm">LLM</span>
-              <span class="flow-arrow">→</span>
-              <span class="flow-step">Output</span>
-            </div>
-            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُحوِّل نصًّا إلى نص.</div>
-            <div class="ex-mini">«<em>لخِّص هذا العقد</em>» → تلخيص.</div>
-            <div class="cc-decider">
-              <div class="cc-decider-label">// decision maker</div>
-              <div class="cc-decider-val">—</div>
-            </div>
-          </div>
-          <div class="reveal-item compare-col">
-            <div class="cc-num">LEVEL 02</div>
-            <div class="cc-title ltr" style="direction:ltr;text-align:left">AI Workflow</div>
-            <div class="cc-flow flow-chain" style="direction:ltr">
-              <span class="flow-step">Goal</span>
-              <span class="flow-arrow">→</span>
-              <span class="flow-step tool">Tool</span>
-              <span class="flow-arrow">→</span>
-              <span class="flow-step llm">LLM</span>
-              <span class="flow-arrow">→</span>
-              <span class="flow-step">Out</span>
-            </div>
-            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يتبع مسارًا يكتبه إنسان.</div>
-            <div class="ex-mini">Zapier: <em>form جديد → Sheet → Slack</em>.</div>
-            <div class="cc-decider">
-              <div class="cc-decider-label">// decision maker</div>
-              <div class="cc-decider-val">الإنسان</div>
-            </div>
-          </div>
-          <div class="reveal-item compare-col highlight">
-            <div class="cc-num">LEVEL 03</div>
-            <div class="cc-title ltr" style="direction:ltr;text-align:left">AI Agent</div>
-            <div class="cc-flow flow-chain" style="direction:ltr">
-              <span class="flow-step">Goal</span>
-              <span class="flow-arrow">→</span>
-              <span class="flow-step llm">Reason</span>
-              <span class="flow-arrow">↻</span>
-              <span class="flow-step tool">Act</span>
-              <span class="flow-arrow">↻</span>
-              <span class="flow-step">Observe</span>
-            </div>
-            <div class="cc-row"><strong>ما الذي يفعله؟</strong> يُقرِّر المسار، يُنفِّذه، يُراقب، يُكرِّر.</div>
-            <div class="ex-mini">Cursor: <em>«أصلح bug في PR #42»</em> → يقرأ، يُعدِّل، يُعيد الاختبار.</div>
-            <div class="cc-decider">
-              <div class="cc-decider-label">// decision maker</div>
-              <div class="cc-decider-val ltr" style="direction:ltr">LLM itself</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 27 · TAKEAWAY -->
-    <section class="slide"
-             data-slide="27"
-             data-section="CLOSE"
-             data-title="TAKEAWAY"
-             data-notes="جُملةٌ واحدة تخرج بها. إن نسيت الدَّرجات الثَّلاث، والأرقام، وMCP — تذكَّر هذه: Agent هو LLM يستطيع أن يفعل أشياء. وحين يتَّخذ القرار بنفسه، صار Agent.">
-      <div class="slide-inner">
-        <div class="reveal-item font-mono text-xs text-muted tracking-[0.25em] mb-10 ltr">// one sentence</div>
-        <h2 class="reveal-item font-display font-medium tracking-tight leading-[1.15] text-[clamp(2.5rem,7.5vw,8rem)]">
-          الـ<span class="ltr">Agent</span> هو <span class="text-primary ltr">LLM</span><br/>
-          يستطيع أن <span style="font-style: italic;">يفعل أشياء</span>.
-        </h2>
-        <div class="reveal-item mt-12 font-mono text-muted tracking-[0.22em] text-sm ltr">
-          // if you remember nothing else.
-        </div>
-      </div>
-    </section>
-
-    <!-- 28 · CLOSE -->
-    <section class="slide"
-             data-slide="28"
+             data-slide="32"
              data-section="CLOSE"
              data-title="CLOSE"
              data-notes="اختم بسلاسة. ادعُ إلى الأسئلة. إن بقي وقت، اسأل القاعة: «ما المُهمَّة الواحدة التي ستُسلِّمها لـAgent غدًا؟» — الإجابات عادةً هي أفضل جزءٍ من النِّقاش.">
@@ -1887,7 +2455,30 @@
         <div class="reveal-item mt-6 font-mono text-muted tracking-widest">
           شكرًا لكم.
         </div>
-        <div class="reveal-item mt-16 font-mono text-xs text-muted tracking-[0.22em] ltr">
+
+        <!-- Instructor bio card -->
+        <div class="reveal-item mt-10 inline-flex flex-col items-center gap-1" style="padding:1.25rem 2rem;border:1px solid #27272a;border-radius:10px;background:#151518;min-width:380px">
+          <!-- Institution logo row -->
+          <div class="flex items-center gap-3 mb-1">
+            <img src="ucas-logo.png"
+                 alt="شعار الكلية الجامعية للعلوم التطبيقية"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                 style="width:44px;height:44px;object-fit:contain;border-radius:6px;border:1px solid #3f3f46;background:#0e0e10;padding:5px" />
+            <div style="display:none;width:44px;height:44px;border:1px solid #8b5cf6;border-radius:6px;background:rgba(139,92,246,0.12);align-items:center;justify-content:center;font-family:monospace;font-size:9px;font-weight:700;color:#c4b5fd;letter-spacing:0.05em;direction:ltr">UCAS</div>
+            <div class="text-right">
+              <div class="text-muted text-xs">محاضر في عمادة تكنولوجيا المعلومات</div>
+              <div class="text-muted text-xs">الكلية الجامعية للعلوم التطبيقية</div>
+            </div>
+          </div>
+          <div class="text-ink text-base font-semibold mt-1">م. محمود صلاح الدين أبو جادالله</div>
+          <div class="text-muted text-xs mt-1">طالب دكتوراة في هندسة البرمجيات · جامعة كيبيك، كندا</div>
+          <div class="mt-2 flex items-center gap-2">
+            <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-muted ltr">Research:</span>
+            <span class="text-primary-soft text-xs ltr font-semibold">Agentic AI</span>
+          </div>
+        </div>
+
+        <div class="reveal-item mt-8 font-mono text-xs text-muted tracking-[0.22em] ltr">
           // session closed · loop frozen on OBSERVE · tools_called = <span id="final-tool-count" class="text-secondary">—</span>
         </div>
       </div>
@@ -2545,3 +3136,7 @@
   </script>
 </body>
 </html>
+
+
+
+

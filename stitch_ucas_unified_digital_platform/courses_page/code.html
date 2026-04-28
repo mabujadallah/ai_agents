@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#773205",
+                        "outline": "#757682",
+                        "surface-variant": "#e3e1e9",
+                        "on-secondary-fixed": "#001f26",
+                        "surface": "#faf8ff",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "surface-bright": "#faf8ff",
+                        "inverse-primary": "#b6c4ff",
+                        "on-primary-fixed-variant": "#264191",
+                        "on-secondary-container": "#006172",
+                        "surface-container-high": "#e9e7ef",
+                        "tertiary-container": "#6e2c00",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#acedff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#341100",
+                        "surface-container-highest": "#e3e1e9",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1a1b21",
+                        "surface-container-low": "#f4f3fa",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "outline-variant": "#c5c5d3",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "secondary": "#00687a",
+                        "on-surface-variant": "#444651",
+                        "background": "#faf8ff",
+                        "inverse-surface": "#2f3036",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "surface-dim": "#dad9e1",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#57dffe",
+                        "primary-container": "#1e3a8a",
+                        "surface-tint": "#4059aa",
+                        "surface-container": "#eeedf4",
+                        "primary": "#00236f",
+                        "primary-fixed": "#dce1ff",
+                        "on-background": "#1a1b21",
+                        "on-primary-container": "#90a8ff",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#00164e",
+                        "tertiary-fixed": "#ffdbcb",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#4b1c00",
+                        "on-tertiary-container": "#f39461",
+                        "inverse-on-surface": "#f1f0f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "48px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "md": "24px",
+                        "xl": "64px",
+                        "sm": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Work Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Work Sans"],
+                        "body-lg": ["Work Sans"],
+                        "h3": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "h2": ["32px", {"lineHeight": "1.25", "fontWeight": "700"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            font-family: 'Work Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-gray-800 shadow-[0_4px_12px_rgba(30,58,138,0.1)]">
+<div class="flex items-center gap-sm">
+<img alt="Student Profile Photo" class="w-8 h-8 rounded-full border border-primary-container" data-alt="close-up portrait of a professional student with a neutral background in high-key lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNmPlloEODng5pRNQ0Uy92Dd_du6xvv1KLl7iIEJz7t5kc0siAXvxy0hTD9ULALO7lLVcs4y3cSUpOoAStktdOwFwjk8GZIA1peGEvZ2pvxeNu5roqjsw56xpoyVWb_nKbSiiAFQyKrCUvdNZNSKcZyhIp4px5MxZZN2UnQ-gSs9CN2Qku50YYOMTKA_HBXYWVfC9IKApk2x4c-7LSqfsbFoVJ263uqWx3pxCjpkGoNfphJhym_3ofWq35mf8cfkxe_bXM1zgJvn0"/>
+<h1 class="text-xl font-black text-[#1E3A8A] dark:text-blue-400 font-['Plus_Jakarta_SANS']">UCAS Mobile</h1>
+</div>
+<button class="material-symbols-outlined text-[#1E3A8A] dark:text-blue-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors active:opacity-80">notifications</button>
+</header>
+<!-- Main Canvas -->
+<main class="pt-24 pb-32 px-4 max-w-container-max mx-auto">
+<!-- Header Section -->
+<section class="mb-lg">
+<h2 class="font-h1 text-h1 text-primary mb-xs">Available Courses</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Continue your academic journey with excellence.</p>
+</section>
+<!-- Search and Filter Section -->
+<section class="mb-lg space-y-sm">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-secondary transition-colors">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md" placeholder="Search for courses, instructors..." type="text"/>
+</div>
+<div class="flex gap-xs overflow-x-auto pb-2 no-scrollbar">
+<button class="flex items-center gap-xs px-sm py-2 bg-primary text-on-primary rounded-full font-label-sm whitespace-nowrap active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                    Semester 1
+                </button>
+<button class="flex items-center gap-xs px-sm py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm whitespace-nowrap hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">category</span>
+                    Engineering
+                </button>
+<button class="flex items-center gap-xs px-sm py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm whitespace-nowrap hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">science</span>
+                    Pure Sciences
+                </button>
+<button class="flex items-center gap-xs px-sm py-2 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm whitespace-nowrap hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                    IT &amp; Tech
+                </button>
+</div>
+</section>
+<!-- Course Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Course Card 1 -->
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(30,58,138,0.05)] border border-gray-100 overflow-hidden flex flex-col hover:shadow-[0_8px_24px_rgba(30,58,138,0.08)] transition-all">
+<div class="h-32 bg-primary-container relative">
+<div class="absolute inset-0 opacity-20" data-alt="abstract close-up of a high-end computer keyboard with blue glowing lights and minimalist coding aesthetic" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCl_l86Pyw_o1_J2nBupuK8Q7hiy_OmojjgA7MWpCccqvDFr3EWeJDBMrc-LhBvhMCNhaVaKHGOpQsHc9noacJvfqWQtlAKjiP3vOaeeQ-xq5IfqxOXT48rTcP55WZ2dynpOwPjCPdvznDWHkeT28ju2NnO0igu0wEsb31tJK-fmXKwk35mMJDDOQYG1mptXJvHnhKUqMozwUreYDhOt1AJTwxX6uhpDtIn5owG191MtbUBiF2QIsUVTOd4oB7uVswwo15ww8D7150'); background-size: cover;"></div>
+<span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[12px] font-bold text-primary">EN-102</span>
+</div>
+<div class="p-md flex flex-col flex-1">
+<h3 class="font-h3 text-h3 text-primary mb-1">Computer Science 101</h3>
+<div class="flex items-center gap-xs mb-md">
+<img alt="Instructor" class="w-6 h-6 rounded-full" data-alt="professional male instructor headshot with clean lighting and neutral office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuf4lsLF3bhtFk_DvC1zzIP-F_JSQYKZPR8q3VjoNqBM44zt3mxZiBrefKpdp0m04pYOtcgHLwldEe1rrF4iFC1ACIecaSwqUQj4h5U8VfCmhuerkMvr4XsZ0Ec84bUrqwiSvHrFAPs9ie4f-ZzLwR-MOY8Z1HsuSTlfgMIZTw5-RmHENUH8V5Qz6qLYm5abDKSrc-V43w9dirTSaJpkbrdHj7W_PhW5sy02soA2ZJYRG63w-vUP_Xu5kaE3chJEEYSm1_oeR7SQ0"/>
+<span class="font-label-sm text-on-surface-variant">Dr. Sarah Jenkins</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-outline">Progress</span>
+<span class="font-label-sm font-bold text-secondary">65%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 65%;"></div>
+</div>
+<button class="w-full mt-md py-3 bg-primary text-white rounded-lg font-bold font-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all flex justify-center items-center gap-xs">
+                            Go to Materials
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(30,58,138,0.05)] border border-gray-100 overflow-hidden flex flex-col hover:shadow-[0_8px_24px_rgba(30,58,138,0.08)] transition-all">
+<div class="h-32 bg-[#06B6D4]/20 relative">
+<div class="absolute inset-0 opacity-20" data-alt="clean overhead shot of a calculator, mathematical formulas on paper, and architect tools in soft daylight" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBo2u_56I3FK2zpveBTU0OoCM0u7Fq3IkkR8KOyuSTz_61_ci1EJxVeUbRiHxxXCOG2z0D9ApaomOxoYwnpkSTFuQF8qrAyuI3gae-XeC2dag1GXrZXOAWbpF7ykzZBrwsdpdZ8Ovim8Sy2ZNE4fhks7G6KcDEEQrxualpDN_nGZk8ePPy7dbxCF0IkgLGTdZU9Wu73D5rYO9jRvkJ3rfrRmhMk_xUJtqTyDAOWvy-jimZjv9eRIW4VmbBiXOfuG-lJV_7M9g4-RrM'); background-size: cover;"></div>
+<span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[12px] font-bold text-secondary">MATH-205</span>
+</div>
+<div class="p-md flex flex-col flex-1">
+<h3 class="font-h3 text-h3 text-primary mb-1">Applied Calculus II</h3>
+<div class="flex items-center gap-xs mb-md">
+<img alt="Instructor" class="w-6 h-6 rounded-full" data-alt="scholarly female professor headshot with soft studio lighting and academic attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1R4E_PywDFWmUkue979CW0_Mf6EIqddON-U3hi63D2GaYvkaijXa5qLd0OT98tG7a0FBx0DgW4au7fApSMrR83fnHJ25lIJjg3gzCm4O0UsYukg_zW8QH8TWUA3RsFQhRehdKhx-z60YLDB3IgudB9QQQoLXxP7WUr7WBZEqfPAxvM_PsNNoqB-n4X5PSO1dW0kJsv1T8frPlhVJTyVoNVUftMKlijCDn-h2GX63ybakvL9EUbDakJ54cEZ6vTqyJ5PsNQHN31-0"/>
+<span class="font-label-sm text-on-surface-variant">Prof. Michael Chen</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-outline">Progress</span>
+<span class="font-label-sm font-bold text-secondary">42%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 42%;"></div>
+</div>
+<button class="w-full mt-md py-3 bg-primary text-white rounded-lg font-bold font-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all flex justify-center items-center gap-xs">
+                            Go to Materials
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(30,58,138,0.05)] border border-gray-100 overflow-hidden flex flex-col hover:shadow-[0_8px_24px_rgba(30,58,138,0.08)] transition-all">
+<div class="h-32 bg-primary-container relative">
+<div class="absolute inset-0 opacity-20" data-alt="vibrant circuit board and electronic components macro shot with shallow depth of field and tech-oriented lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAealsMYTy1clR8EahfeNsZbzhDbkBwcLgaJ-XkxZqMj8XGiKBPP7BB4mOT3exD9CpV-LnqNb8DOyY9Y90_bKO31GbKVRDXVKhzq1a1EdvQ4qcSU5ZCsyi5213APesZiv_NGGjKEJcX9zJvUuvskT5LK45BLaGw5mt6rXKLbstQefx5kc1K_pxbWarbhdDuS8zvWeV170BchecsVJlIju1LKagaKl_IYPc50_Yruyhaele4eUIUCoks939Mc_AK1nTZ-N9CSRkT1Fc'); background-size: cover;"></div>
+<span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[12px] font-bold text-primary">EE-301</span>
+</div>
+<div class="p-md flex flex-col flex-1">
+<h3 class="font-h3 text-h3 text-primary mb-1">Digital Systems Design</h3>
+<div class="flex items-center gap-xs mb-md">
+<img alt="Instructor" class="w-6 h-6 rounded-full" data-alt="middle-aged male engineering professor in a lab environment with soft ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClMaH4WiUFjlETDeoz_7NeN766aRDZ1PBnIc0n6CJtx_KchFeCVvAhz5Q1QR6vUgkvXPuL0aEAMtFfoLS9zAH0r2xqbYy7YSpFmPHL8Bpp9K7J20GXOQ_Jvoa261gDrVZZxNCFVhLxDOWLx4nQTk-Fy2kKCIcHAWlmLGXCBo7-Mi1eBVF5UJYl4XI1p4SzDCgljFg8RPP0BiOQRoKH9LOC053A44rlXBzryhFWHPpzbqO_0VeqXm--XZamy9Jibj3_YBz6d5YjtEQ"/>
+<span class="font-label-sm text-on-surface-variant">Dr. Elena Rodriguez</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-outline">Progress</span>
+<span class="font-label-sm font-bold text-secondary">88%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 88%;"></div>
+</div>
+<button class="w-full mt-md py-3 bg-primary text-white rounded-lg font-bold font-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all flex justify-center items-center gap-xs">
+                            Go to Materials
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Course Card 4 -->
+<div class="bg-white rounded-xl shadow-[0_4px_12px_rgba(30,58,138,0.05)] border border-gray-100 overflow-hidden flex flex-col hover:shadow-[0_8px_24px_rgba(30,58,138,0.08)] transition-all">
+<div class="h-32 bg-[#06B6D4]/20 relative">
+<div class="absolute inset-0 opacity-20" data-alt="clean minimalist corporate office lobby with glass windows and high-end design elements in cool blue tones" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA64NJEcFLj7MlaTBgIUa4ZJCRcN4hoOCouwPY8Xa9eEvwto5Dbx_QDlbs3SFLqJTGoUIMPZimWaWNNVu0c-heMCxunFNdy94Up7hrI24MLxEw8JT-eBfgSGaTTSh6xzKsAyWxuhpbzsGAqTmzfqpaM8uq2qKW74HLVmJY7mLCL-ufu4xIJ3RdacYSiyTvi9_d45ZVdQSyZ_GRbRZAm8-J77Jz1GxEz8CnldCXHKY8_r4_eNGOgfUNFelvjx7X7KsiH752zooEHqJ8'); background-size: cover;"></div>
+<span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-[12px] font-bold text-secondary">BUS-110</span>
+</div>
+<div class="p-md flex flex-col flex-1">
+<h3 class="font-h3 text-h3 text-primary mb-1">Principles of Management</h3>
+<div class="flex items-center gap-xs mb-md">
+<img alt="Instructor" class="w-6 h-6 rounded-full" data-alt="confident professional woman headshot with bright natural light and contemporary business casual style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCrf2B36ULWG2wlNSLY9nJBJpuQcPGTsKW7PREGNN32QUakh6jg5VIXYS3N6uHl7vQnuk6JWrms2TmlE1-2Cu_qznqXC9xiy06clZ5VVn82aISkDaHppKpuKdgpYUfbb48EkMLM1JIRKEUlbp8duKUObLvfRhbNkxwcAEhAebpK80h7c3S43tnVDwV7KS1cFvKMqwzfefWDQPwMLpN4AT0sal2JY4BZngBgJ9wGIG4IOUlGGW5Gi9RVOdzsetPRLyYjKlkLKG0MCA"/>
+<span class="font-label-sm text-on-surface-variant">Prof. Alan Turing Jr.</span>
+</div>
+<div class="mt-auto">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-outline">Progress</span>
+<span class="font-label-sm font-bold text-secondary">15%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 15%;"></div>
+</div>
+<button class="w-full mt-md py-3 bg-primary text-white rounded-lg font-bold font-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all flex justify-center items-center gap-xs">
+                            Go to Materials
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-2 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-[0_-4px_12px_rgba(30,58,138,0.05)]">
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 scale-95 active:scale-90 transition-transform duration-200 hover:text-[#1E3A8A] dark:hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[12px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#1E3A8A] dark:text-blue-400 font-bold scale-95 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[12px] font-medium">Courses</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 scale-95 active:scale-90 transition-transform duration-200 hover:text-[#1E3A8A] dark:hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[12px] font-medium">Schedule</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500 scale-95 active:scale-90 transition-transform duration-200 hover:text-[#1E3A8A] dark:hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-['Plus_Jakarta_SANS'] text-[12px] font-medium">Tasks</span>
+</a>
+</nav>
+<!-- FAB (Suppressed on this page as per Relevance Check, prioritizing Courses layout) -->
+</body></html>
